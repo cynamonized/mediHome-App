@@ -1,34 +1,11 @@
 import React, { useEffect, useState } from "react";
 import { createRoot } from "react-dom/client";
-import { fetchTasks } from "./Tasks";
-import NewTask from "./NewTask";
-import TaskComponent from "./TaskComponent";
+import "../scss/main.scss";
 
 function App() {
-  const [tasksData, setTasksData] = useState(null);
-
-  useEffect(() => {
-    fetchTasks(setTasksData);
-  }, []);
-
-  const refreshTasksData = () => {
-    fetchTasks(setTasksData);
-  };
-
   return (
     <>
-      <NewTask refreshData={refreshTasksData} />
-
-      {tasksData &&
-        tasksData.map((task) => {
-          return (
-            <TaskComponent
-              key={task.id}
-              task={task}
-              refreshOnAction={refreshTasksData}
-            />
-          );
-        })}
+      ccc <span className="material-icons md-18">face</span>
     </>
   );
 }

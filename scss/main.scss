@@ -8,6 +8,11 @@ html {
   font-size: 16px;
 }
 
+body {
+  background-color: aqua;
+  font-family: $font-poppins;
+}
+
 * {
   margin: 0;
   padding: 0;
@@ -23,17 +28,17 @@ body {
 .container {
   width: $container-width;
 
-  @include small_desktop {
-    width: $container-width-small-desktop;
-  }
+  // @include small_desktop {
+  //   width: $container-width-small-desktop;
+  // }
 
-  @include smallest_desktop {
-    width: $container-width-smallest-desktop;
-  }
+  // @include smallest_desktop {
+  //   width: $container-width-smallest-desktop;
+  // }
 
-  @include tablet {
-    width: 80%;
-  }
+  // @include tablet {
+  //   width: 80%;
+  // }
 }
 
 @import "/scss/sections/_nav";

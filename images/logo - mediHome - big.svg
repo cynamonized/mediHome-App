@@ -1,0 +1,23 @@
+<svg id="Layer_1" data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="366.491" height="100.858" viewBox="0 0 366.491 100.858">
+  <defs>
+    <linearGradient id="linear-gradient" x1="0.5" y1="1" x2="0.5" gradientUnits="objectBoundingBox">
+      <stop offset="0" stop-color="#1f2f98"/>
+      <stop offset="1" stop-color="#ee4392"/>
+    </linearGradient>
+    <linearGradient id="linear-gradient-2" x1="0.5" y1="1" x2="0.5" y2="0.131" gradientUnits="objectBoundingBox">
+      <stop offset="0" stop-color="#ee4392"/>
+      <stop offset="0.1" stop-color="#e54292"/>
+      <stop offset="0.26" stop-color="#cc3f92"/>
+      <stop offset="0.46" stop-color="#a53b94"/>
+      <stop offset="0.7" stop-color="#6e3695"/>
+      <stop offset="0.96" stop-color="#292f97"/>
+      <stop offset="1" stop-color="#1f2f98"/>
+    </linearGradient>
+  </defs>
+  <g id="Group_15" data-name="Group 15" transform="translate(0)">
+    <text id="mediHome" transform="translate(122.491 59.337)" fill="#ee4392" font-size="47" font-family="VarelaRound-Regular, Varela Round"><tspan x="0" y="0">medi</tspan><tspan y="0" fill="#1f2f98" letter-spacing="-0.01em">H</tspan><tspan y="0" fill="#1f2f98">ome</tspan></text>
+    <rect id="Rectangle_28" data-name="Rectangle 28" width="74.32" height="74.32" rx="37" transform="translate(26.539 26.539)" fill="#1f2f98"/>
+    <path id="Path_28" data-name="Path 28" d="M29.9,0h0A12.222,12.222,0,0,1,42.113,12.212V74.245A3.252,3.252,0,0,1,38.858,77.5H29.9A12.222,12.222,0,0,1,17.69,65.289V12.212A12.222,12.222,0,0,1,29.9,0Z" transform="translate(8.849)" fill="url(#linear-gradient)"/>
+    <path id="Path_29" data-name="Path 29" d="M12.212,0h8.956a3.252,3.252,0,0,1,3.255,3.255V65.289A12.222,12.222,0,0,1,12.212,77.5h0A12.222,12.222,0,0,1,0,65.289V12.212A12.222,12.222,0,0,1,12.212,0Z" transform="translate(77.5 26.539) rotate(90)" fill="url(#linear-gradient-2)"/>
+  </g>
+</svg>

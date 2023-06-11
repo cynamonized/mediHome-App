@@ -1,0 +1,14 @@
+<svg id="Group_221" data-name="Group 221" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="164.909" height="46.002" viewBox="0 0 164.909 46.002">
+  <defs>
+    <linearGradient id="linear-gradient" x1="0.501" y1="1" x2="0.501" gradientUnits="objectBoundingBox">
+      <stop offset="0" stop-color="#ff9dda"/>
+      <stop offset="1" stop-color="#ee4392"/>
+    </linearGradient>
+  </defs>
+  <text id="mediCare" transform="translate(55.909 31.55)" fill="#ee4392" font-size="24" font-family="VarelaRound-Regular, Varela Round"><tspan x="0" y="0">mediCa</tspan><tspan y="0" letter-spacing="-0.01em">r</tspan><tspan y="0">e</tspan></text>
+  <g id="Group_11" data-name="Group 11">
+    <rect id="Rectangle_24" data-name="Rectangle 24" width="33.895" height="33.895" rx="16.947" transform="translate(12.107 12.107)" fill="#ff9dda"/>
+    <path id="Path_22" data-name="Path 22" d="M23.176,0h0a5.566,5.566,0,0,1,5.562,5.569V35.345H23.169A5.572,5.572,0,0,1,17.6,29.777V5.569A5.582,5.582,0,0,1,23.176,0Z" transform="translate(-5.5)" fill="url(#linear-gradient)"/>
+    <path id="Path_23" data-name="Path 23" d="M5.569,0h5.569V29.777a5.572,5.572,0,0,1-5.569,5.569h0A5.572,5.572,0,0,1,0,29.777V5.569A5.572,5.572,0,0,1,5.569,0Z" transform="translate(35.345 12.107) rotate(90)" fill="#ff9dda"/>
+  </g>
+</svg>

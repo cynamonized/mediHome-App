@@ -1,0 +1,12 @@
+<svg id="Group_222" data-name="Group 222" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="166.957" height="46.002" viewBox="0 0 166.957 46.002">
+  <defs>
+    <linearGradient id="linear-gradient" x1="0.501" y1="1" x2="0.501" gradientUnits="objectBoundingBox">
+      <stop offset="0" stop-color="#787ff6"/>
+      <stop offset="1" stop-color="#1f2f98"/>
+    </linearGradient>
+  </defs>
+  <rect id="Rectangle_23" data-name="Rectangle 23" width="33.895" height="33.895" rx="16.947" transform="translate(12.107 12.107)" fill="#787ff6"/>
+  <text id="mediDent" transform="translate(55.957 31.55)" fill="#1f2f98" font-size="24" font-family="VarelaRound-Regular, Varela Round"><tspan x="0" y="0">medi</tspan><tspan y="0" letter-spacing="-0.02em">D</tspan><tspan y="0">e</tspan><tspan y="0" letter-spacing="-0.01em">n</tspan><tspan y="0">t</tspan></text>
+  <path id="Path_20" data-name="Path 20" d="M23.176,0h0a5.566,5.566,0,0,1,5.562,5.569V35.345H23.169A5.572,5.572,0,0,1,17.6,29.777V5.569A5.582,5.582,0,0,1,23.176,0Z" transform="translate(-5.5)" fill="url(#linear-gradient)"/>
+  <path id="Path_21" data-name="Path 21" d="M5.569,0h5.569V29.777a5.572,5.572,0,0,1-5.569,5.569h0A5.572,5.572,0,0,1,0,29.777V5.569A5.572,5.572,0,0,1,5.569,0Z" transform="translate(35.345 12.107) rotate(90)" fill="#787ff6"/>
+</svg>

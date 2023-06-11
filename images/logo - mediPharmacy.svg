@@ -1,0 +1,20 @@
+<svg id="Group_224" data-name="Group 224" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="226.957" height="46.002" viewBox="0 0 226.957 46.002">
+  <defs>
+    <linearGradient id="linear-gradient" x1="0.501" y1="1" x2="0.501" gradientUnits="objectBoundingBox">
+      <stop offset="0" stop-color="#1ca7ec"/>
+      <stop offset="0.26" stop-color="#179fe4"/>
+      <stop offset="0.65" stop-color="#0c89d1"/>
+      <stop offset="1" stop-color="#0071bc"/>
+    </linearGradient>
+    <linearGradient id="linear-gradient-2" x1="0.5" y1="0.977" x2="0.5" y2="0.214" gradientUnits="objectBoundingBox">
+      <stop offset="0" stop-color="#0071bc"/>
+      <stop offset="0.13" stop-color="#0479c3"/>
+      <stop offset="0.69" stop-color="#159ae0"/>
+      <stop offset="1" stop-color="#1ca7ec"/>
+    </linearGradient>
+  </defs>
+  <text id="mediPharmacy" transform="translate(55.957 31.55)" fill="#0071bc" font-size="24" font-family="VarelaRound-Regular, Varela Round"><tspan x="0" y="0">mediPharmacy</tspan></text>
+  <rect id="Rectangle_21" data-name="Rectangle 21" width="33.895" height="33.895" rx="16.947" transform="translate(12.107 12.107)" fill="#1ca7ec"/>
+  <path id="Path_16" data-name="Path 16" d="M23.176,0h0a5.566,5.566,0,0,1,5.562,5.569V35.345H23.169A5.572,5.572,0,0,1,17.6,29.777V5.569A5.582,5.582,0,0,1,23.176,0Z" transform="translate(-5.5)" fill="url(#linear-gradient)"/>
+  <path id="Path_17" data-name="Path 17" d="M5.569,0h5.569V29.777a5.572,5.572,0,0,1-5.569,5.569h0A5.572,5.572,0,0,1,0,29.777V5.569A5.572,5.572,0,0,1,5.569,0Z" transform="translate(35.345 12.107) rotate(90)" fill="url(#linear-gradient-2)"/>
+</svg>

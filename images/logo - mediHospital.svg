@@ -1,0 +1,24 @@
+<svg id="Group_223" data-name="Group 223" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="205.957" height="46.002" viewBox="0 0 205.957 46.002">
+  <defs>
+    <linearGradient id="linear-gradient" x1="0.501" y1="1" x2="0.501" gradientUnits="objectBoundingBox">
+      <stop offset="0" stop-color="#0071bc"/>
+      <stop offset="0.16" stop-color="#0578be"/>
+      <stop offset="0.4" stop-color="#148ec5"/>
+      <stop offset="0.7" stop-color="#2cb2d0"/>
+      <stop offset="1" stop-color="#4adede"/>
+    </linearGradient>
+    <linearGradient id="linear-gradient-2" x1="0.5" y1="0.973" x2="0.5" y2="0.114" gradientUnits="objectBoundingBox">
+      <stop offset="0" stop-color="#4adede"/>
+      <stop offset="0.03" stop-color="#45d7dc"/>
+      <stop offset="0.23" stop-color="#2cb3d0"/>
+      <stop offset="0.42" stop-color="#1996c7"/>
+      <stop offset="0.62" stop-color="#0b81c1"/>
+      <stop offset="0.81" stop-color="#0275bd"/>
+      <stop offset="1" stop-color="#0071bc"/>
+    </linearGradient>
+  </defs>
+  <text id="mediHospital" transform="translate(55.957 31.55)" fill="#00d1c1" font-size="24" font-family="VarelaRound-Regular, Varela Round"><tspan x="0" y="0">medi</tspan><tspan y="0" letter-spacing="-0.01em">H</tspan><tspan y="0">ospital</tspan></text>
+  <rect id="Rectangle_25" data-name="Rectangle 25" width="33.895" height="33.895" rx="16.947" transform="translate(12.107 12.107)" fill="#0071bc"/>
+  <path id="Path_24" data-name="Path 24" d="M23.176,0h0a5.566,5.566,0,0,1,5.562,5.569V35.345H23.169A5.572,5.572,0,0,1,17.6,29.777V5.569A5.582,5.582,0,0,1,23.176,0Z" transform="translate(-5.5)" fill="url(#linear-gradient)"/>
+  <path id="Path_25" data-name="Path 25" d="M5.569,0h5.569V29.777a5.572,5.572,0,0,1-5.569,5.569h0A5.572,5.572,0,0,1,0,29.777V5.569A5.572,5.572,0,0,1,5.569,0Z" transform="translate(35.345 12.107) rotate(90)" fill="url(#linear-gradient-2)"/>
+</svg>
