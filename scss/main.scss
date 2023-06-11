@@ -1,0 +1,41 @@
+@import "/scss/settings/_reset";
+@import "/scss/settings/_variables";
+@import "/scss/settings/_mixins";
+@import "/scss/settings/_buttons";
+
+html {
+  scroll-behavior: smooth;
+  font-size: 16px;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  text-decoration: none;
+  list-style: none;
+}
+
+body {
+  width: 100%;
+}
+
+.container {
+  width: $container-width;
+
+  @include small_desktop {
+    width: $container-width-small-desktop;
+  }
+
+  @include smallest_desktop {
+    width: $container-width-smallest-desktop;
+  }
+
+  @include tablet {
+    width: 80%;
+  }
+}
+
+@import "/scss/sections/_nav";
+@import "/scss/sections/_hero";
+@import "/scss/sections/_footer";

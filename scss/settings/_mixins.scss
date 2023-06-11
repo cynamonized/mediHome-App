@@ -1,0 +1,24 @@
+@mixin small_desktop {
+  @media (max-width: 1440px) {
+    @content;
+  }
+}
+
+// works from 1130 to 870px
+@mixin smallest_desktop {
+  @media (max-width: 1130px) {
+    @content;
+  }
+}
+
+@mixin tablet {
+  @media (max-width: 870px) {
+    @content;
+  }
+}
+
+@mixin mobile {
+  @media (max-width: 670px) {
+    @content;
+  }
+}
