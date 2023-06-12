@@ -2,22 +2,42 @@
 
 // Container
 
-$container-width: 1352px;
+$container-width: 1300px;
 $container-width-small-desktop: 1100px;
 $container-width-smallest-desktop: 860px;
 
 // Fonts
 $font-poppins: "Poppins", sans-serif;
 $font-varela-round: "Varela Round", sans-serif;
+$font-material-icons: "Material Icons";
 
-// Colors
-$color-primary: #08a6e4;
-$color-primary-shadow: #00000029;
-$color-redish: #fb3b64;
-$color-green: #55dfb4;
-$color-black: #000000;
-$color-grey: #a5a5a5;
-$color-light-grey: #f7f7f7;
-$color-white: #ffffff;
-$h2-font-size: 36px;
-$h3-font-size: 16px;
+// Colors - main
+$color-main-pink: #ee4392;
+$color-main-pink-light: #ff9dda;
+$color-main-pink-dark: #aa336b;
+
+$color-main-blue: #1f2f98;
+$color-main-bue-light: #787ff6;
+
+$color-main-white: #ffffff;
+$color-main-text: #051a2d;
+
+//Colors - Secondary
+$color-sec-blue: #004e99;
+$color-sec-blue-light: #438bd3;
+
+$color-sec-greenish: #27bebe;
+$color-sec-breenshish-light: #4adede;
+
+$color-sec-lightblue: #1ca7ec;
+$color-sec-lightblue-light: #7bd5f5;
+
+$color-sec-angry-red: #d20404;
+
+//Colors - Greys
+$color-greys-light-1: #e9e9e9;
+$color-greys-light-2: #dbdbdb;
+$color-greys-mid-1: #d2d2d2;
+$color-greys-mid-2: #bbbbbb;
+$color-greys-dark-1: #a4a3a3;
+$color-greys-dark-2: #5d5d5d;

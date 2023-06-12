@@ -2,6 +2,8 @@
 @import "/scss/settings/_variables";
 @import "/scss/settings/_mixins";
 @import "/scss/settings/_buttons";
+@import "/scss/settings/_headers.scss";
+@import "/scss/settings/_forms.scss";
 
 html {
   scroll-behavior: smooth;
@@ -9,9 +11,15 @@ html {
 }
 
 body {
-  background-color: aqua;
   font-family: $font-poppins;
 }
+
+// How to mixins
+// .test::before {
+//   font-family: $font-material-icons;
+//   font-size: 50rem;
+//   content: "\e894";
+// }
 
 * {
   margin: 0;
@@ -21,13 +29,15 @@ body {
   list-style: none;
 }
 
-body {
+body,
+#app {
   width: 100%;
 }
 
 .container {
   width: $container-width;
-
+  margin-left: auto;
+  margin-right: auto;
   // @include small_desktop {
   //   width: $container-width-small-desktop;
   // }
@@ -42,5 +52,4 @@ body {
 }
 
 @import "/scss/sections/_nav";
-@import "/scss/sections/_hero";
-@import "/scss/sections/_footer";
+@import "/scss/sections/_search-appointments.scss";

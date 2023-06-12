@@ -1,5 +1,6 @@
+//RWD
 @mixin small_desktop {
-  @media (max-width: 1440px) {
+  @media (max-width: 1300px) {
     @content;
   }
 }
@@ -21,4 +22,11 @@
   @media (max-width: 670px) {
     @content;
   }
+}
+
+// Flex
+@mixin flex($justify: center, $align: center) {
+  display: flex;
+  align-items: $align;
+  justify-content: $justify;
 }

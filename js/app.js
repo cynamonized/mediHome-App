@@ -1,11 +1,14 @@
 import React, { useEffect, useState } from "react";
 import { createRoot } from "react-dom/client";
 import "../scss/main.scss";
+import Header from "./Components-App/Header";
+import SearchAppointment from "./Components-App/SearchAppointment";
 
 function App() {
   return (
     <>
-      ccc <span className="material-icons md-18">face</span>
+      <Header />
+      <SearchAppointment />
     </>
   );
 }

@@ -1,0 +1,14 @@
+.search-appointment {
+  .search-appointment-container {
+    .search-appointment__main-title {
+      padding: 70px 0 44px 0;
+    }
+  }
+
+  .search-appointment__form {
+    display: grid;
+    grid-template-columns: 1fr 1.5fr 0.75fr 0.75fr;
+    gap: 2rem;
+    grid-auto-rows: 52px;
+  }
+}

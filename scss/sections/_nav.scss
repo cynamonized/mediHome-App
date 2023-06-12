@@ -1,0 +1,46 @@
+header {
+  border-bottom: 1px solid $color-greys-light-1;
+  width: 100%;
+  .container-header {
+    margin-left: auto;
+    margin-right: auto;
+    padding: 20px 0px 20px 0;
+    @include flex(space-between, center);
+
+    .header__right-column {
+      @include flex;
+      gap: 22px;
+
+      .right-column__name {
+        font-size: 1.625rem;
+        color: $color-main-blue;
+        font-weight: 500;
+      }
+
+      .right-column__notifications {
+        height: 3.125rem;
+        width: 3.125rem;
+        background-color: $color-greys-light-1;
+        border-radius: 50%;
+        position: relative;
+
+        &::before {
+          display: block;
+          position: absolute;
+          font-family: $font-material-icons;
+          font-size: 1.4rem;
+          content: "\e7f4";
+          top: calc(50% - 0.7rem);
+          left: calc(50% - 0.7rem);
+          color: $color-greys-dark-2;
+        }
+      }
+
+      .right-column__profile-picture {
+        height: 3.125rem;
+        width: 3.125rem;
+        border-radius: 50%;
+      }
+    }
+  }
+}
