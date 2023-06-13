@@ -3,3 +3,28 @@
   padding: 14px 22px;
   border-radius: 30px;
 }
+
+.white-form {
+  font-family: $font-poppins;
+  color: $color-main-white;
+  padding: 15px;
+  border-radius: 30px;
+  background-color: $color-main-blue;
+  border: 2px solid $color-main-white;
+  width: 100%;
+  transition: 0.2s;
+  font-size: 1rem;
+
+  &:focus {
+    border: 2px solid $color-main-white;
+    background-color: $color-main-blue-light;
+    outline: white;
+  }
+  &::placeholder {
+    color: $color-main-white;
+  }
+}
+
+// *:focus {
+//   outline: none;
+// }

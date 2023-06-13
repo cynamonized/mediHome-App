@@ -1,3 +1,5 @@
+@import "/scss/settings/_variables";
+
 //RWD
 @mixin small_desktop {
   @media (max-width: 1300px) {
@@ -29,4 +31,11 @@
   display: flex;
   align-items: $align;
   justify-content: $justify;
+}
+
+// Fonts
+@mixin fonts($size: 1rem, $weight: 300, $color: $color-main-text) {
+  font-size: $size;
+  font-weight: $weight;
+  color: $color;
 }

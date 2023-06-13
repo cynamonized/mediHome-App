@@ -1,0 +1,98 @@
+.dashboard-patient__left-column {
+  background-color: $color-greys-light-1;
+  border-radius: $border-radius;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.dashboard__header--small {
+  padding: 30px;
+  border-bottom: 1px solid $color-greys-mid-1;
+}
+
+.dashboard__footer--small {
+  padding: 30px;
+  @include flex(flex-end, center);
+  border-top: 1px solid $color-greys-mid-1;
+
+  .footer--small__button {
+    @include fonts(1rem, 600, $color-main-pink);
+    transition: 0.2s;
+  }
+
+  .footer--small__button:hover {
+    color: $color-main-pink-dark;
+  }
+}
+
+.dashboard__block-small {
+  background-color: $color-main-white;
+  border: 1px solid $color-greys-light-1;
+  border-radius: $border-radius;
+  display: flex;
+  justify-content: space-between;
+  flex-direction: column;
+
+  .block-small__body {
+    padding: 25px;
+    .body__super-text {
+      @include fonts(1.125rem, 500, $color-sec-blue);
+      text-align: center;
+    }
+
+    .body__secondary-text {
+      @include fonts(0.75rem, 500, $color-main-text);
+      margin-top: 15px;
+      text-align: center;
+
+      span {
+        color: $color-main-pink;
+      }
+    }
+  }
+}
+
+.dashboard__block-small--blog {
+  background-color: none;
+  background: linear-gradient(
+    180deg,
+    $color-sec-lightblue 0%,
+    $color-sec-lightblue-light 100%
+  );
+
+  .block-small__body--blog {
+  }
+}
+
+.dashboard__block-small--static {
+  background-color: $color-main-white;
+  border: 1px solid $color-greys-light-1;
+  border-radius: $border-radius;
+
+  @include flex(center, center);
+  flex-direction: column;
+
+  .static__icon {
+    &::before {
+      font-family: $font-material-icons;
+      display: block;
+      font-size: 5rem;
+      color: $color-main-blue;
+      content: "\e8a8";
+    }
+  }
+
+  .static__title {
+    text-align: center;
+    margin: 30px 0;
+    line-height: 1.75rem;
+  }
+
+  .static__description {
+    @include fonts(0.75rem, 500, $color-main-text);
+    line-height: 1rem;
+    text-align: center;
+  }
+}
