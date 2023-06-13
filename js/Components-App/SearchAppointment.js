@@ -6,6 +6,17 @@ import {
 } from "../APICommunication/GetAppointments";
 import { MainButton } from "./Buttons";
 import { getTodaysDate } from "../dates";
+import {
+  colorMainBlue,
+  colorMainBlueLight,
+  colorMainPink,
+  colorGreysLight1,
+  colorGreysLight2,
+  colorGreysMid1,
+  colorMainText,
+} from "../Settings/cssVariables";
+// import { colorMainPink } from "../../scss/settings/_variables.scss";
+import { selectStyles } from "../Settings/formsStyles";
 // -----------------------------------------
 
 import Select, {
@@ -14,6 +25,10 @@ import Select, {
   Props,
   StylesConfig,
 } from "react-select";
+import makeAnimated from "react-select/animated";
+
+import DatePicker from "react-datepicker";
+import "../../css/react-datepicker.css";
 
 //------------------------------------------
 
@@ -30,27 +45,26 @@ const specs = [
 ];
 
 const SearchAppointment = () => {
+  // City states
   const [city, setCity] = useState({
     value: "default",
     label: "Select a city",
   });
   const [cityValues, setCityValues] = useState([]);
 
+  // Specialization states
   const [specialization, setSpecialization] = useState({
     value: "default",
     label: "Select a specialization",
   });
   const [specValues, setSpecValues] = useState([]);
 
-  const [appointmentDate, setAppointmentDate] = useState("");
+  // Date states
+  const [appointmentDate, setAppointmentDate] = useState(new Date());
   const [calendarMinValue, setCalendarMinValue] = useState("");
-  const [selectedOption, setSelectedOption] = useState({
-    value: "default",
-    label: "test",
-  });
 
   useEffect(() => {
-    setAppointmentDate(getTodaysDate());
+    // setAppointmentDate(getTodaysDate());
     setCalendarMinValue(getTodaysDate());
     loadCitiesSpecs(cities, specs);
   }, []);
@@ -61,12 +75,6 @@ const SearchAppointment = () => {
     setSpecValues(specsObjectArray);
   };
 
-  const updateCity = ({ target }) => {
-    setCity(target.value);
-  };
-  const updateSpecialization = ({ target }) => {
-    setSpecialization(target.value);
-  };
   const updateDate = ({ target }) => {
     setAppointmentDate(target.value);
   };
@@ -78,46 +86,29 @@ const SearchAppointment = () => {
           Schedule an appointment
         </h1>
         <form className="search-appointment__form" onSubmit={doingSomething}>
-          {/* TO MOVE THIS TO ANOTHER FILE AND STUDY AGAIN ALL THIS CHILDREN THING */}
           <Select
+            isSearchable={true}
             defaultValue={city}
-            value={city}
-            onChange={updateCity}
+            onChange={setCity}
             options={cityValues}
-            styles={{
-              control: (baseStyles, state) => ({
-                ...baseStyles,
-                borderColor: "#1f2f98",
-                borderRadius: "30px",
-                height: "100%",
-                padding: "7px",
-              }),
-            }}
+            styles={selectStyles}
           />
-
           <Select
+            isSearchable={true}
             defaultValue={specialization}
-            value={specialization}
-            onChange={updateSpecialization}
+            onChange={setSpecialization}
             options={specValues}
-            styles={{
-              control: (baseStyles, state) => ({
-                ...baseStyles,
-                borderColor: state.isActive ? "grey" : "red",
-                borderRadius: "30px",
-                height: "100%",
-                padding: "7px",
-              }),
-            }}
+            styles={selectStyles}
           />
 
-          <input
-            type="date"
-            value={appointmentDate}
-            min={calendarMinValue}
-            onChange={(e) => {
-              updateDate(e);
-            }}
+          <DatePicker
+            portalId="root-portal"
+            showIcon
+            closeOnScroll={true}
+            selected={appointmentDate}
+            onChange={(date) => setAppointmentDate(date)}
+            minDate={new Date()}
+            customInput={<CustomDateInput />}
           />
 
           <MainButton
@@ -132,5 +123,18 @@ const SearchAppointment = () => {
     </section>
   );
 };
+
+const CustomDateInput = React.forwardRef(({ value, onClick }, ref) => (
+  <button
+    className="datepicker-input"
+    onClick={(e) => {
+      e.preventDefault();
+      onClick();
+    }}
+    ref={ref}
+  >
+    {value}
+  </button>
+));
 
 export default SearchAppointment;
