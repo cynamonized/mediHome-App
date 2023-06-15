@@ -1,7 +1,12 @@
 import React, { useEffect, useState } from "react";
 import "../../scss/main.scss";
 import { DashboardPatientLHS } from "./DashboardPatient-LHS";
-import { DashboardBlockSmall } from "./DashboardLittleComps";
+import {
+  DashboardBlockSmall,
+  DashboardBlockSettings,
+  DashboardBlockConsultant,
+  DashboardBlockBlog,
+} from "./DashboardLittleComps";
 
 //Temporary object for blog
 const blogArticleContent = {
@@ -66,12 +71,7 @@ export const DashboardPatient = () => {
             dataToDisplay={""}
           />
 
-          <DashboardBlockSmall
-            title={"Contact with our consultant"}
-            link={"#"}
-            dataToDisplay={""}
-            custom={"consultant"}
-          />
+          <DashboardBlockConsultant title={"Contact with our consultant"} />
 
           <DashboardBlockSmall
             title={"Laboratory tests"}
@@ -79,20 +79,13 @@ export const DashboardPatient = () => {
             dataToDisplay={""}
           />
 
-          <DashboardBlockSmall
+          <DashboardBlockBlog
             title={"Healthy blog"}
             link={"#"}
-            dataToDisplay={""}
-            custom={"blog"}
             blogContent={blogArticleContent}
           />
 
-          <DashboardBlockSmall
-            title={"Account settings"}
-            link={"#"}
-            dataToDisplay={""}
-            custom={"settings"}
-          />
+          <DashboardBlockSettings title={"Account settings"} link={"#"} />
         </div>
       </div>
     </section>

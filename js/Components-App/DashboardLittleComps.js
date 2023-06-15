@@ -52,54 +52,8 @@ export const DashboardFooterSmall = ({ link, whiteElements }) => {
   );
 };
 
-export const DashboardBlockSmall = ({
-  title,
-  dataToDisplay,
-  link,
-  custom,
-  blogContent,
-}) => {
-  const [background, setBackground] = useState("null");
+export const DashboardBlockSmall = ({ title, dataToDisplay, link }) => {
   useEffect;
-
-  //What if custom blocks
-
-  //Consultant
-  if (custom == "consultant") {
-    return (
-      <div className="dashboard__block-small--static">
-        <div className="static__icon"></div>
-        <h2 className="static__title">Contact with our consultant</h2>
-        <div className="static__description">
-          Do you need our help? <br />
-          Call us!
-          <br /> 609 346 609
-        </div>
-      </div>
-    );
-  }
-
-  //Settings
-  if (custom == "settings") {
-    return <div className="dashboard__block-small--static">małe</div>;
-  }
-
-  //Blog
-  if (custom == "blog") {
-    return (
-      <>
-        <div className="dashboard__block-small dashboard__block-small--blog">
-          <DashboardHeaderSmall title={title} whiteElements={true} />
-          <div className="block-small__body--blog">
-            {/* NEED TO PUT BLOG CONTENT HERE */}
-          </div>
-          <DashboardFooterSmall link={link} whiteElements={true} />
-        </div>
-      </>
-    );
-  }
-
-  // Standard small block
   return (
     <>
       <div className="dashboard__block-small">
@@ -129,8 +83,34 @@ export const DashboardBlockSmall = ({
   );
 };
 
-// Settings component
+export const DashboardBlockSettings = ({ title, link }) => {
+  return <div className="dashboard__block-small--static">{title}</div>;
+};
 
-// Consultant component
+export const DashboardBlockConsultant = ({ title }) => {
+  return (
+    <div className="dashboard__block-small--static">
+      <div className="static__icon"></div>
+      <h2 className="static__title">{title}</h2>
+      <div className="static__description">
+        Do you need our help? <br />
+        Call us!
+        <br /> 609 346 609
+      </div>
+    </div>
+  );
+};
 
-// BLog component
+export const DashboardBlockBlog = ({ title, link, blogContent }) => {
+  return (
+    <>
+      <div className="dashboard__block-small dashboard__block-small--blog">
+        <DashboardHeaderSmall title={title} whiteElements={true} />
+        <div className="block-small__body--blog">
+          {/* NEED TO PUT BLOG CONTENT HERE -> FROM OBJECT IN DP.js */}
+        </div>
+        <DashboardFooterSmall link={link} whiteElements={true} />
+      </div>
+    </>
+  );
+};
