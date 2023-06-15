@@ -1,0 +1,8 @@
+.dashboard-patient__left-column {
+  background-color: $color-greys-light-1;
+  border-radius: $border-radius;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}

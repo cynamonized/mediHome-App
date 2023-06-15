@@ -7,49 +7,47 @@ import {
   DashboardBlockConsultant,
   DashboardBlockBlog,
 } from "./DashboardLittleComps";
+import { DateTime } from "luxon";
 
 //Temporary object for blog
 const blogArticleContent = {
   articleTitle: "Lorem ipsum dolor amet",
   articleBody:
     "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent velit nulla...",
-  articleImage: "images/Blog article - temp.png",
+  articleImage:
+    "https://github.com/cynamonized/mediHome-App/blob/dba4278ef9416d46009aaa863888c6d16f7e5d20/images/Blog%20article%20-%20temp.png?raw=true",
 };
 
 // To be replaced with real data representation from API
 const temporaryAppointments = [
-  {
-    app1: {
-      date: "2023/06/23",
-      hour: "2pm",
+  [
+    {
+      date: DateTime.local(2023, 6, 23, 8, 30),
       specialization: "orthopaedist",
       place: "Puławska Center",
       doctor: "Alan Smith",
     },
-    app2: {
-      date: "2023/06/23",
-      hour: "2pm",
+    {
+      date: DateTime.local(2023, 6, 23, 9, 0),
       specialization: "orthopaedist",
       place: "Puławska Center",
       doctor: "Alan Smith",
     },
-  },
-  {
-    finished_app1: {
-      date: "2023/06/23",
-      hour: "2pm",
+  ],
+  [
+    {
+      date: DateTime.local(2023, 6, 23, 9, 0),
       specialization: "orthopaedist",
       place: "Puławska Center",
       doctor: "Alan Smith",
     },
-    finished_app2: {
-      date: "2023/06/23",
-      hour: "2pm",
+    {
+      date: DateTime.local(2023, 6, 23, 9, 30),
       specialization: "orthopaedist",
       place: "Puławska Center",
       doctor: "Alan Smith",
     },
-  },
+  ],
 ];
 
 export const DashboardPatient = () => {

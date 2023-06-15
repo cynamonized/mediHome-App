@@ -28,7 +28,7 @@ export const DashboardHeaderSmall = ({ title, whiteElements }) => {
   );
 };
 
-export const DashboardFooterSmall = ({ link, whiteElements }) => {
+export const DashboardFooterSmall = ({ link, whiteElements, forceBottom }) => {
   //If this is blog
   if (whiteElements) {
     return (
@@ -84,13 +84,25 @@ export const DashboardBlockSmall = ({ title, dataToDisplay, link }) => {
 };
 
 export const DashboardBlockSettings = ({ title, link }) => {
-  return <div className="dashboard__block-small--static">{title}</div>;
+  return (
+    <div className="dashboard__block-small--static">
+      <a href={link}>
+        <div className="static__icon static__icon--settings"></div>
+        <h2 className="static__title">{title}</h2>
+        <div className="static__description">
+          Update your address, contact <br />
+          information and read our <br />
+          privacy policy
+        </div>
+      </a>
+    </div>
+  );
 };
 
 export const DashboardBlockConsultant = ({ title }) => {
   return (
     <div className="dashboard__block-small--static">
-      <div className="static__icon"></div>
+      <div className="static__icon static__icon--consultant  "></div>
       <h2 className="static__title">{title}</h2>
       <div className="static__description">
         Do you need our help? <br />
@@ -108,8 +120,16 @@ export const DashboardBlockBlog = ({ title, link, blogContent }) => {
         <DashboardHeaderSmall title={title} whiteElements={true} />
         <div className="block-small__body--blog">
           {/* NEED TO PUT BLOG CONTENT HERE -> FROM OBJECT IN DP.js */}
+
+          <img src={`${blogContent.articleImage}`} />
+          <p className="body-blog__title">{blogContent.articleTitle}</p>
+          <p className="body-blog__description">{blogContent.articleBody}</p>
         </div>
-        <DashboardFooterSmall link={link} whiteElements={true} />
+        <DashboardFooterSmall
+          link={link}
+          whiteElements={true}
+          forceBottom={true}
+        />
       </div>
     </>
   );

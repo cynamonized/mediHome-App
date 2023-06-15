@@ -1,12 +1,3 @@
-.dashboard-patient__left-column {
-  background-color: $color-greys-light-1;
-  border-radius: $border-radius;
-  height: 100%;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-}
-
 .dashboard__header--small {
   padding: 30px;
   border-bottom: 1px solid $color-greys-mid-1;
@@ -61,8 +52,19 @@
     $color-sec-lightblue 0%,
     $color-sec-lightblue-light 100%
   );
-
+  display: flex;
+  // justify-content: flex-start;
   .block-small__body--blog {
+    margin-bottom: auto;
+    .body-blog__title {
+      @include fonts(1rem, 500, $color-main-white);
+      margin: 15px 30px;
+    }
+
+    .body-blog__description {
+      @include fonts(0.75rem, 400, $color-main-white);
+      margin: 0 30px;
+    }
   }
 }
 
@@ -80,7 +82,18 @@
       display: block;
       font-size: 5rem;
       color: $color-main-blue;
+      text-align: center;
+    }
+  }
+
+  .static__icon--consultant {
+    &::before {
       content: "\e8a8";
+    }
+  }
+  .static__icon--settings {
+    &::before {
+      content: "\e8b9";
     }
   }
 
