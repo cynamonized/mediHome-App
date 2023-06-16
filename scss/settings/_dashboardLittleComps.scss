@@ -3,6 +3,28 @@
   border-bottom: 1px solid $color-greys-mid-1;
 }
 
+.dashboard__header--small-white {
+  border-bottom: 1px solid $color-main-white;
+  .small-white__title {
+    color: $color-main-white;
+  }
+}
+
+// Tutaj (2)
+.dashboard__header-big {
+  padding: 30px;
+  border-bottom: 1px solid $color-greys-mid-1;
+  .header-big__back-arrow {
+    &::before {
+      display: block;
+      font-family: $font-material-icons;
+      color: $color-main-pink;
+      font-size: 3rem;
+      content: "\e5c4";
+    }
+  }
+}
+
 .dashboard__footer--small {
   padding: 30px;
   @include flex(flex-end, center);
@@ -16,6 +38,10 @@
   .footer--small__button:hover {
     color: $color-main-pink-dark;
   }
+}
+
+.dashboard__footer--small-white {
+  border-top: 1px solid $color-main-white;
 }
 
 .dashboard__block-small {

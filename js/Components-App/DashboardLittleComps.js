@@ -1,53 +1,43 @@
 import React, { useEffect, useState } from "react";
 import "../../scss/main.scss";
-
-/////////////////////////////////////////////////////////////////////
-//
-//  Below containts some dirty code - re- displaying blog
-//  Perhaphs it can be done cleaner???
-//
-/////////////////////////////////////////////////////////////////////
+import { Link } from "react-router-dom";
 
 export const DashboardHeaderSmall = ({ title, whiteElements }) => {
-  // If this is blog
-  if (whiteElements) {
-    return (
-      <div
-        className="dashboard__header--small"
-        style={{ borderBottom: "1px solid white" }}
-      >
-        <h2 style={{ color: "white" }}>{title}</h2>
-      </div>
-    );
-  }
-
   return (
-    <div className="dashboard__header--small">
-      <h2>{title}</h2>
+    <div
+      className={`dashboard__header--small ${
+        whiteElements == true ? "dashboard__header--small-white" : ""
+      }`}
+    >
+      <h2 className={`${whiteElements == true ? "small-white__title" : ""}`}>
+        {title}
+      </h2>
     </div>
   );
 };
 
-export const DashboardFooterSmall = ({ link, whiteElements, forceBottom }) => {
-  //If this is blog
-  if (whiteElements) {
-    return (
-      <div
-        className="dashboard__footer--small"
-        style={{ borderTop: "1px solid white" }}
-      >
-        <a href={`${link}`}>
-          <p className="footer--small__button">Show more...</p>
-        </a>
-      </div>
-    );
-  }
-
+// Ostylowac to najpierw (1)
+export const DashboardHeaderBig = ({ title, link }) => {
   return (
-    <div className="dashboard__footer--small">
-      <a href={`${link}`}>
+    <div className="dashboard__header-big">
+      <Link to={link}>
+        <div className="header-big__back-arrow"></div>
+      </Link>
+      <h3>{title}</h3>
+    </div>
+  );
+};
+
+export const DashboardFooterSmall = ({ link, whiteElements }) => {
+  return (
+    <div
+      className={`dashboard__footer--small ${
+        whiteElements == true ? "dashboard__footer--small-white" : ""
+      }`}
+    >
+      <Link to={link}>
         <p className="footer--small__button">Show more...</p>
-      </a>
+      </Link>
     </div>
   );
 };
@@ -119,8 +109,6 @@ export const DashboardBlockBlog = ({ title, link, blogContent }) => {
       <div className="dashboard__block-small dashboard__block-small--blog">
         <DashboardHeaderSmall title={title} whiteElements={true} />
         <div className="block-small__body--blog">
-          {/* NEED TO PUT BLOG CONTENT HERE -> FROM OBJECT IN DP.js */}
-
           <img src={`${blogContent.articleImage}`} />
           <p className="body-blog__title">{blogContent.articleTitle}</p>
           <p className="body-blog__description">{blogContent.articleBody}</p>

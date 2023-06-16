@@ -7,8 +7,6 @@ import {
 import { DateTime } from "luxon";
 import { AppointmentDate } from "../Functions/convertTime";
 
-const dateSpec = { month: "long", day: "numeric" };
-
 export const DashboardPatientLHS = ({ patientAppointments }) => {
   const [appointments, setAppointments] = useState("");
 
@@ -18,7 +16,7 @@ export const DashboardPatientLHS = ({ patientAppointments }) => {
     <div className="dashboard-patient__left-column">
       <DashboardHeaderSmall title={"Your appointments"} />
       <DashboardPatientLHSBody patientAppointments={patientAppointments} />
-      <DashboardFooterSmall link={"#"} />
+      <DashboardFooterSmall link={"/app-list"} />
     </div>
   );
 };
@@ -32,19 +30,37 @@ const DashboardPatientLHSBody = ({ patientAppointments }) => {
     console.log(currentData[0].toLocaleString(DateTime.TIME_SIMPLE));
   }, []);
 
-  // run script that changes [0] to [1] if plannedAppo is true
-  // go back to [0] if plannedAppo is false
-
   const toggleTabs = () => {
-    setPlannedAppo((prev) => !prev);
+    setPlannedAppos((prev) => !prev);
+
+    patientAppointments.indexOf(currentData) == 0 &&
+      setCurrentData(patientAppointments[1]);
+    patientAppointments.indexOf(currentData) == 1 &&
+      setCurrentData(patientAppointments[0]);
   };
 
   return (
     <>
       <div className="appointments">
         <div className="appointments__top-menu">
-          <p className="top-menu__planned">Planned</p>
-          <p className="top-menu__completed">Completed</p>
+          <div
+            className={`top-menu__planned ${
+              plannedAppos ? "top-menu__active" : "top-menu__not-active"
+            }`}
+          >
+            <p className="top-menu__planned" onClick={toggleTabs}>
+              Planned
+            </p>
+          </div>
+          <div
+            className={`top-menu__completed ${
+              plannedAppos ? "top-menu__not-active" : "top-menu__active"
+            }`}
+          >
+            <p className="top-menu__completed" onClick={toggleTabs}>
+              Completed
+            </p>
+          </div>
         </div>
 
         <ul className="appointments__appo-list">
@@ -56,7 +72,9 @@ const DashboardPatientLHSBody = ({ patientAppointments }) => {
                   <p className="labels__spec">{appo.doctor}</p>
                   <p className="labels__adress">{appo.place}</p>
                 </div>
-                <div className="single-appo__settings"></div>
+                <a href="#">
+                  <div className="single-appo__settings"></div>
+                </a>
               </li>
             );
           })}

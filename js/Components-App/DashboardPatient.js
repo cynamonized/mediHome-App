@@ -7,48 +7,10 @@ import {
   DashboardBlockConsultant,
   DashboardBlockBlog,
 } from "./DashboardLittleComps";
-import { DateTime } from "luxon";
-
-//Temporary object for blog
-const blogArticleContent = {
-  articleTitle: "Lorem ipsum dolor amet",
-  articleBody:
-    "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent velit nulla...",
-  articleImage:
-    "https://github.com/cynamonized/mediHome-App/blob/dba4278ef9416d46009aaa863888c6d16f7e5d20/images/Blog%20article%20-%20temp.png?raw=true",
-};
-
-// To be replaced with real data representation from API
-const temporaryAppointments = [
-  [
-    {
-      date: DateTime.local(2023, 6, 23, 8, 30),
-      specialization: "orthopaedist",
-      place: "Puławska Center",
-      doctor: "Alan Smith",
-    },
-    {
-      date: DateTime.local(2023, 6, 23, 9, 0),
-      specialization: "orthopaedist",
-      place: "Puławska Center",
-      doctor: "Alan Smith",
-    },
-  ],
-  [
-    {
-      date: DateTime.local(2023, 6, 23, 9, 0),
-      specialization: "orthopaedist",
-      place: "Puławska Center",
-      doctor: "Alan Smith",
-    },
-    {
-      date: DateTime.local(2023, 6, 23, 9, 30),
-      specialization: "orthopaedist",
-      place: "Puławska Center",
-      doctor: "Alan Smith",
-    },
-  ],
-];
+import {
+  temporaryAppointments,
+  blogArticleContent,
+} from "../APICommunication/tempArrays";
 
 export const DashboardPatient = () => {
   return (
