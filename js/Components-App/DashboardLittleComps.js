@@ -16,7 +16,6 @@ export const DashboardHeaderSmall = ({ title, whiteElements }) => {
   );
 };
 
-// Ostylowac to najpierw (1)
 export const DashboardHeaderBig = ({ title, link }) => {
   return (
     <div className="dashboard__header-big">

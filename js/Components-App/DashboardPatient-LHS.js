@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
 import "../../scss/main.scss";
 import {
   DashboardHeaderSmall,
   DashboardFooterSmall,
 } from "./DashboardLittleComps";
-import { DateTime } from "luxon";
 import { AppointmentDate } from "../Functions/convertTime";
 
 export const DashboardPatientLHS = ({ patientAppointments }) => {
@@ -16,7 +16,7 @@ export const DashboardPatientLHS = ({ patientAppointments }) => {
     <div className="dashboard-patient__left-column">
       <DashboardHeaderSmall title={"Your appointments"} />
       <DashboardPatientLHSBody patientAppointments={patientAppointments} />
-      <DashboardFooterSmall link={"/app-list"} />
+      <DashboardFooterSmall link={"/portal/app-list"} />
     </div>
   );
 };
@@ -24,11 +24,6 @@ export const DashboardPatientLHS = ({ patientAppointments }) => {
 const DashboardPatientLHSBody = ({ patientAppointments }) => {
   const [plannedAppos, setPlannedAppos] = useState(true);
   const [currentData, setCurrentData] = useState(patientAppointments[0]);
-
-  useEffect(() => {
-    console.log(currentData);
-    console.log(currentData[0].toLocaleString(DateTime.TIME_SIMPLE));
-  }, []);
 
   const toggleTabs = () => {
     setPlannedAppos((prev) => !prev);
@@ -66,15 +61,20 @@ const DashboardPatientLHSBody = ({ patientAppointments }) => {
         <ul className="appointments__appo-list">
           {currentData.map((appo) => {
             return (
+              // it should receve app ID here
+              // so it can use it once clicked in a link
+              // conception how to transfer this id to
+              // another Link address?
               <li className="appo-list__single-appo" key={appo.date.ts}>
                 <div className="single-appo__labels">
                   <p className="labels__date">{AppointmentDate(appo.date)}</p>
                   <p className="labels__spec">{appo.doctor}</p>
                   <p className="labels__adress">{appo.place}</p>
                 </div>
-                <a href="#">
+
+                <Link to="/portal/app-list">
                   <div className="single-appo__settings"></div>
-                </a>
+                </Link>
               </li>
             );
           })}

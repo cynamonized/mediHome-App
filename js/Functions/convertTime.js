@@ -5,3 +5,11 @@ export const AppointmentDate = (date) => {
     DateTime.TIME_SIMPLE
   )}`;
 };
+
+export const AppointmentPureDate = (date) => {
+  return `${date.monthLong} ${date.day}`;
+};
+
+export const AppointmentTime = (date) => {
+  return `${date.toLocaleString(DateTime.TIME_SIMPLE)}`;
+};

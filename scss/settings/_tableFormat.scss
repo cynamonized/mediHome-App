@@ -1,0 +1,49 @@
+.dashboard-table {
+  margin: 30px;
+  .table__title {
+    margin-bottom: 30px;
+    @include fonts(1.125rem, 500, $color-main-pink);
+  }
+
+  .table__content {
+    width: 100%;
+    thead {
+      border-bottom: 1px solid $color-greys-mid-1;
+
+      tr {
+        th {
+        }
+      }
+
+      .content__row-head {
+        @include fonts(1rem, 500, $color-main-text);
+        text-align: left;
+        padding-bottom: 15px;
+      }
+
+      .content__row-head--last {
+        text-align: right;
+      }
+    }
+
+    tbody {
+      tr {
+        td {
+          padding: 30px 0;
+          @include fonts(1rem, 400, $color-main-text);
+        }
+
+        .appo-greyed-out {
+          @include fonts(1rem, 400, $color-greys-dark-1);
+        }
+      }
+
+      .content__settings-column {
+        text-align: right;
+        .settings-column__icon {
+          color: $color-sec-blue;
+        }
+      }
+    }
+  }
+}

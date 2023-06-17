@@ -1,21 +1,15 @@
 h1 {
-  font-size: 2rem;
-  font-weight: 500;
-  color: $color-main-blue;
+  @include fonts(2rem, 500, $color-main-blue);
 }
 
 h2 {
-  font-size: 1.5rem;
-  font-weight: 500;
-  color: $color-main-text;
+  @include fonts(1.5rem, 500, $color-main-text);
 }
 
-// i tutaj (3)
 h3 {
+  @include fonts(2rem, 500, $color-main-blue);
 }
 
 h6 {
-  font-size: 1.25rem;
-  font-weight: 500;
-  color: $color-main-blue-light;
+  @include fonts(1.25rem, 500, $color-main-blue-light);
 }

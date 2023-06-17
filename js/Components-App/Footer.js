@@ -73,7 +73,7 @@ export const Footer = () => {
           <div className="bottom-part__copyright">
             <p>
               <span className="copyright__company">mediHome</span> - created by
-              <span className="copyright__name">Mateusz Hofman</span>, 2023
+              <span className="copyright__name"> Mateusz Hofman</span>, 2023
             </p>
           </div>
         </div>

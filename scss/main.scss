@@ -4,22 +4,17 @@
 @import "/scss/settings/_buttons";
 @import "/scss/settings/_headers.scss";
 @import "/scss/settings/_forms.scss";
+@import "/scss/settings/_tableFormat";
 
 html {
   scroll-behavior: smooth;
   font-size: 16px;
+  overflow-y: scroll;
 }
 
 body {
   font-family: $font-poppins;
 }
-
-// How to mixins
-// .test::before {
-//   font-family: $font-material-icons;
-//   font-size: 50rem;
-//   content: "\e894";
-// }
 
 * {
   margin: 0;
@@ -36,6 +31,9 @@ body,
 
 .container {
   width: $container-width;
+  // display: flex;
+  // flex-direction: column;
+  // align-items: center;
   margin-left: auto;
   margin-right: auto;
   // @include small_desktop {
@@ -58,3 +56,4 @@ body,
 @import "/scss/sections/_dashboardPatient.scss";
 @import "/scss/settings/_dashboardLittleComps.scss";
 @import "/scss/settings/_dashboardPatient-LHS.scss";
+@import "/scss/sections/_appointmentsList";
