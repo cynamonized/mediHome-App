@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Link, useLocation } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import { DashboardHeaderBig } from "../DashboardLittleComps";
 import { MainButton } from "../Buttons";
 import { PopUp } from "../PopUp";
@@ -14,28 +14,60 @@ export const SingleAppointment = () => {
   const [chosenAppo, setChosenAppo] = useState(null);
   const [appoFetchList, setAppoFetchList] = useState(temporaryAppointments);
 
+  const [isLoading, setIsLoading] = useState(false);
+  const navigate = useNavigate();
+
   useEffect(() => {
     setAppoFetchList(temporaryAppointments);
     appoFetchList && setChosenAppo(findAppo(appoFetchList, chosenAppoID));
   }, [appoFetchList]);
 
   const cancelAppo = () => {
-    console.log(
-      "Cancell appo here + Fetch with delete + post back to available appos"
-    );
+    setIsLoading(true);
+
+    /////////////////////////////////// This is temporary !!
+    console.log("Rozpoczynam procedure fetchowania");
     // ADD WHAT HAPPENS IF DELETE
     // DELETE FROM "appoFetchList"
     // FETCH DELETE AND POST TO AVAILABLE APPOS ON THE SERVER
+    console.log(chosenAppoID);
+    const indexToRemove = temporaryAppointments[0].findIndex(
+      (appo) => appo.id == chosenAppoID
+    );
+    console.log(indexToRemove);
+    temporaryAppointments[0].splice(indexToRemove, 1);
+
+    // I delay it on purpose, above should be real fetch that allows
+    // 'navigate' once it's succesfull
+
+    // Q: Server will handle managing cancelled appo
+    //  to move it to available appos (?)
+    // [TEMP] do above here instead (for now)
+    const tempDelay = setTimeout(() => {
+      navigate("/portal/app-list");
+    }, 2500);
+    ////////////////////////////////////
   };
+
+  if (isLoading) {
+    return (
+      <div
+        className="appo-list dashboard__block-small container single-appo"
+        style={{
+          display: "flex",
+          justifyContent: "center",
+          alignItems: "center",
+        }}
+      >
+        <p>This is placeholder for a loader</p>
+      </div>
+    );
+  }
 
   return (
     <div className="appo-list dashboard__block-small container single-appo">
       <DashboardHeaderBig title={"Appointment details"} link={from} />
-      <SingleAppoBody
-        singleAppo={chosenAppo}
-        chosenAppo={chosenAppo}
-        cancelAppo={cancelAppo}
-      />
+      <SingleAppoBody chosenAppo={chosenAppo} cancelAppo={cancelAppo} />
     </div>
   );
 };
@@ -49,7 +81,13 @@ const SingleAppoBody = ({ chosenAppo, cancelAppo }) => {
 
   return (
     <div className="single-appo__body">
-      {isPopUp && <PopUp cancelAppo={cancelAppo} closePopUp={togglePopUp} />}
+      {isPopUp && (
+        <PopUp
+          cancelAppo={cancelAppo}
+          closePopUp={togglePopUp}
+          chosenAppo={chosenAppo}
+        />
+      )}
 
       <div className="body__left-column">
         <p className="left-column__label">Date:</p>

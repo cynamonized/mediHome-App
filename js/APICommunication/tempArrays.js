@@ -57,3 +57,5 @@ export const temporaryAppointments = [
     },
   ],
 ];
+
+export const availableAppos = [];

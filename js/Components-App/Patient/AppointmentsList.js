@@ -12,6 +12,7 @@ export const AppointmentsList = () => {
   const [completedAppos, setCompletedAppos] = useState([1]);
 
   useEffect(() => {
+    // Here it needs to fetch when server is ready
     setPlannedAppos(temporaryAppointments[0]);
     setCompletedAppos(temporaryAppointments[1]);
   }, []);
