@@ -15,7 +15,6 @@ import {
   colorGreysMid1,
   colorMainText,
 } from "../Settings/cssVariables";
-// import { colorMainPink } from "../../scss/settings/_variables.scss";
 import { selectStyles } from "../Settings/formsStyles";
 // -----------------------------------------
 

@@ -7,41 +7,66 @@
 
   .table__content {
     width: 100%;
+    table-layout: fixed;
     thead {
       border-bottom: 1px solid $color-greys-mid-1;
 
-      tr {
+      .head-date {
+        width: 10%;
+      }
+
+      .head-time {
+        width: 10%;
+      }
+
+      .head-doctor {
+        width: 25%;
+      }
+
+      .head-spec {
+        width: 25%;
+      }
+
+      .head-address {
+        width: 20%;
+      }
+
+      .head-set {
+        width: 10%;
+      }
+      tr.content__row-head {
         th {
+          @include fonts(1rem, 500, $color-main-text);
+          text-align: left;
+          padding-bottom: 15px;
         }
-      }
 
-      .content__row-head {
-        @include fonts(1rem, 500, $color-main-text);
-        text-align: left;
-        padding-bottom: 15px;
-      }
-
-      .content__row-head--last {
-        text-align: right;
+        th.content__row-head--last {
+          text-align: right;
+        }
       }
     }
 
     tbody {
-      tr {
+      tr.appo-row {
         td {
-          padding: 30px 0;
+          padding-top: 30px;
           @include fonts(1rem, 400, $color-main-text);
         }
+      }
 
-        .appo-greyed-out {
+      tr.appo-greyed-out {
+        td {
           @include fonts(1rem, 400, $color-greys-dark-1);
         }
       }
 
-      .content__settings-column {
-        text-align: right;
-        .settings-column__icon {
-          color: $color-sec-blue;
+      tr {
+        td.content__settings-column {
+          text-align: right;
+          .settings-column__icon {
+            color: $color-sec-blue;
+          }
         }
       }
     }

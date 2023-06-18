@@ -14,33 +14,46 @@ export const temporaryAppointments = [
   [
     {
       date: DateTime.local(2023, 6, 23, 8, 30),
-      specialization: "orthopaedist",
+      specialization: "Orthopaedist",
       place: "Racławicka 42",
       doctor: "Gordon Freeman",
-      // app ID !!
+      id: 1234,
+      completed: false,
     },
     {
       date: DateTime.local(2023, 6, 23, 9, 0),
-      specialization: "internist",
+      specialization: "Internist",
       place: "Puławska Center",
       doctor: "Alan Smith",
-      // app ID !!
+      id: 1235,
+      completed: false,
     },
   ],
   [
     {
       date: DateTime.local(2023, 6, 3, 10, 0),
-      specialization: "orthopaedist",
+      specialization: "Orthopaedist",
       place: "Dworzec Gdański 12",
       doctor: "Will Smith",
-      // app ID !!
+      id: 1236,
+      completed: true,
+      recommendations: `Recommendation 1 
+      Recomendation 2
+      Recommendation 3`,
     },
     {
       date: DateTime.local(2023, 6, 5, 14, 30),
-      specialization: "internist",
+      specialization: "Internist",
       place: "Kabaty Centrum",
       doctor: "Adam Sandler",
-      // app ID !!
+      id: 1237,
+      completed: true,
+      recommendations: `Recommendation 1
+      Recomendation 2
+      Recommendation 3
+      Recomendation 4
+      Recommendation 5
+      `,
     },
   ],
 ];

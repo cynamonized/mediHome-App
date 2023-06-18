@@ -61,18 +61,20 @@ const DashboardPatientLHSBody = ({ patientAppointments }) => {
         <ul className="appointments__appo-list">
           {currentData.map((appo) => {
             return (
-              // it should receve app ID here
-              // so it can use it once clicked in a link
-              // conception how to transfer this id to
-              // another Link address?
-              <li className="appo-list__single-appo" key={appo.date.ts}>
+              <li className="appo-list__single-appo" key={appo.id}>
                 <div className="single-appo__labels">
                   <p className="labels__date">{AppointmentDate(appo.date)}</p>
                   <p className="labels__spec">{appo.doctor}</p>
                   <p className="labels__adress">{appo.place}</p>
                 </div>
 
-                <Link to="/portal/app-list">
+                <Link
+                  to="/portal/single-apointment"
+                  state={{
+                    chosenAppoID: appo.id,
+                    from: "/portal/start",
+                  }}
+                >
                   <div className="single-appo__settings"></div>
                 </Link>
               </li>

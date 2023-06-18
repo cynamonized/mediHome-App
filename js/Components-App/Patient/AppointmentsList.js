@@ -3,21 +3,17 @@ import { Link } from "react-router-dom";
 import { DashboardHeaderBig } from "../DashboardLittleComps";
 import { temporaryAppointments } from "../../APICommunication/tempArrays";
 import {
-  AppointmentDate,
   AppointmentPureDate,
   AppointmentTime,
 } from "../../Functions/convertTime";
 
-console.log(temporaryAppointments[0]);
-
 export const AppointmentsList = () => {
-  const [plannedAppos, setPlannedAppos] = useState(null);
-  const [completedAppos, setCompletedAppos] = useState(null);
+  const [plannedAppos, setPlannedAppos] = useState([1]);
+  const [completedAppos, setCompletedAppos] = useState([1]);
 
   useEffect(() => {
     setPlannedAppos(temporaryAppointments[0]);
     setCompletedAppos(temporaryAppointments[1]);
-    console.log(plannedAppos);
   }, []);
 
   return (
@@ -46,36 +42,48 @@ const AppointetsTable = ({ title, appos, isCompleted }) => {
         <p className="table__title">{title}</p>
         <table className="table__content">
           <thead>
-            <tr>
-              <th className="content__row-head">Date</th>
-              <th className="content__row-head">Hour</th>
-              <th className="content__row-head">Doctor</th>
-              <th className="content__row-head">Specialization</th>
-              <th className="content__row-head">Localization</th>
-              <th className="content__row-head content__row-head--last">
-                Settings
-              </th>
+            <tr className="content__row-head">
+              <th className=" head-date">Date</th>
+              <th className=" head-time">Hour</th>
+              <th className=" head-doctor">Doctor</th>
+              <th className=" head-spec">Specialization</th>
+              <th className=" head-address">Localization</th>
+              <th className=" content__row-head--last head-set">Settings</th>
             </tr>
           </thead>
           <tbody>
-            <tr>
-              <td>12</td>
-              <td>12</td>
-              <td>12</td>
-              <td>12</td>
-              <td>12</td>
-              <td className="content__settings-column">
-                <Link to="/portal/start">
-                  <span className="material-icons settings-column__icon">
-                    more_horiz
-                  </span>
-                </Link>
-              </td>
-            </tr>
-
-            {/* {appos.map((appo) => {
-              return <>aaaa</>;
-            })} */}
+            {appos[0] != 1 &&
+              appos.map((appo) => {
+                return (
+                  <tr
+                    key={appo.id}
+                    className={
+                      isCompleted == true
+                        ? "appo-row appo-greyed-out"
+                        : "appo-row"
+                    }
+                  >
+                    <td>{AppointmentPureDate(appo.date)}</td>
+                    <td>{AppointmentTime(appo.date)}</td>
+                    <td>{appo.doctor}</td>
+                    <td>{appo.specialization}</td>
+                    <td>{appo.place}</td>
+                    <td className="content__settings-column">
+                      <Link
+                        to="/portal/single-apointment"
+                        state={{
+                          chosenAppoID: appo.id,
+                          from: "/portal/app-list",
+                        }}
+                      >
+                        <span className="material-icons settings-column__icon">
+                          more_horiz
+                        </span>
+                      </Link>
+                    </td>
+                  </tr>
+                );
+              })}
           </tbody>
         </table>
       </div>
