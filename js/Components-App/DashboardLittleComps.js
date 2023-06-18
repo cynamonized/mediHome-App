@@ -19,9 +19,12 @@ export const DashboardHeaderSmall = ({ title, whiteElements }) => {
 export const DashboardHeaderBig = ({ title, link }) => {
   return (
     <div className="dashboard__header-big">
-      <Link to={link}>
-        <div className="header-big__back-arrow"></div>
-      </Link>
+      {link && (
+        <Link to={link}>
+          <div className="header-big__back-arrow"></div>
+        </Link>
+      )}
+
       <h3>{title}</h3>
     </div>
   );

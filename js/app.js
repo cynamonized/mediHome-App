@@ -15,7 +15,7 @@ function App() {
       <HashRouter>
         <Routes>
           <Route path="/login" element={<Login />}></Route>
-          <Route path="test" element={<PopUp />}></Route>
+          {/* <Route path="test" element={<PopUp />}></Route> */}
           <Route path="/portal" element={<Main />}>
             <Route path="/portal/start" element={<PatientMain />} />
             <Route path="/portal/app-list" element={<AppointmentsList />} />

@@ -5,9 +5,9 @@
   font-family: $font-poppins;
   text-transform: uppercase;
   font-size: 1.25rem;
-  font-weight: 300;
+  font-weight: 400;
   background-color: $color-main-pink;
-  color: white;
+  color: $color-main-white;
   padding: 12px 40px;
   border-radius: 26px;
   border: none;
@@ -17,4 +17,20 @@
   &:hover {
     background-color: $color-main-pink-dark;
   }
+}
+
+.secondary-button {
+  background-color: $color-main-white;
+  border: 1px solid $color-main-pink;
+  color: $color-main-pink;
+
+  &:hover {
+    background-color: $color-main-white;
+    border: 1px solid $color-main-pink-dark;
+    color: $color-main-pink-dark;
+  }
+}
+
+.wide-buttons {
+  padding: 12px 80px;
 }

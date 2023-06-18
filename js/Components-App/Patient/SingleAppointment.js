@@ -2,12 +2,9 @@ import React, { useEffect, useState } from "react";
 import { Link, useLocation } from "react-router-dom";
 import { DashboardHeaderBig } from "../DashboardLittleComps";
 import { MainButton } from "../Buttons";
+import { PopUp } from "../PopUp";
 import { temporaryAppointments } from "../../APICommunication/tempArrays";
-import {
-  AppointmentPureDate,
-  AppointmentTime,
-  AppointmentDate,
-} from "../../Functions/convertTime";
+import { AppointmentDate } from "../../Functions/convertTime";
 import { findAppo } from "../../Functions/findAppo";
 
 export const SingleAppointment = () => {
@@ -22,17 +19,38 @@ export const SingleAppointment = () => {
     appoFetchList && setChosenAppo(findAppo(appoFetchList, chosenAppoID));
   }, [appoFetchList]);
 
+  const cancelAppo = () => {
+    console.log(
+      "Cancell appo here + Fetch with delete + post back to available appos"
+    );
+    // ADD WHAT HAPPENS IF DELETE
+    // DELETE FROM "appoFetchList"
+    // FETCH DELETE AND POST TO AVAILABLE APPOS ON THE SERVER
+  };
+
   return (
     <div className="appo-list dashboard__block-small container single-appo">
       <DashboardHeaderBig title={"Appointment details"} link={from} />
-      <SingleAppoBody singleAppo={chosenAppo} chosenAppo={chosenAppo} />
+      <SingleAppoBody
+        singleAppo={chosenAppo}
+        chosenAppo={chosenAppo}
+        cancelAppo={cancelAppo}
+      />
     </div>
   );
 };
 
-const SingleAppoBody = ({ chosenAppo }) => {
+const SingleAppoBody = ({ chosenAppo, cancelAppo }) => {
+  const [isPopUp, setIsPopUp] = useState(false);
+
+  const togglePopUp = () => {
+    setIsPopUp((prev) => !prev);
+  };
+
   return (
     <div className="single-appo__body">
+      {isPopUp && <PopUp cancelAppo={cancelAppo} closePopUp={togglePopUp} />}
+
       <div className="body__left-column">
         <p className="left-column__label">Date:</p>
         <p className="left-column__value">
@@ -52,7 +70,9 @@ const SingleAppoBody = ({ chosenAppo }) => {
         </p>
         {chosenAppo && !chosenAppo.completed && (
           <div className="left-column__button-container">
-            <MainButton>Cancel appointment</MainButton>
+            <MainButton callbackAction={togglePopUp}>
+              Cancel appointment
+            </MainButton>
           </div>
         )}
       </div>

@@ -3,6 +3,7 @@
   grid-template-columns: 2fr 4fr;
   margin: $margin-inside;
   height: 100%;
+  position: relative;
 
   .body__left-column {
     display: flex;
