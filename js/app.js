@@ -7,6 +7,7 @@ import { PatientMain } from "./Components-App/PatientMain";
 import { AppointmentsList } from "./Components-App/Patient/AppointmentsList";
 import { Login } from "./Components-App/Login/Login";
 import { SingleAppointment } from "./Components-App/Patient/SingleAppointment";
+import { SettingsDashboard } from "./Components-App/Patient/SettingsDashboard";
 import { PopUp } from "./Components-App/PopUp";
 
 function App() {
@@ -22,6 +23,10 @@ function App() {
             <Route
               path="/portal/single-apointment"
               element={<SingleAppointment />}
+            />
+            <Route
+              path="/portal/user-settings"
+              element={<SettingsDashboard />}
             />
           </Route>
         </Routes>

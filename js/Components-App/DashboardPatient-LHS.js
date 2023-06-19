@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import "../../scss/main.scss";
 import {
   DashboardHeaderSmall,
@@ -9,8 +9,6 @@ import { AppointmentDate } from "../Functions/convertTime";
 
 export const DashboardPatientLHS = ({ patientAppointments }) => {
   const [appointments, setAppointments] = useState("");
-
-  useEffect(() => {}, []);
 
   return (
     <div className="dashboard-patient__left-column">

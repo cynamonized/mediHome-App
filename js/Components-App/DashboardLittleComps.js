@@ -78,7 +78,7 @@ export const DashboardBlockSmall = ({ title, dataToDisplay, link }) => {
 export const DashboardBlockSettings = ({ title, link }) => {
   return (
     <div className="dashboard__block-small--static">
-      <a href={link}>
+      <Link to={"/portal/user-settings"}>
         <div className="static__icon static__icon--settings"></div>
         <h2 className="static__title">{title}</h2>
         <div className="static__description">
@@ -86,7 +86,7 @@ export const DashboardBlockSettings = ({ title, link }) => {
           information and read our <br />
           privacy policy
         </div>
-      </a>
+      </Link>
     </div>
   );
 };
