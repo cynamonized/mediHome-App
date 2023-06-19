@@ -31,6 +31,14 @@
   }
 }
 
+.tertiary-button {
+  background-color: $color-main-blue;
+
+  &:hover {
+    background-color: $color-main-text;
+  }
+}
+
 .wide-buttons {
   padding: 12px 80px;
 }

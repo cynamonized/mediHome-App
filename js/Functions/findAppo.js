@@ -1,5 +1,3 @@
-import { temporaryAppointments } from "../APICommunication/tempArrays";
-
 export const findAppo = (multiArray, ID) => {
   const resultsArray = [];
 
@@ -9,5 +7,3 @@ export const findAppo = (multiArray, ID) => {
 
   return resultsArray[0];
 };
-
-// console.log(findAppo(temporaryAppointments, 1234));

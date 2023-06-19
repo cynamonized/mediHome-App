@@ -1,0 +1,65 @@
+.login-screen {
+  display: grid;
+  grid-template-columns: 3fr 7fr;
+
+  .login-screen__left-column {
+    display: block;
+    height: 100vh;
+    background-color: $color-greys-light-1;
+    padding: 75px;
+
+    .left-column__logo {
+      margin-bottom: 140px;
+    }
+
+    .login-screen {
+      margin-bottom: 55px;
+    }
+
+    .left-column__form {
+      margin-bottom: auto;
+    }
+  }
+
+  .login-screen__right-column {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: flex-end;
+
+    .right-column__top-callout {
+      margin: 40px;
+      display: flex;
+      align-items: center;
+      .top-callout__description {
+        margin-right: 30px;
+        @include fonts(1.125rem, 400, $color-main-text);
+      }
+    }
+
+    .right-column__bottom-section {
+      .bottom-section__health-packages {
+        padding: 10px 45px;
+        margin-bottom: 50px;
+        border-left: 1px solid $color-greys-light-2;
+        .health-packages__description {
+          max-width: 480px;
+          margin-bottom: 35px;
+          @include fonts(1.25rem, 400, $color-main-text);
+          line-height: 1.625rem;
+        }
+
+        .health-packages__logos {
+          max-width: 480px;
+          display: grid;
+          grid-template-columns: 1fr 1fr;
+          gap: 35px;
+        }
+      }
+
+      .bottom-section__main-image {
+        border-radius: 0 216px;
+      }
+    }
+  }
+}

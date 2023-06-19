@@ -8,6 +8,16 @@ h2 {
 
 h3 {
   @include fonts(2rem, 500, $color-main-blue);
+  line-height: 2.5rem;
+  display: inline;
+  span {
+    font-weight: 600;
+  }
+}
+
+h3.login-screen {
+  font-weight: 400;
+  display: block;
 }
 
 h6 {

@@ -5,7 +5,7 @@ import "../scss/main.scss";
 import { Main } from "./Components-App/Main";
 import { PatientMain } from "./Components-App/PatientMain";
 import { AppointmentsList } from "./Components-App/Patient/AppointmentsList";
-import { Login } from "./Components-App/Login";
+import { Login } from "./Components-App/Login/Login";
 import { SingleAppointment } from "./Components-App/Patient/SingleAppointment";
 import { PopUp } from "./Components-App/PopUp";
 

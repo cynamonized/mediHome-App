@@ -1,7 +1,7 @@
 .form-select {
   border: 2px solid $color-main-blue;
   padding: 14px 22px;
-  border-radius: 30px;
+  border-radius: $border-radius;
 }
 
 .white-form {
@@ -25,6 +25,21 @@
   }
 }
 
-// *:focus {
-//   outline: none;
-// }
+.form-write {
+  width: 100%;
+  font-family: $font-poppins;
+  margin-bottom: 40px;
+  border: 2px solid $color-main-blue;
+  border-radius: $border-radius;
+  padding: 12px 20px;
+  color: $color-main-text;
+  @include fonts(1.125rem, 400, $color-main-blue);
+
+  &::placeholder {
+    @include fonts(1.125rem, 400, $color-main-blue);
+  }
+}
+
+input {
+  outline: none;
+}
