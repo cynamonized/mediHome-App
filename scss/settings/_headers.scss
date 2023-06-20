@@ -20,6 +20,15 @@ h3.login-screen {
   display: block;
 }
 
+h4 {
+  @include fonts(1.125rem, 500, $color-main-pink);
+  margin-bottom: 30px;
+}
+
+h4.tooltip-near {
+  margin-bottom: 0;
+}
+
 h6 {
   @include fonts(1.25rem, 500, $color-main-blue-light);
 }

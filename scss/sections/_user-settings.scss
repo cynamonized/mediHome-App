@@ -2,4 +2,32 @@
   margin-bottom: 120px;
   height: 830px;
   justify-content: flex-start;
+
+  .user-settings__body {
+    margin: $margin-inside;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    height: 100%;
+
+    .body__forms {
+      display: grid;
+      gap: 90px;
+      grid-template-columns: 1fr 1fr 1fr;
+
+      .body__contact-birth-columnn {
+        height: 100%;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        .contact-birth-column__birth {
+          margin-top: auto;
+        }
+      }
+    }
+
+    .body__button-place {
+      margin-top: auto;
+    }
+  }
 }

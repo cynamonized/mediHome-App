@@ -25,6 +25,12 @@
   }
 }
 
+.form-header {
+  @include fonts(1rem, 400, $color-greys-dark-1);
+  margin-bottom: 5px;
+  display: block;
+}
+
 .form-write {
   width: 100%;
   font-family: $font-poppins;
@@ -36,8 +42,12 @@
   @include fonts(1.125rem, 400, $color-main-blue);
 
   &::placeholder {
-    @include fonts(1.125rem, 400, $color-main-blue);
+    @include fonts(1.125rem, 400, $color-greys-mid-2);
   }
+}
+
+.form-write--long-form {
+  margin-bottom: 25px;
 }
 
 input {

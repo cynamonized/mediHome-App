@@ -1,15 +1,16 @@
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { DashboardHeaderBig } from "../DashboardLittleComps";
+import { MainButton } from "../Buttons";
 import { temporaryAppointments } from "../../APICommunication/tempArrays";
 import {
   AppointmentPureDate,
   AppointmentTime,
 } from "../../Functions/convertTime";
+import { ToolTip } from "../PopUp";
 
-//Login is (forms validation) (1)
+// Login in (forms validation) (1)
 // Create temp array first (2) --> big task: evolve current temp and add 3 layers
-// Build DOM (0) <--
 // Connect DOM with new temp (3) -> read and update
 
 export const SettingsDashboard = () => {
@@ -20,7 +21,252 @@ export const SettingsDashboard = () => {
           title={"Your account settings"}
           link={"/portal/start"}
         />
+
+        <SettingsBody />
       </div>
     </>
+  );
+};
+
+const SettingsBody = () => {
+  const [street, setStreet] = useState("");
+  const [apartment, setApartment] = useState("");
+  const [postCode, setPostCode] = useState("");
+  const [city, setCity] = useState("");
+  const [country, setCountry] = useState("");
+  const [email, setEmail] = useState("");
+  const [phone, setPhone] = useState("");
+  const [birthDate, setBirthDate] = useState("");
+  const [newPassword, setNewPassword] = useState("");
+  const [newPasswordConfrim, setNewPasswordConfirm] = useState("");
+
+  const [userData, setUserData] = useState({
+    street,
+    apartment,
+    postCode,
+    city,
+    country,
+    email,
+    phone,
+    birthDate,
+    newPassword,
+  });
+
+  useEffect(() => {
+    // need to add fetch(GET) here
+    // From Fake Array at first
+    console.log("fetch: GET Data from user");
+
+    // update object using data from fetch(GET)
+    // update both Object & single states (?)
+    // USE IT ONCE ABOVE BRINGS DATA
+    updateUserDataObject();
+  }, []);
+
+  const updateInput = (e, updateCallback) => {
+    updateCallback(e.target.value);
+
+    // below ads new key that is exactly as input.name
+    const newValueObj = { tempKey: `${e.target.value}` };
+    newValueObj[`${e.target.name}`] = newValueObj["tempKey"];
+    delete newValueObj["tempKey"];
+
+    setUserData((prev) => {
+      return { ...prev, ...newValueObj };
+    });
+  };
+
+  const updateUserData = (e) => {
+    // need to add fetch (PATCH/POST) here;
+    e.preventDefault();
+    console.log("fetch: PATCH/POST to the database");
+    console.log("I am using:", userData);
+  };
+
+  const updateUserDataObject = () => {
+    setUserData({
+      street,
+      apartment,
+      postCode,
+      city,
+      country,
+      email,
+      phone,
+      birthDate,
+      newPassword,
+    });
+  };
+
+  return (
+    <form className="user-settings__body" onSubmit={updateUserData}>
+      <div className="body__forms">
+        <div className="body__adrress-column">
+          <h4>Your address:</h4>
+          <label className="form-header" htmlFor="street-address">
+            Street name
+          </label>
+          <input
+            type="text"
+            className="form-write form-write--long-form"
+            id="street-address"
+            name="street"
+            required
+            value={street}
+            onChange={(e) => {
+              updateInput(e, setStreet);
+            }}
+          />
+          <label className="form-header" htmlFor="apartment">
+            Apartment number:
+          </label>
+          <input
+            type="text"
+            className="form-write form-write--long-form"
+            id="apartment-number"
+            name="apartment"
+            required
+            value={apartment}
+            onChange={(e) => {
+              updateInput(e, setApartment);
+            }}
+          />
+          <label className="form-header" htmlFor="postCode">
+            Post-code
+          </label>
+          <input
+            type="text"
+            className="form-write form-write--long-form"
+            id="postal-code"
+            name="postCode"
+            required
+            value={postCode}
+            onChange={(e) => {
+              updateInput(e, setPostCode);
+            }}
+          />
+          <label className="form-header" htmlFor="city">
+            City
+          </label>
+          <input
+            type="text"
+            className="form-write form-write--long-form"
+            id="city"
+            name="city"
+            required
+            value={city}
+            onChange={(e) => {
+              updateInput(e, setCity);
+            }}
+          />
+          <label className="form-header" htmlFor="country">
+            Country
+          </label>
+          <input
+            type="text"
+            className="form-write form-write--long-form"
+            id="country"
+            name="country"
+            required
+            value={country}
+            onChange={(e) => {
+              updateInput(e, setCountry);
+            }}
+          />
+        </div>
+
+        <div className="body__contact-birth-columnn">
+          <div className="tooltip__head">
+            <ToolTip />
+            <h4 className="tooltip-near">Contact information:</h4>
+          </div>
+          <label className="form-header" htmlFor="email">
+            Email
+          </label>
+          <input
+            type="email"
+            className="form-write form-write--long-form"
+            id="email"
+            name="email"
+            disabled
+            value={email}
+            onChange={(e) => {
+              updateInput(e, setEmail);
+            }}
+          />
+          <label className="form-header" htmlFor="phone">
+            Phone number
+          </label>
+          <input
+            type="number"
+            className="form-write form-write--long-form"
+            id="phone-number"
+            name="phone"
+            disabled
+            value={phone}
+            onChange={(e) => {
+              updateInput(e, setPhone);
+            }}
+          />
+
+          <div className="contact-birth-column__birth">
+            <div className="tooltip__head">
+              <ToolTip />
+              <h4 className="tooltip-near">Date of birth:</h4>
+            </div>
+            <input
+              type="text"
+              className="form-write form-write--long-form"
+              id="birthDate"
+              name="birthDate"
+              disabled
+              value={birthDate}
+              onChange={(e) => {
+                updateInput(e, setBirthDate);
+              }}
+            />
+          </div>
+        </div>
+
+        <div className="body__password-column">
+          <h4>Update password:</h4>
+          <label className="form-header" htmlFor="newPassword">
+            New password
+          </label>
+          <input
+            type="password"
+            className="form-write form-write--long-form"
+            id="newPassword"
+            name="newPassword"
+            required
+            placeholder="Write new password here"
+            value={newPassword}
+            onChange={(e) => {
+              updateInput(e, setNewPassword);
+            }}
+          />
+          <label className="form-header" htmlFor="newPaswordConfirm">
+            Confirm new password
+          </label>
+          <input
+            type="password"
+            className="form-write form-write--long-form"
+            id="newPaswordConfirm"
+            name="newPaswordConfirm"
+            required
+            placeholder="Write new password again"
+            value={newPasswordConfrim}
+            onChange={(e) => {
+              updateInput(e, setNewPasswordConfirm);
+            }}
+          />
+        </div>
+      </div>
+
+      <div className="body__button-place">
+        <MainButton callbackAction={updateUserData}>
+          Update information
+        </MainButton>
+      </div>
+    </form>
   );
 };

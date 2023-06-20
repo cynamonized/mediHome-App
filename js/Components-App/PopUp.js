@@ -38,3 +38,11 @@ export const PopUp = ({ cancelAppo, closePopUp, chosenAppo }) => {
     </div>
   );
 };
+
+export const ToolTip = () => {
+  return (
+    <div className="tooltip">
+      <span className="material-icons">info</span>
+    </div>
+  );
+};

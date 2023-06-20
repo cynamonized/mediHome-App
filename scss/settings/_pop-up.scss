@@ -35,3 +35,16 @@
     }
   }
 }
+
+.tooltip {
+  display: inline;
+  color: $color-main-pink;
+  font-family: $font-material-icons;
+  font-size: 1rem;
+  margin-right: 5px;
+}
+
+.tooltip__head {
+  @include flex(flex-start, center);
+  margin-bottom: 30px;
+}
