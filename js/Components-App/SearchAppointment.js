@@ -16,6 +16,9 @@ import {
   colorMainText,
 } from "../Settings/cssVariables";
 import { selectStyles } from "../Settings/formsStyles";
+import { Link, useNavigate, useLocation } from "react-router-dom";
+// import { DateTime } from "luxon";
+import { dateToLuxonType } from "../Functions/convertTime";
 // -----------------------------------------
 
 import Select, {
@@ -28,6 +31,7 @@ import makeAnimated from "react-select/animated";
 
 import DatePicker from "react-datepicker";
 import "../../css/react-datepicker.css";
+import { temporaryAppointments } from "../APICommunication/tempArrays";
 
 //------------------------------------------
 
@@ -44,23 +48,24 @@ const specs = [
 ];
 
 const SearchAppointment = () => {
-  // City states
+  // Picked values
   const [city, setCity] = useState({
     value: "default",
     label: "Select a city",
   });
-  const [cityValues, setCityValues] = useState([]);
-
-  // Specialization states
   const [specialization, setSpecialization] = useState({
     value: "default",
     label: "Select a specialization",
   });
-  const [specValues, setSpecValues] = useState([]);
-
-  // Date states
   const [appointmentDate, setAppointmentDate] = useState(new Date());
+
+  // Select form values
+  const [cityValues, setCityValues] = useState([]);
+  const [specValues, setSpecValues] = useState([]);
   const [calendarMinValue, setCalendarMinValue] = useState("");
+
+  const location = useLocation();
+  const navigate = useNavigate();
 
   useEffect(() => {
     // setAppointmentDate(getTodaysDate());
@@ -74,6 +79,23 @@ const SearchAppointment = () => {
     setSpecValues(specsObjectArray);
   };
 
+  const performSearch = (e) => {
+    e.preventDefault();
+
+    console.log(location.pathname);
+    if (location.pathname != "/portal/search") {
+      navigate("/portal/search", {
+        state: {
+          city,
+          specialization,
+          appointmentDate,
+        },
+      });
+    } else {
+      console.log("SEARCHING TIME!!!!!!");
+    }
+  };
+
   const updateDate = ({ target }) => {
     setAppointmentDate(target.value);
   };
@@ -84,7 +106,7 @@ const SearchAppointment = () => {
         <h1 className="search-appointment__main-title">
           Schedule an appointment
         </h1>
-        <form className="search-appointment__form" onSubmit={doingSomething}>
+        <form className="search-appointment__form" onSubmit={performSearch}>
           <Select
             isSearchable={true}
             defaultValue={city}
@@ -105,18 +127,14 @@ const SearchAppointment = () => {
             showIcon
             closeOnScroll={true}
             selected={appointmentDate}
-            onChange={(date) => setAppointmentDate(date)}
+            onChange={(date) => {
+              setAppointmentDate(date);
+            }}
             minDate={new Date()}
             customInput={<CustomDateInput />}
           />
 
-          <MainButton
-            callbackAction={(e) => {
-              searchForAppointment(e);
-            }}
-          >
-            Search
-          </MainButton>
+          <MainButton callbackAction={performSearch}>Search</MainButton>
         </form>
       </div>
     </section>

@@ -9,6 +9,8 @@ import { Login } from "./Components-App/Login/Login";
 import { SingleAppointment } from "./Components-App/Patient/SingleAppointment";
 import { SettingsDashboard } from "./Components-App/Patient/SettingsDashboard";
 import { PopUp } from "./Components-App/PopUp";
+import SearchAppointment from "./Components-App/SearchAppointment";
+import { SearchDashboard } from "./Components-App/Patient/search";
 
 function App() {
   return (
@@ -28,6 +30,7 @@ function App() {
               path="/portal/user-settings"
               element={<SettingsDashboard />}
             />
+            <Route path="/portal/search" element={<SearchDashboard />} />
           </Route>
         </Routes>
       </HashRouter>
