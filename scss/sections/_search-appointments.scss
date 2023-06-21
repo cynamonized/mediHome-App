@@ -1,5 +1,7 @@
 .search-appointment {
+  margin-bottom: 90px;
   .search-appointment-container {
+    position: relative;
     .search-appointment__main-title {
       padding-bottom: 44px;
     }
@@ -11,6 +13,13 @@
     gap: 2rem;
     grid-auto-rows: 52px;
   }
+}
+
+.validaiton-warning {
+  @include fonts(1rem, 500, $color-sec-angry-red);
+  position: absolute;
+  z-index: 1;
+  top: 45px;
 }
 
 .picker {

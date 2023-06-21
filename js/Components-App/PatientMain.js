@@ -6,7 +6,12 @@ import { DashboardPatient } from "./DashboardPatient";
 export const PatientMain = () => {
   return (
     <>
-      <SearchAppointment />
+      <SearchAppointment
+        isPartOfSearch={false}
+        // desiredCity={null}
+        // desiredSpecialization={null}
+        // desiredAppointmentDate={null}
+      />
       <DashboardPatient />
     </>
   );

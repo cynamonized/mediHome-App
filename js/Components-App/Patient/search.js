@@ -14,8 +14,12 @@ export const SearchDashboard = () => {
 
   return (
     <>
-      {console.log(city, specialization, appointmentDate)}
-      <SearchAppointment />
+      <SearchAppointment
+        isPartOfSearch={true}
+        desiredCity={city}
+        desiredSpecialization={specialization}
+        desiredAppointmentDate={appointmentDate}
+      />
       <SearchResults />
     </>
   );

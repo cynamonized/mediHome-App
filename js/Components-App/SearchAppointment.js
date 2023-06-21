@@ -47,30 +47,49 @@ const specs = [
   { value: "orthodontist", label: "Orthodontist" },
 ];
 
-const SearchAppointment = () => {
-  // Picked values
-  const [city, setCity] = useState({
-    value: "default",
-    label: "Select a city",
-  });
-  const [specialization, setSpecialization] = useState({
-    value: "default",
-    label: "Select a specialization",
-  });
+const setSelectValue = (desiredValue, defaultText) => {
+  if (desiredValue) {
+    return desiredValue;
+  } else {
+    return { value: "default", label: `${defaultText}` };
+  }
+};
+
+const SearchAppointment = ({
+  isPartOfSearch,
+  desiredCity,
+  desiredSpecialization,
+  desiredAppointmentDate,
+}) => {
+  // Picked values [states]
+  const [city, setCity] = useState(() =>
+    setSelectValue(desiredCity, "Select a city")
+  );
+  const [specialization, setSpecialization] = useState(() =>
+    setSelectValue(desiredSpecialization, "Select a specialization")
+  );
   const [appointmentDate, setAppointmentDate] = useState(new Date());
 
   // Select form values
   const [cityValues, setCityValues] = useState([]);
   const [specValues, setSpecValues] = useState([]);
-  const [calendarMinValue, setCalendarMinValue] = useState("");
+  const [isSelectValid, setIsSelectValid] = useState(true);
 
   const location = useLocation();
   const navigate = useNavigate();
 
   useEffect(() => {
-    // setAppointmentDate(getTodaysDate());
-    setCalendarMinValue(getTodaysDate());
     loadCitiesSpecs(cities, specs);
+
+    if (desiredAppointmentDate) {
+      // setCity(desiredCity);
+      // setSpecialization(desiredSpecialization);
+      setAppointmentDate(desiredAppointmentDate);
+    }
+
+    if (isPartOfSearch) {
+      console.log("FETCH SEARCHING TIME!!!!!!");
+    }
   }, []);
 
   const loadCitiesSpecs = (citiesObjectArray, specsObjectArray) => {
@@ -82,38 +101,66 @@ const SearchAppointment = () => {
   const performSearch = (e) => {
     e.preventDefault();
 
-    console.log(location.pathname);
     if (location.pathname != "/portal/search") {
-      navigate("/portal/search", {
-        state: {
-          city,
-          specialization,
-          appointmentDate,
-        },
-      });
+      if (validateSelects()) {
+        setIsSelectValid(true);
+        navigate("/portal/search", {
+          state: {
+            city,
+            specialization,
+            appointmentDate,
+          },
+        });
+      } else {
+        setIsSelectValid(false);
+      }
     } else {
-      console.log("SEARCHING TIME!!!!!!");
+      if (validateSelects()) {
+        setIsSelectValid(true);
+        console.log("FETCH SEARCHING TIME!!!!!!");
+      } else {
+        setIsSelectValid(false);
+      }
     }
   };
 
-  const updateDate = ({ target }) => {
-    setAppointmentDate(target.value);
+  const validateSelects = () => {
+    if (city.value == "default" || specialization.value == "default") {
+      return false;
+    }
+    return true;
   };
 
   return (
     <section className="search-appointment">
       <div className="container search-appointment-container">
+        {!isSelectValid && (
+          <p className="validaiton-warning">
+            Please pick all neccessary criteria.
+          </p>
+        )}
         <h1 className="search-appointment__main-title">
           Schedule an appointment
         </h1>
+
         <form className="search-appointment__form" onSubmit={performSearch}>
-          <Select
+          {city.value && (
+            <Select
+              isSearchable={true}
+              defaultValue={city}
+              onChange={setCity}
+              options={cityValues}
+              styles={selectStyles}
+            />
+          )}
+
+          {/* <Select
             isSearchable={true}
             defaultValue={city}
             onChange={setCity}
             options={cityValues}
             styles={selectStyles}
-          />
+          /> */}
           <Select
             isSearchable={true}
             defaultValue={specialization}
@@ -141,6 +188,7 @@ const SearchAppointment = () => {
   );
 };
 
+// It adds custom styling to date-picker
 const CustomDateInput = React.forwardRef(({ value, onClick }, ref) => (
   <button
     className="datepicker-input"
