@@ -31,7 +31,6 @@ import makeAnimated from "react-select/animated";
 
 import DatePicker from "react-datepicker";
 import "../../css/react-datepicker.css";
-import { temporaryAppointments } from "../APICommunication/tempArrays";
 
 //------------------------------------------
 

@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useRef } from "react";
 import { Link, useLocation } from "react-router-dom";
 import "../../scss/main.scss";
 import {
@@ -21,7 +21,23 @@ export const DashboardPatientLHS = ({ patientAppointments }) => {
 
 const DashboardPatientLHSBody = ({ patientAppointments }) => {
   const [plannedAppos, setPlannedAppos] = useState(true);
-  const [currentData, setCurrentData] = useState(patientAppointments[0]);
+  const [currentData, setCurrentData] = useState(() => {
+    if (patientAppointments) {
+      return patientAppointments[0];
+    } else {
+      return null;
+    }
+  });
+
+  const initialRenderAppos = useRef(true);
+
+  useEffect(() => {
+    if (initialRenderAppos.current) {
+      initialRenderAppos.current = false;
+    } else {
+      setCurrentData(patientAppointments[0]);
+    }
+  }, [patientAppointments]);
 
   const toggleTabs = () => {
     setPlannedAppos((prev) => !prev);
@@ -57,27 +73,28 @@ const DashboardPatientLHSBody = ({ patientAppointments }) => {
         </div>
 
         <ul className="appointments__appo-list">
-          {currentData.map((appo) => {
-            return (
-              <li className="appo-list__single-appo" key={appo.id}>
-                <div className="single-appo__labels">
-                  <p className="labels__date">{AppointmentDate(appo.date)}</p>
-                  <p className="labels__spec">{appo.doctor}</p>
-                  <p className="labels__adress">{appo.place}</p>
-                </div>
+          {currentData &&
+            currentData.map((appo) => {
+              return (
+                <li className="appo-list__single-appo" key={appo.id}>
+                  <div className="single-appo__labels">
+                    <p className="labels__date">{AppointmentDate(appo.date)}</p>
+                    <p className="labels__spec">{appo.doctor}</p>
+                    <p className="labels__adress">{appo.place}</p>
+                  </div>
 
-                <Link
-                  to="/portal/single-apointment"
-                  state={{
-                    chosenAppoID: appo.id,
-                    from: "/portal/start",
-                  }}
-                >
-                  <div className="single-appo__settings"></div>
-                </Link>
-              </li>
-            );
-          })}
+                  <Link
+                    to="/portal/single-apointment"
+                    state={{
+                      chosenAppoID: appo.id,
+                      from: "/portal/start",
+                    }}
+                  >
+                    <div className="single-appo__settings"></div>
+                  </Link>
+                </li>
+              );
+            })}
         </ul>
       </div>
     </>
