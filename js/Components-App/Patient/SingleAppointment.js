@@ -3,22 +3,35 @@ import { Link, useLocation, useNavigate } from "react-router-dom";
 import { DashboardHeaderBig } from "../DashboardLittleComps";
 import { MainButton } from "../Buttons";
 import { PopUp } from "../PopUp";
-import { temporaryAppointments } from "../../APICommunication/tempArrays";
 import { AppointmentDate } from "../../Functions/convertTime";
 import { findAppo } from "../../Functions/findAppo";
+import {
+  temporaryAppointments,
+  temporaryAppointmentsUser,
+} from "../../APICommunication/tempArrays";
+import {
+  getUserAppointments,
+  RemoveAppoFrUser,
+} from "../../APICommunication/GetAppointments";
+import { userIDserver } from "../../APICommunication/user";
 
 export const SingleAppointment = () => {
   const location = useLocation();
   const { chosenAppoID, from } = location.state;
-
-  const [chosenAppo, setChosenAppo] = useState(null);
-  const [appoFetchList, setAppoFetchList] = useState(temporaryAppointments);
-
-  const [isLoading, setIsLoading] = useState(false);
   const navigate = useNavigate();
 
+  const [chosenAppo, setChosenAppo] = useState(null);
+  const [appoFetchList, setAppoFetchList] = useState(null);
+  const [isLoading, setIsLoading] = useState(false);
+
   useEffect(() => {
-    setAppoFetchList(temporaryAppointments);
+    if (appoFetchList == null) {
+      getUserAppointments(
+        userIDserver,
+        temporaryAppointmentsUser,
+        setAppoFetchList
+      );
+    }
     appoFetchList && setChosenAppo(findAppo(appoFetchList, chosenAppoID));
   }, [appoFetchList]);
 
@@ -26,16 +39,19 @@ export const SingleAppointment = () => {
     setIsLoading(true);
 
     /////////////////////////////////// This is temporary !!
-    console.log("Rozpoczynam procedure fetchowania");
+    console.log("Rozpoczynam procedure fetchowania deletowania");
     // ADD WHAT HAPPENS IF DELETE
     // DELETE FROM "appoFetchList"
     // FETCH DELETE AND POST TO AVAILABLE APPOS ON THE SERVER
-    console.log(chosenAppoID);
-    const indexToRemove = temporaryAppointments[0].findIndex(
-      (appo) => appo.id == chosenAppoID
-    );
-    console.log(indexToRemove);
-    temporaryAppointments[0].splice(indexToRemove, 1);
+    //
+    // const indexToRemove = temporaryAppointments[0].findIndex(
+    //   (appo) => appo.id == chosenAppoID
+    // );
+    // console.log(indexToRemove);
+    // temporaryAppointments[0].splice(indexToRemove, 1);
+    //
+
+    RemoveAppoFrUser(userIDserver, temporaryAppointmentsUser, chosenAppoID);
 
     // I delay it on purpose, above should be real fetch that allows
     // 'navigate' once it's succesfull
@@ -45,7 +61,7 @@ export const SingleAppointment = () => {
     // [TEMP] do above here instead (for now)
     const tempDelay = setTimeout(() => {
       navigate("/portal/app-list");
-    }, 2500);
+    }, 2000);
     ////////////////////////////////////
   };
 
@@ -59,7 +75,7 @@ export const SingleAppointment = () => {
           alignItems: "center",
         }}
       >
-        <p>This is placeholder for a loader</p>
+        <p>This is placeholder for a loader when cancelling</p>
       </div>
     );
   }
@@ -67,7 +83,9 @@ export const SingleAppointment = () => {
   return (
     <div className="appo-list dashboard__block-small container single-appo">
       <DashboardHeaderBig title={"Appointment details"} link={from} />
-      <SingleAppoBody chosenAppo={chosenAppo} cancelAppo={cancelAppo} />
+      {chosenAppo && (
+        <SingleAppoBody chosenAppo={chosenAppo} cancelAppo={cancelAppo} />
+      )}
     </div>
   );
 };

@@ -20,6 +20,7 @@ export const temporaryAppointments = [
       id: 1,
       completed: false,
       booked: true,
+      city: "Warsaw",
     },
     {
       date: DateTime.local(2023, 6, 23, 9, 0),
@@ -29,6 +30,7 @@ export const temporaryAppointments = [
       id: 2,
       completed: false,
       booked: true,
+      city: "Warsaw",
     },
   ],
   [
@@ -40,6 +42,7 @@ export const temporaryAppointments = [
       id: 3,
       completed: true,
       booked: true,
+      city: "Warsaw",
       recommendations: `Recommendation 1 
       Recomendation 2
       Recommendation 3`,
@@ -52,6 +55,7 @@ export const temporaryAppointments = [
       id: 4,
       completed: true,
       booked: true,
+      city: "Warsaw",
       recommendations: `Recommendation 1
       Recomendation 2
       Recommendation 3
@@ -91,6 +95,7 @@ export const temporaryAppointmentsUser = [
           id: 1,
           completed: false,
           booked: true,
+          city: "Warsaw",
         },
         {
           date: DateTime.local(2023, 6, 23, 9, 0),
@@ -100,6 +105,7 @@ export const temporaryAppointmentsUser = [
           id: 2,
           completed: false,
           booked: true,
+          city: "Warsaw",
         },
       ],
       [
@@ -111,6 +117,7 @@ export const temporaryAppointmentsUser = [
           id: 3,
           completed: true,
           booked: true,
+          city: "Warsaw",
           recommendations: `Recommendation 1 
         Recomendation 2
         Recommendation 3`,
@@ -123,6 +130,7 @@ export const temporaryAppointmentsUser = [
           id: 4,
           completed: true,
           booked: true,
+          city: "Warsaw",
           recommendations: `Recommendation 1
         Recomendation 2
         Recommendation 3
@@ -148,6 +156,7 @@ export const AllAppos = {
           booked: false,
           completed: false,
           patientID: "",
+          city: "Poznan",
         },
         {
           date: DateTime.local(2023, 7, 1, 9, 0),
@@ -158,6 +167,7 @@ export const AllAppos = {
           booked: false,
           completed: false,
           patientID: "",
+          city: "Poznan",
         },
       ],
       Orthopaedist: [
@@ -170,6 +180,7 @@ export const AllAppos = {
           booked: false,
           completed: false,
           patientID: "",
+          city: "Poznan",
         },
         {
           date: DateTime.local(2023, 7, 12, 9, 0),
@@ -180,6 +191,7 @@ export const AllAppos = {
           booked: false,
           completed: false,
           patientID: "",
+          city: "Poznan",
         },
       ],
       Orthodontist: [
@@ -192,6 +204,7 @@ export const AllAppos = {
           booked: false,
           completed: false,
           patientID: "",
+          city: "Poznan",
         },
         {
           date: DateTime.local(2023, 7, 20, 16, 0),
@@ -202,6 +215,7 @@ export const AllAppos = {
           booked: false,
           completed: false,
           patientID: "",
+          city: "Poznan",
         },
       ],
     },
@@ -216,6 +230,7 @@ export const AllAppos = {
           booked: false,
           completed: false,
           patientID: "",
+          city: "Krakow",
         },
         {
           date: DateTime.local(2023, 7, 2, 14, 0),
@@ -226,6 +241,7 @@ export const AllAppos = {
           booked: false,
           completed: false,
           patientID: "",
+          city: "Krakow",
         },
       ],
       Orthopaedist: [
@@ -238,6 +254,7 @@ export const AllAppos = {
           booked: false,
           completed: false,
           patientID: "",
+          city: "Krakow",
         },
         {
           date: DateTime.local(2023, 7, 13, 19, 0),
@@ -248,6 +265,7 @@ export const AllAppos = {
           booked: false,
           completed: false,
           patientID: "",
+          city: "Krakow",
         },
       ],
       Orthodontist: [
@@ -260,6 +278,7 @@ export const AllAppos = {
           booked: false,
           completed: false,
           patientID: "",
+          city: "Krakow",
         },
         {
           date: DateTime.local(2023, 7, 10, 14, 0),
@@ -270,6 +289,7 @@ export const AllAppos = {
           booked: false,
           completed: false,
           patientID: "",
+          city: "Krakow",
         },
       ],
     },
@@ -284,6 +304,7 @@ export const AllAppos = {
           booked: false,
           completed: false,
           patientID: "",
+          city: "Warsaw",
         },
         {
           date: DateTime.local(2023, 7, 4, 15, 0),
@@ -294,6 +315,7 @@ export const AllAppos = {
           booked: false,
           completed: false,
           patientID: "",
+          city: "Warsaw",
         },
       ],
       Orthopaedist: [
@@ -306,6 +328,7 @@ export const AllAppos = {
           booked: false,
           completed: false,
           patientID: "",
+          city: "Warsaw",
         },
         {
           date: DateTime.local(2023, 7, 23, 15, 0),
@@ -316,6 +339,7 @@ export const AllAppos = {
           booked: false,
           completed: false,
           patientID: "",
+          city: "Warsaw",
         },
       ],
       Orthodontist: [
@@ -328,6 +352,7 @@ export const AllAppos = {
           booked: false,
           completed: false,
           patientID: "",
+          city: "Warsaw",
         },
         {
           date: DateTime.local(2023, 7, 11, 17, 0),
@@ -338,6 +363,7 @@ export const AllAppos = {
           booked: false,
           completed: false,
           patientID: "",
+          city: "Warsaw",
         },
       ],
     },
@@ -364,6 +390,7 @@ export const AllAppos = {
           completed: false,
           booked: true,
           patientID: 1,
+          city: "Warsaw",
         },
         {
           date: DateTime.local(2023, 6, 30, 14, 0),
@@ -374,6 +401,7 @@ export const AllAppos = {
           booked: true,
           completed: false,
           patientID: 2,
+          city: "Warsaw",
         },
       ],
       Orthopaedist: [
@@ -386,6 +414,7 @@ export const AllAppos = {
           completed: false,
           booked: true,
           patientID: 1,
+          city: "Warsaw",
         },
         {
           date: DateTime.local(2023, 6, 23, 10, 30),
@@ -396,6 +425,7 @@ export const AllAppos = {
           completed: false,
           booked: true,
           patientID: 2,
+          city: "Warsaw",
         },
       ],
       Orthodontist: [],

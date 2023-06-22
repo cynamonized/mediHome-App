@@ -1,36 +1,44 @@
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { DashboardHeaderBig } from "../DashboardLittleComps";
-import { temporaryAppointments } from "../../APICommunication/tempArrays";
+import { temporaryAppointmentsUser } from "../../APICommunication/tempArrays";
 import {
   AppointmentPureDate,
   AppointmentTime,
 } from "../../Functions/convertTime";
+import { getUserAppointments } from "../../APICommunication/GetAppointments";
+import { userIDserver } from "../../APICommunication/user";
 
 export const AppointmentsList = () => {
-  const [plannedAppos, setPlannedAppos] = useState([1]);
-  const [completedAppos, setCompletedAppos] = useState([1]);
+  const [appoMultiArray, setAppoMultiArray] = useState(null);
 
   useEffect(() => {
     // Here it needs to fetch when server is ready
-    setPlannedAppos(temporaryAppointments[0]);
-    setCompletedAppos(temporaryAppointments[1]);
+    getUserAppointments(
+      userIDserver,
+      temporaryAppointmentsUser,
+      setAppoMultiArray
+    );
   }, []);
 
   return (
     <>
       <div className="appo-list dashboard__block-small container">
         <DashboardHeaderBig title={"My appointments"} link={"/portal/start"} />
-        <AppointetsTable
-          title={"Planned"}
-          appos={plannedAppos}
-          isCompleted={false}
-        />
-        <AppointetsTable
-          title={"Completed"}
-          appos={completedAppos}
-          isCompleted={true}
-        />
+        {appoMultiArray && (
+          <>
+            <AppointetsTable
+              title={"Planned"}
+              appos={appoMultiArray[0]}
+              isCompleted={false}
+            />
+            <AppointetsTable
+              title={"Completed"}
+              appos={appoMultiArray[1]}
+              isCompleted={true}
+            />
+          </>
+        )}
       </div>
     </>
   );
@@ -53,7 +61,7 @@ const AppointetsTable = ({ title, appos, isCompleted }) => {
             </tr>
           </thead>
           <tbody>
-            {appos[0] != 1 &&
+            {appos &&
               appos.map((appo) => {
                 return (
                   <tr
