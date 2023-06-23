@@ -15,13 +15,6 @@
   }
 }
 
-.validaiton-warning {
-  @include fonts(1rem, 500, $color-sec-angry-red);
-  position: absolute;
-  z-index: 1;
-  top: 45px;
-}
-
 .picker {
   grid-column: 5/10;
   grid-row: 2/4;

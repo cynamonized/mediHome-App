@@ -2,16 +2,17 @@ import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { DashboardHeaderBig } from "../DashboardLittleComps";
 import { MainButton } from "../Buttons";
-import { temporaryAppointments } from "../../APICommunication/tempArrays";
-import {
-  AppointmentPureDate,
-  AppointmentTime,
-} from "../../Functions/convertTime";
 import { ToolTip } from "../PopUp";
-
-// Login in (forms validation) (1)
-// Create temp array first (2) --> big task: evolve current temp and add 3 layers
-// Connect DOM with new temp (3) -> read and update
+import { DateTime } from "luxon";
+import {
+  gettingUserSettings,
+  updateUserSettings,
+} from "../../APICommunication/GetAppointments";
+import {
+  temporaryAppointments,
+  temporaryAppointmentsUser,
+} from "../../APICommunication/tempArrays";
+import { userIDserver } from "../../APICommunication/user";
 
 export const SettingsDashboard = () => {
   return (
@@ -29,6 +30,7 @@ export const SettingsDashboard = () => {
 };
 
 const SettingsBody = () => {
+  const [userObject, setUserObject] = useState(null);
   const [street, setStreet] = useState("");
   const [apartment, setApartment] = useState("");
   const [postCode, setPostCode] = useState("");
@@ -40,6 +42,9 @@ const SettingsBody = () => {
   const [newPassword, setNewPassword] = useState("");
   const [newPasswordConfrim, setNewPasswordConfirm] = useState("");
 
+  const [wrongPassword, setWrongPassword] = useState(false);
+
+  // LEGACY
   const [userData, setUserData] = useState({
     street,
     apartment,
@@ -53,36 +58,71 @@ const SettingsBody = () => {
   });
 
   useEffect(() => {
-    // need to add fetch(GET) here
-    // From Fake Array at first
-    console.log("fetch: GET Data from user");
+    // need to add fetch(GET) here - FIREBASE
 
-    // update object using data from fetch(GET)
-    // update both Object & single states (?)
-    // USE IT ONCE ABOVE BRINGS DATA
-    updateUserDataObject();
-  }, []);
+    if (!userObject) {
+      gettingUserSettings(
+        userIDserver,
+        temporaryAppointmentsUser,
+        setUserObject
+      );
+    } else {
+      setStreet(userObject.address.streetName);
+      setApartment(userObject.address.apartmentNumber);
+      setPostCode(userObject.address.postCode);
+      setCity(userObject.address.city);
+      setCountry(userObject.address.country);
+      setEmail(userObject.email);
+      setPhone(userObject.phone);
+      setBirthDate(
+        userObject.birthDate.toLocaleString({ month: "long", day: "numeric" })
+      );
+    }
+  }, [userObject]);
 
   const updateInput = (e, updateCallback) => {
     updateCallback(e.target.value);
 
-    // below ads new key that is exactly as input.name
-    const newValueObj = { tempKey: `${e.target.value}` };
-    newValueObj[`${e.target.name}`] = newValueObj["tempKey"];
-    delete newValueObj["tempKey"];
+    // NOT SURE WHY IT WAS HERE (LEGACY)
+    // PROB it was adding to userData when it was empty
 
-    setUserData((prev) => {
-      return { ...prev, ...newValueObj };
-    });
+    // // below ads new key that is exactly as input.name
+    // const newValueObj = { tempKey: `${e.target.value}` };
+    // newValueObj[`${e.target.name}`] = newValueObj["tempKey"];
+    // delete newValueObj["tempKey"];
+
+    // setUserData((prev) => {
+    //   return { ...prev, ...newValueObj };
+    // });
   };
 
   const updateUserData = (e) => {
-    // need to add fetch (PATCH/POST) here;
     e.preventDefault();
-    console.log("fetch: PATCH/POST to the database");
-    console.log("I am using:", userData);
+
+    // need to add fetch (PATCH/POST) here;
+
+    // WARUNEK NIE DZIAŁA
+    if (
+      (newPassword === "" && newPasswordConfrim === "") ||
+      newPassword === newPasswordConfrim
+    ) {
+      updateUserSettings(
+        userIDserver,
+        temporaryAppointmentsUser,
+        street,
+        apartment,
+        postCode,
+        city,
+        country,
+        newPassword
+      );
+      console.log("tu se updatuje w Componencie jeszcze");
+    } else {
+      setWrongPassword(true);
+    }
   };
 
+  // LEGACY
   const updateUserDataObject = () => {
     setUserData({
       street,
@@ -259,6 +299,14 @@ const SettingsBody = () => {
               updateInput(e, setNewPasswordConfirm);
             }}
           />
+
+          {newPassword != "" &&
+            newPasswordConfrim != "" &&
+            newPassword != newPasswordConfrim && (
+              <p className="validaiton-warning--bottom">
+                Two passwords do not match.
+              </p>
+            )}
         </div>
       </div>
 

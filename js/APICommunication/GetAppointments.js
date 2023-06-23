@@ -4,19 +4,16 @@ import {
   AllAppos,
 } from "./tempArrays";
 import { DateTime } from "luxon";
+import { dateToLuxonType } from "../Functions/convertTime";
 
 // LEGACY
 export const doingSomething = () => {
   return null;
 };
 
-export const searchForAppointment = (e) => {
-  e.preventDefault();
-  return null;
-};
 /////////////////////////////////////////////////////////////////////////////
-
 // GETTING USER <- Just on the beginning? Or just his name, lastname and ID
+///////////////////////////////////////////////////////////////////////////////
 export const getUser = (userID, usersArray, successCallback) => {
   // Fetching data from server here
   const myUserArray = usersArray.filter((user) => {
@@ -28,7 +25,9 @@ export const getUser = (userID, usersArray, successCallback) => {
   successCallback(myUser);
 };
 
+///////////////////////////////////////////////////////////////////////////////
 // GETTING USER APPOINTMENTS
+///////////////////////////////////////////////////////////////////////////////
 export const getUserAppointments = (userID, usersArray, successCallback) => {
   // Fetching data from server here
   const myUserArray = usersArray.filter((user) => {
@@ -100,14 +99,88 @@ export const RemoveAppoFrUser = (userID, usersArray, appoID) => {
 
   /////// 2. Adding appo back to available repo
   AllAppos[availableRepo][tempCity][tempAppoSpec].push(freedAppo);
-  console.log(
-    "PRZED SORTOWANIEM: ",
-    AllAppos[availableRepo][tempCity][tempAppoSpec]
-  );
 
   // 2A. Sort this specific array with appos by date time
   AllAppos[availableRepo][tempCity][tempAppoSpec].sort(function (a, b) {
     return a.date.toSeconds() - b.date.toSeconds();
   });
-  console.log(AllAppos[availableRepo][tempCity][tempAppoSpec]);
+};
+
+///////////////////////////////////////////////////////////////////////////////
+// Getting user settings
+///////////////////////////////////////////////////////////////////////////////
+
+export const gettingUserSettings = (userID, usersArray, successCallback) => {
+  // Fetching data from server here
+  const myUserArray = usersArray.filter((user) => {
+    return user.userID == userID;
+  });
+  const myUser = myUserArray[0];
+  const personalData = myUser.personalData;
+
+  console.log(personalData);
+  successCallback(personalData);
+  // Write appointments down to a state
+
+  return null;
+};
+
+///////////////////////////////////////////////////////////////////////////////
+// Updating user settings
+///////////////////////////////////////////////////////////////////////////////
+
+export const updateUserSettings = (
+  userID,
+  usersArray,
+  street,
+  apartment,
+  postCode,
+  city,
+  country,
+  password
+) => {
+  const myUserArray = usersArray.filter((user) => {
+    return user.userID == userID;
+  });
+
+  const userIndex = usersArray.findIndex((user) => user.userID == userID);
+
+  temporaryAppointmentsUser[userIndex].password = password;
+  temporaryAppointmentsUser[userIndex].personalData.address.streetName = street;
+  temporaryAppointmentsUser[userIndex].personalData.address.apartmentNumber =
+    apartment;
+  temporaryAppointmentsUser[userIndex].personalData.address.postCode = postCode;
+  temporaryAppointmentsUser[userIndex].personalData.address.city = city;
+  temporaryAppointmentsUser[userIndex].personalData.address.country = country;
+  console.log(temporaryAppointmentsUser[0]);
+
+  return null;
+};
+
+///////////////////////////////////////////////////////////////////////////////
+// Search fetch
+///////////////////////////////////////////////////////////////////////////////
+
+export const searchForAppointment = (
+  city,
+  specialization,
+  appointmentDate,
+  apposArray,
+  successCallback
+) => {
+  const myCity = city.label;
+  const mySpec = specialization.label;
+  const desiredLuxonDate = dateToLuxonType(appointmentDate);
+
+  const availableAppos = apposArray.Available;
+  console.log(availableAppos);
+  const firstFilter = [...availableAppos[myCity][mySpec]];
+
+  console.log(firstFilter);
+
+  const filteredByDate = firstFilter.filter((appo) => {
+    return appo.date.toUnixInteger() >= desiredLuxonDate.toUnixInteger();
+  });
+  console.log(filteredByDate);
+  successCallback(filteredByDate);
 };

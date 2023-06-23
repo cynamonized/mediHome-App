@@ -48,3 +48,16 @@
   @include flex(flex-start, center);
   margin-bottom: 30px;
 }
+
+.validaiton-warning {
+  @include fonts(1rem, 500, $color-sec-angry-red);
+  position: absolute;
+  z-index: 1;
+  bottom: -35px;
+  right: 0;
+}
+
+.validaiton-warning--bottom {
+  @include fonts(1rem, 500, $color-sec-angry-red);
+  margin-top: 15px;
+}

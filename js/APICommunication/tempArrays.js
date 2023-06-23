@@ -68,15 +68,16 @@ export const temporaryAppointments = [
 
 export const temporaryAppointmentsUser = [
   {
-    name: "Mark",
-    lastName: "Marco",
     userID: 1,
-    userPersonalData: {
+    login: "example_email.gmail.com",
+    password: "examplePassword123",
+    personalData: {
+      firstName: "Mark",
+      lastName: "Marco",
       PESEL: 12345678900,
       email: "example_email.gmail.com",
       phone: 123456789,
       birthDate: DateTime.local(1987, 4, 20, 0, 0),
-      password: "examplePassword123",
       address: {
         streetName: "Mandarynki",
         apartmentNumber: "4/10",
@@ -188,6 +189,17 @@ export const AllAppos = {
           place: "Racławicka 42",
           doctor: "Cristiano Ronaldo",
           id: 8,
+          booked: false,
+          completed: false,
+          patientID: "",
+          city: "Poznan",
+        },
+        {
+          date: DateTime.local(2023, 6, 28, 9, 0),
+          specialization: "Orthopaedist",
+          place: "Racławicka 42",
+          doctor: "Cristiano Ronaldo",
+          id: 3243667,
           booked: false,
           completed: false,
           patientID: "",

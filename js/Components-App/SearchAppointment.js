@@ -19,6 +19,9 @@ import { selectStyles } from "../Settings/formsStyles";
 import { Link, useNavigate, useLocation } from "react-router-dom";
 // import { DateTime } from "luxon";
 import { dateToLuxonType } from "../Functions/convertTime";
+import { temporaryAppointmentsUser } from "../APICommunication/tempArrays";
+import { userIDserver } from "../APICommunication/user";
+import { AllAppos } from "../APICommunication/tempArrays";
 // -----------------------------------------
 
 import Select, {
@@ -59,6 +62,8 @@ const SearchAppointment = ({
   desiredCity,
   desiredSpecialization,
   desiredAppointmentDate,
+  searchCallback,
+  saveApposCallback,
 }) => {
   // Picked values [states]
   const [city, setCity] = useState(() =>
@@ -86,9 +91,9 @@ const SearchAppointment = ({
       setAppointmentDate(desiredAppointmentDate);
     }
 
-    if (isPartOfSearch) {
-      console.log("FETCH SEARCHING TIME!!!!!!");
-    }
+    // if (isPartOfSearch) {
+    //   console.log("FETCH SEARCHING TIME!!!!!!");
+    // }
   }, []);
 
   const loadCitiesSpecs = (citiesObjectArray, specsObjectArray) => {
@@ -116,7 +121,14 @@ const SearchAppointment = ({
     } else {
       if (validateSelects()) {
         setIsSelectValid(true);
-        console.log("FETCH SEARCHING TIME!!!!!!");
+        searchCallback(
+          city,
+          specialization,
+          appointmentDate,
+          AllAppos,
+          saveApposCallback
+        );
+        console.log("INITIALIZE SEARCH FROM SEARCH BAR");
       } else {
         setIsSelectValid(false);
       }
