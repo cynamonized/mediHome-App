@@ -1,5 +1,6 @@
 .dashboard-table {
   margin: 30px;
+
   .table__title {
     margin-bottom: 30px;
     @include fonts(1.125rem, 500, $color-main-pink);
@@ -8,32 +9,43 @@
   .table__content {
     width: 100%;
     table-layout: fixed;
+
+    .col-date {
+      width: 10%;
+    }
+
+    .col-time {
+      width: 10%;
+    }
+
+    .col-doctor {
+      width: 25%;
+    }
+
+    .col-spec {
+      width: 20%;
+    }
+
+    .col-address {
+      width: 20%;
+    }
+
+    .col-set {
+      width: 15%;
+    }
+
     thead {
       border-bottom: 1px solid $color-greys-mid-1;
 
-      .head-date {
-        width: 10%;
+      tr {
+        overflow-y: scroll;
+        -ms-overflow-style: none;
       }
 
-      .head-time {
-        width: 10%;
+      tr::-webkit-scrollbar {
+        visibility: hidden;
       }
 
-      .head-doctor {
-        width: 25%;
-      }
-
-      .head-spec {
-        width: 25%;
-      }
-
-      .head-address {
-        width: 20%;
-      }
-
-      .head-set {
-        width: 10%;
-      }
       tr.content__row-head {
         th {
           @include fonts(1rem, 500, $color-main-text);
@@ -69,6 +81,36 @@
           }
         }
       }
+    }
+  }
+}
+
+.appo-list__table--my-appos {
+  margin-bottom: 50px;
+}
+
+// Below allows scrollbar in tbody
+table {
+  table-layout: fixed;
+  border-collapse: collapse;
+  thead {
+    tr {
+      display: flex;
+      justify-content: space-between;
+    }
+  }
+
+  tbody {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    overflow: auto;
+    height: 210px;
+
+    tr {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
     }
   }
 }

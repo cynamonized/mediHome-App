@@ -3,15 +3,22 @@ import "../../scss/main.scss";
 
 export const LoaderCircle = () => {
   return (
-    <div
-      className="appo-list dashboard__block-small container single-appo"
-      style={{
-        display: "flex",
-        justifyContent: "center",
-        alignItems: "center",
-      }}
-    >
-      <p>This is placeholder for a loader when cancelling V2</p>
+    <div className="loader-circle container ">
+      <span className="material-icons popup-icon--big">hourglass_empty</span>
+      <p className="loader-circle__text">We are processing your request</p>
+    </div>
+  );
+};
+
+export const BookingCompleted = () => {
+  return (
+    <div className="loader-circle container ">
+      <span className="material-icons popup-icon--big">
+        assignment_turned_in
+      </span>
+      <p className="loader-circle__text">
+        Appointment has been successfully booked!
+      </p>
     </div>
   );
 };

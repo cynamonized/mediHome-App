@@ -23,10 +23,10 @@ export const AppointmentsList = () => {
 
   return (
     <>
-      <div className="appo-list dashboard__block-small container">
+      <main className="appo-list dashboard__block-small container">
         <DashboardHeaderBig title={"My appointments"} link={"/portal/start"} />
         {appoMultiArray && (
-          <>
+          <div className="appo-list__body">
             <AppointetsTable
               title={"Planned"}
               appos={appoMultiArray[0]}
@@ -37,9 +37,9 @@ export const AppointmentsList = () => {
               appos={appoMultiArray[1]}
               isCompleted={true}
             />
-          </>
+          </div>
         )}
-      </div>
+      </main>
     </>
   );
 };
@@ -47,17 +47,17 @@ export const AppointmentsList = () => {
 const AppointetsTable = ({ title, appos, isCompleted }) => {
   return (
     <>
-      <div className="appo-list__table dashboard-table">
+      <div className="body__table dashboard-table appo-list__table--my-appos">
         <p className="table__title">{title}</p>
         <table className="table__content">
           <thead>
             <tr className="content__row-head">
-              <th className=" head-date">Date</th>
-              <th className=" head-time">Hour</th>
-              <th className=" head-doctor">Doctor</th>
-              <th className=" head-spec">Specialization</th>
-              <th className=" head-address">Localization</th>
-              <th className=" content__row-head--last head-set">Settings</th>
+              <th className=" col-date">Date</th>
+              <th className=" col-time">Hour</th>
+              <th className=" col-doctor">Doctor</th>
+              <th className=" col-spec">Specialization</th>
+              <th className=" col-address">Localization</th>
+              <th className=" col-set content__row-head--last">Settings</th>
             </tr>
           </thead>
           <tbody>
@@ -72,12 +72,14 @@ const AppointetsTable = ({ title, appos, isCompleted }) => {
                         : "appo-row"
                     }
                   >
-                    <td>{AppointmentPureDate(appo.date)}</td>
-                    <td>{AppointmentTime(appo.date)}</td>
-                    <td>{appo.doctor}</td>
-                    <td>{appo.specialization}</td>
-                    <td>{appo.place}</td>
-                    <td className="content__settings-column">
+                    <td className=" col-date">
+                      {AppointmentPureDate(appo.date)}
+                    </td>
+                    <td className=" col-time">{AppointmentTime(appo.date)}</td>
+                    <td className=" col-doctor">{appo.doctor}</td>
+                    <td className=" col-spec">{appo.specialization}</td>
+                    <td className=" col-address">{appo.place}</td>
+                    <td className=" col-set content__settings-column">
                       <Link
                         to="/portal/single-apointment"
                         state={{

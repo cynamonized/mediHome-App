@@ -191,7 +191,13 @@ export const searchForAppointment = (
 // Book appointment
 ///////////////////////////////////////////////////////////////////////////////
 
-export const bookThisAppoFetch = (appo, userID, usersArray, allAppos) => {
+export const bookThisAppoFetch = (
+  appo,
+  userID,
+  usersArray,
+  allAppos,
+  successCallback
+) => {
   const myDesiredAppoID = appo.id;
   const bookedRepo = "Booked";
   const availableRepo = "Available";
@@ -235,5 +241,6 @@ export const bookThisAppoFetch = (appo, userID, usersArray, allAppos) => {
     return a.date.toSeconds() - b.date.toSeconds();
   });
 
-  console.log(temporaryAppointmentsUser[userIndex].appointments[0]);
+  // Successcallback
+  successCallback();
 };

@@ -15,7 +15,7 @@ import {
   AppointmentPureDate,
   AppointmentTime,
 } from "../../Functions/convertTime";
-import { LoaderCircle } from "../LoaderCircle";
+import { LoaderCircle, BookingCompleted } from "../LoaderCircle";
 
 export const SearchDashboard = () => {
   const location = useLocation();
@@ -26,6 +26,7 @@ export const SearchDashboard = () => {
 
   const [appoUserPicked, setAppoUserPicked] = useState("");
   const [fetchIsLoading, setFetchIsLoading] = useState(false);
+  const [bookingCompleted, setBookingCompleted] = useState(false);
   const [confirmPopUp, setConfirmPopUp] = useState(false);
 
   useEffect(() => {
@@ -52,13 +53,20 @@ export const SearchDashboard = () => {
     setFetchIsLoading(true);
 
     // fetching here FIREBASE
+    const tempDelayFetch = setTimeout(() => {
+      bookThisAppoFetch(
+        appoUserPicked,
+        userIDserver,
+        temporaryAppointmentsUser,
+        AllAppos,
+        redirectToStart
+      );
+    }, 1000);
+  };
 
-    bookThisAppoFetch(
-      appoUserPicked,
-      userIDserver,
-      temporaryAppointmentsUser,
-      AllAppos
-    );
+  const redirectToStart = () => {
+    setBookingCompleted(true);
+    setFetchIsLoading(false);
 
     const tempDelay = setTimeout(() => {
       navigate("/portal/start");
@@ -68,6 +76,10 @@ export const SearchDashboard = () => {
   const closePopUp = () => {
     setConfirmPopUp(false);
   };
+
+  if (bookingCompleted) {
+    return <BookingCompleted />;
+  }
 
   if (fetchIsLoading) {
     return <LoaderCircle />;
@@ -105,17 +117,19 @@ const SearchResults = ({ appos, callbackBookAppo }) => {
   return (
     <div className="search-results dashboard__block-small container  ">
       <DashboardHeaderBig title={"Search results"} link={"/portal/start"} />
-      <div className="appo-list__table dashboard-table">
+      <div className="appo-list__table dashboard-table search-results__table-container">
         <p className="table__title">Available appointments:</p>
-        <table className="table__content">
+        <table className="table__content  search-table">
           <thead>
             <tr className="content__row-head">
-              <th className=" head-date">Date</th>
-              <th className=" head-time">Hour</th>
-              <th className=" head-doctor">Doctor</th>
-              <th className=" head-spec">Specialization</th>
-              <th className=" head-address">Localization</th>
-              <th className=" content__row-head--last head-set">Book</th>
+              <th className=" col-date">Date</th>
+              <th className=" col-time">Hour</th>
+              <th className=" col-doctor">Doctor</th>
+              <th className=" col-spec">Specialization</th>
+              <th className=" col-address">Localization</th>
+              <th className=" col-set content__row-head--last head-set">
+                Book
+              </th>
             </tr>
           </thead>
           <tbody>
@@ -123,12 +137,14 @@ const SearchResults = ({ appos, callbackBookAppo }) => {
               appos.map((appo) => {
                 return (
                   <tr key={appo.id} className="appo-row">
-                    <td>{AppointmentPureDate(appo.date)}</td>
-                    <td>{AppointmentTime(appo.date)}</td>
-                    <td>{appo.doctor}</td>
-                    <td>{appo.specialization}</td>
-                    <td>{appo.place}</td>
-                    <td className="content__settings-column">
+                    <td className=" col-date">
+                      {AppointmentPureDate(appo.date)}
+                    </td>
+                    <td className=" col-time">{AppointmentTime(appo.date)}</td>
+                    <td className=" col-doctor">{appo.doctor}</td>
+                    <td className=" col-spec">{appo.specialization}</td>
+                    <td className=" col-address">{appo.place}</td>
+                    <td className="col-set content__settings-column">
                       <TertiaryButton
                         callbackAction={(e) => {
                           e.preventDefault();

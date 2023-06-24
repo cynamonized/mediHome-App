@@ -1,10 +1,32 @@
-.search-results {
-  margin-bottom: 90px;
-  height: 880px;
-  justify-content: flex-start;
-  position: relative;
-}
-
 .search-dashboard {
   position: relative;
+
+  .search-results {
+    margin-bottom: 90px;
+    height: 880px;
+    justify-content: flex-start;
+    display: flex;
+    flex-direction: column;
+    position: relative;
+
+    .search-results__table-container {
+      display: flex;
+      flex-direction: column;
+
+      .search-table {
+        display: flex;
+        flex-direction: column;
+        flex: 1;
+        height: 100%;
+
+        tbody {
+          // height: auto;
+          height: 610px;
+          overflow-y: auto;
+          // height: inherit;
+          // flex: 1;
+        }
+      }
+    }
+  }
 }
