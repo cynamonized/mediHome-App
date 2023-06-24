@@ -173,6 +173,17 @@ export const AllAppos = {
       ],
       Orthopaedist: [
         {
+          date: DateTime.local(2023, 6, 28, 9, 0),
+          specialization: "Orthopaedist",
+          place: "Racławicka 42",
+          doctor: "Cristiano Ronaldo",
+          id: 3243667,
+          booked: false,
+          completed: false,
+          patientID: "",
+          city: "Poznan",
+        },
+        {
           date: DateTime.local(2023, 7, 12, 8, 30),
           specialization: "Orthopaedist",
           place: "Racławicka 42",
@@ -189,17 +200,6 @@ export const AllAppos = {
           place: "Racławicka 42",
           doctor: "Cristiano Ronaldo",
           id: 8,
-          booked: false,
-          completed: false,
-          patientID: "",
-          city: "Poznan",
-        },
-        {
-          date: DateTime.local(2023, 6, 28, 9, 0),
-          specialization: "Orthopaedist",
-          place: "Racławicka 42",
-          doctor: "Cristiano Ronaldo",
-          id: 3243667,
           booked: false,
           completed: false,
           patientID: "",
@@ -383,7 +383,19 @@ export const AllAppos = {
   Booked: {
     Poznan: {
       Internist: [],
-      Orthopaedist: [],
+      Orthopaedist: [
+        {
+          date: DateTime.local(2023, 6, 30, 8, 30),
+          specialization: "Orthopaedist",
+          place: "Racławicka 42",
+          doctor: "Christiano Beckham",
+          id: 12323536456,
+          completed: false,
+          booked: true,
+          patientID: 46456465,
+          city: "Poznan",
+        },
+      ],
       Orthodontist: [],
     },
     Krakow: {

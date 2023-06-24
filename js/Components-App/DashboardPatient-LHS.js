@@ -79,7 +79,8 @@ const DashboardPatientLHSBody = ({ patientAppointments }) => {
                 <li className="appo-list__single-appo" key={appo.id}>
                   <div className="single-appo__labels">
                     <p className="labels__date">{AppointmentDate(appo.date)}</p>
-                    <p className="labels__spec">{appo.doctor}</p>
+                    <p className="labels__spec">{appo.specialization}</p>
+                    <p className="labels__doc">{appo.doctor}</p>
                     <p className="labels__adress">{appo.place}</p>
                   </div>
 

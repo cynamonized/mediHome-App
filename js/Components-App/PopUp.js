@@ -4,33 +4,35 @@ import { MainButton, SecondaryButton } from "./Buttons";
 import { DashboardHeaderBig } from "./DashboardLittleComps";
 import { AppointmentDate } from "../Functions/convertTime";
 
-export const PopUp = ({ cancelAppo, closePopUp, chosenAppo }) => {
-  const actionConfirmed = () => {
-    console.log("=====ACTION CONFIRMED======");
-  };
-
-  const actionDenied = () => {
-    console.log("=====ACTION DENIED=========");
-  };
-
+export const PopUp = ({ actionProceed, closePopUp, chosenAppo, action }) => {
   return (
     <div className="pop-up fade-in-object">
       <div className="pop-up__window">
         <DashboardHeaderBig title={"Confirm action"} />
         <div className="window__body">
-          <p className="body__message">
-            Are you sure you want to cancel appointment:
-          </p>
+          {action == "cancel" ? (
+            <>
+              <p className="body__message">
+                Are you sure you want to cancel appointment:
+              </p>
+            </>
+          ) : (
+            <p className="body__message">
+              Please confirm booking this appointment:
+            </p>
+          )}
+
           <p className="body__appointment-name">
             {chosenAppo.specialization}
+            {", "}
             {AppointmentDate(chosenAppo.date)}
           </p>
           <div className="body__buttons">
-            <MainButton callbackAction={cancelAppo} wide={true}>
-              Yes
+            <MainButton callbackAction={actionProceed} wide={true}>
+              Confirm
             </MainButton>
             <SecondaryButton callbackAction={closePopUp} wide={true}>
-              No
+              Cancel
             </SecondaryButton>
           </div>
         </div>

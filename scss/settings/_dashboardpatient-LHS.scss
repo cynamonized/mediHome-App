@@ -47,10 +47,17 @@
 
           .labels__spec {
             @include fonts(1rem, 600, $color-main-text);
+            line-height: 1.25rem;
+          }
+
+          .labels__doc {
+            @include fonts(1rem, 400, $color-main-text);
+            line-height: 1.25rem;
           }
 
           .labels__adress {
             @include fonts(1rem, 400, $color-main-text);
+            line-height: 1.25rem;
           }
         }
 

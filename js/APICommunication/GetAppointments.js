@@ -94,6 +94,8 @@ export const RemoveAppoFrUser = (userID, usersArray, appoID) => {
     return appo;
   });
 
+  freedAppo.booked = false;
+
   // 1C. Delete appo from booked array (city -> spec -> appo)
   AllAppos[bookedRepo][tempCity][tempAppoSpec].splice(serverAppoIndex, 1);
 
@@ -173,14 +175,65 @@ export const searchForAppointment = (
   const desiredLuxonDate = dateToLuxonType(appointmentDate);
 
   const availableAppos = apposArray.Available;
-  console.log(availableAppos);
+  // console.log(availableAppos);
   const firstFilter = [...availableAppos[myCity][mySpec]];
 
-  console.log(firstFilter);
+  // console.log(firstFilter);
 
   const filteredByDate = firstFilter.filter((appo) => {
     return appo.date.toUnixInteger() >= desiredLuxonDate.toUnixInteger();
   });
-  console.log(filteredByDate);
+  // console.log(filteredByDate);
   successCallback(filteredByDate);
+};
+
+///////////////////////////////////////////////////////////////////////////////
+// Book appointment
+///////////////////////////////////////////////////////////////////////////////
+
+export const bookThisAppoFetch = (appo, userID, usersArray, allAppos) => {
+  const myDesiredAppoID = appo.id;
+  const bookedRepo = "Booked";
+  const availableRepo = "Available";
+  const myCity = appo.city;
+  const mySpec = appo.specialization;
+
+  // 1. Removing appo from Available Appos on the server
+  // const tempPickUp = allAppos[availableRepo][myCity][mySpec];
+  const serverAppoIndex = allAppos[availableRepo][myCity][mySpec].findIndex(
+    (appo) => {
+      return appo.id == myDesiredAppoID;
+    }
+  );
+
+  // 1A. Copy appo before deleteing (to inject into booked appos and user)
+  const appoBeingBookedArray = allAppos[availableRepo][myCity][mySpec].slice(
+    serverAppoIndex,
+    serverAppoIndex + 1
+  );
+  const appoBeingBooked = appoBeingBookedArray.reduce((appo) => appo);
+  appoBeingBooked.booked = true;
+
+  // 1C. Delete appo from Available appos
+  // Here (just temporarily, I am using AllAppos -> Sentence case)
+  // (so it's global temp array, not just for this func)
+  AllAppos[availableRepo][myCity][mySpec].splice(serverAppoIndex, 1);
+  // console.log(AllAppos[availableRepo][myCity][mySpec]);
+
+  // 2. Adding appo to Booked Appos on the server
+  AllAppos[bookedRepo][myCity][mySpec].push(appoBeingBooked);
+  AllAppos[bookedRepo][myCity][mySpec].sort(function (a, b) {
+    return a.date.toSeconds() - b.date.toSeconds();
+  });
+
+  // 3. Add AppoBeingbooked to userAppos
+  const userIndex = usersArray.findIndex((user) => user.userID == userID);
+  temporaryAppointmentsUser[userIndex].appointments[0].push(appoBeingBooked);
+
+  // 3A. Sorting user appos by Date
+  temporaryAppointmentsUser[userIndex].appointments[0].sort(function (a, b) {
+    return a.date.toSeconds() - b.date.toSeconds();
+  });
+
+  console.log(temporaryAppointmentsUser[userIndex].appointments[0]);
 };

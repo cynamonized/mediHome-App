@@ -3,6 +3,7 @@ import { Link, useLocation, useNavigate } from "react-router-dom";
 import { DashboardHeaderBig } from "../DashboardLittleComps";
 import { MainButton } from "../Buttons";
 import { PopUp } from "../PopUp";
+import { LoaderCircle } from "../LoaderCircle";
 import { AppointmentDate } from "../../Functions/convertTime";
 import { findAppo } from "../../Functions/findAppo";
 import {
@@ -66,18 +67,7 @@ export const SingleAppointment = () => {
   };
 
   if (isLoading) {
-    return (
-      <div
-        className="appo-list dashboard__block-small container single-appo"
-        style={{
-          display: "flex",
-          justifyContent: "center",
-          alignItems: "center",
-        }}
-      >
-        <p>This is placeholder for a loader when cancelling</p>
-      </div>
-    );
+    return <LoaderCircle />;
   }
 
   return (
@@ -101,9 +91,10 @@ const SingleAppoBody = ({ chosenAppo, cancelAppo }) => {
     <div className="single-appo__body">
       {isPopUp && (
         <PopUp
-          cancelAppo={cancelAppo}
+          actionProceed={cancelAppo}
           closePopUp={togglePopUp}
           chosenAppo={chosenAppo}
+          action={"cancel"}
         />
       )}
 
