@@ -1,6 +1,6 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import "../../scss/main.scss";
-import { MainButton } from "./Buttons";
+import { MainButton } from "../Utilities/Buttons";
 
 export const Footer = () => {
   return (

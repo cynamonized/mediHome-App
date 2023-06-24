@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from "react";
-import SearchAppointment from "../SearchAppointment";
+import SearchAppointment from "./SearchAppointment";
 import { Link, useLocation, useNavigate } from "react-router-dom";
-import { DashboardHeaderBig } from "../DashboardLittleComps";
-import { TertiaryButton } from "../Buttons";
-import { PopUp } from "../PopUp";
+import { DashboardHeaderBig } from "./DashboardLittleComps";
+import { TertiaryButton } from "../../Utilities/Buttons";
+import { PopUp } from "../../Utilities/PopUp";
 import { searchForAppointment } from "../../APICommunication/GetAppointments";
 import {
   temporaryAppointmentsUser,
@@ -15,7 +15,7 @@ import {
   AppointmentPureDate,
   AppointmentTime,
 } from "../../Functions/convertTime";
-import { LoaderCircle, BookingCompleted } from "../LoaderCircle";
+import { LoaderCircle, BookingCompleted } from "../../Utilities/LoaderCircle";
 
 export const SearchDashboard = () => {
   const location = useLocation();
@@ -115,7 +115,7 @@ const SearchResults = ({ appos, callbackBookAppo }) => {
   };
 
   return (
-    <div className="search-results dashboard__block-small container  ">
+    <div className="search-results dashboard__block container  ">
       <DashboardHeaderBig title={"Search results"} link={"/portal/start"} />
       <div className="appo-list__table dashboard-table search-results__table-container">
         <p className="table__title">Available appointments:</p>

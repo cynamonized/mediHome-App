@@ -1,23 +1,18 @@
 import React, { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
-import { DashboardHeaderBig } from "../DashboardLittleComps";
-import { MainButton } from "../Buttons";
-import { ToolTip } from "../PopUp";
-import { DateTime } from "luxon";
+import { DashboardHeaderBig } from "./DashboardLittleComps";
+import { MainButton } from "../../Utilities/Buttons";
+import { ToolTip } from "../../Utilities/PopUp";
 import {
   gettingUserSettings,
   updateUserSettings,
 } from "../../APICommunication/GetAppointments";
-import {
-  temporaryAppointments,
-  temporaryAppointmentsUser,
-} from "../../APICommunication/tempArrays";
+import { temporaryAppointmentsUser } from "../../APICommunication/tempArrays";
 import { userIDserver } from "../../APICommunication/user";
 
 export const SettingsDashboard = () => {
   return (
     <>
-      <div className="user-settings dashboard__block-small container">
+      <div className="user-settings dashboard__block container">
         <DashboardHeaderBig
           title={"Your account settings"}
           link={"/portal/start"}

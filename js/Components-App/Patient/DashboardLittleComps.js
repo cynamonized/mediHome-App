@@ -1,5 +1,5 @@
-import React, { useEffect, useState } from "react";
-import "../../scss/main.scss";
+import React, { useEffect } from "react";
+import "../../../scss/main.scss";
 import { Link } from "react-router-dom";
 
 export const DashboardHeaderSmall = ({ title, whiteElements }) => {
@@ -48,7 +48,7 @@ export const DashboardBlockSmall = ({ title, dataToDisplay, link }) => {
   useEffect;
   return (
     <>
-      <div className="dashboard__block-small">
+      <div className="dashboard__block">
         <DashboardHeaderSmall title={title} />
         <div className="block-small__body">
           {dataToDisplay == "" && (
@@ -108,7 +108,7 @@ export const DashboardBlockConsultant = ({ title }) => {
 export const DashboardBlockBlog = ({ title, link, blogContent }) => {
   return (
     <>
-      <div className="dashboard__block-small dashboard__block-small--blog">
+      <div className="dashboard__block dashboard__block-small--blog">
         <DashboardHeaderSmall title={title} whiteElements={true} />
         <div className="block-small__body--blog">
           <img src={`${blogContent.articleImage}`} />

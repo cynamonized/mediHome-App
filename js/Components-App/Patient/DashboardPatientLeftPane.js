@@ -1,25 +1,25 @@
 import React, { useEffect, useState, useRef } from "react";
-import { Link, useLocation } from "react-router-dom";
-import "../../scss/main.scss";
+import { Link } from "react-router-dom";
+import "../../../scss/main.scss";
 import {
   DashboardHeaderSmall,
   DashboardFooterSmall,
 } from "./DashboardLittleComps";
-import { AppointmentDate } from "../Functions/convertTime";
+import { AppointmentDate } from "../../Functions/convertTime";
 
-export const DashboardPatientLHS = ({ patientAppointments }) => {
+export const DashboarPatientLeftPane = ({ patientAppointments }) => {
   const [appointments, setAppointments] = useState("");
 
   return (
     <div className="dashboard-patient__left-column">
       <DashboardHeaderSmall title={"Your appointments"} />
-      <DashboardPatientLHSBody patientAppointments={patientAppointments} />
+      <DashboardPatientLeftPaneBody patientAppointments={patientAppointments} />
       <DashboardFooterSmall link={"/portal/app-list"} />
     </div>
   );
 };
 
-const DashboardPatientLHSBody = ({ patientAppointments }) => {
+const DashboardPatientLeftPaneBody = ({ patientAppointments }) => {
   const [plannedAppos, setPlannedAppos] = useState(true);
   const [currentData, setCurrentData] = useState(() => {
     if (patientAppointments) {

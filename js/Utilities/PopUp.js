@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { MainButton, SecondaryButton } from "./Buttons";
-import { DashboardHeaderBig } from "./DashboardLittleComps";
+import { DashboardHeaderBig } from "../Components-App/Patient/DashboardLittleComps";
 import { AppointmentDate } from "../Functions/convertTime";
 
 export const PopUp = ({ actionProceed, closePopUp, chosenAppo, action }) => {

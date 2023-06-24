@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
-import { DashboardHeaderBig } from "../DashboardLittleComps";
+import { DashboardHeaderBig } from "./DashboardLittleComps";
 import { temporaryAppointmentsUser } from "../../APICommunication/tempArrays";
 import {
   AppointmentPureDate,
@@ -23,7 +23,7 @@ export const AppointmentsList = () => {
 
   return (
     <>
-      <main className="appo-list dashboard__block-small container">
+      <main className="appo-list dashboard__block container">
         <DashboardHeaderBig title={"My appointments"} link={"/portal/start"} />
         {appoMultiArray && (
           <div className="appo-list__body">

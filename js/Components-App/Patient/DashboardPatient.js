@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
-import "../../scss/main.scss";
-import { DashboardPatientLHS } from "./DashboardPatient-LHS";
+import "../../../scss/main.scss";
+import { DashboarPatientLeftPane } from "./DashboardPatientLeftPane";
 import {
   DashboardBlockSmall,
   DashboardBlockSettings,
@@ -8,12 +8,11 @@ import {
   DashboardBlockBlog,
 } from "./DashboardLittleComps";
 import {
-  temporaryAppointments,
   blogArticleContent,
   temporaryAppointmentsUser,
-} from "../APICommunication/tempArrays";
-import { getUserAppointments } from "../APICommunication/GetAppointments";
-import { userIDserver } from "../APICommunication/user";
+} from "../../APICommunication/tempArrays";
+import { getUserAppointments } from "../../APICommunication/GetAppointments";
+import { userIDserver } from "../../APICommunication/user";
 
 export const DashboardPatient = () => {
   const [appoMultiArray, setAppoMultiArray] = useState(null);
@@ -29,7 +28,7 @@ export const DashboardPatient = () => {
   return (
     <section className="dashboard-patient">
       <div className="container container-dashboard-patient">
-        <DashboardPatientLHS patientAppointments={appoMultiArray} />
+        <DashboarPatientLeftPane patientAppointments={appoMultiArray} />
         <div className="dashboard-patient__right-column">
           <DashboardBlockSmall
             title={"Prescriptions"}

@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import "../../../scss/main.scss";
-import { MainButton, TertiaryButton } from "../Buttons";
+import { MainButton, TertiaryButton } from "../../Utilities/Buttons";
 
 export const Login = () => {
   const [email, setEmail] = useState("");

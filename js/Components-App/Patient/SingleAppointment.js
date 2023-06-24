@@ -1,15 +1,12 @@
 import React, { useEffect, useState } from "react";
-import { Link, useLocation, useNavigate } from "react-router-dom";
-import { DashboardHeaderBig } from "../DashboardLittleComps";
-import { MainButton } from "../Buttons";
-import { PopUp } from "../PopUp";
-import { LoaderCircle } from "../LoaderCircle";
+import { useLocation, useNavigate } from "react-router-dom";
+import { DashboardHeaderBig } from "./DashboardLittleComps";
+import { MainButton } from "../../Utilities/Buttons";
+import { PopUp } from "../../Utilities/PopUp";
+import { LoaderCircle } from "../../Utilities/LoaderCircle";
 import { AppointmentDate } from "../../Functions/convertTime";
 import { findAppo } from "../../Functions/findAppo";
-import {
-  temporaryAppointments,
-  temporaryAppointmentsUser,
-} from "../../APICommunication/tempArrays";
+import { temporaryAppointmentsUser } from "../../APICommunication/tempArrays";
 import {
   getUserAppointments,
   RemoveAppoFrUser,
@@ -71,7 +68,7 @@ export const SingleAppointment = () => {
   }
 
   return (
-    <div className="appo-list dashboard__block-small container single-appo">
+    <div className="appo-list dashboard__block container single-appo">
       <DashboardHeaderBig title={"Appointment details"} link={from} />
       {chosenAppo && (
         <SingleAppoBody chosenAppo={chosenAppo} cancelAppo={cancelAppo} />

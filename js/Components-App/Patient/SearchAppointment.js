@@ -1,43 +1,18 @@
 import React, { useEffect, useState } from "react";
-import "../../scss/main.scss";
-import {
-  doingSomething,
-  searchForAppointment,
-} from "../APICommunication/GetAppointments";
-import { MainButton } from "./Buttons";
-import { getTodaysDate } from "../dates";
-import {
-  colorMainBlue,
-  colorMainBlueLight,
-  colorMainPink,
-  colorGreysLight1,
-  colorGreysLight2,
-  colorGreysMid1,
-  colorMainText,
-} from "../Settings/cssVariables";
-import { selectStyles } from "../Settings/formsStyles";
-import { Link, useNavigate, useLocation } from "react-router-dom";
-// import { DateTime } from "luxon";
-import { dateToLuxonType } from "../Functions/convertTime";
-import { temporaryAppointmentsUser } from "../APICommunication/tempArrays";
-import { userIDserver } from "../APICommunication/user";
-import { AllAppos } from "../APICommunication/tempArrays";
+import "../../../scss/main.scss";
+import { MainButton } from "../../Utilities/Buttons";
+import { selectStyles } from "../../Settings/formsStyles";
+import { useNavigate, useLocation } from "react-router-dom";
+import { AllAppos } from "../../APICommunication/tempArrays";
 // -----------------------------------------
 
-import Select, {
-  components,
-  ControlProps,
-  Props,
-  StylesConfig,
-} from "react-select";
-import makeAnimated from "react-select/animated";
-
+import Select from "react-select";
 import DatePicker from "react-datepicker";
-import "../../css/react-datepicker.css";
+import "../../../css/react-datepicker.css";
 
 //------------------------------------------
 
-//placeholder for cities & specs - to delete once API is here
+//placeholder for cities & specs - Fetch once it's in API
 const cities = [
   { value: "krakow", label: "Krakow" },
   { value: "poznan", label: "Poznan" },
@@ -86,14 +61,8 @@ const SearchAppointment = ({
     loadCitiesSpecs(cities, specs);
 
     if (desiredAppointmentDate) {
-      // setCity(desiredCity);
-      // setSpecialization(desiredSpecialization);
       setAppointmentDate(desiredAppointmentDate);
     }
-
-    // if (isPartOfSearch) {
-    //   console.log("FETCH SEARCHING TIME!!!!!!");
-    // }
   }, []);
 
   const loadCitiesSpecs = (citiesObjectArray, specsObjectArray) => {
@@ -165,13 +134,6 @@ const SearchAppointment = ({
             />
           )}
 
-          {/* <Select
-            isSearchable={true}
-            defaultValue={city}
-            onChange={setCity}
-            options={cityValues}
-            styles={selectStyles}
-          /> */}
           <Select
             isSearchable={true}
             defaultValue={specialization}

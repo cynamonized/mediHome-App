@@ -4,7 +4,7 @@
 @import "/scss/settings/_buttons";
 @import "/scss/settings/_headers.scss";
 @import "/scss/settings/_forms.scss";
-@import "/scss/settings/_tableFormat";
+@import "/scss/settings/_table-format";
 @import "/scss/settings/_pop-up";
 @import "/scss/settings/_animations";
 
@@ -33,9 +33,6 @@ body,
 
 .container {
   width: $container-width;
-  // display: flex;
-  // flex-direction: column;
-  // align-items: center;
   margin-left: auto;
   margin-right: auto;
   // @include small_desktop {
@@ -53,13 +50,12 @@ body,
 
 @import "/scss/sections/_nav";
 @import "/scss/sections/_search-appointments.scss";
-@import "/scss/sections/_search-appointments.scss";
 @import "/scss/sections/_footer.scss";
-@import "/scss/sections/_dashboardPatient.scss";
-@import "/scss/settings/_dashboardLittleComps.scss";
-@import "/scss/settings/_dashboardPatient-LHS.scss";
-@import "/scss/sections/_appointmentsList";
-@import "/scss/sections/_singleAppointment";
+@import "/scss/sections/_dashboard-patient.scss";
+@import "/scss/settings/_dashboard-little-comps.scss";
+@import "/scss/settings/_dashboard-patient-left-pane.scss";
+@import "/scss/sections/_appointments-list";
+@import "/scss/sections/_single-appointment";
 @import "/scss/sections/_login";
 @import "/scss/sections/_user-settings";
 @import "/scss/sections/_search-results";
