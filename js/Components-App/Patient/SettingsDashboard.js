@@ -13,10 +13,7 @@ export const SettingsDashboard = () => {
   return (
     <>
       <div className="user-settings dashboard__block container">
-        <DashboardHeaderBig
-          title={"Your account settings"}
-          link={"/portal/start"}
-        />
+        <DashboardHeaderBig title={"Your account settings"} link={"/portal"} />
 
         <SettingsBody />
       </div>

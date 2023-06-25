@@ -69,7 +69,7 @@ export const SearchDashboard = () => {
     setFetchIsLoading(false);
 
     const tempDelay = setTimeout(() => {
-      navigate("/portal/start");
+      navigate("/portal");
     }, 2000);
   };
 
@@ -116,7 +116,7 @@ const SearchResults = ({ appos, callbackBookAppo }) => {
 
   return (
     <div className="search-results dashboard__block container  ">
-      <DashboardHeaderBig title={"Search results"} link={"/portal/start"} />
+      <DashboardHeaderBig title={"Search results"} link={"/portal"} />
       <div className="appo-list__table dashboard-table search-results__table-container">
         <p className="table__title">Available appointments:</p>
         <table className="table__content  search-table">

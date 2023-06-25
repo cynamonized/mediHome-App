@@ -12,6 +12,7 @@
     "@babel/preset-react": "7.7.0",
     "babel-loader": "8.2.5",
     "css-loader": "^6.8.1",
+    "dotenv-webpack": "^8.0.1",
     "process": "0.11.10",
     "sass": "^1.63.3",
     "sass-loader": "^13.3.2",
@@ -21,6 +22,7 @@
     "webpack-dev-server": "4.9.0"
   },
   "dependencies": {
+    "firebase": "^9.23.0",
     "luxon": "^3.3.0",
     "moment": "^2.29.4",
     "react": "18.1.0",

@@ -78,7 +78,7 @@ export const DashboardBlockSmall = ({ title, dataToDisplay, link }) => {
 export const DashboardBlockSettings = ({ title, link }) => {
   return (
     <div className="dashboard__block-small--static">
-      <Link to={"/portal/user-settings"}>
+      <Link to={"/user-settings"}>
         <div className="static__icon static__icon--settings"></div>
         <h2 className="static__title">{title}</h2>
         <div className="static__description">

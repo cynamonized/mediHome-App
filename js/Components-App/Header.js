@@ -1,7 +1,22 @@
 import React, { useEffect, useState } from "react";
+import { getAuth, signOut } from "firebase/auth";
 import "../../scss/main.scss";
 
-const Header = () => {
+const Header = ({ setIsAuthenticated }) => {
+  const signOut = async (e) => {
+    const auth = getAuth();
+
+    try {
+      await signOut(auth);
+      await setIsAuthenticated(false);
+      localStorage.setItem("is_authenticated", false);
+      console.log("ile razy?");
+      // setIsAuthenticated(false);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
   return (
     <header>
       <div className="container container-header">
@@ -14,6 +29,7 @@ const Header = () => {
           <img
             className="right-column__profile-picture"
             src="/images/Profile picture - temp.png"
+            onClick={signOut}
           />
         </div>
       </div>

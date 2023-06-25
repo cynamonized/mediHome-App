@@ -1,8 +1,15 @@
 import React, { useEffect, useState } from "react";
+import { useLocation, useNavigate } from "react-router-dom";
 import "../../../scss/main.scss";
 import { MainButton, TertiaryButton } from "../../Utilities/Buttons";
+import {
+  getAuth,
+  setPersistence,
+  signInWithEmailAndPassword,
+  browserSessionPersistence,
+} from "firebase/auth";
 
-export const Login = () => {
+export const Login = ({ setIsAuthenticated }) => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
@@ -14,15 +21,38 @@ export const Login = () => {
     setPassword(target.value);
   };
 
-  const submitLogin = ({ target }) => {
-    target.preventDefault();
-    console.log("Trigger to logowania");
+  const submitLogin = async (e) => {
+    const auth = getAuth();
+
+    try {
+      await signInWithEmailAndPassword(auth, email, password);
+      setIsAuthenticated(true);
+      localStorage.setItem("is_authenticated", true);
+    } catch (error) {
+      console.log(error);
+    }
   };
 
-  // VALIDATIONS (1) !!!!!!!
+  // const submitLogin = async (e) => {
+  //   const auth = getAuth();
+  //   setPersistence(auth, browserSessionPersistence);
+  //   try {
+  //     await signInWithEmailAndPassword(auth, email, password);
+  //     setIsAuthenticated(true);
+  //     localStorage.setItem("is_authenticated", true);
+  //   } catch (error) {
+  //     console.log(error);
+  //   }
+  // };
 
   return (
-    <section className="login-screen" onSubmit={submitLogin}>
+    <section
+      className="login-screen"
+      onSubmit={(e) => {
+        e.preventDefault();
+        submitLogin();
+      }}
+    >
       <div className="login-screen__left-column">
         <img
           src="images/logo - mediHome - big.svg"
@@ -34,7 +64,12 @@ export const Login = () => {
           all health packages
         </h3>
 
-        <form onSubmit={submitLogin} className="left-column__form">
+        <form
+          onSubmit={(e) => {
+            submitLogin(e);
+          }}
+          className="left-column__form"
+        >
           <input
             type="email"
             name="email"
@@ -51,7 +86,12 @@ export const Login = () => {
             onChange={passwordUpdate}
             placeholder="Password"
           />
-          <MainButton wide={false} callbackAction={submitLogin}>
+          <MainButton
+            wide={false}
+            callbackAction={(e) => {
+              submitLogin(e);
+            }}
+          >
             Log in
           </MainButton>
         </form>

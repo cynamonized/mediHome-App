@@ -14,7 +14,7 @@ export const DashboarPatientLeftPane = ({ patientAppointments }) => {
     <div className="dashboard-patient__left-column">
       <DashboardHeaderSmall title={"Your appointments"} />
       <DashboardPatientLeftPaneBody patientAppointments={patientAppointments} />
-      <DashboardFooterSmall link={"/portal/app-list"} />
+      <DashboardFooterSmall link={"/app-list"} />
     </div>
   );
 };
@@ -85,10 +85,10 @@ const DashboardPatientLeftPaneBody = ({ patientAppointments }) => {
                   </div>
 
                   <Link
-                    to="/portal/single-apointment"
+                    to="/single-apointment"
                     state={{
                       chosenAppoID: appo.id,
-                      from: "/portal/start",
+                      from: "/portal",
                     }}
                   >
                     <div className="single-appo__settings"></div>

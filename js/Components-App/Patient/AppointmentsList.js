@@ -24,7 +24,7 @@ export const AppointmentsList = () => {
   return (
     <>
       <main className="appo-list dashboard__block container">
-        <DashboardHeaderBig title={"My appointments"} link={"/portal/start"} />
+        <DashboardHeaderBig title={"My appointments"} link={"/portal"} />
         {appoMultiArray && (
           <div className="appo-list__body">
             <AppointetsTable
@@ -81,10 +81,10 @@ const AppointetsTable = ({ title, appos, isCompleted }) => {
                     <td className=" col-address">{appo.place}</td>
                     <td className=" col-set content__settings-column">
                       <Link
-                        to="/portal/single-apointment"
+                        to="/single-apointment"
                         state={{
                           chosenAppoID: appo.id,
-                          from: "/portal/app-list",
+                          from: "/app-list",
                         }}
                       >
                         <span className="material-icons settings-column__icon">

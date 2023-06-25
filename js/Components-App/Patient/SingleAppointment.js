@@ -58,7 +58,7 @@ export const SingleAppointment = () => {
     //  to move it to available appos (?)
     // [TEMP] do above here instead (for now)
     const tempDelay = setTimeout(() => {
-      navigate("/portal/app-list");
+      navigate("/app-list");
     }, 2000);
     ////////////////////////////////////
   };

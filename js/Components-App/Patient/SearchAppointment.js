@@ -74,10 +74,10 @@ const SearchAppointment = ({
   const performSearch = (e) => {
     e.preventDefault();
 
-    if (location.pathname != "/portal/search") {
+    if (location.pathname != "/search") {
       if (validateSelects()) {
         setIsSelectValid(true);
-        navigate("/portal/search", {
+        navigate("/search", {
           state: {
             city,
             specialization,
