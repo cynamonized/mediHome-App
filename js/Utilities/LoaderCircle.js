@@ -22,3 +22,13 @@ export const BookingCompleted = () => {
     </div>
   );
 };
+
+export const LoaderCircleEmpty = () => {
+  return (
+    <div className="loader-circle--empty ">
+      <span className="material-icons popup-icon--big hourglass-animating">
+        hourglass_empty
+      </span>
+    </div>
+  );
+};

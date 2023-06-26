@@ -1,20 +1,24 @@
 import React, { useEffect, useState } from "react";
 import { getAuth, signOut } from "firebase/auth";
+import { useNavigate } from "react-router-dom";
 import "../../scss/main.scss";
+import { fireApp, auth } from "../config/firestore";
 
-const Header = ({ setIsAuthenticated }) => {
-  const signOut = async (e) => {
-    const auth = getAuth();
+const Header = ({ setCurrentUser }) => {
+  const navigate = useNavigate();
 
-    try {
-      await signOut(auth);
-      await setIsAuthenticated(false);
-      localStorage.setItem("is_authenticated", false);
-      console.log("ile razy?");
-      // setIsAuthenticated(false);
-    } catch (error) {
-      console.log(error);
-    }
+  const userSignOut = async (e) => {
+    signOut(auth)
+      .then(() => {
+        // Sign-out successful.
+        console.log("Udało sie?");
+        // setCurrentUser(null);
+        navigate("/portal/");
+      })
+      .catch((error) => {
+        // An error happened.
+        console.log(error);
+      });
   };
 
   return (
@@ -29,7 +33,9 @@ const Header = ({ setIsAuthenticated }) => {
           <img
             className="right-column__profile-picture"
             src="/images/Profile picture - temp.png"
-            onClick={signOut}
+            onClick={() => {
+              userSignOut();
+            }}
           />
         </div>
       </div>

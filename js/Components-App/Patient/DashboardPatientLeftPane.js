@@ -6,10 +6,9 @@ import {
   DashboardFooterSmall,
 } from "./DashboardLittleComps";
 import { AppointmentDate } from "../../Functions/convertTime";
+import { getUserAppointmentsF } from "../../APICommunication/getUserAppoinments";
 
 export const DashboarPatientLeftPane = ({ patientAppointments }) => {
-  const [appointments, setAppointments] = useState("");
-
   return (
     <div className="dashboard-patient__left-column">
       <DashboardHeaderSmall title={"Your appointments"} />
@@ -20,6 +19,11 @@ export const DashboarPatientLeftPane = ({ patientAppointments }) => {
 };
 
 const DashboardPatientLeftPaneBody = ({ patientAppointments }) => {
+  const [allUserAppointments, setAllUserAppointments] = useState("");
+  const [appointments, setAppointments] = useState("");
+  const [bookedAppos, setBookedAppos] = useState("");
+  const [currentAppos, setCurrentAppos] = useState("");
+
   const [plannedAppos, setPlannedAppos] = useState(true);
   const [currentData, setCurrentData] = useState(() => {
     if (patientAppointments) {
@@ -29,15 +33,25 @@ const DashboardPatientLeftPaneBody = ({ patientAppointments }) => {
     }
   });
 
+  // to read from the user once session can be maintained
+  const userUID = "3eyqbBF2h8M27OVISJfsae0xDM42";
+
   const initialRenderAppos = useRef(true);
 
+  useEffect(() => {}, []);
+
+  // useEffect(() => {
+  //   if (initialRenderAppos.current) {
+  //     initialRenderAppos.current = false;
+  //   } else {
+  //     setCurrentData(patientAppointments[0]);
+  //   }
+  // }, [patientAppointments]);
+
   useEffect(() => {
-    if (initialRenderAppos.current) {
-      initialRenderAppos.current = false;
-    } else {
-      setCurrentData(patientAppointments[0]);
-    }
-  }, [patientAppointments]);
+    // get and assign to proper states (arrays)
+    getUserAppointmentsF(userUID);
+  }, []);
 
   const toggleTabs = () => {
     setPlannedAppos((prev) => !prev);

@@ -8,6 +8,7 @@ import {
   signInWithEmailAndPassword,
   browserSessionPersistence,
 } from "firebase/auth";
+import { auth } from "../../config/firestore";
 
 export const Login = ({ setIsAuthenticated }) => {
   const [email, setEmail] = useState("");
@@ -21,18 +22,40 @@ export const Login = ({ setIsAuthenticated }) => {
     setPassword(target.value);
   };
 
+  /////////////////////////////////////////
+  // LATEST WORKING ONLY WITHOUT REFRESHING
   const submitLogin = async (e) => {
-    const auth = getAuth();
-
-    try {
-      await signInWithEmailAndPassword(auth, email, password);
-      setIsAuthenticated(true);
-      localStorage.setItem("is_authenticated", true);
-    } catch (error) {
-      console.log(error);
-    }
+    signInWithEmailAndPassword(auth, email, password)
+      .then((userCredential) => {
+        const user = userCredential.user;
+        // userLogsIn(user);
+        console.log(userCredential);
+        console.log("Ile razy sie odpalam?");
+        setIsAuthenticated(user);
+      })
+      .catch((error) => {
+        const errorCode = error.code;
+        const errorMessage = error.message;
+        console.log(errorCode);
+        console.log(errorMessage);
+      });
   };
+  ////////////////////////////////////////////
 
+  // TRAVIS WAY + LOCAL STORAGE
+  // const submitLogin = async (e) => {
+  //   const auth = getAuth();
+
+  //   try {
+  //     await signInWithEmailAndPassword(auth, email, password);
+  //     setIsAuthenticated(true);
+  //     localStorage.setItem("is_authenticated", true);
+  //   } catch (error) {
+  //     console.log(error);
+  //   }
+  // };
+
+  // ??????????????????????????
   // const submitLogin = async (e) => {
   //   const auth = getAuth();
   //   setPersistence(auth, browserSessionPersistence);
@@ -46,13 +69,7 @@ export const Login = ({ setIsAuthenticated }) => {
   // };
 
   return (
-    <section
-      className="login-screen"
-      onSubmit={(e) => {
-        e.preventDefault();
-        submitLogin();
-      }}
-    >
+    <section className="login-screen">
       <div className="login-screen__left-column">
         <img
           src="images/logo - mediHome - big.svg"
@@ -88,9 +105,9 @@ export const Login = ({ setIsAuthenticated }) => {
           />
           <MainButton
             wide={false}
-            callbackAction={(e) => {
-              submitLogin(e);
-            }}
+            // callbackAction={(e) => {
+            //   submitLogin(e);
+            // }}
           >
             Log in
           </MainButton>
@@ -141,4 +158,8 @@ export const Login = ({ setIsAuthenticated }) => {
       </div>
     </section>
   );
+};
+
+const TestComp = () => {
+  return <p>THIS IS A FREAKING TEST</p>;
 };
