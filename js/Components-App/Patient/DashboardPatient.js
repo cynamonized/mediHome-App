@@ -14,21 +14,24 @@ import {
 import { getUserAppointments } from "../../APICommunication/GetAppointments";
 import { userIDserver } from "../../APICommunication/user";
 
-export const DashboardPatient = () => {
-  const [appoMultiArray, setAppoMultiArray] = useState(null);
+export const DashboardPatient = ({ currentUserUID }) => {
+  // const [appoMultiArray, setAppoMultiArray] = useState(null);
 
-  useEffect(() => {
-    getUserAppointments(
-      userIDserver,
-      temporaryAppointmentsUser,
-      setAppoMultiArray
-    );
-  }, []);
+  // useEffect(() => {
+  //   getUserAppointments(
+  //     userIDserver,
+  //     temporaryAppointmentsUser,
+  //     setAppoMultiArray
+  //   );
+  // }, []);
 
   return (
     <section className="dashboard-patient">
       <div className="container container-dashboard-patient">
-        <DashboarPatientLeftPane patientAppointments={appoMultiArray} />
+        <DashboarPatientLeftPane
+          // patientAppointments={appoMultiArray}
+          currentUserUID={currentUserUID}
+        />
         <div className="dashboard-patient__right-column">
           <DashboardBlockSmall
             title={"Prescriptions"}

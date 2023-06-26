@@ -18,71 +18,32 @@ import { auth } from "./config/firestore";
 import { AuthProvider } from "./config/AuthContext";
 import PrivateRoute from "./Components-App/PrivateRoute";
 import { AuthContext } from "./config/AuthContext";
+import { authUserCheck } from "./APICommunication/authUserCheck";
 
 function App() {
-  // const [isAuthenticated, setIsAuthenticated] = useState(
-  //   JSON.parse(localStorage.getItem("is_authenticated"))
-  // );
-
-  // useEffect(()=>{
-  // const [user, setUser] = auth.currentUser;
-  // },[userCredential])
-
-  // useEffect(() => {
-  //   onAuthStateChanged(auth, (user) => {
-  //     if (user) {
-  //       const uid = user.uid;
-  //       console.log(uid);
-  //       return user;
-  //     } else {
-  //       return null;
-  //     }
-  //   });
-  // }, [userCredential]);
-
-  // const [userCredential, setUserCredential] = useState(
-  //   onAuthStateChanged(auth, (user) => {
-  //     if (user) {
-  //       const uid = user.uid;
-  //       console.log(uid);
-  //       return user;
-  //     } else {
-  //       return null;
-  //     }
-  //   })
-  // );
-
-  const [currentUser, setCurrentUser] = useState(
-    onAuthStateChanged(auth, (user) => {
-      if (user) {
-        const uid = user.uid;
-        console.log("CONTEXT: ", uid);
-        setCurrentUser(user);
-      } else {
-        setCurrentUser(null);
-        console.log("User is not logged it, displaying login screen");
-      }
-    })
-  );
-
-  // useEffect(() => {
+  // const [currentUser, setCurrentUser] = useState(
   //   onAuthStateChanged(auth, (user) => {
   //     if (user) {
   //       const uid = user.uid;
   //       console.log("CONTEXT: ", uid);
   //       setCurrentUser(user);
   //     } else {
-  //       console.log("Coś poszło nie tak");
+  //       setCurrentUser(null);
+  //       console.log("User is not logged it, displaying login screen");
   //     }
-  //   });
-  // }, []);
+  //   })
+  // );
+
+  const [currentUser, setCurrentUser] = useState(undefined);
+
+  useEffect(() => {
+    authUserCheck(setCurrentUser);
+  }, []);
 
   const [isAuthenticated, setIsAuthenticated] = useState();
 
   return (
     <>
-      {/* <AuthProvider> */}
-
       {currentUser === undefined ? (
         <LoaderCircleEmpty />
       ) : (
@@ -93,7 +54,10 @@ function App() {
                 path="/"
                 element={<Main setCurrentUser={setCurrentUser} />}
               >
-                <Route path="/portal" element={<PatientMain />} />
+                <Route
+                  path="/portal"
+                  element={<PatientMain currentUserUID={currentUser.uid} />}
+                />
                 <Route path="/app-list" element={<AppointmentsList />} />
                 <Route
                   path="/single-apointment"
@@ -112,8 +76,6 @@ function App() {
           </Routes>
         </HashRouter>
       )}
-
-      {/* </AuthProvider> */}
     </>
   );
 }
@@ -121,36 +83,3 @@ function App() {
 const container = document.getElementById("app");
 const root = createRoot(container);
 root.render(<App />);
-
-// EVENING BACKUP
-{
-  /* <>
-      <AuthProvider>
-        <HashRouter>
-          <Routes>
-            {isAuthenticated ? (
-              <Route
-                path="/"
-                element={<Main setIsAuthenticated={setIsAuthenticated} />}
-              >
-                <Route path="/portal" element={<PatientMain />} />
-                <Route path="/app-list" element={<AppointmentsList />} />
-                <Route
-                  path="/single-apointment"
-                  element={<SingleAppointment />}
-                />
-                <Route path="/user-settings" element={<SettingsDashboard />} />
-                <Route path="/search" element={<SearchDashboard />} />
-                <Route path="/test" element={<FireBaseTesting />} />
-              </Route>
-            ) : (
-              <Route
-                path="/portal"
-                element={<Login setIsAuthenticated={setIsAuthenticated} />}
-              ></Route>
-            )}
-          </Routes>
-        </HashRouter>
-      </AuthProvider>
-    </> */
-}

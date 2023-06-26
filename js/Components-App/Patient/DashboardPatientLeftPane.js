@@ -5,25 +5,33 @@ import {
   DashboardHeaderSmall,
   DashboardFooterSmall,
 } from "./DashboardLittleComps";
-import { AppointmentDate } from "../../Functions/convertTime";
-import { getUserAppointmentsF } from "../../APICommunication/getUserAppoinments";
+import { DateTime } from "luxon";
+import {
+  AppointmentDate,
+  AppoDateFromSeconds,
+} from "../../Functions/convertTime";
+import { getUserAppointmentsMultiArray } from "../../APICommunication/getUserAppoinments";
 
-export const DashboarPatientLeftPane = ({ patientAppointments }) => {
+export const DashboarPatientLeftPane = ({ currentUserUID }) => {
+  const [patientAppointments, setPatientAppointments] = useState(null);
+
+  useEffect(() => {
+    getUserAppointmentsMultiArray(currentUserUID, setPatientAppointments);
+  }, []);
+
   return (
     <div className="dashboard-patient__left-column">
       <DashboardHeaderSmall title={"Your appointments"} />
-      <DashboardPatientLeftPaneBody patientAppointments={patientAppointments} />
+      <DashboardPatientLeftPaneBody
+        patientAppointments={patientAppointments}
+        currentUserUID={currentUserUID}
+      />
       <DashboardFooterSmall link={"/app-list"} />
     </div>
   );
 };
 
 const DashboardPatientLeftPaneBody = ({ patientAppointments }) => {
-  const [allUserAppointments, setAllUserAppointments] = useState("");
-  const [appointments, setAppointments] = useState("");
-  const [bookedAppos, setBookedAppos] = useState("");
-  const [currentAppos, setCurrentAppos] = useState("");
-
   const [plannedAppos, setPlannedAppos] = useState(true);
   const [currentData, setCurrentData] = useState(() => {
     if (patientAppointments) {
@@ -33,25 +41,15 @@ const DashboardPatientLeftPaneBody = ({ patientAppointments }) => {
     }
   });
 
-  // to read from the user once session can be maintained
-  const userUID = "3eyqbBF2h8M27OVISJfsae0xDM42";
-
   const initialRenderAppos = useRef(true);
 
-  useEffect(() => {}, []);
-
-  // useEffect(() => {
-  //   if (initialRenderAppos.current) {
-  //     initialRenderAppos.current = false;
-  //   } else {
-  //     setCurrentData(patientAppointments[0]);
-  //   }
-  // }, [patientAppointments]);
-
   useEffect(() => {
-    // get and assign to proper states (arrays)
-    getUserAppointmentsF(userUID);
-  }, []);
+    if (initialRenderAppos.current) {
+      initialRenderAppos.current = false;
+    } else {
+      setCurrentData(patientAppointments[0]);
+    }
+  }, [patientAppointments]);
 
   const toggleTabs = () => {
     setPlannedAppos((prev) => !prev);
@@ -92,7 +90,9 @@ const DashboardPatientLeftPaneBody = ({ patientAppointments }) => {
               return (
                 <li className="appo-list__single-appo" key={appo.id}>
                   <div className="single-appo__labels">
-                    <p className="labels__date">{AppointmentDate(appo.date)}</p>
+                    <p className="labels__date">
+                      {AppoDateFromSeconds(appo.date.seconds)}
+                    </p>
                     <p className="labels__spec">{appo.specialization}</p>
                     <p className="labels__doc">{appo.doctor}</p>
                     <p className="labels__adress">{appo.place}</p>

@@ -3,11 +3,11 @@ import "../../../scss/main.scss";
 import SearchAppointment from "./SearchAppointment";
 import { DashboardPatient } from "./DashboardPatient";
 
-export const PatientMain = () => {
+export const PatientMain = ({ currentUserUID }) => {
   return (
     <>
       <SearchAppointment isPartOfSearch={false} />
-      <DashboardPatient />
+      <DashboardPatient currentUserUID={currentUserUID} />
     </>
   );
 };
