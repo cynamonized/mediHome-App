@@ -58,14 +58,29 @@ function App() {
                   path="/portal"
                   element={<PatientMain currentUserUID={currentUser.uid} />}
                 />
-                <Route path="/app-list" element={<AppointmentsList />} />
+                <Route
+                  path="/app-list"
+                  element={
+                    <AppointmentsList currentUserUID={currentUser.uid} />
+                  }
+                />
                 <Route
                   path="/single-apointment"
-                  element={<SingleAppointment />}
+                  element={
+                    <SingleAppointment currentUserUID={currentUser.uid} />
+                  }
                 />
-                <Route path="/user-settings" element={<SettingsDashboard />} />
-                <Route path="/search" element={<SearchDashboard />} />
-                <Route path="/test" element={<FireBaseTesting />} />
+                <Route
+                  path="/user-settings"
+                  element={
+                    <SettingsDashboard currentUserUID={currentUser.uid} />
+                  }
+                />
+                <Route
+                  path="/search"
+                  element={<SearchDashboard currentUserUID={currentUser.uid} />}
+                />
+                {/* <Route path="/test" element={<FireBaseTesting />} /> */}
               </Route>
             ) : (
               <Route

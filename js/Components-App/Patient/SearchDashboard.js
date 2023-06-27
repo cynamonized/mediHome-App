@@ -14,10 +14,13 @@ import { bookThisAppoFetch } from "../../APICommunication/GetAppointments";
 import {
   AppointmentPureDate,
   AppointmentTime,
+  AppoPureDateFromSeconds,
+  AppoTimeFromSeconds,
 } from "../../Functions/convertTime";
 import { LoaderCircle, BookingCompleted } from "../../Utilities/LoaderCircle";
+import { searchForAppo } from "../../APICommunication/searchForAppo";
 
-export const SearchDashboard = () => {
+export const SearchDashboard = ({ currentUserUID }) => {
   const location = useLocation();
   const { city, specialization, appointmentDate } = location.state;
   const navigate = useNavigate();
@@ -34,11 +37,21 @@ export const SearchDashboard = () => {
   }, []);
 
   const searchingMain = (city, specialization, appointmentDate, apposArray) => {
-    searchForAppointment(
-      city,
-      specialization,
+    // LEGACY - TO DELETE WHEN BOOKING WORKS
+    // BEFORE THAT CAN UNCOMMENT AND CHECK HOW IT WORKS
+    //
+    // searchForAppointment(
+    //   city,
+    //   specialization,
+    //   appointmentDate,
+    //   apposArray,
+    //   setFoundAppos
+    // );
+
+    searchForAppo(
+      city.label,
+      specialization.label,
       appointmentDate,
-      apposArray,
       setFoundAppos
     );
   };
@@ -138,9 +151,11 @@ const SearchResults = ({ appos, callbackBookAppo }) => {
                 return (
                   <tr key={appo.id} className="appo-row">
                     <td className=" col-date">
-                      {AppointmentPureDate(appo.date)}
+                      {AppoPureDateFromSeconds(appo.date.seconds)}
                     </td>
-                    <td className=" col-time">{AppointmentTime(appo.date)}</td>
+                    <td className=" col-time">
+                      {AppoTimeFromSeconds(appo.date.seconds)}
+                    </td>
                     <td className=" col-doctor">{appo.doctor}</td>
                     <td className=" col-spec">{appo.specialization}</td>
                     <td className=" col-address">{appo.place}</td>

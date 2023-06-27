@@ -103,6 +103,7 @@ const DashboardPatientLeftPaneBody = ({ patientAppointments }) => {
                     state={{
                       chosenAppoID: appo.id,
                       from: "/portal",
+                      ifCompleted: appo.completed,
                     }}
                   >
                     <div className="single-appo__settings"></div>

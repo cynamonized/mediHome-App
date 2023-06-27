@@ -30,3 +30,15 @@ export const AppoDateFromSeconds = (seconds) => {
   const luxonDate = DateTime.fromSeconds(seconds);
   return AppointmentDate(luxonDate);
 };
+
+// it intakes time in seconds and returns date (without time)
+export const AppoPureDateFromSeconds = (seconds) => {
+  const luxonDate = DateTime.fromSeconds(seconds);
+  return AppointmentPureDate(luxonDate);
+};
+
+// it intakes time in seconds and returns time (without date)
+export const AppoTimeFromSeconds = (seconds) => {
+  const luxonDate = DateTime.fromSeconds(seconds);
+  return AppointmentTime(luxonDate);
+};

@@ -5,20 +5,25 @@ import { temporaryAppointmentsUser } from "../../APICommunication/tempArrays";
 import {
   AppointmentPureDate,
   AppointmentTime,
+  AppoPureDateFromSeconds,
+  AppoTimeFromSeconds,
 } from "../../Functions/convertTime";
 import { getUserAppointments } from "../../APICommunication/GetAppointments";
 import { userIDserver } from "../../APICommunication/user";
+import { getUserAppointmentsMultiArray } from "../../APICommunication/getUserAppoinments";
 
-export const AppointmentsList = () => {
+export const AppointmentsList = ({ currentUserUID }) => {
   const [appoMultiArray, setAppoMultiArray] = useState(null);
 
   useEffect(() => {
     // Here it needs to fetch when server is ready
-    getUserAppointments(
-      userIDserver,
-      temporaryAppointmentsUser,
-      setAppoMultiArray
-    );
+    // getUserAppointments(
+    //   userIDserver,
+    //   temporaryAppointmentsUser,
+    //   setAppoMultiArray
+    // );
+
+    getUserAppointmentsMultiArray(currentUserUID, setAppoMultiArray);
   }, []);
 
   return (
@@ -73,9 +78,11 @@ const AppointetsTable = ({ title, appos, isCompleted }) => {
                     }
                   >
                     <td className=" col-date">
-                      {AppointmentPureDate(appo.date)}
+                      {AppoPureDateFromSeconds(appo.date.seconds)}
                     </td>
-                    <td className=" col-time">{AppointmentTime(appo.date)}</td>
+                    <td className=" col-time">
+                      {AppoTimeFromSeconds(appo.date.seconds)}
+                    </td>
                     <td className=" col-doctor">{appo.doctor}</td>
                     <td className=" col-spec">{appo.specialization}</td>
                     <td className=" col-address">{appo.place}</td>
@@ -85,6 +92,7 @@ const AppointetsTable = ({ title, appos, isCompleted }) => {
                         state={{
                           chosenAppoID: appo.id,
                           from: "/app-list",
+                          ifCompleted: appo.completed,
                         }}
                       >
                         <span className="material-icons settings-column__icon">

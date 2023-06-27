@@ -4,7 +4,10 @@ import { DashboardHeaderBig } from "./DashboardLittleComps";
 import { MainButton } from "../../Utilities/Buttons";
 import { PopUp } from "../../Utilities/PopUp";
 import { LoaderCircle } from "../../Utilities/LoaderCircle";
-import { AppointmentDate } from "../../Functions/convertTime";
+import {
+  AppointmentDate,
+  AppoDateFromSeconds,
+} from "../../Functions/convertTime";
 import { findAppo } from "../../Functions/findAppo";
 import { temporaryAppointmentsUser } from "../../APICommunication/tempArrays";
 import {
@@ -12,10 +15,11 @@ import {
   RemoveAppoFrUser,
 } from "../../APICommunication/GetAppointments";
 import { userIDserver } from "../../APICommunication/user";
+import { getSingleUserAppointment } from "../../APICommunication/getSingleUserAppointment";
 
-export const SingleAppointment = () => {
+export const SingleAppointment = ({ currentUserUID }) => {
   const location = useLocation();
-  const { chosenAppoID, from } = location.state;
+  const { chosenAppoID, from, ifCompleted } = location.state;
   const navigate = useNavigate();
 
   const [chosenAppo, setChosenAppo] = useState(null);
@@ -23,6 +27,13 @@ export const SingleAppointment = () => {
   const [isLoading, setIsLoading] = useState(false);
 
   useEffect(() => {
+    getSingleUserAppointment(
+      currentUserUID,
+      chosenAppoID,
+      ifCompleted,
+      setChosenAppo
+    );
+
     if (appoFetchList == null) {
       getUserAppointments(
         userIDserver,
@@ -71,7 +82,11 @@ export const SingleAppointment = () => {
     <div className="appo-list dashboard__block container single-appo">
       <DashboardHeaderBig title={"Appointment details"} link={from} />
       {chosenAppo && (
-        <SingleAppoBody chosenAppo={chosenAppo} cancelAppo={cancelAppo} />
+        <SingleAppoBody
+          chosenAppo={chosenAppo}
+          cancelAppo={cancelAppo}
+          currentUserUID={currentUserUID}
+        />
       )}
     </div>
   );
@@ -98,7 +113,9 @@ const SingleAppoBody = ({ chosenAppo, cancelAppo }) => {
       <div className="body__left-column">
         <p className="left-column__label">Date:</p>
         <p className="left-column__value">
-          {chosenAppo != null ? `${AppointmentDate(chosenAppo.date)}` : ""}
+          {chosenAppo != null
+            ? `${AppoDateFromSeconds(chosenAppo.date.seconds)}`
+            : ""}
         </p>
         <p className="left-column__label">Localization:</p>
         <p className="left-column__value">
