@@ -30,6 +30,15 @@ export const DashboardHeaderBig = ({ title, link }) => {
   );
 };
 
+export const DashboardHeaderWarning = ({ title, children }) => {
+  return (
+    <div className="dashboard__header-big dashboard__header-big--warning">
+      {children}
+      <h3>{title}</h3>
+    </div>
+  );
+};
+
 export const DashboardFooterSmall = ({ link, whiteElements }) => {
   return (
     <div

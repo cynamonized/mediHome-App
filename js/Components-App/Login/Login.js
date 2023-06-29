@@ -42,32 +42,6 @@ export const Login = ({ setIsAuthenticated }) => {
   };
   ////////////////////////////////////////////
 
-  // TRAVIS WAY + LOCAL STORAGE
-  // const submitLogin = async (e) => {
-  //   const auth = getAuth();
-
-  //   try {
-  //     await signInWithEmailAndPassword(auth, email, password);
-  //     setIsAuthenticated(true);
-  //     localStorage.setItem("is_authenticated", true);
-  //   } catch (error) {
-  //     console.log(error);
-  //   }
-  // };
-
-  // ??????????????????????????
-  // const submitLogin = async (e) => {
-  //   const auth = getAuth();
-  //   setPersistence(auth, browserSessionPersistence);
-  //   try {
-  //     await signInWithEmailAndPassword(auth, email, password);
-  //     setIsAuthenticated(true);
-  //     localStorage.setItem("is_authenticated", true);
-  //   } catch (error) {
-  //     console.log(error);
-  //   }
-  // };
-
   return (
     <section className="login-screen">
       <div className="login-screen__left-column">

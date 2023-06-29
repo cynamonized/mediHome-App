@@ -3,7 +3,7 @@ import SearchAppointment from "./SearchAppointment";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { DashboardHeaderBig } from "./DashboardLittleComps";
 import { TertiaryButton } from "../../Utilities/Buttons";
-import { PopUp } from "../../Utilities/PopUp";
+import { PopUp, PopUpDeny, PopUpLoading } from "../../Utilities/PopUp";
 import { searchForAppointment } from "../../APICommunication/GetAppointments";
 import {
   temporaryAppointmentsUser,
@@ -16,9 +16,11 @@ import {
   AppointmentTime,
   AppoPureDateFromSeconds,
   AppoTimeFromSeconds,
+  AppoDateFromSeconds,
 } from "../../Functions/convertTime";
 import { LoaderCircle, BookingCompleted } from "../../Utilities/LoaderCircle";
 import { searchForAppo } from "../../APICommunication/searchForAppo";
+import { bookThisAppointment } from "../../APICommunication/bookAppointment";
 
 export const SearchDashboard = ({ currentUserUID }) => {
   const location = useLocation();
@@ -28,9 +30,13 @@ export const SearchDashboard = ({ currentUserUID }) => {
   const [foundAppos, setFoundAppos] = useState([]);
 
   const [appoUserPicked, setAppoUserPicked] = useState("");
+  const [chosenSpecForValid, setChosenSpecForValid] = useState("");
+  const [searchValuesBackup, setSearchValuesBackup] = useState("");
   const [fetchIsLoading, setFetchIsLoading] = useState(false);
   const [bookingCompleted, setBookingCompleted] = useState(false);
   const [confirmPopUp, setConfirmPopUp] = useState(false);
+  const [denyPopUp, setDenyPopUp] = useState(false);
+  const [appoGone, setAppoGone] = useState(false);
 
   useEffect(() => {
     searchingMain(city, specialization, appointmentDate, AllAppos);
@@ -48,10 +54,29 @@ export const SearchDashboard = ({ currentUserUID }) => {
     //   setFoundAppos
     // );
 
+    // Saving spec type to check if user already have this kind of appo
+    setChosenSpecForValid(specialization.label);
+
+    //Saving searching parameters in case page needs to be refreshed
+    setSearchValuesBackup({
+      city: city.label,
+      specialization: specialization.label,
+      ppointmentDate: appointmentDate,
+    });
+
     searchForAppo(
       city.label,
       specialization.label,
       appointmentDate,
+      setFoundAppos
+    );
+  };
+
+  const refreshSearch = () => {
+    searchForAppo(
+      searchValuesBackup.city,
+      searchValuesBackup.specialization,
+      searchValuesBackup.appointmentDate,
       setFoundAppos
     );
   };
@@ -61,25 +86,37 @@ export const SearchDashboard = ({ currentUserUID }) => {
     setConfirmPopUp(true);
   };
 
-  const bookAppo = () => {
+  const bookAppo = async () => {
     setConfirmPopUp(false);
     setFetchIsLoading(true);
 
-    // fetching here FIREBASE
-    const tempDelayFetch = setTimeout(() => {
-      bookThisAppoFetch(
-        appoUserPicked,
-        userIDserver,
-        temporaryAppointmentsUser,
-        AllAppos,
-        redirectToStart
-      );
-    }, 1000);
+    await bookThisAppointment(
+      currentUserUID,
+      chosenSpecForValid,
+      setDenyPopUp,
+      setFetchIsLoading,
+      appoUserPicked,
+      setAppoGone,
+      refreshSearch,
+      redirectToStart
+    );
+
+    // // fetching here FIREBASE
+    // const tempDelayFetch = setTimeout(() => {
+    //   bookThisAppoFetch(
+    //     appoUserPicked,
+    //     userIDserver,
+    //     temporaryAppointmentsUser,
+    //     AllAppos,
+    //     redirectToStart
+    //   );
+    // }, 1000);
   };
 
+  // USE IT IN THE END
   const redirectToStart = () => {
-    setBookingCompleted(true);
     setFetchIsLoading(false);
+    setBookingCompleted(true);
 
     const tempDelay = setTimeout(() => {
       navigate("/portal");
@@ -90,16 +127,39 @@ export const SearchDashboard = ({ currentUserUID }) => {
     setConfirmPopUp(false);
   };
 
+  const closeDenyPopUp = (secondaryAction) => {
+    setDenyPopUp(false);
+    setAppoGone(false);
+
+    if (secondaryAction) {
+      refreshSearch();
+    }
+  };
+
   if (bookingCompleted) {
     return <BookingCompleted />;
   }
 
-  if (fetchIsLoading) {
-    return <LoaderCircle />;
-  }
-
   return (
     <main className="search-dashboard">
+      {denyPopUp && (
+        <PopUpDeny
+          refresh={closeDenyPopUp}
+          specialization={chosenSpecForValid}
+          action={""}
+          reason={"UserAlreadyHaveAppo"}
+        />
+      )}
+
+      {appoGone && (
+        <PopUpDeny
+          refresh={closeDenyPopUp}
+          specialization={chosenSpecForValid}
+          reason={"AppoIsGone"}
+          secondaryAction={true}
+        />
+      )}
+
       {confirmPopUp && (
         <PopUp
           actionProceed={bookAppo}
@@ -108,6 +168,8 @@ export const SearchDashboard = ({ currentUserUID }) => {
           action={"Book"}
         />
       )}
+
+      {fetchIsLoading && <PopUpLoading />}
 
       <SearchAppointment
         isPartOfSearch={true}

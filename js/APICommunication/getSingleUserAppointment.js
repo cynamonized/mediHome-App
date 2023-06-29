@@ -21,7 +21,11 @@ export const getSingleUserAppointment = async (
 
   try {
     const singleAppoObj = await getDoc(docRef);
-    saveAppoCallback(singleAppoObj.data());
+    if (saveAppoCallback) {
+      saveAppoCallback(singleAppoObj.data());
+    } else {
+      return singleAppoObj;
+    }
   } catch (error) {
     console.log(error);
   }
