@@ -9,7 +9,7 @@ import { AppointmentDate, AppoDateFromSeconds } from "../Functions/convertTime";
 
 export const PopUp = ({ actionProceed, closePopUp, chosenAppo, action }) => {
   return (
-    <div className="pop-up fade-in-object">
+    <div className="pop-up pop-up--no-radius fade-in-object">
       <div className="pop-up__window">
         <DashboardHeaderBig title={"Confirm action"} />
         <div className="window__body">
@@ -56,7 +56,7 @@ export const PopUpDeny = ({
 
   return (
     <>
-      <div className="pop-up">
+      <div className="pop-up pop-up--no-radius">
         <div className="pop-up__window">
           <DashboardHeaderWarning title={"Booking issue"}>
             <span className="material-icons warning__header-icon">
@@ -79,6 +79,31 @@ export const PopUpDeny = ({
                 look for another appointment
               </p>
             )}
+
+            <div className="body__buttons">
+              <MainButton callbackAction={closePopUp} wide={true}>
+                Confirm
+              </MainButton>
+            </div>
+          </div>
+        </div>
+      </div>
+    </>
+  );
+};
+
+export const SimpleErrorPopUp = ({ closePopUp, children }) => {
+  return (
+    <>
+      <div className="pop-up">
+        <div className="pop-up__window">
+          <DashboardHeaderWarning title={"This appointment is already gone!"}>
+            <span className="material-icons warning__header-icon">
+              dangerous
+            </span>
+          </DashboardHeaderWarning>
+          <div className="window__body window__body--centered">
+            <p className="body__message">{children}</p>
 
             <div className="body__buttons">
               <MainButton callbackAction={closePopUp} wide={true}>

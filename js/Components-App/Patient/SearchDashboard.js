@@ -18,7 +18,7 @@ import {
   AppoTimeFromSeconds,
   AppoDateFromSeconds,
 } from "../../Functions/convertTime";
-import { LoaderCircle, BookingCompleted } from "../../Utilities/LoaderCircle";
+import { LoaderCircle, ActionCompleted } from "../../Utilities/LoaderCircle";
 import { searchForAppo } from "../../APICommunication/searchForAppo";
 import { bookThisAppointment } from "../../APICommunication/bookAppointment";
 
@@ -101,7 +101,7 @@ export const SearchDashboard = ({ currentUserUID }) => {
       redirectToStart
     );
 
-    // // fetching here FIREBASE
+    // // LEGACY FETCHING
     // const tempDelayFetch = setTimeout(() => {
     //   bookThisAppoFetch(
     //     appoUserPicked,
@@ -137,7 +137,11 @@ export const SearchDashboard = ({ currentUserUID }) => {
   };
 
   if (bookingCompleted) {
-    return <BookingCompleted />;
+    return (
+      <ActionCompleted>
+        Appointment has been successfully booked!
+      </ActionCompleted>
+    );
   }
 
   return (

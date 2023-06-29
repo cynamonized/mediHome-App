@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import { DashboardHeaderBig } from "./DashboardLittleComps";
 import { MainButton } from "../../Utilities/Buttons";
-import { PopUp } from "../../Utilities/PopUp";
+import { PopUp, SimpleErrorPopUp } from "../../Utilities/PopUp";
 import { LoaderCircle } from "../../Utilities/LoaderCircle";
 import {
   AppointmentDate,
@@ -16,6 +16,7 @@ import {
 } from "../../APICommunication/GetAppointments";
 import { userIDserver } from "../../APICommunication/user";
 import { getSingleUserAppointment } from "../../APICommunication/getSingleUserAppointment";
+import { cancelThisAppointment } from "../../APICommunication/cancelAppointment";
 
 export const SingleAppointment = ({ currentUserUID }) => {
   const location = useLocation();
@@ -25,6 +26,7 @@ export const SingleAppointment = ({ currentUserUID }) => {
   const [chosenAppo, setChosenAppo] = useState(null);
   const [appoFetchList, setAppoFetchList] = useState(null);
   const [isLoading, setIsLoading] = useState(false);
+  const [denyPopUp, setDenyPopUp] = useState(false);
 
   useEffect(() => {
     getSingleUserAppointment(
@@ -34,44 +36,40 @@ export const SingleAppointment = ({ currentUserUID }) => {
       setChosenAppo
     );
 
-    if (appoFetchList == null) {
-      getUserAppointments(
-        userIDserver,
-        temporaryAppointmentsUser,
-        setAppoFetchList
-      );
-    }
-    appoFetchList && setChosenAppo(findAppo(appoFetchList, chosenAppoID));
-  }, [appoFetchList]);
+    // if (appoFetchList == null) {
+    //   getUserAppointments(
+    //     userIDserver,
+    //     temporaryAppointmentsUser,
+    //     setAppoFetchList
+    //   );
+    // }
+    // appoFetchList && setChosenAppo(findAppo(appoFetchList, chosenAppoID));
+  }, []);
 
   const cancelAppo = () => {
     setIsLoading(true);
 
-    /////////////////////////////////// This is temporary !!
-    console.log("Rozpoczynam procedure fetchowania deletowania");
-    // ADD WHAT HAPPENS IF DELETE
-    // DELETE FROM "appoFetchList"
-    // FETCH DELETE AND POST TO AVAILABLE APPOS ON THE SERVER
-    //
-    // const indexToRemove = temporaryAppointments[0].findIndex(
-    //   (appo) => appo.id == chosenAppoID
-    // );
-    // console.log(indexToRemove);
-    // temporaryAppointments[0].splice(indexToRemove, 1);
-    //
+    console.log("Rozpoczynam procedure fetchowania cancelowania");
 
-    RemoveAppoFrUser(userIDserver, temporaryAppointmentsUser, chosenAppoID);
+    // LEGACY
+    // RemoveAppoFrUser(userIDserver, temporaryAppointmentsUser, chosenAppoID);
 
-    // I delay it on purpose, above should be real fetch that allows
-    // 'navigate' once it's succesfull
+    cancelThisAppointment(currentUserUID, chosenAppoID, chosenAppo);
+    const temperDelay = setTimeout(() => {
+      setDenyPopUp(true);
+      setIsLoading(false);
+    }, 1000);
+  };
 
-    // Q: Server will handle managing cancelled appo
-    //  to move it to available appos (?)
-    // [TEMP] do above here instead (for now)
+  const redirectToAppoList = () => {
     const tempDelay = setTimeout(() => {
       navigate("/app-list");
     }, 2000);
-    ////////////////////////////////////
+  };
+
+  const closeDenyPopUp = () => {
+    setDenyPopUp(false);
+    navigate("/app-list");
   };
 
   if (isLoading) {
@@ -80,6 +78,13 @@ export const SingleAppointment = ({ currentUserUID }) => {
 
   return (
     <div className="appo-list dashboard__block container single-appo">
+      {denyPopUp && (
+        <SimpleErrorPopUp closePopUp={closeDenyPopUp}>
+          Apologies, you are not assigned to this appointment anymore. Probably
+          it was removed or changed by our administration. Contact us if you
+          think this is an issue.{" "}
+        </SimpleErrorPopUp>
+      )}
       <DashboardHeaderBig title={"Appointment details"} link={from} />
       {chosenAppo && (
         <SingleAppoBody

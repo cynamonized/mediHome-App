@@ -10,15 +10,13 @@ export const LoaderCircle = () => {
   );
 };
 
-export const BookingCompleted = () => {
+export const ActionCompleted = ({ children }) => {
   return (
     <div className="loader-circle container ">
       <span className="material-icons popup-icon--big">
         assignment_turned_in
       </span>
-      <p className="loader-circle__text">
-        Appointment has been successfully booked!
-      </p>
+      <p className="loader-circle__text">{children}</p>
     </div>
   );
 };

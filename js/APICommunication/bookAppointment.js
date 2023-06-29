@@ -5,12 +5,18 @@ import {
   doc,
   query,
   where,
-  Timestamp,
   getDoc,
   deleteDoc,
   setDoc,
 } from "firebase/firestore";
+import {
+  getSingleAppointment,
+  deleteSingleAppoFrServer,
+  cloneAppo,
+  apposNumberValidation,
+} from "./singleAppoSimpleOperations";
 
+//It intakes userID,
 export const bookThisAppointment = async (
   currentUserUID,
   specialization,
@@ -38,8 +44,9 @@ export const bookThisAppointment = async (
 
       // 2. Delete appo
       // RESTORE WHEN CANCELLING WORKS FULLY
-      // const deleteFromDatabase = await deleteSingleAppo(
+      // const deleteFromDatabase = await deleteSingleAppoFrServer(
       //   chosenAppo,
+      //   "AvailableAppos",
       //   failureCallback,
       //   refreshSearchCallback
       // );
@@ -70,119 +77,6 @@ export const bookThisAppointment = async (
       denyCallback(true);
       keepLoadingCallback(false);
     }
-  } catch (error) {
-    console.log(error);
-  }
-};
-
-export const apposNumberValidation = async (currentUserUID, specialization) => {
-  let appoCount = 0;
-
-  const appoQueryRef = query(
-    collection(
-      db,
-      "Users",
-      `${currentUserUID}`,
-      "Appointments",
-      "Booked",
-      "Booked"
-    ),
-    where("specialization", "==", `${specialization}`)
-  );
-
-  try {
-    const alreadyBookedAppos = await getDocs(appoQueryRef);
-    alreadyBookedAppos.forEach((appo) => {
-      appoCount++;
-    });
-
-    if (appoCount > 0) {
-      return false;
-    } else {
-      return true;
-    }
-  } catch (error) {
-    console.log(error);
-    return error;
-  }
-
-  return null;
-};
-
-export const getSingleAppointment = async (chosenAppo, failureCallback) => {
-  const desiredCity = chosenAppo.city;
-  const desiredSpec = chosenAppo.specialization;
-  const desiredID = chosenAppo.id;
-
-  const docRef = doc(
-    db,
-    "AvailableAppos",
-    `${desiredCity}`,
-    `${desiredSpec}`,
-    `${desiredID}`
-  );
-
-  try {
-    const desiredAppo = await getDoc(docRef);
-
-    if (desiredAppo.exists()) {
-      return desiredAppo.data();
-    } else {
-      failureCallback(true);
-    }
-  } catch (error) {
-    console.log(error);
-    failureCallback(true);
-  }
-
-  return null;
-};
-
-export const deleteSingleAppo = async (
-  chosenAppo,
-  failureCallback,
-  refreshSearchCallback
-) => {
-  const desiredCity = chosenAppo.city;
-  const desiredSpec = chosenAppo.specialization;
-  const desiredID = chosenAppo.id;
-
-  const docRef = doc(
-    db,
-    "AvailableAppos",
-    `${desiredCity}`,
-    `${desiredSpec}`,
-    `${desiredID}`
-  );
-
-  try {
-    const deleteAppo = await deleteDoc(docRef);
-  } catch (error) {
-    console.log(error);
-    refreshSearchCallback();
-    failureCallback(true);
-  }
-};
-
-export const cloneAppo = async (
-  currentUserUID,
-  appoToBeCloned,
-  ...pathArgs
-) => {
-  console.log(pathArgs);
-  const newDocRef = doc(db, ...pathArgs, `${appoToBeCloned.id}`);
-  const fieldsRef = {
-    booked: appoToBeCloned.booked,
-    city: `${appoToBeCloned.city}`,
-    completed: appoToBeCloned.completed,
-    date: appoToBeCloned.date,
-    doctor: `${appoToBeCloned.doctor}`,
-    patientID: `${currentUserUID}`,
-    palce: `${appoToBeCloned.palce}`,
-    specialization: `${appoToBeCloned.specialization}`,
-  };
-  try {
-    await setDoc(newDocRef, fieldsRef);
   } catch (error) {
     console.log(error);
   }
