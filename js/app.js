@@ -24,7 +24,7 @@ function App() {
       {currentUser === undefined ? (
         <LoaderCircleEmpty />
       ) : (
-        <HashRouter>
+        <BrowserRouter>
           <Routes>
             {currentUser ? (
               <Route
@@ -67,7 +67,7 @@ function App() {
               <Route path="/portal" element={<Login />}></Route>
             )}
           </Routes>
-        </HashRouter>
+        </BrowserRouter>
       )}
     </>
   );
