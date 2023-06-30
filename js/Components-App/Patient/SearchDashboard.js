@@ -8,7 +8,11 @@ import {
   AppoPureDateFromSeconds,
   AppoTimeFromSeconds,
 } from "../../Functions/convertTime";
-import { LoaderCircle, ActionCompleted } from "../../Utilities/LoaderCircle";
+import {
+  LoaderCircle,
+  LoaderCircleSmall,
+  ActionCompleted,
+} from "../../Utilities/LoaderCircle";
 import { searchForAppo } from "../../APICommunication/searchForAppo";
 import { bookThisAppointment } from "../../APICommunication/bookAppointment";
 
@@ -17,7 +21,7 @@ export const SearchDashboard = ({ currentUserUID }) => {
   const { city, specialization, appointmentDate } = location.state;
   const navigate = useNavigate();
 
-  const [foundAppos, setFoundAppos] = useState([]);
+  const [foundAppos, setFoundAppos] = useState(null);
 
   const [appoUserPicked, setAppoUserPicked] = useState("");
   const [chosenSpecForValid, setChosenSpecForValid] = useState("");
@@ -35,6 +39,9 @@ export const SearchDashboard = ({ currentUserUID }) => {
   const searchingMain = (city, specialization, appointmentDate) => {
     // Saving spec type to check if user already have this kind of appo
     setChosenSpecForValid(specialization.label);
+
+    // allowing loader animation to jump back in
+    setFoundAppos(null);
 
     //Saving searching parameters in case page needs to be refreshed
     setSearchValuesBackup({
@@ -173,13 +180,11 @@ const SearchResults = ({ appos, callbackBookAppo }) => {
               <th className=" col-doctor">Doctor</th>
               <th className=" col-spec">Specialization</th>
               <th className=" col-address">Localization</th>
-              <th className=" col-set content__row-head--last head-set">
-                Book
-              </th>
+              <th className=" col-set content__row-head--last head-set"></th>
             </tr>
           </thead>
           <tbody>
-            {appos &&
+            {appos ? (
               appos.map((appo) => {
                 return (
                   <tr key={appo.id} className="appo-row">
@@ -205,7 +210,14 @@ const SearchResults = ({ appos, callbackBookAppo }) => {
                     </td>
                   </tr>
                 );
-              })}
+              })
+            ) : (
+              <tr className="loader">
+                <td>
+                  <LoaderCircleSmall />
+                </td>
+              </tr>
+            )}
           </tbody>
         </table>
       </div>

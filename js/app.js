@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { createRoot } from "react-dom/client";
-import { HashRouter, Route, Routes } from "react-router-dom";
+import { HashRouter, BrowserRouter, Route, Routes } from "react-router-dom";
 import "../scss/main.scss";
 import { Main } from "./Main";
 import { PatientMain } from "./Components-App/Patient/PatientMain";

@@ -37,15 +37,6 @@
     thead {
       border-bottom: 1px solid $color-greys-mid-1;
 
-      tr {
-        overflow-y: scroll;
-        -ms-overflow-style: none;
-      }
-
-      tr::-webkit-scrollbar {
-        visibility: hidden;
-      }
-
       tr.content__row-head {
         th {
           @include fonts(1rem, 500, $color-main-text);
@@ -55,6 +46,7 @@
 
         th.content__row-head--last {
           text-align: right;
+          margin-right: 10px;
         }
       }
     }
@@ -73,9 +65,15 @@
         }
       }
 
+      tr.loader {
+        @include flex(center, center);
+        padding: 100px 0 100px 0;
+      }
+
       tr {
         td.content__settings-column {
           text-align: right;
+          padding-right: 10px;
           .settings-column__icon {
             color: $color-sec-blue;
           }

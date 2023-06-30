@@ -5,6 +5,7 @@ import {
   DashboardHeaderSmall,
   DashboardFooterSmall,
 } from "./DashboardLittleComps";
+import { PopUpTiny } from "../../Utilities/PopUp";
 import { AppoDateFromSeconds } from "../../Functions/convertTime";
 import { getUserAppointmentsMultiArray } from "../../APICommunication/getUserAppoinments";
 
@@ -93,39 +94,42 @@ const DashboardPatientLeftPaneBody = ({ patientAppointments }) => {
             </p>
           </div>
         </div>
+        {patientAppointments != null ? (
+          <ul className="appointments__appo-list">
+            {currentData &&
+              currentData.map((appo) => {
+                if (!appo.specialization) {
+                  return "";
+                }
 
-        <ul className="appointments__appo-list">
-          {currentData &&
-            currentData.map((appo) => {
-              if (!appo.specialization) {
-                return "";
-              }
+                return (
+                  <li className="appo-list__single-appo" key={appo.id}>
+                    <div className="single-appo__labels">
+                      <p className="labels__date">
+                        {AppoDateFromSeconds(appo.date.seconds)}
+                      </p>
+                      <p className="labels__spec">{appo.specialization}</p>
+                      <p className="labels__doc">{appo.doctor}</p>
+                      <p className="labels__adress">{appo.place}</p>
+                    </div>
 
-              return (
-                <li className="appo-list__single-appo" key={appo.id}>
-                  <div className="single-appo__labels">
-                    <p className="labels__date">
-                      {AppoDateFromSeconds(appo.date.seconds)}
-                    </p>
-                    <p className="labels__spec">{appo.specialization}</p>
-                    <p className="labels__doc">{appo.doctor}</p>
-                    <p className="labels__adress">{appo.place}</p>
-                  </div>
-
-                  <Link
-                    to="/single-apointment"
-                    state={{
-                      chosenAppoID: appo.id,
-                      from: "/portal",
-                      ifCompleted: appo.completed,
-                    }}
-                  >
-                    <div className="single-appo__settings"></div>
-                  </Link>
-                </li>
-              );
-            })}
-        </ul>
+                    <Link
+                      to="/single-apointment"
+                      state={{
+                        chosenAppoID: appo.id,
+                        from: "/portal",
+                        ifCompleted: appo.completed,
+                      }}
+                    >
+                      <div className="single-appo__settings"></div>
+                    </Link>
+                  </li>
+                );
+              })}
+          </ul>
+        ) : (
+          <PopUpTiny />
+        )}
       </div>
     </>
   );

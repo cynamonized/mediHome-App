@@ -121,7 +121,21 @@ export const PopUpLoading = () => {
   return (
     <div className="pop-up">
       <div className="pop-up__loader">
-        <span className="material-icons loader__icon">hourglass_empty</span>
+        <span className="material-icons loader__icon hourglass-animating">
+          hourglass_empty
+        </span>
+      </div>
+    </div>
+  );
+};
+
+export const PopUpTiny = () => {
+  return (
+    <div className="pop-up--tiny">
+      <div className="pop-up__loader">
+        <span className="material-icons loader__icon hourglass-animating">
+          hourglass_empty
+        </span>
       </div>
     </div>
   );
@@ -138,7 +152,9 @@ export const ToolTip = () => {
 export const LoaderCircle = () => {
   return (
     <div className="loader-circle container ">
-      <span className="material-icons popup-icon--big">hourglass_empty</span>
+      <span className="material-icons popup-icon--big hourglass-animating">
+        hourglass_empty
+      </span>
       <p className="loader-circle__text">We are processing your request</p>
     </div>
   );
