@@ -2,7 +2,6 @@ import React, { useState, useEffect } from "react";
 
 import { collection, getDocs, doc, setDoc } from "firebase/firestore";
 import { db } from "../config/firestore";
-import { addLel } from "./createFirestoreAppos";
 
 export const FireBaseTesting = ({ setIsAuthenticated }) => {
   const [testData, setTestData] = useState("");

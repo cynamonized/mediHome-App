@@ -17,6 +17,8 @@ import {
 import { userIDserver } from "../../APICommunication/user";
 import { getSingleUserAppointment } from "../../APICommunication/getSingleUserAppointment";
 import { cancelThisAppointment } from "../../APICommunication/cancelAppointment";
+import { addDoc, setDoc, doc, collection, Timestamp } from "firebase/firestore";
+import { db } from "../../config/firestore";
 
 export const SingleAppointment = ({ currentUserUID }) => {
   const location = useLocation();
@@ -29,6 +31,8 @@ export const SingleAppointment = ({ currentUserUID }) => {
   const [denyPopUp, setDenyPopUp] = useState(false);
 
   useEffect(() => {
+    // AddBackUserAndServer();
+
     getSingleUserAppointment(
       currentUserUID,
       chosenAppoID,
@@ -54,7 +58,12 @@ export const SingleAppointment = ({ currentUserUID }) => {
     // LEGACY
     // RemoveAppoFrUser(userIDserver, temporaryAppointmentsUser, chosenAppoID);
 
-    cancelThisAppointment(currentUserUID, chosenAppoID, chosenAppo);
+    cancelThisAppointment(
+      currentUserUID,
+      chosenAppoID,
+      chosenAppo,
+      setDenyPopUp
+    );
     const temperDelay = setTimeout(() => {
       setDenyPopUp(true);
       setIsLoading(false);

@@ -40,7 +40,43 @@ export const getSingleAppointment = async (chosenAppo, failureCallback) => {
   return null;
 };
 
-// Deleting single appo from given collection
+// Getting single appointment from available appos on the server
+export const getBookedAppoFrUser = async (
+  chosenAppo,
+  currentUserUID,
+  failureCallback
+) => {
+  const desiredCity = chosenAppo.city;
+  const desiredSpec = chosenAppo.specialization;
+  const desiredID = chosenAppo.id;
+
+  const docRef = doc(
+    db,
+    "Users",
+    `${currentUserUID}`,
+    `Appointments`,
+    `Booked`,
+    `Booked`,
+    `${desiredID}`
+  );
+
+  try {
+    const desiredAppo = await getDoc(docRef);
+
+    if (desiredAppo.exists()) {
+      return desiredAppo.data();
+    } else {
+      failureCallback(true);
+    }
+  } catch (error) {
+    console.log(error);
+    failureCallback(true);
+  }
+
+  return null;
+};
+
+// Deleting single appo from given server collection
 export const deleteSingleAppoFrServer = async (
   chosenAppo,
   localization,
@@ -61,9 +97,41 @@ export const deleteSingleAppoFrServer = async (
 
   try {
     const deleteAppo = await deleteDoc(docRef);
+    console.log("usuwam z serwera !!!");
   } catch (error) {
     console.log(error);
-    refreshSearchCallback();
+    if (refreshSearchCallback) {
+      refreshSearchCallback();
+    }
+    failureCallback(true);
+  }
+};
+
+// Deleting single appo from user
+export const deleteSingleAppoFrUser = async (
+  chosenAppo,
+  currentUserUID,
+  failureCallback
+) => {
+  // const desiredCity = chosenAppo.city;
+  // const desiredSpec = chosenAppo.specialization;
+  const desiredID = chosenAppo.id;
+
+  const docRef = doc(
+    db,
+    "Users",
+    `${currentUserUID}`,
+    `Appointments`,
+    `Booked`,
+    `Booked`,
+    `${desiredID}`
+  );
+
+  try {
+    const deleteAppo = await deleteDoc(docRef);
+    console.log("usuwa z usera !!!");
+  } catch (error) {
+    console.log(error);
     failureCallback(true);
   }
 };
@@ -83,7 +151,31 @@ export const cloneAppo = async (
     date: appoToBeCloned.date,
     doctor: `${appoToBeCloned.doctor}`,
     patientID: `${currentUserUID}`,
-    palce: `${appoToBeCloned.palce}`,
+    place: `${appoToBeCloned.place}`,
+    specialization: `${appoToBeCloned.specialization}`,
+  };
+  try {
+    await setDoc(newDocRef, fieldsRef);
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+// Cloning given appointmet into new location without userID
+export const cloneAppoBackToAvailable = async (
+  currentUserUID,
+  appoToBeCloned,
+  ...pathArgs
+) => {
+  console.log(pathArgs);
+  const newDocRef = doc(db, ...pathArgs, `${appoToBeCloned.id}`);
+  const fieldsRef = {
+    booked: appoToBeCloned.booked,
+    city: `${appoToBeCloned.city}`,
+    completed: appoToBeCloned.completed,
+    date: appoToBeCloned.date,
+    doctor: `${appoToBeCloned.doctor}`,
+    place: `${appoToBeCloned.place}`,
     specialization: `${appoToBeCloned.specialization}`,
   };
   try {

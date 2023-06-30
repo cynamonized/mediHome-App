@@ -24,7 +24,7 @@ const twoDigitNumber = (number) => {
 //
 ////////////////////////////////////////////////////////////
 
-export const addLel = async () => {
+export const currentAdd = async () => {
   await addDoc(
     collection(
       db,
@@ -39,27 +39,6 @@ export const addLel = async () => {
       specialization: "Intenist",
       place: "Mlociny Center",
       doctor: "Marcin Kowalski",
-      booked: true,
-      completed: true,
-      patientID: "3eyqbBF2h8M27OVISJfsae0xDM42",
-      city: "Warsaw",
-    }
-  );
-
-  await addDoc(
-    collection(
-      db,
-      "Users",
-      "3eyqbBF2h8M27OVISJfsae0xDM42",
-      "Appointments",
-      "Completed",
-      "Completed"
-    ),
-    {
-      date: Timestamp.fromDate(new Date(`May 25, 2023 8:30:00`)),
-      specialization: "Orthopaedist",
-      place: "Zawady Center",
-      doctor: "Adam Sandler",
       booked: true,
       completed: true,
       patientID: "3eyqbBF2h8M27OVISJfsae0xDM42",
@@ -248,5 +227,94 @@ const avaWarsawInternistOrthopaedist = async () => {
       patientID: "",
       city: "Warsaw",
     });
+  }
+};
+
+// Adding test user appointments
+
+const userCompleted = async () => {
+  await addDoc(
+    collection(
+      db,
+      "Users",
+      "3eyqbBF2h8M27OVISJfsae0xDM42",
+      "Appointments",
+      "Completed",
+      "Completed"
+    ),
+    {
+      date: Timestamp.fromDate(new Date(`June 1, 2023 9:15:00`)),
+      specialization: "Intenist",
+      place: "Mlociny Center",
+      doctor: "Marcin Kowalski",
+      booked: true,
+      completed: true,
+      patientID: "3eyqbBF2h8M27OVISJfsae0xDM42",
+      city: "Warsaw",
+    }
+  );
+
+  await addDoc(
+    collection(
+      db,
+      "Users",
+      "3eyqbBF2h8M27OVISJfsae0xDM42",
+      "Appointments",
+      "Completed",
+      "Completed"
+    ),
+    {
+      date: Timestamp.fromDate(new Date(`May 25, 2023 8:30:00`)),
+      specialization: "Orthopaedist",
+      place: "Zawady Center",
+      doctor: "Adam Sandler",
+      booked: true,
+      completed: true,
+      patientID: "3eyqbBF2h8M27OVISJfsae0xDM42",
+      city: "Warsaw",
+    }
+  );
+};
+
+// Jean Quentin Warszawa Internist (User + Server)
+const AddBackUserAndServerInterWarsawJeanQuentin = async () => {
+  try {
+    const addingUser = await setDoc(
+      doc(
+        db,
+        "Users",
+        "3eyqbBF2h8M27OVISJfsae0xDM42",
+        "Appointments",
+        "Booked",
+        "Booked",
+        "GeQwdfLBSt9AArHx5HJf"
+      ),
+      {
+        date: Timestamp.fromDate(new Date(`July 5, 2023 12:30:00`)),
+        specialization: "Internist",
+        place: "Kabaty Center",
+        doctor: "Jean Quentin",
+        booked: true,
+        completed: false,
+        patientID: "3eyqbBF2h8M27OVISJfsae0xDM42",
+        city: "Warsaw",
+      }
+    );
+
+    const addingServer = await setDoc(
+      doc(db, "BookedAppos", "Warsaw", "Internist", "GeQwdfLBSt9AArHx5HJf"),
+      {
+        date: Timestamp.fromDate(new Date(`July 5, 2023 12:30:00`)),
+        specialization: "Internist",
+        place: "Kabaty Center",
+        doctor: "Jean Quentin",
+        booked: true,
+        completed: false,
+        patientID: "3eyqbBF2h8M27OVISJfsae0xDM42",
+        city: "Warsaw",
+      }
+    );
+  } catch (error) {
+    console.log(error);
   }
 };

@@ -44,12 +44,12 @@ export const bookThisAppointment = async (
 
       // 2. Delete appo
       // RESTORE WHEN CANCELLING WORKS FULLY
-      // const deleteFromDatabase = await deleteSingleAppoFrServer(
-      //   chosenAppo,
-      //   "AvailableAppos",
-      //   failureCallback,
-      //   refreshSearchCallback
-      // );
+      const deleteFromDatabase = await deleteSingleAppoFrServer(
+        chosenAppo,
+        "AvailableAppos",
+        failureCallback,
+        refreshSearchCallback
+      );
 
       // 3. Insert/create appo to User's collection
       const cloningToUser = await cloneAppo(
