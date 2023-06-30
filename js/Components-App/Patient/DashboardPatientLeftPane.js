@@ -5,11 +5,7 @@ import {
   DashboardHeaderSmall,
   DashboardFooterSmall,
 } from "./DashboardLittleComps";
-import { DateTime } from "luxon";
-import {
-  AppointmentDate,
-  AppoDateFromSeconds,
-} from "../../Functions/convertTime";
+import { AppoDateFromSeconds } from "../../Functions/convertTime";
 import { getUserAppointmentsMultiArray } from "../../APICommunication/getUserAppoinments";
 
 export const DashboarPatientLeftPane = ({ currentUserUID }) => {
@@ -69,7 +65,14 @@ const DashboardPatientLeftPaneBody = ({ patientAppointments }) => {
               plannedAppos ? "top-menu__active" : "top-menu__not-active"
             }`}
           >
-            <p className="top-menu__planned" onClick={toggleTabs}>
+            <p
+              className="top-menu__planned"
+              onClick={() => {
+                if (!plannedAppos) {
+                  toggleTabs();
+                }
+              }}
+            >
               Planned
             </p>
           </div>
@@ -78,7 +81,14 @@ const DashboardPatientLeftPaneBody = ({ patientAppointments }) => {
               plannedAppos ? "top-menu__not-active" : "top-menu__active"
             }`}
           >
-            <p className="top-menu__completed" onClick={toggleTabs}>
+            <p
+              className="top-menu__completed"
+              onClick={() => {
+                if (plannedAppos) {
+                  toggleTabs();
+                }
+              }}
+            >
               Completed
             </p>
           </div>

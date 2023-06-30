@@ -15,16 +15,6 @@ import { getUserAppointments } from "../../APICommunication/GetAppointments";
 import { userIDserver } from "../../APICommunication/user";
 
 export const DashboardPatient = ({ currentUserUID }) => {
-  // const [appoMultiArray, setAppoMultiArray] = useState(null);
-
-  // useEffect(() => {
-  //   getUserAppointments(
-  //     userIDserver,
-  //     temporaryAppointmentsUser,
-  //     setAppoMultiArray
-  //   );
-  // }, []);
-
   return (
     <section className="dashboard-patient">
       <div className="container container-dashboard-patient">

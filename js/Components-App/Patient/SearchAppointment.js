@@ -98,7 +98,6 @@ const SearchAppointment = ({
           AllAppos,
           saveApposCallback
         );
-        console.log("INITIALIZE SEARCH FROM SEARCH BAR");
       } else {
         setIsSelectValid(false);
       }

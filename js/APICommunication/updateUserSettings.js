@@ -1,13 +1,5 @@
 import { db } from "../config/firestore";
-import {
-  collection,
-  getDocs,
-  doc,
-  query,
-  where,
-  getDoc,
-  updateDoc,
-} from "firebase/firestore";
+import { doc, updateDoc } from "firebase/firestore";
 import { getAuth, updatePassword } from "firebase/auth";
 import { auth } from "../config/firestore";
 
@@ -45,12 +37,11 @@ export const updateUserSettingsAndRefresh = async (
 };
 
 const updateThisUserPassword = async (newPassword, passwordFailureCallack) => {
-  const auth = getAuth();
+  // const auth = getAuth();
   const user = auth.currentUser;
 
   try {
     const updatingPassword = await updatePassword(user, newPassword);
-    console.log("JUST CHANGED THE PASSWORD LOL");
   } catch (error) {
     console.log(error);
     passwordFailureCallack(true);

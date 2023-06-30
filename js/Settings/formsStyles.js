@@ -8,6 +8,7 @@ import {
   colorMainText,
 } from "../Settings/cssVariables";
 
+// Object that stores custom Date-picker/
 export const selectStyles = {
   control: (baseStyles, state) => ({
     ...baseStyles,

@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { createRoot } from "react-dom/client";
-import { HashRouter, Route, Routes, useNavigate } from "react-router-dom";
+import { HashRouter, Route, Routes } from "react-router-dom";
 import "../scss/main.scss";
 import { Main } from "./Main";
 import { PatientMain } from "./Components-App/Patient/PatientMain";
@@ -10,37 +10,14 @@ import { SingleAppointment } from "./Components-App/Patient/SingleAppointment";
 import { SettingsDashboard } from "./Components-App/Patient/SettingsDashboard";
 import { SearchDashboard } from "./Components-App/Patient/SearchDashboard";
 import { LoaderCircleEmpty } from "./Utilities/LoaderCircle";
-import { FireBaseTesting } from "./APICommunication/FireBaseTesting";
-import { useStateManager } from "react-select";
-import { addLel } from "./APICommunication/createFirestoreAppos";
-import { getAuth, onAuthStateChanged } from "firebase/auth";
-import { auth } from "./config/firestore";
-import { AuthProvider } from "./config/AuthContext";
-import PrivateRoute from "./Components-App/PrivateRoute";
-import { AuthContext } from "./config/AuthContext";
 import { authUserCheck } from "./APICommunication/authUserCheck";
 
 function App() {
-  // const [currentUser, setCurrentUser] = useState(
-  //   onAuthStateChanged(auth, (user) => {
-  //     if (user) {
-  //       const uid = user.uid;
-  //       console.log("CONTEXT: ", uid);
-  //       setCurrentUser(user);
-  //     } else {
-  //       setCurrentUser(null);
-  //       console.log("User is not logged it, displaying login screen");
-  //     }
-  //   })
-  // );
-
   const [currentUser, setCurrentUser] = useState(undefined);
 
   useEffect(() => {
     authUserCheck(setCurrentUser);
   }, []);
-
-  const [isAuthenticated, setIsAuthenticated] = useState();
 
   return (
     <>
@@ -52,7 +29,12 @@ function App() {
             {currentUser ? (
               <Route
                 path="/"
-                element={<Main setCurrentUser={setCurrentUser} />}
+                element={
+                  <Main
+                    setCurrentUser={setCurrentUser}
+                    currentUserUID={currentUser.uid}
+                  />
+                }
               >
                 <Route
                   path="/portal"
@@ -80,13 +62,9 @@ function App() {
                   path="/search"
                   element={<SearchDashboard currentUserUID={currentUser.uid} />}
                 />
-                {/* <Route path="/test" element={<FireBaseTesting />} /> */}
               </Route>
             ) : (
-              <Route
-                path="/portal"
-                element={<Login setIsAuthenticated={setIsAuthenticated} />}
-              ></Route>
+              <Route path="/portal" element={<Login />}></Route>
             )}
           </Routes>
         </HashRouter>

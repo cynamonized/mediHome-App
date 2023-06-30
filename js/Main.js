@@ -5,10 +5,10 @@ import { Footer } from "./Components-App/Footer";
 import { Outlet } from "react-router-dom";
 import { getAuth } from "firebase/auth";
 
-export const Main = ({ setCurrentUser }) => {
+export const Main = ({ setCurrentUser, currentUserUID }) => {
   return (
     <>
-      <Header setCurrentUser={setCurrentUser} />
+      <Header setCurrentUser={setCurrentUser} currentUserUID={currentUserUID} />
       <Outlet />
       <Footer />
     </>

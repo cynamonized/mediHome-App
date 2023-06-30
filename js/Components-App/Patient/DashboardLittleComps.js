@@ -120,7 +120,7 @@ export const DashboardBlockBlog = ({ title, link, blogContent }) => {
       <div className="dashboard__block dashboard__block-small--blog">
         <DashboardHeaderSmall title={title} whiteElements={true} />
         <div className="block-small__body--blog">
-          <img src={`${blogContent.articleImage}`} />
+          <img src={`${blogContent.articleImage}`} className="body__image" />
           <p className="body-blog__title">{blogContent.articleTitle}</p>
           <p className="body-blog__description">{blogContent.articleBody}</p>
         </div>

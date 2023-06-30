@@ -5,6 +5,10 @@ header {
     padding: 20px 0px 20px 0;
     @include flex(space-between, center);
 
+    .container-header__main-logo {
+      cursor: pointer;
+    }
+
     .header__right-column {
       @include flex;
       gap: 22px;
@@ -39,6 +43,7 @@ header {
         width: 3.125rem;
         border-radius: 50%;
         cursor: pointer;
+        background-color: $color-greys-light-1;
       }
     }
   }

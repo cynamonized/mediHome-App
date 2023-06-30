@@ -1,5 +1,13 @@
 import { db } from "../config/firestore";
-import { collection, getDocs, doc, query, where } from "firebase/firestore";
+import {
+  collection,
+  getDocs,
+  doc,
+  query,
+  where,
+  limit,
+  orderBy,
+} from "firebase/firestore";
 
 export const searchForAppo = async (
   city,
@@ -9,7 +17,9 @@ export const searchForAppo = async (
 ) => {
   const appoQueryRef = query(
     collection(db, "AvailableAppos", `${city}`, `${specialization}`),
-    where("date", ">=", appointmentDate)
+    where("date", ">=", appointmentDate),
+    orderBy("date"),
+    limit(11)
   );
 
   try {

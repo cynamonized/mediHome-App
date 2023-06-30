@@ -1,16 +1,10 @@
-import React, { useEffect, useState } from "react";
-import { useLocation, useNavigate } from "react-router-dom";
+import React, { useState } from "react";
 import "../../../scss/main.scss";
 import { MainButton, TertiaryButton } from "../../Utilities/Buttons";
-import {
-  getAuth,
-  setPersistence,
-  signInWithEmailAndPassword,
-  browserSessionPersistence,
-} from "firebase/auth";
+import { signInWithEmailAndPassword } from "firebase/auth";
 import { auth } from "../../config/firestore";
 
-export const Login = ({ setIsAuthenticated }) => {
+export const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
@@ -31,9 +25,7 @@ export const Login = ({ setIsAuthenticated }) => {
       .then((userCredential) => {
         const user = userCredential.user;
         setWrongPassword(false);
-        // userLogsIn(user);
         console.log(userCredential);
-        setIsAuthenticated(user);
       })
       .catch((error) => {
         setWrongPassword(true);

@@ -83,6 +83,11 @@
   // justify-content: flex-start;
   .block-small__body--blog {
     margin-bottom: auto;
+
+    .body__image {
+      background-color: $color-sec-blue;
+    }
+
     .body-blog__title {
       @include fonts(1rem, 500, $color-main-white);
       margin: 15px 30px;

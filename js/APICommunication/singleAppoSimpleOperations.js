@@ -97,7 +97,6 @@ export const deleteSingleAppoFrServer = async (
 
   try {
     const deleteAppo = await deleteDoc(docRef);
-    console.log("usuwam z serwera !!!");
   } catch (error) {
     console.log(error);
     if (refreshSearchCallback) {
@@ -129,7 +128,6 @@ export const deleteSingleAppoFrUser = async (
 
   try {
     const deleteAppo = await deleteDoc(docRef);
-    console.log("usuwa z usera !!!");
   } catch (error) {
     console.log(error);
     failureCallback(true);
@@ -142,7 +140,6 @@ export const cloneAppo = async (
   appoToBeCloned,
   ...pathArgs
 ) => {
-  console.log(pathArgs);
   const newDocRef = doc(db, ...pathArgs, `${appoToBeCloned.id}`);
   const fieldsRef = {
     booked: appoToBeCloned.booked,
@@ -167,7 +164,6 @@ export const cloneAppoBackToAvailable = async (
   appoToBeCloned,
   ...pathArgs
 ) => {
-  console.log(pathArgs);
   const newDocRef = doc(db, ...pathArgs, `${appoToBeCloned.id}`);
   const fieldsRef = {
     booked: appoToBeCloned.booked,
