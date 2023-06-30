@@ -1,15 +1,10 @@
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { DashboardHeaderBig } from "./DashboardLittleComps";
-import { temporaryAppointmentsUser } from "../../APICommunication/tempArrays";
 import {
-  AppointmentPureDate,
-  AppointmentTime,
   AppoPureDateFromSeconds,
   AppoTimeFromSeconds,
 } from "../../Functions/convertTime";
-import { getUserAppointments } from "../../APICommunication/GetAppointments";
-import { userIDserver } from "../../APICommunication/user";
 import { getUserAppointmentsMultiArray } from "../../APICommunication/getUserAppoinments";
 
 export const AppointmentsList = ({ currentUserUID }) => {

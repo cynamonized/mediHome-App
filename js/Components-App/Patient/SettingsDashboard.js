@@ -3,14 +3,8 @@ import { useNavigate } from "react-router-dom";
 import { DashboardHeaderBig } from "./DashboardLittleComps";
 import { MainButton } from "../../Utilities/Buttons";
 import { ToolTip, SimpleErrorPopUp } from "../../Utilities/PopUp";
-import {
-  gettingUserSettings,
-  updateUserSettings,
-} from "../../APICommunication/GetAppointments";
 import { getUserSettings } from "../../APICommunication/getUserSettings";
 import { updateUserSettingsAndRefresh } from "../../APICommunication/updateUserSettings";
-import { temporaryAppointmentsUser } from "../../APICommunication/tempArrays";
-import { userIDserver } from "../../APICommunication/user";
 import {
   LoaderCircleSmall,
   ActionCompleted,

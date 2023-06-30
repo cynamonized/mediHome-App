@@ -3,7 +3,6 @@ import "../../../scss/main.scss";
 import { MainButton } from "../../Utilities/Buttons";
 import { selectStyles } from "../../Settings/formsStyles";
 import { useNavigate, useLocation } from "react-router-dom";
-import { AllAppos } from "../../APICommunication/tempArrays";
 
 // -----------------------------------------
 
@@ -91,13 +90,7 @@ const SearchAppointment = ({
     } else {
       if (validateSelects()) {
         setIsSelectValid(true);
-        searchCallback(
-          city,
-          specialization,
-          appointmentDate,
-          AllAppos,
-          saveApposCallback
-        );
+        searchCallback(city, specialization, appointmentDate);
       } else {
         setIsSelectValid(false);
       }

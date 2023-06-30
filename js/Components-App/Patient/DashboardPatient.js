@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import "../../../scss/main.scss";
 import { DashboarPatientLeftPane } from "./DashboardPatientLeftPane";
 import {
@@ -7,12 +7,7 @@ import {
   DashboardBlockConsultant,
   DashboardBlockBlog,
 } from "./DashboardLittleComps";
-import {
-  blogArticleContent,
-  temporaryAppointmentsUser,
-} from "../../APICommunication/tempArrays";
-import { getUserAppointments } from "../../APICommunication/GetAppointments";
-import { userIDserver } from "../../APICommunication/user";
+import { blogArticleContent } from "../../APICommunication/tempArrays";
 
 export const DashboardPatient = ({ currentUserUID }) => {
   return (

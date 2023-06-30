@@ -4,19 +4,9 @@ import { Link, useLocation, useNavigate } from "react-router-dom";
 import { DashboardHeaderBig } from "./DashboardLittleComps";
 import { TertiaryButton } from "../../Utilities/Buttons";
 import { PopUp, PopUpDeny, PopUpLoading } from "../../Utilities/PopUp";
-import { searchForAppointment } from "../../APICommunication/GetAppointments";
 import {
-  temporaryAppointmentsUser,
-  AllAppos,
-} from "../../APICommunication/tempArrays";
-import { userIDserver } from "../../APICommunication/user";
-import { bookThisAppoFetch } from "../../APICommunication/GetAppointments";
-import {
-  AppointmentPureDate,
-  AppointmentTime,
   AppoPureDateFromSeconds,
   AppoTimeFromSeconds,
-  AppoDateFromSeconds,
 } from "../../Functions/convertTime";
 import { LoaderCircle, ActionCompleted } from "../../Utilities/LoaderCircle";
 import { searchForAppo } from "../../APICommunication/searchForAppo";
@@ -39,10 +29,10 @@ export const SearchDashboard = ({ currentUserUID }) => {
   const [appoGone, setAppoGone] = useState(false);
 
   useEffect(() => {
-    searchingMain(city, specialization, appointmentDate, AllAppos);
+    searchingMain(city, specialization, appointmentDate);
   }, []);
 
-  const searchingMain = (city, specialization, appointmentDate, apposArray) => {
+  const searchingMain = (city, specialization, appointmentDate) => {
     // Saving spec type to check if user already have this kind of appo
     setChosenSpecForValid(specialization.label);
 

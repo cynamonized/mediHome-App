@@ -9,12 +9,6 @@ import {
   AppoDateFromSeconds,
 } from "../../Functions/convertTime";
 import { findAppo } from "../../Functions/findAppo";
-import { temporaryAppointmentsUser } from "../../APICommunication/tempArrays";
-import {
-  getUserAppointments,
-  RemoveAppoFrUser,
-} from "../../APICommunication/GetAppointments";
-import { userIDserver } from "../../APICommunication/user";
 import { getSingleUserAppointment } from "../../APICommunication/getSingleUserAppointment";
 import { cancelThisAppointment } from "../../APICommunication/cancelAppointment";
 import { addDoc, setDoc, doc, collection, Timestamp } from "firebase/firestore";

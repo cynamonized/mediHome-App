@@ -29,8 +29,6 @@ export const cancelThisAppointment = async (
   chosenAppo["id"] = `${chosenAppoID}`;
 
   try {
-    console.log(chosenAppo);
-
     //1. Get and store backup of the appo
     const backupAppo = await getBookedAppoFrUser(
       chosenAppo,
@@ -40,7 +38,6 @@ export const cancelThisAppointment = async (
     backupAppo["id"] = chosenAppoID;
     backupAppo["booked"] = false;
     delete backupAppo.patientID;
-    console.log(backupAppo);
 
     //2A. Delete Appo from user
     const deleteFromUser = await deleteSingleAppoFrUser(
