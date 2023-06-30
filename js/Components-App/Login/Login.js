@@ -25,7 +25,6 @@ export const Login = () => {
       .then((userCredential) => {
         const user = userCredential.user;
         setWrongPassword(false);
-        console.log(userCredential);
       })
       .catch((error) => {
         setWrongPassword(true);
