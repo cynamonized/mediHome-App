@@ -42,3 +42,9 @@ export const AppoTimeFromSeconds = (seconds) => {
   const luxonDate = DateTime.fromSeconds(seconds);
   return AppointmentTime(luxonDate);
 };
+
+// it intakes seconds and returns full date (birthday-like)
+export const fullDateFromSeconds = (seconds) => {
+  const luxonDate = DateTime.fromSeconds(seconds);
+  return luxonDate.toLocaleString(DateTime.DATE_FULL);
+};

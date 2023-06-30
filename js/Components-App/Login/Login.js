@@ -14,6 +14,8 @@ export const Login = ({ setIsAuthenticated }) => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
+  const [wrongPassword, setWrongPassword] = useState(false);
+
   const emailUpdate = ({ target }) => {
     setEmail(target.value);
   };
@@ -23,19 +25,21 @@ export const Login = ({ setIsAuthenticated }) => {
   };
 
   /////////////////////////////////////////
-  // LATEST WORKING ONLY WITHOUT REFRESHING
   const submitLogin = async (e) => {
+    e.preventDefault();
     signInWithEmailAndPassword(auth, email, password)
       .then((userCredential) => {
         const user = userCredential.user;
+        setWrongPassword(false);
         // userLogsIn(user);
         console.log(userCredential);
-        console.log("Ile razy sie odpalam?");
         setIsAuthenticated(user);
       })
       .catch((error) => {
+        setWrongPassword(true);
         const errorCode = error.code;
         const errorMessage = error.message;
+        console.log(error);
         console.log(errorCode);
         console.log(errorMessage);
       });
@@ -85,6 +89,11 @@ export const Login = ({ setIsAuthenticated }) => {
           >
             Log in
           </MainButton>
+          {wrongPassword && (
+            <p className="validaiton-warning--bottom">
+              Email or password is wrong.
+            </p>
+          )}
         </form>
       </div>
       <div className="login-screen__right-column">
@@ -132,8 +141,4 @@ export const Login = ({ setIsAuthenticated }) => {
       </div>
     </section>
   );
-};
-
-const TestComp = () => {
-  return <p>THIS IS A FREAKING TEST</p>;
 };

@@ -16,13 +16,6 @@ export const AppointmentsList = ({ currentUserUID }) => {
   const [appoMultiArray, setAppoMultiArray] = useState(null);
 
   useEffect(() => {
-    // Here it needs to fetch when server is ready
-    // getUserAppointments(
-    //   userIDserver,
-    //   temporaryAppointmentsUser,
-    //   setAppoMultiArray
-    // );
-
     getUserAppointmentsMultiArray(currentUserUID, setAppoMultiArray);
   }, []);
 
@@ -68,6 +61,9 @@ const AppointetsTable = ({ title, appos, isCompleted }) => {
           <tbody>
             {appos &&
               appos.map((appo) => {
+                if (!appo.specialization) {
+                  return "";
+                }
                 return (
                   <tr
                     key={appo.id}

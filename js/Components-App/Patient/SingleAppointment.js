@@ -3,7 +3,7 @@ import { useLocation, useNavigate } from "react-router-dom";
 import { DashboardHeaderBig } from "./DashboardLittleComps";
 import { MainButton } from "../../Utilities/Buttons";
 import { PopUp, SimpleErrorPopUp } from "../../Utilities/PopUp";
-import { LoaderCircle } from "../../Utilities/LoaderCircle";
+import { LoaderCircle, ActionCompleted } from "../../Utilities/LoaderCircle";
 import {
   AppointmentDate,
   AppoDateFromSeconds,
@@ -29,6 +29,7 @@ export const SingleAppointment = ({ currentUserUID }) => {
   const [appoFetchList, setAppoFetchList] = useState(null);
   const [isLoading, setIsLoading] = useState(false);
   const [denyPopUp, setDenyPopUp] = useState(false);
+  const [cancelCompleted, setCancelCompleted] = useState(false);
 
   useEffect(() => {
     // AddBackUserAndServer();
@@ -39,35 +40,21 @@ export const SingleAppointment = ({ currentUserUID }) => {
       ifCompleted,
       setChosenAppo
     );
-
-    // if (appoFetchList == null) {
-    //   getUserAppointments(
-    //     userIDserver,
-    //     temporaryAppointmentsUser,
-    //     setAppoFetchList
-    //   );
-    // }
-    // appoFetchList && setChosenAppo(findAppo(appoFetchList, chosenAppoID));
   }, []);
 
-  const cancelAppo = () => {
+  const cancelAppo = async () => {
     setIsLoading(true);
 
-    console.log("Rozpoczynam procedure fetchowania cancelowania");
-
-    // LEGACY
-    // RemoveAppoFrUser(userIDserver, temporaryAppointmentsUser, chosenAppoID);
-
-    cancelThisAppointment(
+    await cancelThisAppointment(
       currentUserUID,
       chosenAppoID,
       chosenAppo,
       setDenyPopUp
     );
-    const temperDelay = setTimeout(() => {
-      setDenyPopUp(true);
-      setIsLoading(false);
-    }, 1000);
+
+    setIsLoading(false);
+    setCancelCompleted(true);
+    redirectToAppoList();
   };
 
   const redirectToAppoList = () => {
@@ -85,10 +72,21 @@ export const SingleAppointment = ({ currentUserUID }) => {
     return <LoaderCircle />;
   }
 
+  if (cancelCompleted) {
+    return (
+      <ActionCompleted>
+        Appointment has been successfully cancelled!
+      </ActionCompleted>
+    );
+  }
+
   return (
     <div className="appo-list dashboard__block container single-appo">
       {denyPopUp && (
-        <SimpleErrorPopUp closePopUp={closeDenyPopUp}>
+        <SimpleErrorPopUp
+          closePopUp={closeDenyPopUp}
+          title={"This appointment is already gone!"}
+        >
           Apologies, you are not assigned to this appointment anymore. Probably
           it was removed or changed by our administration. Contact us if you
           think this is an issue.{" "}

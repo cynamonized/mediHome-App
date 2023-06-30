@@ -42,6 +42,18 @@
   }
 }
 
+.loader-circle--small {
+  @include flex(center, center);
+  height: 100%;
+  width: 100%;
+  margin-bottom: 0;
+  border: none;
+
+  .hourglass-animating {
+    animation: circle-rotating 2s infinite cubic-bezier(0.52, 0.23, 0.26, 0.82);
+  }
+}
+
 @keyframes circle-rotating {
   0% {
     transform: rotate(0deg);

@@ -92,12 +92,12 @@ export const PopUpDeny = ({
   );
 };
 
-export const SimpleErrorPopUp = ({ closePopUp, children }) => {
+export const SimpleErrorPopUp = ({ closePopUp, children, title }) => {
   return (
     <>
       <div className="pop-up">
         <div className="pop-up__window">
-          <DashboardHeaderWarning title={"This appointment is already gone!"}>
+          <DashboardHeaderWarning title={title}>
             <span className="material-icons warning__header-icon">
               dangerous
             </span>

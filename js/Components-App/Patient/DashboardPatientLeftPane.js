@@ -87,6 +87,10 @@ const DashboardPatientLeftPaneBody = ({ patientAppointments }) => {
         <ul className="appointments__appo-list">
           {currentData &&
             currentData.map((appo) => {
+              if (!appo.specialization) {
+                return "";
+              }
+
               return (
                 <li className="appo-list__single-appo" key={appo.id}>
                   <div className="single-appo__labels">

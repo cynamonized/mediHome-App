@@ -43,17 +43,6 @@ export const SearchDashboard = ({ currentUserUID }) => {
   }, []);
 
   const searchingMain = (city, specialization, appointmentDate, apposArray) => {
-    // LEGACY - TO DELETE WHEN BOOKING WORKS
-    // BEFORE THAT CAN UNCOMMENT AND CHECK HOW IT WORKS
-    //
-    // searchForAppointment(
-    //   city,
-    //   specialization,
-    //   appointmentDate,
-    //   apposArray,
-    //   setFoundAppos
-    // );
-
     // Saving spec type to check if user already have this kind of appo
     setChosenSpecForValid(specialization.label);
 
@@ -100,20 +89,8 @@ export const SearchDashboard = ({ currentUserUID }) => {
       refreshSearch,
       redirectToStart
     );
-
-    // // LEGACY FETCHING
-    // const tempDelayFetch = setTimeout(() => {
-    //   bookThisAppoFetch(
-    //     appoUserPicked,
-    //     userIDserver,
-    //     temporaryAppointmentsUser,
-    //     AllAppos,
-    //     redirectToStart
-    //   );
-    // }, 1000);
   };
 
-  // USE IT IN THE END
   const redirectToStart = () => {
     setFetchIsLoading(false);
     setBookingCompleted(true);
