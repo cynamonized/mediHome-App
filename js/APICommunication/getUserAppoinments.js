@@ -29,9 +29,11 @@ export const getUserAppointmentsMultiArray = async (
 
       firstArray.push(appoWithID);
     });
-    firstArray.sort((a, b) => {
-      return a.date.seconds - b.date.seconds;
-    });
+    if (firstArray.length < 1) {
+      firstArray.sort((a, b) => {
+        return a.date.seconds - b.date.seconds;
+      });
+    }
 
     completedApointments.forEach((appo) => {
       const appoWithID = appo.data();
@@ -39,9 +41,11 @@ export const getUserAppointmentsMultiArray = async (
 
       secondArray.push(appoWithID);
     });
-    secondArray.sort((a, b) => {
-      return a.date.seconds - b.date.seconds;
-    });
+    if (secondArray.length < 1) {
+      secondArray.sort((a, b) => {
+        return a.date.seconds - b.date.seconds;
+      });
+    }
 
     multiArray.push(firstArray);
     multiArray.push(secondArray);
