@@ -13,7 +13,6 @@ import {
 import {
   getSingleAppointment,
   getBookedAppoFrUser,
-  getBookedAppoFrServer,
   deleteSingleAppoFrServer,
   deleteSingleAppoFrUser,
   cloneAppo,

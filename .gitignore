@@ -6,6 +6,15 @@ logs
 npm-debug.log*
 node_modules/
 .sass-cache/
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+lerna-debug.log*
+
+node_modules
+dist
+dist-ssr
+*.local
 
 ### OSX ###
 .DS_Store
@@ -19,6 +28,16 @@ node_modules/
 # Visual Studio Code - https://code.visualstudio.com/
 .settings/
 .vscode/
+.vscode/*
+!.vscode/extensions.json
+.idea
+.DS_Store
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.sw?
+
 
 ### Webstorm ###
 .idea/
