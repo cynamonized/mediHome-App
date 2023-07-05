@@ -5,6 +5,7 @@ import "../../scss/main.scss";
 import { fireApp, auth } from "../config/firestore";
 import { getProfileInfo } from "../APICommunication/getProfileInfo";
 import { TertiaryButton } from "../Utilities/Buttons";
+import LogoTop from "../../images/logo - mediHome - small.svg";
 
 export const Header = ({ setCurrentUser, currentUserUID }) => {
   const navigate = useNavigate();
@@ -46,7 +47,7 @@ export const Header = ({ setCurrentUser, currentUserUID }) => {
     <header>
       <div className="container container-header">
         <img
-          src="/images/logo - mediHome - small.svg"
+          src={LogoTop}
           className="container-header__main-logo"
           onClick={goToMainView}
         ></img>

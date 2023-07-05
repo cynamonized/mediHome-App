@@ -3,6 +3,12 @@ import "../../../scss/main.scss";
 import { MainButton, TertiaryButton } from "../../Utilities/Buttons";
 import { signInWithEmailAndPassword } from "firebase/auth";
 import { auth } from "../../config/firestore";
+import PhotoMain from "../../../images/Login Photo - small.png";
+import LogoBig from "../../../images/logo - mediHome - big.svg";
+import LogoSmall1 from "../../../images/logo - mediCare.svg";
+import LogoSmall2 from "../../../images/logo - mediDent.svg";
+import LogoSmall3 from "../../../images/logo - mediHospital.svg";
+import LogoSmall4 from "../../../images/logo - mediPharmacy.svg";
 
 export const Login = () => {
   const [email, setEmail] = useState("");
@@ -40,10 +46,7 @@ export const Login = () => {
   return (
     <section className="login-screen">
       <div className="login-screen__left-column">
-        <img
-          src="images/logo - mediHome - big.svg"
-          className="left-column__logo"
-        />
+        <img src={LogoBig} className="left-column__logo" />
 
         <h3 className="login-screen">
           <span>Log in </span>to manage <br />
@@ -102,32 +105,13 @@ export const Login = () => {
               libero sapien, volutpat sed leo ac, dictum placerat ante.
             </p>
             <div className="health-packages__logos">
-              <img
-                src="images/logo - mediCare.svg"
-                alt=""
-                className="logos__single-logo"
-              />
-              <img
-                src="images/logo - mediDent.svg"
-                alt=""
-                className="logos__single-logo"
-              />
-              <img
-                src="images/logo - mediHospital.svg"
-                alt=""
-                className="logos__single-logo"
-              />
-              <img
-                src="images/logo - mediPharmacy.svg"
-                alt=""
-                className="logos__single-logo"
-              />
+              <img src={LogoSmall1} alt="" className="logos__single-logo" />
+              <img src={LogoSmall2} alt="" className="logos__single-logo" />
+              <img src={LogoSmall3} alt="" className="logos__single-logo" />
+              <img src={LogoSmall4} alt="" className="logos__single-logo" />
             </div>
           </div>
-          <img
-            src="images/Login Photo - small.png"
-            className="bottom-section__main-image"
-          />
+          <img src={PhotoMain} className="bottom-section__main-image" />
         </div>
       </div>
     </section>
