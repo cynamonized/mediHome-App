@@ -23,6 +23,8 @@ export const getUserAppointmentsMultiArray = async (
     let firstArray = [];
     let secondArray = [];
 
+    // Need to sort data here by date
+
     bookedAppointments.forEach((appo) => {
       const appoWithID = appo.data();
       appoWithID["id"] = appo.id;
@@ -32,6 +34,8 @@ export const getUserAppointmentsMultiArray = async (
     firstArray.sort((a, b) => {
       return a.date.seconds - b.date.seconds;
     });
+
+    // Need to sort data here by date
 
     completedApointments.forEach((appo) => {
       const appoWithID = appo.data();
