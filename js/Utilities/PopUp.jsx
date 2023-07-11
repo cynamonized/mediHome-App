@@ -141,10 +141,49 @@ export const PopUpTiny = () => {
   );
 };
 
-export const ToolTip = () => {
+export const ToolTip = ({ children }) => {
+  const [isHovering, setIsHovering] = useState(false);
+  const [fadingIn, setFadingIn] = useState(false);
+  const [fadingOut, setFadingOut] = useState(false);
+
+  const handleMouseOver = () => {
+    setFadingIn(true);
+    setIsHovering(true);
+  };
+
+  const handleMouseOut = async () => {
+    const result = await fadingOutPromise();
+    setIsHovering(false);
+  };
+
+  // To be replaced with CSS Transition
+
+  const fadingOutPromise = () => {
+    return new Promise((resolve, reject) => {
+      setTimeout(() => {
+        setFadingIn(false);
+      }, 100);
+    });
+  };
+
   return (
-    <div className="tooltip">
+    <div
+      className="tooltip"
+      onMouseOver={handleMouseOver}
+      onMouseOut={handleMouseOut}
+    >
       <span className="material-icons">info</span>
+      {isHovering && (
+        <div
+          className={
+            fadingIn == true
+              ? "tooltip__hover-message tooltip__fade-in"
+              : "tooltip__hover-message tooltip__fade-out"
+          }
+        >
+          {children}
+        </div>
+      )}
     </div>
   );
 };

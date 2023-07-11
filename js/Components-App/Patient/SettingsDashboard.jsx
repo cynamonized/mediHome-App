@@ -244,7 +244,11 @@ const SettingsBody = ({ currentUserUID }) => {
 
             <div className="body__contact-birth-columnn">
               <div className="tooltip__head">
-                <ToolTip />
+                <ToolTip
+                  children={
+                    "This is important data, if you wish to change it, please contact our hot line."
+                  }
+                />
                 <h4 className="tooltip-near">Contact information:</h4>
               </div>
               <label className="form-header" htmlFor="email">
@@ -278,7 +282,11 @@ const SettingsBody = ({ currentUserUID }) => {
 
               <div className="contact-birth-column__birth">
                 <div className="tooltip__head">
-                  <ToolTip />
+                  <ToolTip
+                    children={
+                      "This is important data, if you wish to change it, please contact our hot line."
+                    }
+                  />
                   <h4 className="tooltip-near">Date of birth:</h4>
                 </div>
                 <input

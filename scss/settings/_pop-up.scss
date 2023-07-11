@@ -91,6 +91,29 @@
   font-family: $font-material-icons;
   font-size: 1rem;
   margin-right: 5px;
+  position: relative;
+
+  .tooltip__hover-message {
+    white-space: nowrap;
+    font-family: $font-poppins;
+    background-color: $color-main-white;
+    position: absolute;
+    padding: 10px;
+    border: 1px solid $color-main-pink;
+    border-radius: 20px;
+    top: -50px;
+    z-index: 2;
+  }
+
+  .tooltip__fade-in {
+    animation: tooltip-fadein 0.1s;
+    animation-fill-mode: forwards;
+  }
+
+  .tooltip__fade-out {
+    animation: tooltip-fadeout 0.1s;
+    animation-fill-mode: forwards;
+  }
 }
 
 .tooltip--warning {
@@ -113,4 +136,24 @@
 .validaiton-warning--bottom {
   @include fonts(1rem, 500, $color-sec-angry-red);
   margin-top: 15px;
+}
+
+@keyframes tooltip-fadein {
+  0% {
+    opacity: 0;
+  }
+
+  100% {
+    opacity: 1;
+  }
+}
+
+@keyframes tooltip-fadeout {
+  0% {
+    opacity: 1;
+  }
+
+  100% {
+    opacity: 0;
+  }
 }
