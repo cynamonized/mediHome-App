@@ -156,7 +156,7 @@ export const ToolTip = ({ children }) => {
     setIsHovering(false);
   };
 
-  // To be replaced with CSS Transition
+  // To be replaced with CSS Transition (1)
 
   const fadingOutPromise = () => {
     return new Promise((resolve, reject) => {
