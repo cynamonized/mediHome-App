@@ -8,6 +8,7 @@ import {
   updateDoc,
 } from "firebase/firestore";
 import { getAuth, createUserWithEmailAndPassword } from "firebase/auth";
+import { fillExampleAppoUser } from "./fillUsersAppos";
 
 export const addDatabase = async () => {
   // Creating Firestore database structure for available, booked and past appointments
@@ -42,6 +43,7 @@ export const addDatabase = async () => {
 
   // Creating hardcoded example user and databasa structure to store his data
   // Following code should be user to create any future patient account
+
   const exampleEmail = "mat.marco@example.com";
   const examplePassword = "321medi";
   let exampleUserUID;
@@ -99,4 +101,44 @@ export const addDatabase = async () => {
     profilePicture:
       "https://github.com/cynamonized/mediHome-App/blob/dedef7b1d0eb883cc5091e6bcdcdfcd659741abd/images/Profile%20picture%20-%20temp.png?raw=true",
   });
+
+  await fillExampleAppoUser(
+    exampleUserUID,
+    new Date(`September 12, 2023 9:15:00`),
+    "Orthopaedist",
+    "Kabaty Center",
+    "Martin Smith",
+    "Warsaw",
+    false
+  );
+
+  await fillExampleAppoUser(
+    exampleUserUID,
+    new Date(`November 15, 2023 10:15:00`),
+    "Orthodontist",
+    "Mlociny Center",
+    "Anthony Smith",
+    "Warsaw",
+    false
+  );
+
+  await fillExampleAppoUser(
+    exampleUserUID,
+    new Date(`May 10, 2023 11:15:00`),
+    "Orthodontist",
+    "Mlociny Center",
+    "Anthony Smith",
+    "Warsaw",
+    true
+  );
+
+  await fillExampleAppoUser(
+    exampleUserUID,
+    new Date(`May 15, 2023 11:15:00`),
+    "Internist",
+    "Skierniewicka 12",
+    "Josh Bread",
+    "Warsaw",
+    true
+  );
 };
