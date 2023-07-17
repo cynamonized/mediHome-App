@@ -31,6 +31,8 @@ export const addDatabase = async () => {
     });
   });
 
+  const currentYear = await setDoc(doc(db, "PastAppos", "2023"), {});
+
   pastAppos.forEach(async (type) => {
     const appoType = await setDoc(
       doc(db, "PastAppos", "2023", `${type}`, "FAKEDOC"),
@@ -53,11 +55,13 @@ export const addDatabase = async () => {
   const userApposTypes = ["Completed", "Booked", "Deserted"];
 
   await userApposTypes.forEach(async (type) => {
-    // SAME TRICK FOR DOCS THAT DOES NOT EXIST
-    // NEED TO DO FOR ALL OF ITALIC DOCS :(
-
     const userStructure = await setDoc(
       doc(db, "Users", `${exampleUserUID}`),
+      {}
+    );
+
+    const userStructurePrimary = await setDoc(
+      doc(db, "Users", `${exampleUserUID}`, "Appointments", `${type}`),
       {}
     );
 
