@@ -10,6 +10,12 @@ import {
 import { getAuth, createUserWithEmailAndPassword } from "firebase/auth";
 import { fillExampleAppoUser } from "./fillUsersAppos";
 
+// 1. Once run it creates collections in db
+// 2. Creates example user and creates example appos for him (and in db)
+// 3. Available appos are created elsewhere (fillAvailableAppos.js)
+
+// I NEED TO READ THROUGH THAT (in mediBase)
+
 export const addDatabase = async () => {
   // Creating Firestore database structure for available, booked and past appointments
   const citiesList = ["Krakow", "Poznan", "Warsaw"];
