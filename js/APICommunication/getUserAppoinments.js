@@ -23,38 +23,6 @@ export const getUserAppointmentsMultiArray = async (
     let firstArray = fillApposArray(bookedAppointments);
     let secondArray = fillApposArray(completedApointments);
 
-    ////////////////////////////////////////////////////////
-    // bookedAppointments.forEach((appo) => {
-    //   const appoWithID = appo.data();
-    //   appoWithID["id"] = appo.id;
-    //   firstArray.push(appoWithID);
-    // });
-
-    // console.log(firstArray);
-
-    // // Need to sort data here by date
-    // if (firstArray.length > 0) {
-    //   firstArray.sort((a, b) => {
-    //     return a.date.seconds - b.date.seconds;
-    //   });
-    // }
-    //////////////////////////////////////////////////////////
-
-    // completedApointments.forEach((appo) => {
-    //   const appoWithID = appo.data();
-    //   appoWithID["id"] = appo.id;
-    //   secondArray.push(appoWithID);
-    // });
-
-    // // Need to sort data here by date
-    // if (secondArray.length > 0) {
-    //   secondArray.sort((a, b) => {
-    //     return a.date.seconds - b.date.seconds;
-    //   });
-    // }
-
-    //////////////////////////////////////////////////////////
-
     multiArray.push(firstArray);
     multiArray.push(secondArray);
 

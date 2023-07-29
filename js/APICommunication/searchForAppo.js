@@ -29,7 +29,10 @@ export const searchForAppo = async (
     foundAppos.forEach((appo) => {
       let appoWithID = appo.data();
       appoWithID["id"] = appo.id;
-      formattedAppos.push(appoWithID);
+
+      if (appoWithID.id != "FAKE DOC") {
+        formattedAppos.push(appoWithID);
+      }
     });
 
     saveApposCallback(formattedAppos);

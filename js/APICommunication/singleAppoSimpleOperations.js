@@ -40,7 +40,7 @@ export const getSingleAppointment = async (chosenAppo, failureCallback) => {
   return null;
 };
 
-// Getting single appointment from available appos on the server
+// Getting single appointment from booked appos on the server
 export const getBookedAppoFrUser = async (
   chosenAppo,
   currentUserUID,
@@ -214,6 +214,4 @@ export const apposNumberValidation = async (currentUserUID, specialization) => {
     console.log(error);
     return error;
   }
-
-  return null;
 };
