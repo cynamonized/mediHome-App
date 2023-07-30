@@ -1,4 +1,4 @@
-import { db } from "./firestore";
+import { db } from "../firestore";
 import {
   collection,
   addDoc,
@@ -28,11 +28,11 @@ export const addDatabase = async () => {
 
     specializationsList.forEach(async (specialization) => {
       const avaSpecialization = await setDoc(
-        doc(db, "AvailableAppos", `${city}`, `${specialization}`, "FAKEDOC"),
+        doc(db, "AvailableAppos", `${city}`, `${specialization}`, "FAKE DOC"),
         {}
       );
       const bookedSpecialization = await setDoc(
-        doc(db, "BookedAppos", `${city}`, `${specialization}`, "FAKEDOC"),
+        doc(db, "BookedAppos", `${city}`, `${specialization}`, "FAKE DOC"),
         {}
       );
     });
@@ -42,7 +42,7 @@ export const addDatabase = async () => {
 
   pastAppos.forEach(async (type) => {
     const appoType = await setDoc(
-      doc(db, "PastAppos", "2023", `${type}`, "FAKEDOC"),
+      doc(db, "PastAppos", "2023", `${type}`, "FAKE DOC"),
       {}
     );
   });
@@ -81,7 +81,7 @@ export const addDatabase = async () => {
         "Appointments",
         `${type}`,
         `${type}`,
-        "FAKEDOC"
+        "FAKE DOC"
       ),
       {}
     );

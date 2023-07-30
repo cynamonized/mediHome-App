@@ -11,12 +11,16 @@ import { SettingsDashboard } from "./Components-App/Patient/SettingsDashboard";
 import { SearchDashboard } from "./Components-App/Patient/SearchDashboard";
 import { LoaderCircleEmpty } from "./Utilities/LoaderCircle";
 import { authUserCheck } from "./APICommunication/authUserCheck";
+import { fillAvailableAppos } from "./config/buildDatabase/fillAvailableAppos";
 
 function App() {
   const [currentUser, setCurrentUser] = useState(undefined);
 
   useEffect(() => {
     authUserCheck(setCurrentUser);
+
+    // Below was used to generate appos
+    // fillAvailableAppos();
   }, []);
 
   return (
