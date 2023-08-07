@@ -20,7 +20,10 @@ function App() {
   useEffect(() => {
     authUserCheck(setCurrentUser);
 
-    // Below was used to generate appos on the server
+    // Use this only to generate entire server (!!)
+    // It will work only if firestore.js file is set up properly
+    // using env variables in .env file (instruction in .env file)
+
     // addDatabase();
     // fillAvailableAppos();
   }, []);
