@@ -1,4 +1,4 @@
-import { db } from "./firestore";
+import { db } from "../firestore";
 import {
   collection,
   addDoc,

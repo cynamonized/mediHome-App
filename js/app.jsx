@@ -11,6 +11,7 @@ import { SettingsDashboard } from "./Components-App/Patient/SettingsDashboard";
 import { SearchDashboard } from "./Components-App/Patient/SearchDashboard";
 import { LoaderCircleEmpty } from "./Utilities/LoaderCircle";
 import { authUserCheck } from "./APICommunication/authUserCheck";
+import { addDatabase } from "./config/buildDatabase/createDatabase";
 import { fillAvailableAppos } from "./config/buildDatabase/fillAvailableAppos";
 
 function App() {
@@ -19,7 +20,8 @@ function App() {
   useEffect(() => {
     authUserCheck(setCurrentUser);
 
-    // Below was used to generate appos
+    // Below was used to generate appos on the server
+    // addDatabase();
     // fillAvailableAppos();
   }, []);
 
