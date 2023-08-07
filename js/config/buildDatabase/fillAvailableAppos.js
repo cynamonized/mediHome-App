@@ -64,34 +64,46 @@ export const fillWithSingleAppoSet = async (
 
   for (let i = 0; i < numOfWeeks; i++) {
     for (let j = 0; j < numOfDays; j++) {
-      currentDate.setDate(whichWeek.getDate() + j);
-      for (let k = 0; k < numOfAppos; k++) {
-        currentDate.setHours(k + 8);
-        console.log(currentDate);
-        try {
-          await addDoc(
-            collection(db, "AvailableAppos", `${city}`, `${specialization}`),
-            {
-              date: Timestamp.fromDate(currentDate),
-              specialization: `${specialization}`,
-              place: `${place}`,
-              doctor: `${doctor}`,
-              booked: false,
-              completed: false,
-              patientID: "",
-              city: `${city}`,
-            }
-          );
-        } catch (error) {
-          console.log(error);
+      if (j == 0) {
+        currentDate.setDate(currentDate.getDate());
+      } else {
+        currentDate.setDate(currentDate.getDate() + 1);
+      }
+
+      if (!isWeekend(currentDate)) {
+        console.log(isWeekend(currentDate));
+
+        for (let k = 0; k < numOfAppos; k++) {
+          currentDate.setHours(k + 8);
+          console.log("SETTING APPO: ", currentDate);
+          try {
+            await addDoc(
+              collection(db, "AvailableAppos", `${city}`, `${specialization}`),
+              {
+                date: Timestamp.fromDate(currentDate),
+                specialization: `${specialization}`,
+                place: `${place}`,
+                doctor: `${doctor}`,
+                booked: false,
+                completed: false,
+                patientID: "",
+                city: `${city}`,
+              }
+            );
+          } catch (error) {
+            console.log(error);
+          }
         }
+      } else {
+        j--;
+        console.log(isWeekend(currentDate));
+        currentDate.setDate(currentDate.getDate() + 1);
       }
     }
-
     whichWeek = getNextMonday(currentDate);
+    currentDate = whichWeek;
   }
 };
-
 ////////////////////////////////////////////////////////////
 
 // P1 NOW !!!!!!!!!!!!!!!!!!!!!!!!!!
@@ -103,7 +115,7 @@ export const fillWithSingleAppoSet = async (
 export const fillAvailableAppos = async () => {
   await fillWithSingleAppoSet(
     new Date(`July 31, 2023 8:00:00`),
-    4,
+    22,
     3,
     6,
     "Internist",
@@ -114,7 +126,7 @@ export const fillAvailableAppos = async () => {
 
   await fillWithSingleAppoSet(
     new Date(`August 2, 2023 8:00:00`),
-    3,
+    22,
     2,
     6,
     "Internist",
@@ -125,7 +137,7 @@ export const fillAvailableAppos = async () => {
 
   await fillWithSingleAppoSet(
     new Date(`August 7, 2023 8:00:00`),
-    3,
+    22,
     2,
     4,
     "Internist",
@@ -136,8 +148,8 @@ export const fillAvailableAppos = async () => {
 
   await fillWithSingleAppoSet(
     new Date(`August 8, 2023 8:00:00`),
-    2,
-    2,
+    22,
+    5,
     4,
     "Orthopaedist",
     "Sameul Garcia",
@@ -147,7 +159,7 @@ export const fillAvailableAppos = async () => {
 
   await fillWithSingleAppoSet(
     new Date(`August 14, 2023 8:00:00`),
-    2,
+    22,
     4,
     6,
     "Orthopaedist",
@@ -158,7 +170,7 @@ export const fillAvailableAppos = async () => {
 
   await fillWithSingleAppoSet(
     new Date(`August 8, 2023 8:00:00`),
-    2,
+    22,
     4,
     6,
     "Orthopaedist",
@@ -169,8 +181,8 @@ export const fillAvailableAppos = async () => {
 
   await fillWithSingleAppoSet(
     new Date(`August 1, 2023 8:00:00`),
-    3,
-    4,
+    22,
+    5,
     6,
     "Orthodontist",
     "Victoria Mitchell",
@@ -180,7 +192,7 @@ export const fillAvailableAppos = async () => {
 
   await fillWithSingleAppoSet(
     new Date(`August 2, 2023 8:00:00`),
-    3,
+    22,
     4,
     6,
     "Orthodontist",
@@ -191,8 +203,8 @@ export const fillAvailableAppos = async () => {
 
   await fillWithSingleAppoSet(
     new Date(`August 7, 2023 8:00:00`),
-    3,
-    3,
+    22,
+    5,
     4,
     "Orthodontist",
     "Gabrielle Taylor",

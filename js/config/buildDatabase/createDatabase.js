@@ -29,12 +29,16 @@ export const addDatabase = async () => {
         doc(db, "AvailableAppos", `${city}`, `${specialization}`, "FAKE DOC"),
         {}
       );
+      // COMMENT BELOW STATEMENT IF YOU ONLY WANT AVAILABLE APPOS
       const bookedSpecialization = await setDoc(
         doc(db, "BookedAppos", `${city}`, `${specialization}`, "FAKE DOC"),
         {}
       );
+      // END COMMENT HERE
     });
   });
+
+  // COMMENT ALL BELOW IF YOU JUST WANT TO CREATE AVAILABLE APPOS
 
   const currentYear = await setDoc(doc(db, "PastAppos", "2023"), {});
 
