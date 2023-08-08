@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import * as ReactDOMClient from "react-dom/client";
 import { createRoot } from "react-dom/client";
 import { HashRouter, BrowserRouter, Route, Routes } from "react-router-dom";
 import "../scss/main.scss";
@@ -83,5 +84,5 @@ function App() {
 }
 
 const container = document.getElementById("app");
-const root = createRoot(container);
+const root = ReactDOMClient.createRoot(container);
 root.render(<App />);
