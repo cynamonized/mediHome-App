@@ -47,7 +47,7 @@ function getNextMonday(date) {
 // FIX IT LATER !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 
 // pick start date
-// numOfDays needs to be less or equal 5
+// numOfDays should be less or equal 5
 // max numOfAppos should be less than 9
 export const fillWithSingleAppoSet = async (
   whichMonday,
@@ -60,7 +60,6 @@ export const fillWithSingleAppoSet = async (
   place
 ) => {
   let currentDate = new Date(whichMonday);
-  let whichWeek = new Date(whichMonday);
 
   for (let i = 0; i < numOfWeeks; i++) {
     for (let j = 0; j < numOfDays; j++) {
@@ -96,12 +95,11 @@ export const fillWithSingleAppoSet = async (
         }
       } else {
         j--;
-        console.log(isWeekend(currentDate));
+        console.log("It's weekend:", isWeekend(currentDate));
         currentDate.setDate(currentDate.getDate() + 1);
       }
     }
-    whichWeek = getNextMonday(currentDate);
-    currentDate = whichWeek;
+    currentDate = getNextMonday(currentDate);
   }
 };
 ////////////////////////////////////////////////////////////
