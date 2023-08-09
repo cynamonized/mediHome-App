@@ -1,20 +1,5 @@
 import { db } from "../firestore";
-import {
-  collection,
-  addDoc,
-  setDoc,
-  doc,
-  Timestamp,
-  updateDoc,
-} from "firebase/firestore";
-import { getAuth, createUserWithEmailAndPassword } from "firebase/auth";
-
-const currentYear = "2023";
-
-//////////////////////////////////////////////////////////
-// Below function that generates appos are very simple
-// need to add customization (occurencies etc.)
-//////////////////////////////////////////////////////////
+import { collection, addDoc, Timestamp } from "firebase/firestore";
 
 const twoDigitNumber = (number) => {
   const increasedNumber = number + 8;

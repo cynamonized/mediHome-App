@@ -12,7 +12,7 @@ import { SettingsDashboard } from "./Components-App/Patient/SettingsDashboard";
 import { SearchDashboard } from "./Components-App/Patient/SearchDashboard";
 import { LoaderCircleEmpty } from "./Utilities/LoaderCircle";
 import { authUserCheck } from "./APICommunication/authUserCheck";
-import { addDatabase } from "./config/buildDatabase/createDatabase";
+import { createDatabase } from "./config/buildDatabase/createDatabase";
 import { fillAvailableAppos } from "./config/buildDatabase/fillAvailableAppos";
 
 function App() {
@@ -25,7 +25,7 @@ function App() {
     // It will work only if firestore.js file is set up properly
     // using env variables in .env file (instruction in .env file)
 
-    // addDatabase();
+    // createDatabase();
     // fillAvailableAppos();
   }, []);
 

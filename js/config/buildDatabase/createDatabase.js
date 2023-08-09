@@ -1,27 +1,22 @@
 import { db } from "../firestore";
-import {
-  collection,
-  addDoc,
-  setDoc,
-  doc,
-  Timestamp,
-  updateDoc,
-} from "firebase/firestore";
+import { setDoc, doc, Timestamp, updateDoc } from "firebase/firestore";
 import { getAuth, createUserWithEmailAndPassword } from "firebase/auth";
 import { fillExampleAppoUser } from "./fillUsersAppos";
 
-// 1. Once run it creates collections in db
+// 1. Once run it creates all neccessary collections in db
 // 2. Creates example user and creates example appos for him (and in db)
-// 3. Available appos are created elsewhere (fillAvailableAppos.js)
+// 2a. Creates past appos structure in db
+// (!) Available appos are created elsewhere (fillAvailableAppos.js)
 
-export const addDatabase = async () => {
-  // Creating Firestore database structure for available, booked and past appointments
+export const createDatabase = async () => {
+  // 1. Creating Firestore database structure for available, booked and past appointments
   const citiesList = ["Krakow", "Poznan", "Warsaw"];
   const specializationsList = ["Internist", "Orthopaedist", "Orthodontist"];
   const pastAppos = ["Completed", "Deserted", "No_picked_up"];
 
   citiesList.forEach(async (city) => {
     const avaCity = await setDoc(doc(db, "AvailableAppos", `${city}`), {});
+    // 0. COMMENT bookedCity IF YOU ONLY WANT AVAILABLE APPOS
     const bookedCity = await setDoc(doc(db, "BookedAppos", `${city}`), {});
 
     specializationsList.forEach(async (specialization) => {
@@ -29,17 +24,18 @@ export const addDatabase = async () => {
         doc(db, "AvailableAppos", `${city}`, `${specialization}`, "FAKE DOC"),
         {}
       );
-      // COMMENT BELOW STATEMENT IF YOU ONLY WANT AVAILABLE APPOS
+
+      // 0. COMMENT bookedSpecialization IF YOU ONLY WANT AVAILABLE APPOS
       const bookedSpecialization = await setDoc(
         doc(db, "BookedAppos", `${city}`, `${specialization}`, "FAKE DOC"),
         {}
       );
-      // END COMMENT HERE
     });
   });
 
-  // COMMENT ALL BELOW IF YOU JUST WANT TO CREATE AVAILABLE APPOS
+  // 0. COMMENT ALL BELOW IF YOU JUST WANT TO CREATE AVAILABLE APPOS
 
+  // 2a. Creating past appos structure in db
   const currentYear = await setDoc(doc(db, "PastAppos", "2023"), {});
 
   pastAppos.forEach(async (type) => {
@@ -49,8 +45,8 @@ export const addDatabase = async () => {
     );
   });
 
-  // Creating hardcoded example user and databasa structure to store his data
-  // Following code should be user to create any future patient account
+  // 2. Creating hardcoded example user and databasa structure to store his data
+  //    Following code should be used to create any future patient account
 
   const exampleEmail = "mat.marco@example.com";
   const examplePassword = "321medi";
