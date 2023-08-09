@@ -5,7 +5,7 @@ import "../../scss/main.scss";
 import { fireApp, auth } from "../config/firestore";
 import { getProfileInfo } from "../APICommunication/getProfileInfo";
 import { TertiaryButton } from "../Utilities/Buttons";
-import LogoTop from "../../images/logo - mediHome - small.svg";
+import LogoTop from "../../images/logo-mediHome-small.svg";
 
 export const Header = ({ setCurrentUser, currentUserUID }) => {
   const navigate = useNavigate();

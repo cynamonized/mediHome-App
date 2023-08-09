@@ -9,7 +9,7 @@ export const Footer = () => {
         <div className="footer__top-part">
           <div className="footer__first-column-logo">
             <img
-              src="/images/logo - mediHome - white.svg"
+              src="/images/logo-mediHome-white.svg"
               alt=""
               className="first-column-logo__logo"
             />

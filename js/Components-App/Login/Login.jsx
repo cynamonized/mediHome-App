@@ -3,12 +3,12 @@ import "../../../scss/main.scss";
 import { MainButton, TertiaryButton } from "../../Utilities/Buttons";
 import { signInWithEmailAndPassword } from "firebase/auth";
 import { auth } from "../../config/firestore";
-import PhotoMain from "../../../images/Login Photo - small.png";
-import LogoBig from "../../../images/logo - mediHome - big.svg";
-import LogoSmall1 from "../../../images/logo - mediCare.svg";
-import LogoSmall2 from "../../../images/logo - mediDent.svg";
-import LogoSmall3 from "../../../images/logo - mediHospital.svg";
-import LogoSmall4 from "../../../images/logo - mediPharmacy.svg";
+import PhotoMain from "../../../images/LoginPhoto-small.png";
+import LogoBig from "../../../images/logo-mediHome-big.svg";
+import LogoSmall1 from "../../../images/logo-mediCare.svg";
+import LogoSmall2 from "../../../images/logo-mediDent.svg";
+import LogoSmall3 from "../../../images/logo-mediHospital.svg";
+import LogoSmall4 from "../../../images/logo-mediPharmacy.svg";
 
 export const Login = () => {
   const [email, setEmail] = useState("");

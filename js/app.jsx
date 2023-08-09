@@ -21,7 +21,7 @@ function App() {
   useEffect(() => {
     authUserCheck(setCurrentUser);
 
-    // Use this only to generate entire server (!!)
+    // Use below only to generate entire server (!!)
     // It will work only if firestore.js file is set up properly
     // using env variables in .env file (instruction in .env file)
 

@@ -1,40 +1,21 @@
 import { db } from "../firestore";
 import { collection, addDoc, Timestamp } from "firebase/firestore";
+import { twoDigitNumber, isWeekend, getNextMonday } from "./databaseUtility";
 
-const twoDigitNumber = (number) => {
-  const increasedNumber = number + 8;
+/**
+ *
+ * @param {Date} whichMonday - first day (should be Monday) in which function will start generating appointments
+ * @param {number} numOfWeeks - how many weeks should appointments repeat
+ * @param {number} numOfDays - how many days in each week should appointmnts repeat (e.g. 2 -> appos will appear on Mon and Tue)
+ * @param {number} numOfAppos - how many appos will appear each day starting 8.00am (e.g. 3 -> three appos will be created on 8.00am, 9.00am and 10.00am)
+ * @param {String} specialization - specialization of appointment that needs to be created (a the moment there are only: Internist, Orthopaedist and Orthodontist)
+ * @param {String} doctor - doctor name that will run the appo (at the moment can be any name because there are no doctor accounts available)
+ * @param {String} city - which city appointments takes place (at the moment it can be Warsaw, Poznan or Krakow only!)
+ * @param {String} place - clinic address, it can be anything at the moment because there are not clinics specified in the database
+ *
+ */
 
-  if (increasedNumber < 10) {
-    return `0${increasedNumber}`;
-  } else {
-    return increasedNumber;
-  }
-};
-
-function isWeekend(date) {
-  return date.getDay() === 6 || date.getDay() === 0;
-}
-
-function getNextMonday(date) {
-  const dateCopy = new Date(date.getTime());
-
-  const nextMonday = new Date(
-    dateCopy.setDate(
-      dateCopy.getDate() + ((7 - dateCopy.getDay() + 1) % 7 || 7)
-    )
-  );
-
-  return nextMonday;
-}
-
-// !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-// JUMPING TO NEXT MONDAY DOESN't WORK IF IT NEEDS TO JUMP TO NEXT WEEK
-// FIX IT LATER !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-
-// pick start date
-// numOfDays should be less or equal 5
-// max numOfAppos should be less than 9
-export const fillWithSingleAppoSet = async (
+const fillWithSingleAppoSet = async (
   whichMonday,
   numOfWeeks,
   numOfDays,
@@ -87,13 +68,6 @@ export const fillWithSingleAppoSet = async (
     currentDate = getNextMonday(currentDate);
   }
 };
-////////////////////////////////////////////////////////////
-
-// P1 NOW !!!!!!!!!!!!!!!!!!!!!!!!!!
-// BUILD BIG FUNCTION THAT USES ABOVE TO FILL EVERYTHING AHEAD OF 2/3 months!!
-//
-
-////////////////////////////////////////////////////////////
 
 export const fillAvailableAppos = async () => {
   await fillWithSingleAppoSet(
