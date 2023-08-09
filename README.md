@@ -2,9 +2,7 @@
 
 ![Application logo](images/logo-mediHome-big.svg)
 
-mediHome is a clinic desktop app that allows users to book medical appointments. It was build using React, Firebase, Sass and Vite.
-
-You can find a demo [here](https://medihome111.netlify.app/#/portal). _Currently you are unable to log in, I am working on temporary accounts generation, stay tunned._
+mediHome is a clinic desktop app that allows users to book medical appointments. It was build using React, Firebase, Sass and Vite. You can find a demo [here](https://medihome111.netlify.app/#/portal). _Currently you are unable to log in, I am working on temporary accounts generation, stay tunned._
 
 ![Screenshot of application main view](images/dashboard_preview_scr.png)
 
@@ -60,17 +58,17 @@ npm run dev
 
    You can open the browser to console to check flying console.logs. This is a sign that appointments are being generated in your database. If console goes silent it means all appointments were created. You can comment functions back (to avoid creating database again).
 
-   [!WARNING]
-   Don't refresh the preview when above functions are working. They create whole database structure and insert all predefined appointments to the server (console logs inform about creating new appointments).
+   > [!WARNING]
+   > Don't refresh the preview when above functions are working. They create whole database structure and insert all predefined appointments to the server (console logs inform about creating new appointments).
 
-   [!WARNING]
-   If any error appears or you interrupted the database creation, shut down the development preview, delete all collections in your database (directly on your Firestore account). Example user also needs to be deleted (authentication tab on your Firebase console). Once this is done, you can run functions again.
+   > [!WARNING]
+   > If any error appears or you interrupted the database creation, shut down the development preview, delete all collections in your database (directly on your Firestore account). Example user also needs to be deleted (authentication tab on your Firebase console). Once this is done, you can run functions again.
 
-[!NOTE]
-If you want to customize appointments that will be generated, you can go to **fillAvalailableAppos.js** and learn how the **fillWithSingleAppoSet** function works. It creates sets of similar appointments on the server (@params described on top of function declaration). The function is then used multiple times in function **fillAvailableAppos** that's declared below in the same file, you can customize function exectuions there.
+   > [!NOTE]
+   > If you want to customize appointments that will be generated, you can go to **fillAvalailableAppos.js** and learn how the **fillWithSingleAppoSet** function works. It creates sets of similar appointments on the server (@params described on top of function declaration). The function is then used multiple times in function **fillAvailableAppos** that's declared below in the same file, you can customize function exectuions there.
 
-[!NOTE]
-For the moment database creates appointments for 2023 only, if it's 2024 already and there are no fresh appointments, feel free to adjust **fillAvailableAppos.js** and **createDatabase.js** accordingly.
+   > [!NOTE]
+   > For the moment database creates appointments for 2023 only, if it's 2024 already and there are no fresh appointments, feel free to adjust **fillAvailableAppos.js** and **createDatabase.js** accordingly.
 
 6. Project uses React HashRouter, you need to add **/#/portal** to localhost link in the browser (e.g. _http://localhost:5173/#/portal/_). When you go to this adress you should see login screen. Above functions have created example user in your database. Default login is: "mat.marco@example.com", password is: "321medi".
 
