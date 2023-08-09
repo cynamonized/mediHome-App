@@ -1,8 +1,8 @@
 # mediHome-App
 
-![Application logo](images/logo - mediHome - big.svg)
+![Application logo](images/logo-mediHome-big.svg)
 
-mediHome is a clinic desktop app that allows users to book medical appointments. You can find a demo [here](https://medihome111.netlify.app/#/portal).
+mediHome is a clinic desktop app that allows users to book medical appointments. You can find a demo [here](https://medihome111.netlify.app/#/portal). _Currently you are unable to log in, I am working on temporary accounts generation, stay tunned._
 
 ![Screenshot of application main view](images/dashboard_preview_scr.png)
 
