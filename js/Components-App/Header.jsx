@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from "react";
-import { getAuth, signOut } from "firebase/auth";
+import { signOut } from "firebase/auth";
 import { useNavigate } from "react-router-dom";
 import "../../scss/main.scss";
-import { fireApp, auth } from "../config/firestore";
+import { auth } from "../config/firestore";
 import { getProfileInfo } from "../APICommunication/getProfileInfo";
 import { TertiaryButton } from "../Utilities/Buttons";
 import LogoTop from "../../images/logo-mediHome-small.svg";
@@ -15,8 +15,6 @@ export const Header = ({ setCurrentUser, currentUserUID }) => {
 
   useEffect(() => {
     getProfileInfo(currentUserUID, setProfileInfo);
-
-    // document.body.addEventListener("click", closePopUp);
   }, []);
 
   const closePopUp = (e) => {

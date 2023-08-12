@@ -1,6 +1,7 @@
 import React from "react";
 import "../../scss/main.scss";
 import { MainButton } from "../Utilities/Buttons";
+import LogoWhite from "../../logo-mediHome-white.svg";
 
 export const Footer = () => {
   return (
@@ -8,11 +9,7 @@ export const Footer = () => {
       <div className="container container-footer">
         <div className="footer__top-part">
           <div className="footer__first-column-logo">
-            <img
-              src="/images/logo-mediHome-white.svg"
-              alt=""
-              className="first-column-logo__logo"
-            />
+            <img src={LogoWhite} alt="" className="first-column-logo__logo" />
             <p className="footer__text">
               Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec
               libero sapien, volutpat sed leo ac, dictum placerat ante. In porta
