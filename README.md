@@ -1,6 +1,7 @@
 # mediHome-App
 
 ![Application logo](images/logo-mediHome-small.svg | width=400)
+<img src="/images/logo-mediHome-small.svg" width="400"/>
 
 mediHome is a clinic desktop app that allows users to book medical appointments. It was build using React, Firebase, Sass and Vite. You can find a demo [here](https://medihome111.netlify.app/#/portal). Please hover over the icon next the LOG IN button to get email and password of demo user.
 ![Login screen preview screenshot](images/login.png)
