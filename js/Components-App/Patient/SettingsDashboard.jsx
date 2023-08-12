@@ -293,7 +293,9 @@ const SettingsBody = ({ currentUserUID }) => {
             </div>
 
             <div className="body__password-column">
-              <h4>Update password:</h4>
+              <div className="tooltip__head">
+                <h4 className="tooltip-near">Update password:</h4>
+              </div>
               <label className="form-header" htmlFor="newPassword">
                 New password
               </label>
