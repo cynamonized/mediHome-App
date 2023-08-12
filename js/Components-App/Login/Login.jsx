@@ -77,7 +77,12 @@ export const Login = () => {
 
           <div className="form__bottom-section">
             <MainButton wide={false}>Log in</MainButton>
-            {/* To insert demo tooltip here */}
+            <ToolTip icon={"login"} isBig={true}>
+              This is a demo build of the application. <br />
+              If you wish to test it, please use test user account below: <br />
+              <b>Email: </b>marc.marco@example.com <br />
+              <b>Password: </b>321medihome
+            </ToolTip>
           </div>
 
           {wrongPassword && (
