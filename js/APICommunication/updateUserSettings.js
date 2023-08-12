@@ -37,7 +37,6 @@ export const updateUserSettingsAndRefresh = async (
 };
 
 const updateThisUserPassword = async (newPassword, passwordFailureCallack) => {
-  // const auth = getAuth();
   const user = auth.currentUser;
 
   try {

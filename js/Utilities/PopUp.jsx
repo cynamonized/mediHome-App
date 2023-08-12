@@ -142,10 +142,9 @@ export const PopUpTiny = () => {
   );
 };
 
-export const ToolTip = ({ children }) => {
+export const ToolTip = ({ children, isBig, icon }) => {
   const [isHovering, setIsHovering] = useState(false);
   const [fadingIn, setFadingIn] = useState(false);
-  const [fadingOut, setFadingOut] = useState(false);
 
   const handleMouseOver = () => {
     setFadingIn(true);
@@ -154,27 +153,46 @@ export const ToolTip = ({ children }) => {
 
   const handleMouseOut = async () => {
     const result = await fadingOutPromise();
-    setIsHovering(false);
   };
-  // (!!!!!!!!!!!)
-  // To be replaced with CSS Transition (1)
-  // (!!!!!!!!!!!)
+
+  const togglePopUp = () => {
+    if (isHovering) {
+      fadingOutPromise();
+      return null;
+    }
+
+    handleMouseOver();
+  };
 
   const fadingOutPromise = () => {
+    setFadingIn(false);
     return new Promise((resolve, reject) => {
       setTimeout(() => {
-        setFadingIn(false);
-      }, 100);
+        setIsHovering(false);
+      }, 200);
     });
   };
 
   return (
     <div
-      className="tooltip"
+      className={isBig == false ? "tooltip " : "tooltip tooltip-big"}
       onMouseOver={handleMouseOver}
-      onMouseOut={handleMouseOut}
+      onMouseLeave={handleMouseOut}
+      onClick={togglePopUp}
     >
-      <span className="material-icons">info</span>
+      {(() => {
+        switch (icon) {
+          case "info":
+            return <span className="material-icons">info</span>;
+          case "login":
+            return <span className="material-icons">login</span>;
+          case "error":
+            return <span className="material-icons">warning</span>;
+          default:
+            return null;
+        }
+      })()}
+
       {isHovering && (
         <div
           className={

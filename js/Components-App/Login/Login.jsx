@@ -9,6 +9,7 @@ import LogoSmall1 from "../../../images/logo-mediCare.svg";
 import LogoSmall2 from "../../../images/logo-mediDent.svg";
 import LogoSmall3 from "../../../images/logo-mediHospital.svg";
 import LogoSmall4 from "../../../images/logo-mediPharmacy.svg";
+import { ToolTip } from "../../Utilities/PopUp";
 
 export const Login = () => {
   const [email, setEmail] = useState("");
@@ -24,7 +25,6 @@ export const Login = () => {
     setPassword(target.value);
   };
 
-  /////////////////////////////////////////
   const submitLogin = async (e) => {
     e.preventDefault();
     signInWithEmailAndPassword(auth, email, password)
@@ -41,7 +41,6 @@ export const Login = () => {
         console.log(errorMessage);
       });
   };
-  ////////////////////////////////////////////
 
   return (
     <section className="login-screen">
@@ -75,14 +74,12 @@ export const Login = () => {
             onChange={passwordUpdate}
             placeholder="Password"
           />
-          <MainButton
-            wide={false}
-            // callbackAction={(e) => {
-            //   submitLogin(e);
-            // }}
-          >
-            Log in
-          </MainButton>
+
+          <div className="form__bottom-section">
+            <MainButton wide={false}>Log in</MainButton>
+            {/* To insert demo tooltip here */}
+          </div>
+
           {wrongPassword && (
             <p className="validaiton-warning--bottom">
               Email or password is wrong.

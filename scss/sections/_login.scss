@@ -18,6 +18,11 @@
 
     .left-column__form {
       margin-bottom: auto;
+
+      .form__bottom-section {
+        display: flex;
+        justify-content: flex-start;
+      }
     }
   }
 

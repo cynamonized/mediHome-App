@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
 import { DashboardHeaderBig } from "./DashboardLittleComps";
 import { MainButton } from "../../Utilities/Buttons";
 import { ToolTip, SimpleErrorPopUp } from "../../Utilities/PopUp";
@@ -7,10 +6,8 @@ import { getUserSettings } from "../../APICommunication/getUserSettings";
 import { updateUserSettingsAndRefresh } from "../../APICommunication/updateUserSettings";
 import {
   LoaderCircleSmall,
-  ActionCompleted,
   ActionCompletedSmall,
 } from "../../Utilities/LoaderCircle";
-import { DateTime } from "luxon";
 import { fullDateFromSeconds } from "../../Functions/convertTime";
 
 export const SettingsDashboard = ({ currentUserUID }) => {
@@ -27,7 +24,7 @@ export const SettingsDashboard = ({ currentUserUID }) => {
 const SettingsBody = ({ currentUserUID }) => {
   const [userObject, setUserObject] = useState(null);
 
-  // Formas states
+  // Forms states
   const [street, setStreet] = useState("");
   const [apartment, setApartment] = useState("");
   const [postCode, setPostCode] = useState("");
@@ -39,23 +36,11 @@ const SettingsBody = ({ currentUserUID }) => {
   const [newPassword, setNewPassword] = useState("");
   const [newPasswordConfrim, setNewPasswordConfirm] = useState("");
 
+  // Loadings
   const [wrongPassword, setWrongPassword] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
   const [dataLoadingFailure, setDataLoadingFailure] = useState(false);
   const [updatingCompleted, setUpdatingCompleted] = useState(false);
-
-  // LEGACY
-  const [userData, setUserData] = useState({
-    street,
-    apartment,
-    postCode,
-    city,
-    country,
-    email,
-    phone,
-    birthDate,
-    newPassword,
-  });
 
   useEffect(() => {
     if (!userObject) {
@@ -248,6 +233,8 @@ const SettingsBody = ({ currentUserUID }) => {
                   children={
                     "This is important data, if you wish to change it, please contact our hot line."
                   }
+                  icon={"info"}
+                  isBig={false}
                 />
                 <h4 className="tooltip-near">Contact information:</h4>
               </div>
@@ -286,6 +273,8 @@ const SettingsBody = ({ currentUserUID }) => {
                     children={
                       "This is important data, if you wish to change it, please contact our hot line."
                     }
+                    icon={"info"}
+                    isBig={false}
                   />
                   <h4 className="tooltip-near">Date of birth:</h4>
                 </div>

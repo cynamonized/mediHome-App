@@ -107,13 +107,42 @@
   }
 
   .tooltip__fade-in {
-    animation: tooltip-fadein 0.1s;
+    animation: tooltip-fadein 0.2s;
     animation-fill-mode: forwards;
   }
 
   .tooltip__fade-out {
-    animation: tooltip-fadeout 0.1s;
+    animation: tooltip-fadeout 0.2s;
     animation-fill-mode: forwards;
+  }
+}
+
+.tooltip-big {
+  margin-left: 25px;
+  margin-right: 0;
+  background-color: $color-main-pink-dark;
+  border-radius: 50%;
+  @include flex(center, center);
+  aspect-ratio: 1/1;
+  height: 55px;
+  animation: pulse-animation 2s infinite;
+
+  b {
+    font-weight: 600;
+  }
+
+  span {
+    display: block;
+    aspect-ratio: 1/1;
+    font-size: 1.4rem;
+    color: $color-main-white;
+  }
+
+  .tooltip__hover-message {
+    line-height: 1.4rem;
+    padding: 20px;
+    top: 20px;
+    left: 70px;
   }
 }
 
@@ -156,5 +185,14 @@
 
   100% {
     opacity: 0;
+  }
+}
+
+@keyframes pulse-animation {
+  0% {
+    box-shadow: 0 0 0 0px rgba(0, 0, 0, 0.2);
+  }
+  100% {
+    box-shadow: 0 0 0 20px rgba(0, 0, 0, 0);
   }
 }
