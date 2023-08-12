@@ -153,6 +153,7 @@
 .tooltip__head {
   @include flex(flex-start, center);
   margin-bottom: 30px;
+  height: 25px;
 }
 
 .validaiton-warning {

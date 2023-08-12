@@ -18,6 +18,11 @@ h3 {
 h3.login-screen {
   font-weight: 400;
   display: block;
+
+  @include small_desktop {
+    font-size: 1.6rem;
+    line-height: 1.9rem;
+  }
 }
 
 h4 {

@@ -145,212 +145,216 @@ const SettingsBody = ({ currentUserUID }) => {
     );
   }
 
+  if (isLoading) {
+    return (
+      <form className="user-settings__body" onSubmit={updateUserDataOnServer}>
+        <LoaderCircleSmall />
+      </form>
+    );
+  }
+
   return (
     <form className="user-settings__body" onSubmit={updateUserDataOnServer}>
-      {isLoading == true ? (
-        <LoaderCircleSmall />
-      ) : (
-        <>
-          {" "}
-          <div className="body__forms">
-            <div className="body__adrress-column">
-              <h4>Your address:</h4>
-              <label className="form-header" htmlFor="street-address">
-                Street name
-              </label>
-              <input
-                type="text"
-                className="form-write form-write--long-form"
-                id="street-address"
-                name="street"
-                required
-                value={street}
-                onChange={(e) => {
-                  updateInput(e, setStreet);
-                }}
-              />
-              <label className="form-header" htmlFor="apartment">
-                Apartment number:
-              </label>
-              <input
-                type="text"
-                className="form-write form-write--long-form"
-                id="apartment-number"
-                name="apartment"
-                required
-                value={apartment}
-                onChange={(e) => {
-                  updateInput(e, setApartment);
-                }}
-              />
-              <label className="form-header" htmlFor="postCode">
-                Post-code
-              </label>
-              <input
-                type="text"
-                className="form-write form-write--long-form"
-                id="postal-code"
-                name="postCode"
-                required
-                value={postCode}
-                onChange={(e) => {
-                  updateInput(e, setPostCode);
-                }}
-              />
-              <label className="form-header" htmlFor="city">
-                City
-              </label>
-              <input
-                type="text"
-                className="form-write form-write--long-form"
-                id="city"
-                name="city"
-                required
-                value={city}
-                onChange={(e) => {
-                  updateInput(e, setCity);
-                }}
-              />
-              <label className="form-header" htmlFor="country">
-                Country
-              </label>
-              <input
-                type="text"
-                className="form-write form-write--long-form"
-                id="country"
-                name="country"
-                required
-                value={country}
-                onChange={(e) => {
-                  updateInput(e, setCountry);
-                }}
-              />
-            </div>
-
-            <div className="body__contact-birth-columnn">
-              <div className="tooltip__head">
-                <ToolTip
-                  children={
-                    "This is important data, if you wish to change it, please contact our hot line."
-                  }
-                  icon={"info"}
-                  isBig={false}
-                />
-                <h4 className="tooltip-near">Contact information:</h4>
-              </div>
-              <label className="form-header" htmlFor="email">
-                Email
-              </label>
-              <input
-                type="email"
-                className="form-write form-write--long-form"
-                id="email"
-                name="email"
-                disabled
-                value={email}
-                onChange={(e) => {
-                  updateInput(e, setEmail);
-                }}
-              />
-              <label className="form-header" htmlFor="phone">
-                Phone number
-              </label>
-              <input
-                type="number"
-                className="form-write form-write--long-form"
-                id="phone-number"
-                name="phone"
-                disabled
-                value={phone}
-                onChange={(e) => {
-                  updateInput(e, setPhone);
-                }}
-              />
-
-              <div className="contact-birth-column__birth">
-                <div className="tooltip__head">
-                  <ToolTip
-                    children={
-                      "This is important data, if you wish to change it, please contact our hot line."
-                    }
-                    icon={"info"}
-                    isBig={false}
-                  />
-                  <h4 className="tooltip-near">Date of birth:</h4>
-                </div>
-                <input
-                  type="text"
-                  className="form-write form-write--long-form"
-                  id="birthDate"
-                  name="birthDate"
-                  disabled
-                  value={birthDate}
-                  onChange={(e) => {
-                    updateInput(e, setBirthDate);
-                  }}
-                />
-              </div>
-            </div>
-
-            <div className="body__password-column">
-              <div className="tooltip__head">
-                <h4 className="tooltip-near">Update password:</h4>
-              </div>
-              <label className="form-header" htmlFor="newPassword">
-                New password
-              </label>
-              <input
-                type="password"
-                className="form-write form-write--long-form"
-                id="newPassword"
-                name="newPassword"
-                required
-                placeholder="Write new password here"
-                value={newPassword}
-                onChange={(e) => {
-                  updateInput(e, setNewPassword);
-                }}
-              />
-              <label className="form-header" htmlFor="newPaswordConfirm">
-                Confirm new password
-              </label>
-              <input
-                type="password"
-                className="form-write form-write--long-form"
-                id="newPaswordConfirm"
-                name="newPaswordConfirm"
-                required
-                placeholder="Write new password again"
-                value={newPasswordConfrim}
-                onChange={(e) => {
-                  updateInput(e, setNewPasswordConfirm);
-                }}
-              />
-
-              {newPassword != "" &&
-                newPasswordConfrim != "" &&
-                newPassword != newPasswordConfrim && (
-                  <p className="validaiton-warning--bottom">
-                    Two passwords do not match.
-                  </p>
-                )}
-
-              {newPassword != "" &&
-                newPassword == newPasswordConfrim &&
-                newPassword.length < 6 && (
-                  <p className="validaiton-warning--bottom">
-                    Password needs to have atleast 6 characters.
-                  </p>
-                )}
-            </div>
+      <div className="body__forms">
+        <div className="body__adrress-column">
+          <div className="tooltip__head">
+            <h4 className="tooltip-near">Your address:</h4>
           </div>
-          <div className="body__button-place">
-            <MainButton callbackAction={updateUserDataOnServer}>
-              Update information
-            </MainButton>
+
+          <label className="form-header" htmlFor="street-address">
+            Street name
+          </label>
+          <input
+            type="text"
+            className="form-write form-write--long-form"
+            id="street-address"
+            name="street"
+            required
+            value={street}
+            onChange={(e) => {
+              updateInput(e, setStreet);
+            }}
+          />
+          <label className="form-header" htmlFor="apartment">
+            Apartment number:
+          </label>
+          <input
+            type="text"
+            className="form-write form-write--long-form"
+            id="apartment-number"
+            name="apartment"
+            required
+            value={apartment}
+            onChange={(e) => {
+              updateInput(e, setApartment);
+            }}
+          />
+          <label className="form-header" htmlFor="postCode">
+            Post-code
+          </label>
+          <input
+            type="text"
+            className="form-write form-write--long-form"
+            id="postal-code"
+            name="postCode"
+            required
+            value={postCode}
+            onChange={(e) => {
+              updateInput(e, setPostCode);
+            }}
+          />
+          <label className="form-header" htmlFor="city">
+            City
+          </label>
+          <input
+            type="text"
+            className="form-write form-write--long-form"
+            id="city"
+            name="city"
+            required
+            value={city}
+            onChange={(e) => {
+              updateInput(e, setCity);
+            }}
+          />
+          <label className="form-header" htmlFor="country">
+            Country
+          </label>
+          <input
+            type="text"
+            className="form-write form-write--long-form"
+            id="country"
+            name="country"
+            required
+            value={country}
+            onChange={(e) => {
+              updateInput(e, setCountry);
+            }}
+          />
+        </div>
+
+        <div className="body__contact-birth-columnn">
+          <div className="tooltip__head">
+            <ToolTip
+              children={
+                "This is important data, if you wish to change it, please contact our hot line."
+              }
+              icon={"info"}
+              isBig={false}
+            />
+            <h4 className="tooltip-near">Contact information:</h4>
           </div>
-        </>
-      )}
+          <label className="form-header" htmlFor="email">
+            Email
+          </label>
+          <input
+            type="email"
+            className="form-write form-write--long-form"
+            id="email"
+            name="email"
+            disabled
+            value={email}
+            onChange={(e) => {
+              updateInput(e, setEmail);
+            }}
+          />
+          <label className="form-header" htmlFor="phone">
+            Phone number
+          </label>
+          <input
+            type="number"
+            className="form-write form-write--long-form"
+            id="phone-number"
+            name="phone"
+            disabled
+            value={phone}
+            onChange={(e) => {
+              updateInput(e, setPhone);
+            }}
+          />
+
+          <div className="contact-birth-column__birth">
+            <div className="tooltip__head">
+              <ToolTip
+                children={
+                  "This is important data, if you wish to change it, please contact our hot line."
+                }
+                icon={"info"}
+                isBig={false}
+              />
+              <h4 className="tooltip-near">Date of birth:</h4>
+            </div>
+            <input
+              type="text"
+              className="form-write form-write--long-form"
+              id="birthDate"
+              name="birthDate"
+              disabled
+              value={birthDate}
+              onChange={(e) => {
+                updateInput(e, setBirthDate);
+              }}
+            />
+          </div>
+        </div>
+
+        <div className="body__password-column">
+          <div className="tooltip__head">
+            <h4 className="tooltip-near">Update password:</h4>
+          </div>
+          <label className="form-header" htmlFor="newPassword">
+            New password
+          </label>
+          <input
+            type="password"
+            className="form-write form-write--long-form"
+            id="newPassword"
+            name="newPassword"
+            required
+            placeholder="Write new password here"
+            value={newPassword}
+            onChange={(e) => {
+              updateInput(e, setNewPassword);
+            }}
+          />
+          <label className="form-header" htmlFor="newPaswordConfirm">
+            Confirm new password
+          </label>
+          <input
+            type="password"
+            className="form-write form-write--long-form"
+            id="newPaswordConfirm"
+            name="newPaswordConfirm"
+            required
+            placeholder="Write new password again"
+            value={newPasswordConfrim}
+            onChange={(e) => {
+              updateInput(e, setNewPasswordConfirm);
+            }}
+          />
+
+          {newPassword != "" &&
+            newPasswordConfrim != "" &&
+            newPassword != newPasswordConfrim && (
+              <p className="validaiton-warning--bottom">
+                Two passwords do not match.
+              </p>
+            )}
+
+          {newPassword != "" &&
+            newPassword == newPasswordConfrim &&
+            newPassword.length < 6 && (
+              <p className="validaiton-warning--bottom">
+                Password needs to have atleast 6 characters.
+              </p>
+            )}
+        </div>
+      </div>
+      <div className="body__button-place">
+        <MainButton callbackAction={updateUserDataOnServer}>
+          Update information
+        </MainButton>
+      </div>
     </form>
   );
 };

@@ -59,11 +59,219 @@
           display: grid;
           grid-template-columns: 1fr 1fr;
           gap: 35px;
+
+          .logos__single-logo {
+            height: 50px;
+          }
         }
       }
 
       .bottom-section__main-image {
         border-radius: 0 216px;
+        max-width: 100%;
+      }
+    }
+  }
+
+  @include medium_desktop {
+    .login-screen__right-column {
+      .right-column__top-callout {
+        button {
+          min-width: 207px;
+        }
+        .top-callout__description {
+        }
+      }
+
+      .right-column__bottom-section {
+        .bottom-section__health-packages {
+          border-left: none;
+          .health-packages__description {
+          }
+
+          .health-packages__logos {
+            .logos__single-logo {
+            }
+          }
+        }
+
+        .bottom-section__main-image {
+          border-radius: 0 216px 0 0;
+        }
+      }
+    }
+  }
+
+  @include small_desktop {
+    grid-template-columns: 4fr 6fr;
+
+    .login-screen__left-column {
+      .left-column__logo {
+      }
+
+      .login-screen {
+      }
+
+      .left-column__form {
+        .form__bottom-section {
+        }
+      }
+    }
+
+    .login-screen__right-column {
+      .right-column__top-callout {
+        button {
+          min-width: 207px;
+        }
+        .top-callout__description {
+        }
+      }
+
+      .right-column__bottom-section {
+        .bottom-section__health-packages {
+          .health-packages__description {
+          }
+
+          .health-packages__logos {
+            .logos__single-logo {
+            }
+          }
+        }
+
+        .bottom-section__main-image {
+        }
+      }
+    }
+  }
+
+  @include smallest_desktop {
+    // need any transition between sizes above and below?
+  }
+
+  @include tablet {
+    grid-template-columns: 1fr;
+
+    .login-screen__left-column {
+      height: inherit;
+      padding: 10%;
+      .left-column__logo {
+      }
+
+      .login-screen {
+      }
+
+      .left-column__form {
+        .form__bottom-section {
+        }
+      }
+
+      button {
+        margin: 50px 0;
+        width: 100%;
+      }
+    }
+
+    .login-screen__right-column {
+      // margin: 0;
+      // padding-top: 50px;
+      box-sizing: border-box;
+      // padding: 75px;
+      align-items: flex-start;
+      // padding: 75px;
+      align-items: center;
+
+      .right-column__top-callout {
+        margin: 50px 0;
+        width: 80%;
+        // padding: 20px;
+        flex-direction: column;
+        align-items: flex-start;
+        padding: 0;
+        // margin: 0;
+        button {
+          width: 100%;
+        }
+        .top-callout__description {
+          margin: 30px 0;
+        }
+      }
+
+      .right-column__bottom-section {
+        .bottom-section__health-packages {
+          padding: 10%;
+          padding: 50px 0;
+          margin-left: auto;
+          margin-right: auto;
+          padding-top: 50px;
+          // padding: 0;
+          border-top: 1px solid $color-greys-light-2;
+          width: 80%;
+          // padding: 0;
+          .health-packages__description {
+            max-width: inherit;
+          }
+
+          .health-packages__logos {
+            @include flex(center, flex-start);
+            flex-direction: column;
+            .logos__single-logo {
+              // height: 80%;
+              // height: inherit;
+              // max-height: 80%;
+              // max-height: calc(50% - 35px);
+              // height: 50%;
+            }
+          }
+        }
+
+        .bottom-section__main-image {
+          border-radius: 0;
+        }
+      }
+    }
+  }
+
+  @include small_mobile {
+    .login-screen__left-column {
+      .left-column__logo {
+      }
+
+      .login-screen {
+      }
+
+      .left-column__form {
+        .form__bottom-section {
+        }
+      }
+
+      button {
+      }
+    }
+
+    .login-screen__right-column {
+      .right-column__top-callout {
+        button {
+        }
+        .top-callout__description {
+        }
+      }
+
+      .right-column__bottom-section {
+        .bottom-section__health-packages {
+          .health-packages__description {
+          }
+
+          .health-packages__logos {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+            .logos__single-logo {
+            }
+          }
+        }
+
+        .bottom-section__main-image {
+        }
       }
     }
   }
