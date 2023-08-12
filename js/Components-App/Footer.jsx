@@ -1,7 +1,7 @@
 import React from "react";
 import "../../scss/main.scss";
 import { MainButton } from "../Utilities/Buttons";
-import LogoWhite from "../../logo-mediHome-white.svg";
+import LogoWhite from "../../images/logo-mediHome-white.svg";
 
 export const Footer = () => {
   return (
