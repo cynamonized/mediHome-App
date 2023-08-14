@@ -16,7 +16,7 @@ import {
   apposNumberValidation,
 } from "./singleAppoSimpleOperations";
 
-//It intakes userID,
+//It intakes userID
 export const bookThisAppointment = async (
   currentUserUID,
   specialization,
