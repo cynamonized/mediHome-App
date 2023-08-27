@@ -22,12 +22,12 @@ export const updateUserSettingsAndRefresh = async (
       "personalData.address.country": `${userDataToUpdate.country}`,
     });
 
-    // if (ifPassword) {
-    //   const updatingPassword = await updateThisUserPassword(
-    //     newPassword,
-    //     updateFailureCallback
-    //   );
-    // }
+    if (ifPassword) {
+      const updatingPassword = await updateThisUserPassword(
+        newPassword,
+        updateFailureCallback
+      );
+    }
 
     successCallback();
   } catch (error) {
