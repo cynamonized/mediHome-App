@@ -4,8 +4,8 @@
 
   .login-screen__left-column {
     display: block;
-
-    height: 100%;
+    min-height: 800px;
+    height: 100vh;
     background-color: $color-greys-light-1;
     padding: 75px;
 
