@@ -43,10 +43,22 @@
     }
 
     .right-column__bottom-section {
+      // align-self: center;
+      // width: 500px;
+      // margin-left: auto;
+      // @include flex(flex-end, flex-end);
+      // flex-direction: column;
+      // align-self: flex-end;
+      // margin-left: auto;
+      @include flex(flex-start, flex-end);
+      flex-direction: column;
       .bottom-section__health-packages {
+        width: 100%;
+        // align-self: flex-start;
         padding: 10px 45px;
         margin-bottom: 50px;
         border-left: 1px solid $color-greys-light-2;
+        max-width: 80%;
         .health-packages__description {
           max-width: 480px;
           margin-bottom: 35px;
@@ -68,7 +80,8 @@
 
       .bottom-section__main-image {
         border-radius: 0 216px;
-        max-width: 100%;
+        // max-width: 100%;
+        width: 80%;
       }
     }
   }
@@ -121,6 +134,8 @@
       }
 
       .right-column__bottom-section {
+        margin-top: auto;
+        align-items: flex-start;
         .bottom-section__health-packages {
           .health-packages__description {
           }
@@ -132,6 +147,7 @@
         }
 
         .bottom-section__main-image {
+          margin-top: auto;
         }
       }
     }
@@ -155,12 +171,12 @@
 
       .left-column__form {
         .form__bottom-section {
-        }
-      }
+          margin: 50px 0;
 
-      button {
-        margin: 50px 0;
-        width: 100%;
+          button {
+            width: 100%;
+          }
+        }
       }
     }
 
@@ -219,6 +235,7 @@
 
         .bottom-section__main-image {
           border-radius: 0;
+          width: 100%;
         }
       }
     }
