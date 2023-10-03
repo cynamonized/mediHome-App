@@ -97,7 +97,7 @@ const DashboardPatientLeftPaneBody = ({ patientAppointments }) => {
             </p>
           </div>
         </div>
-        {/* {patientAppointments != null ? (
+        {patientAppointments != null ? (
           <ul className="appointments__appo-list">
             {currentData &&
               currentData.map((appo) => {
@@ -131,24 +131,8 @@ const DashboardPatientLeftPaneBody = ({ patientAppointments }) => {
               })}
           </ul>
         ) : (
-          // <PopUpTiny />
-          <Oval
-            height={40}
-            width={40}
-            color={colorMainPink}
-            secondaryColor={colorMainBlue}
-            wrapperStyle={{ margin: "auto" }}
-          />
-        )} */}
-        <Oval
-          height={60}
-          width={60}
-          color={colorMainPink}
-          secondaryColor={colorGreysMid1}
-          wrapperStyle={{ margin: "50px" }}
-        />
-        {/* HOW TO CENTER??? ATELAST HORIZONTALLY */}
-        {/* COLOR IS BAD */}
+          <PopUpTiny />
+        )}
       </div>
     </>
   );

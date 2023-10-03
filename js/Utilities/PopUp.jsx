@@ -6,6 +6,9 @@ import {
   DashboardHeaderWarning,
 } from "../Components-App/Patient/DashboardLittleComps";
 import { AppointmentDate, AppoDateFromSeconds } from "../Functions/convertTime";
+import { Oval } from "react-loader-spinner";
+import { GridLoader } from "react-spinners";
+import { colorMainPink } from "../Settings/cssVariables";
 
 export const PopUp = ({ actionProceed, closePopUp, chosenAppo, action }) => {
   return (
@@ -122,9 +125,16 @@ export const PopUpLoading = () => {
   return (
     <div className="pop-up">
       <div className="pop-up__loader">
-        <span className="material-icons loader__icon hourglass-animating">
+        {/* <span className="material-icons loader__icon hourglass-animating">
           hourglass_empty
-        </span>
+        </span> */}
+
+        <Oval
+          height={60}
+          width={60}
+          color={colorMainPink}
+          secondaryColor={`gray`}
+        />
       </div>
     </div>
   );
@@ -134,9 +144,16 @@ export const PopUpTiny = () => {
   return (
     <div className="pop-up--tiny">
       <div className="pop-up__loader">
-        <span className="material-icons loader__icon hourglass-animating">
+        {/* <span className="material-icons loader__icon hourglass-animating">
           hourglass_empty
-        </span>
+        </span> */}
+
+        <Oval
+          height={60}
+          width={60}
+          color={colorMainPink}
+          secondaryColor={`gray`}
+        />
       </div>
     </div>
   );
@@ -211,9 +228,17 @@ export const ToolTip = ({ children, isBig, icon }) => {
 export const LoaderCircle = () => {
   return (
     <div className="loader-circle container ">
-      <span className="material-icons popup-icon--big hourglass-animating">
+      {/* <span className="material-icons popup-icon--big hourglass-animating">
         hourglass_empty
-      </span>
+      </span> */}
+
+      <Oval
+        height={60}
+        width={60}
+        color={colorMainPink}
+        secondaryColor={`gray`}
+      />
+
       <p className="loader-circle__text">We are processing your request</p>
     </div>
   );

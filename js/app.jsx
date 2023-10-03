@@ -35,9 +35,9 @@ function App() {
   return (
     <>
       {currentUser === undefined ? (
-        // <LoaderCircleEmpty />
-        <GridLoader color={colorMainPink} />
+        <LoaderCircleEmpty />
       ) : (
+        // <GridLoader color={colorMainPink} />
         <HashRouter>
           <Routes>
             {currentUser ? (
