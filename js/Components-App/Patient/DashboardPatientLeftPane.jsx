@@ -8,6 +8,9 @@ import {
 import { PopUpTiny } from "../../Utilities/PopUp";
 import { AppoDateFromSeconds } from "../../Functions/convertTime";
 import { getUserAppointmentsMultiArray } from "../../APICommunication/getUserAppoinments";
+import { Oval } from "react-loader-spinner";
+import { colorMainPink } from "../../Settings/cssVariables";
+import { colorGreysMid1 } from "../../Settings/cssVariables";
 
 export const DashboarPatientLeftPane = ({ currentUserUID }) => {
   const [patientAppointments, setPatientAppointments] = useState(null);
@@ -94,7 +97,7 @@ const DashboardPatientLeftPaneBody = ({ patientAppointments }) => {
             </p>
           </div>
         </div>
-        {patientAppointments != null ? (
+        {/* {patientAppointments != null ? (
           <ul className="appointments__appo-list">
             {currentData &&
               currentData.map((appo) => {
@@ -128,8 +131,24 @@ const DashboardPatientLeftPaneBody = ({ patientAppointments }) => {
               })}
           </ul>
         ) : (
-          <PopUpTiny />
-        )}
+          // <PopUpTiny />
+          <Oval
+            height={40}
+            width={40}
+            color={colorMainPink}
+            secondaryColor={colorMainBlue}
+            wrapperStyle={{ margin: "auto" }}
+          />
+        )} */}
+        <Oval
+          height={60}
+          width={60}
+          color={colorMainPink}
+          secondaryColor={colorGreysMid1}
+          wrapperStyle={{ margin: "50px" }}
+        />
+        {/* HOW TO CENTER??? ATELAST HORIZONTALLY */}
+        {/* COLOR IS BAD */}
       </div>
     </>
   );

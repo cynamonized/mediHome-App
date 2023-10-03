@@ -14,6 +14,9 @@ import { LoaderCircleEmpty } from "./Utilities/LoaderCircle";
 import { authUserCheck } from "./APICommunication/authUserCheck";
 import { createDatabase } from "./config/buildDatabase/createDatabase";
 import { fillAvailableAppos } from "./config/buildDatabase/fillAvailableAppos";
+import { GridLoader } from "react-spinners";
+import { Oval } from "react-loader-spinner";
+import { colorMainPink } from "./Settings/cssVariables";
 
 function App() {
   const [currentUser, setCurrentUser] = useState(undefined);
@@ -21,7 +24,7 @@ function App() {
   useEffect(() => {
     authUserCheck(setCurrentUser);
 
-    // Use below only to generate entire server (!!)
+    // Use below only to generate entire database (!!)
     // It will work only if firestore.js file is set up properly
     // using env variables in .env file (instruction in .env file)
 
@@ -32,7 +35,8 @@ function App() {
   return (
     <>
       {currentUser === undefined ? (
-        <LoaderCircleEmpty />
+        // <LoaderCircleEmpty />
+        <GridLoader color={colorMainPink} />
       ) : (
         <HashRouter>
           <Routes>
