@@ -10,6 +10,10 @@ export const colorMainPink = getComputedStyle(
   document.documentElement
 ).getPropertyValue("--color-main-pink");
 
+export const colorMainPinkLight = getComputedStyle(
+  document.documentElement
+).getPropertyValue("--color-main-pink-light");
+
 export const colorGreysLight1 = getComputedStyle(
   document.documentElement
 ).getPropertyValue("--color-greys-light-1");

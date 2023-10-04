@@ -8,7 +8,7 @@ import {
 import { AppointmentDate, AppoDateFromSeconds } from "../Functions/convertTime";
 import { Oval } from "react-loader-spinner";
 import { GridLoader } from "react-spinners";
-import { colorMainPink } from "../Settings/cssVariables";
+import { colorMainPink, colorMainPinkLight } from "../Settings/cssVariables";
 
 export const PopUp = ({ actionProceed, closePopUp, chosenAppo, action }) => {
   return (
@@ -133,7 +133,7 @@ export const PopUpLoading = () => {
           height={60}
           width={60}
           color={colorMainPink}
-          secondaryColor={`gray`}
+          secondaryColor={colorMainPinkLight}
         />
       </div>
     </div>
@@ -152,7 +152,7 @@ export const PopUpTiny = () => {
           height={60}
           width={60}
           color={colorMainPink}
-          secondaryColor={`gray`}
+          secondaryColor={colorMainPinkLight}
         />
       </div>
     </div>
@@ -236,7 +236,7 @@ export const LoaderCircle = () => {
         height={60}
         width={60}
         color={colorMainPink}
-        secondaryColor={`gray`}
+        secondaryColor={colorMainPinkLight}
       />
 
       <p className="loader-circle__text">We are processing your request</p>
