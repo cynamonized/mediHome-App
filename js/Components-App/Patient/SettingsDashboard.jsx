@@ -301,13 +301,13 @@ const SettingsBody = ({ currentUserUID }) => {
         <div className="body__password-column">
           <div className="tooltip__head">
             {/* ADD DEMO TOOLTIP HERE */}
-            <ToolTip
+            {/* <ToolTip
               children={
                 "This is demo account, password change feature has beeen disabled."
               }
               icon={"info"}
               isBig={false}
-            />
+            /> */}
             <h4 className="tooltip-near">Update password:</h4>
           </div>
           <label className="form-header" htmlFor="newPassword">
@@ -324,7 +324,7 @@ const SettingsBody = ({ currentUserUID }) => {
             onChange={(e) => {
               updateInput(e, setNewPassword);
             }}
-            disabled
+            // disabled
           />
           <label className="form-header" htmlFor="newPaswordConfirm">
             Confirm new password
@@ -340,7 +340,7 @@ const SettingsBody = ({ currentUserUID }) => {
             onChange={(e) => {
               updateInput(e, setNewPasswordConfirm);
             }}
-            disabled
+            // disabled
           />
 
           {newPassword != "" &&
