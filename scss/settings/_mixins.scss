@@ -1,4 +1,4 @@
-@import "/scss/settings/_variables";
+@import "/scss/settings/_variables.module.scss";
 
 @mixin medium_desktop {
   @media (max-width: 1385px) {

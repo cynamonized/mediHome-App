@@ -1,3 +1,9 @@
+import { randomText } from "../../scss/settings/_variables.module.scss";
+
+// IT WORKS!!!
+
+export const testExport = randomText;
+
 export const colorMainBlue = getComputedStyle(
   document.documentElement
 ).getPropertyValue("--color-main-blue");
