@@ -17,9 +17,7 @@ import { fillAvailableAppos } from "./config/buildDatabase/fillAvailableAppos";
 import { GridLoader } from "react-spinners";
 import { Oval } from "react-loader-spinner";
 import { colorMainPink } from "./Settings/cssVariables";
-import { testExport } from "./Settings/cssVariables";
-
-console.log("testExport is: ", testExport);
+// import { testExport } from "./Settings/cssVariables";
 
 function App() {
   const [currentUser, setCurrentUser] = useState(undefined);

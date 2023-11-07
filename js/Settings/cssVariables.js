@@ -1,37 +1,35 @@
-import { randomText } from "../../scss/settings/_variables.module.scss";
+import {
+  mainPink,
+  mainPinkLight,
+  mainPinkDark,
+  mainBlue,
+  mainBlueLight,
+  greysLight1,
+  greysLight2,
+  greysMid1,
+  mainText,
+} from "../../scss/settings/_variables.module.scss";
 
-// IT WORKS!!!
+export const colorMainBlue = mainBlue;
 
-export const testExport = randomText;
+export const colorMainBlueLight = mainBlueLight;
 
-export const colorMainBlue = getComputedStyle(
-  document.documentElement
-).getPropertyValue("--color-main-blue");
+export const colorMainPink = mainPink;
 
-export const colorMainBlueLight = getComputedStyle(
-  document.documentElement
-).getPropertyValue("--color-main-blue-light");
+export const colorMainPinkLight = mainPinkLight;
 
-export const colorMainPink = getComputedStyle(
-  document.documentElement
-).getPropertyValue("--color-main-pink");
+export const colorMainPinkDark = mainPinkDark;
 
-export const colorMainPinkLight = getComputedStyle(
-  document.documentElement
-).getPropertyValue("--color-main-pink-light");
+export const colorGreysLight1 = greysLight1;
 
-export const colorGreysLight1 = getComputedStyle(
-  document.documentElement
-).getPropertyValue("--color-greys-light-1");
+export const colorGreysLight2 = greysLight2;
 
-export const colorGreysLight2 = getComputedStyle(
-  document.documentElement
-).getPropertyValue("--color-greys-light-2");
+export const colorGreysMid1 = greysMid1;
 
-export const colorGreysMid1 = getComputedStyle(
-  document.documentElement
-).getPropertyValue("--color-greys-mid-1");
+export const colorMainText = mainText;
 
-export const colorMainText = getComputedStyle(
-  document.documentElement
-).getPropertyValue("--color-main-text");
+// LEGACY
+
+// export const colorMainBlue = getComputedStyle(
+//   document.documentElement
+// ).getPropertyValue("--color-main-blue");

@@ -58,5 +58,13 @@ $border-radius: 30px;
 $margin-inside: 30px;
 
 :export {
-  randomText: $color-main-pink;
+  mainPink: $color-main-pink;
+  mainPinkLight: $color-main-pink-light;
+  mainPinkDark: $color-main-pink-dark;
+  mainBlue: $color-main-blue;
+  mainBlueLight: $color-main-blue-light;
+  greysLight1: $color-greys-light-1;
+  greysLight2: $color-greys-light-2;
+  greysMid1: $color-greys-mid-1;
+  mainText: $color-main-text;
 }
