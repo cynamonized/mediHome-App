@@ -35,6 +35,8 @@ Link to [Doctor Dashboard Design](https://xd.adobe.com/view/89d1a1ea-2062-480c-a
 
 Link to [Admin Dashboard Design](https://xd.adobe.com/view/0bba04bf-2fe9-4e81-bcbf-cbb93090a705-5ee9/)
 
+Link to [Landing Page Design](https://xd.adobe.com/view/091cb395-7e90-49fd-9c82-9f20a87f103c-5c4f/)
+
 ## How to run this application on your own
 
 To run the application on your own, you need to follow couple of steps. All steps are mandatory for the application to work:
