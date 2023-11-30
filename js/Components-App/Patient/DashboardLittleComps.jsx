@@ -1,6 +1,7 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import "../../../scss/main.scss";
 import { Link } from "react-router-dom";
+import { animated, useSpring, useSprings } from "@react-spring/web";
 
 export const DashboardHeaderSmall = ({ title, whiteElements }) => {
   return (
@@ -115,12 +116,33 @@ export const DashboardBlockConsultant = ({ title }) => {
 };
 
 export const DashboardBlockBlog = ({ title, link, blogContent }) => {
+  const [isImageLoaded, setIsImageLoaded] = useState(false);
+
+  const onLoadHandle = () => {
+    setIsImageLoaded(true);
+  };
+
+  const props = useSpring({
+    from: { opacity: 0 },
+    to: { opacity: isImageLoaded ? 1 : 0 },
+  });
+
   return (
     <>
       <div className="dashboard__block dashboard__block-small--blog">
         <DashboardHeaderSmall title={title} whiteElements={true} />
         <div className="block-small__body--blog">
-          <img src={`${blogContent.articleImage}`} className="body__image" />
+          <animated.img
+            src={`${blogContent.articleImage}`}
+            onLoad={onLoadHandle}
+            className="body__image"
+            style={{
+              height: isImageLoaded ? "auto" : "99px",
+              width: isImageLoaded ? "auto" : "310px",
+              color: isImageLoaded ? "none" : "red",
+              ...props,
+            }}
+          />
           <p className="body-blog__title">{blogContent.articleTitle}</p>
           <p className="body-blog__description">{blogContent.articleBody}</p>
         </div>
