@@ -8,6 +8,14 @@ header {
     .container-header__main-logo {
       cursor: pointer;
       max-width: 210px;
+
+      @include mobile {
+        max-width: 180px;
+      }
+
+      @include small_mobile {
+        max-width: 150px;
+      }
     }
 
     .header__right-column {
@@ -19,6 +27,13 @@ header {
         font-size: 1.625rem;
         color: $color-main-blue;
         font-weight: 500;
+        @include mobile {
+          font-size: 1.2rem;
+        }
+
+        @include small_mobile {
+          display: none;
+        }
       }
 
       .right-column__notifications {
@@ -27,6 +42,7 @@ header {
         background-color: $color-greys-light-1;
         border-radius: 50%;
         position: relative;
+        aspect-ratio: 1/1;
 
         &::before {
           display: block;
@@ -38,14 +54,23 @@ header {
           left: calc(50% - 0.7rem);
           color: $color-greys-dark-2;
         }
+
+        @include tablet {
+          display: none;
+        }
       }
 
       .right-column__profile-picture {
         height: 3.125rem;
-        width: 3.125rem;
+        aspect-ratio: 1/1;
+        // width: 3.125rem;
         border-radius: 50%;
         cursor: pointer;
         background-color: $color-greys-light-1;
+
+        @include smallest_desktop {
+          height: 2.5rem;
+        }
       }
     }
   }
@@ -60,5 +85,19 @@ header {
   border-radius: $border-radius;
   bottom: -130px;
 
+  z-index: 50;
   @include flex(center, center);
+
+  @include tablet {
+    width: 130%;
+    right: 0;
+  }
+
+  @include mobile {
+    width: 180%;
+  }
+
+  @include small_mobile {
+    width: 250px;
+  }
 }

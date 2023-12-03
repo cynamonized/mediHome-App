@@ -1,9 +1,21 @@
 h1 {
   @include fonts(2rem, 500, $color-main-blue);
+
+  @include mobile {
+    @include fonts(1.5rem, 500, $color-main-blue);
+  }
 }
 
 h2 {
   @include fonts(1.5rem, 500, $color-main-text);
+
+  @include small_desktop {
+    @include fonts(1.3rem, 500, $color-main-text);
+  }
+
+  @include smallest_desktop {
+    @include fonts(1.1rem, 500, $color-main-text);
+  }
 }
 
 h3 {
@@ -12,6 +24,16 @@ h3 {
   display: inline;
   span {
     font-weight: 600;
+  }
+
+  @include mobile {
+    @include fonts(1.5rem, 500, $color-main-blue);
+    line-height: 1.8rem;
+  }
+
+  @include small_mobile {
+    @include fonts(1.2rem, 500, $color-main-blue);
+    line-height: 1.5rem;
   }
 }
 
@@ -28,6 +50,10 @@ h3.login-screen {
 h4 {
   @include fonts(1.125rem, 500, $color-main-pink);
   margin-bottom: 30px;
+
+  @include small_desktop {
+    font-size: 1.05rem;
+  }
 }
 
 h4.tooltip-near {

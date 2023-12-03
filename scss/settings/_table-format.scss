@@ -11,27 +11,33 @@
     table-layout: fixed;
 
     .col-date {
-      width: 10%;
+      width: 15%;
+      background-color: red;
     }
 
     .col-time {
       width: 10%;
+      background-color: green;
     }
 
     .col-doctor {
-      width: 25%;
+      width: 20%;
+      background-color: aqua;
     }
 
     .col-spec {
       width: 20%;
+      background-color: aquamarine;
     }
 
     .col-address {
       width: 20%;
+      background-color: orange;
     }
 
     .col-set {
       width: 15%;
+      background-color: yellow;
     }
 
     thead {

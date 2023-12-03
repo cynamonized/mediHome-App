@@ -49,6 +49,17 @@
       align-items: center;
       flex-direction: column;
     }
+
+    @include tablet {
+      max-width: 400px;
+
+      .window__body {
+        .body__buttons {
+          flex-direction: column;
+          margin: 40px 0 0 0;
+        }
+      }
+    }
   }
 
   .pop-up__loader {
@@ -162,6 +173,15 @@
   z-index: 1;
   bottom: -35px;
   left: 0;
+  @include tablet {
+    text-align: center;
+    display: block;
+    width: 100%;
+  }
+
+  @include small_mobile {
+    bottom: -50px;
+  }
 }
 
 .validaiton-warning--bottom {

@@ -22,28 +22,52 @@
         line-height: 1.25rem;
         margin-bottom: 25px;
       }
-
-      .left-column__button-container {
-        margin-top: auto;
-      }
     }
 
     .body__right-column {
+      display: flex;
+      // height: 100%;
+      flex-direction: column;
       .right-column__how-to-prep {
         @include fonts(1rem, 500, $color-sec-blue);
         line-height: 1.25rem;
-      }
 
-      .right-column__description {
-        @include fonts(1rem, 400, $color-main-text);
-        line-height: 1.25rem;
-        margin-bottom: 50px;
+        @include mobile {
+          margin-top: 50px;
+        }
       }
 
       .right-column__doc-rec-label {
         @include fonts(1rem, 500, $color-main-text);
         line-height: 1.25rem;
+        margin-top: 50px;
       }
+
+      .right-column__description {
+        @include fonts(1rem, 400, $color-main-text);
+        line-height: 1.25rem;
+        // margin-bottom: 50px;
+
+        // @include tablet {
+        //   margin-bottom: inherit;
+        // }
+      }
+    }
+
+    .single-appo__button-container {
+      margin-top: auto;
+
+      @include mobile {
+        margin-top: 50px;
+      }
+    }
+
+    @include tablet {
+      gap: 20px;
+    }
+
+    @include mobile {
+      grid-template-columns: 1fr;
     }
   }
 }

@@ -17,14 +17,45 @@ import { fillAvailableAppos } from "./config/buildDatabase/fillAvailableAppos";
 import { GridLoader } from "react-spinners";
 import { Oval } from "react-loader-spinner";
 import { colorMainPink } from "./Settings/cssVariables";
-// import { testExport } from "./Settings/cssVariables";
+import { db } from "./config/firestore";
+import {
+  collection,
+  addDoc,
+  setDoc,
+  doc,
+  Timestamp,
+  updateDoc,
+} from "firebase/firestore";
 
 function App() {
   const [currentUser, setCurrentUser] = useState(undefined);
 
+  const createTestAppos = async () => {
+    await addDoc(
+      collection(
+        db,
+        "Users",
+        `3eyqbBF2h8M27OVISJfsae0xDM42`,
+        "Appointments",
+        `Booked`,
+        `Booked`
+      ),
+      {
+        date: Timestamp.fromDate(new Date(`December 12, 2023 9:15:00`)),
+        specialization: `Orthopaedist`,
+        place: `Poznanska 12`,
+        doctor: `Testowy`,
+        booked: true,
+        completed: false,
+        patientID: `3eyqbBF2h8M27OVISJfsae0xDM42`,
+        city: `Warsaw`,
+      }
+    );
+  };
+
   useEffect(() => {
     authUserCheck(setCurrentUser);
-
+    // createTestAppos();
     // Use below only to generate entire database (!!)
     // It will work only if firestore.js file is set up properly
     // using env variables in .env file (instruction in .env file)

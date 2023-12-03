@@ -23,6 +23,10 @@
   .loader-circle__text {
     margin-top: 50px;
     @include fonts(2rem, 400, $color-main-blue);
+    text-align: center;
+    @include tablet {
+      margin: 50px;
+    }
   }
 }
 

@@ -79,6 +79,7 @@ const AppointetsTable = ({ title, appos, isCompleted }) => {
                     <td className=" col-address">{appo.place}</td>
 
                     {/* BELOW WORKS, FINALIZE RWD */}
+                    {/* Any way to make it in CSS? IDK REALLY */}
 
                     <td
                       className=" col-set content__settings-column"

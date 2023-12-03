@@ -10,6 +10,8 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "@react-spring/web": "^9.7.3",
+    "@uidotdev/usehooks": "^2.4.1",
     "firebase": "^9.23.0",
     "luxon": "^3.3.0",
     "moment": "^2.29.4",

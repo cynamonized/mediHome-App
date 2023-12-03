@@ -6,14 +6,12 @@
   }
 }
 
-//RWD
 @mixin small_desktop {
   @media (max-width: 1300px) {
     @content;
   }
 }
 
-// works from 1130 to 870px
 @mixin smallest_desktop {
   @media (max-width: 1130px) {
     @content;

@@ -3,16 +3,30 @@
   height: 800px;
   width: 100%;
 
+  @include tablet {
+    height: inherit;
+  }
+
   .container-dashboard-patient {
     height: 100%;
     display: grid;
     grid-template-columns: 3fr 9fr;
     gap: 20px;
 
+    @include tablet {
+      grid-template-columns: 1fr;
+      gap: 40px;
+    }
+
     .dashboard-patient__right-column {
       display: grid;
       grid-template-columns: 1fr 1fr 1fr;
       gap: 20px;
+
+      @include tablet {
+        grid-template-columns: 1fr;
+        gap: 40px;
+      }
     }
   }
 }

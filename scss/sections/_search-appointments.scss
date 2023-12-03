@@ -12,6 +12,10 @@
     grid-template-columns: 1fr 1.5fr 0.75fr 0.75fr;
     gap: 2rem;
     grid-auto-rows: 52px;
+
+    @include tablet {
+      grid-template-columns: 1fr;
+    }
   }
 }
 
@@ -36,4 +40,8 @@
   font-size: 1rem;
   border-radius: 2rem;
   border: 1px solid $color-main-blue;
+
+  @include tablet {
+    padding: 0 17px;
+  }
 }

@@ -32,4 +32,15 @@
       margin-top: auto;
     }
   }
+
+  @include tablet {
+    height: inherit;
+    margin-bottom: 50px;
+    .user-settings__body {
+      .body__forms {
+        grid-template-columns: 1fr;
+        gap: 30px;
+      }
+    }
+  }
 }

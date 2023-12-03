@@ -17,6 +17,15 @@
   &:hover {
     background-color: $color-main-pink-dark;
   }
+
+  @include smallest_desktop {
+    padding: 12px 20px;
+    width: 100%;
+  }
+
+  @include tablet {
+    padding: 12px;
+  }
 }
 
 .secondary-button {
@@ -41,4 +50,9 @@
 
 .wide-buttons {
   padding: 12px 80px;
+
+  @include tablet {
+    padding: 12px 40px;
+    width: 100%;
+  }
 }

@@ -1,6 +1,14 @@
 .dashboard__header--small {
   padding: 30px;
   border-bottom: 1px solid $color-greys-mid-1;
+
+  @include smallest_desktop {
+    padding: 25px 20px;
+  }
+
+  @include tablet {
+    padding: 30px;
+  }
 }
 
 .dashboard__header--small-white {
@@ -55,9 +63,16 @@
 
   .block-small__body {
     padding: 25px;
+
     .body__super-text {
       @include fonts(1.125rem, 500, $color-sec-blue);
       text-align: center;
+    }
+
+    @include tablet {
+      min-height: 95px;
+      @include flex(center, center);
+      flex-direction: column;
     }
 
     .body__secondary-text {
@@ -73,7 +88,7 @@
 }
 
 .dashboard__block-small--blog {
-  background-color: none;
+  // background-color: none;
   background: linear-gradient(
     180deg,
     $color-sec-lightblue 0%,
@@ -96,6 +111,16 @@
     .body-blog__description {
       @include fonts(0.75rem, 400, $color-main-white);
       margin: 0 30px;
+    }
+
+    @include tablet {
+      .body-blog__title {
+        margin-top: 30px;
+      }
+
+      .body-blog__description {
+        margin-bottom: 30px;
+      }
     }
   }
 }
@@ -139,5 +164,9 @@
     @include fonts(0.75rem, 500, $color-main-text);
     line-height: 1rem;
     text-align: center;
+  }
+
+  @include tablet {
+    padding: 30px 0;
   }
 }
