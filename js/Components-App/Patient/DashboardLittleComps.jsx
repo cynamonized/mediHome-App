@@ -137,8 +137,10 @@ export const DashboardBlockBlog = ({ title, link, blogContent }) => {
             onLoad={onLoadHandle}
             className="body__image"
             style={{
-              height: isImageLoaded ? "auto" : "99px",
-              width: isImageLoaded ? "auto" : "310px",
+              // height: isImageLoaded ? "auto" : "99px",
+              // width: isImageLoaded ? "auto" : "310px",
+              width: "100%",
+              aspectRatio: "310/99",
               color: isImageLoaded ? "none" : "red",
               ...props,
             }}

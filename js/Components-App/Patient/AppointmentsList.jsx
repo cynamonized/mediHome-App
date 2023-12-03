@@ -77,7 +77,13 @@ const AppointetsTable = ({ title, appos, isCompleted }) => {
                     <td className=" col-doctor">{appo.doctor}</td>
                     <td className=" col-spec">{appo.specialization}</td>
                     <td className=" col-address">{appo.place}</td>
-                    <td className=" col-set content__settings-column">
+
+                    {/* BELOW WORKS, FINALIZE RWD */}
+
+                    <td
+                      className=" col-set content__settings-column"
+                      style={{ marginRight: appos.length < 4 ? "10px" : "0px" }}
+                    >
                       <Link
                         to="/single-apointment"
                         state={{

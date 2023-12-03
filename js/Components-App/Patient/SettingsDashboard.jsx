@@ -361,9 +361,7 @@ const SettingsBody = ({ currentUserUID }) => {
         </div>
       </div>
       <div className="body__button-place">
-        <MainButton callbackAction={updateUserDataOnServer}>
-          Update information
-        </MainButton>
+        <MainButton callbackAction={updateUserDataOnServer}>Update</MainButton>
       </div>
     </form>
   );

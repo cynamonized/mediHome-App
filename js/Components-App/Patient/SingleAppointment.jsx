@@ -4,15 +4,10 @@ import { DashboardHeaderBig } from "./DashboardLittleComps";
 import { MainButton } from "../../Utilities/Buttons";
 import { PopUp, SimpleErrorPopUp } from "../../Utilities/PopUp";
 import { LoaderCircle, ActionCompleted } from "../../Utilities/LoaderCircle";
-import {
-  AppointmentDate,
-  AppoDateFromSeconds,
-} from "../../Functions/convertTime";
-import { findAppo } from "../../Functions/findAppo";
+import { AppoDateFromSeconds } from "../../Functions/convertTime";
 import { getSingleUserAppointment } from "../../APICommunication/getSingleUserAppointment";
 import { cancelThisAppointment } from "../../APICommunication/cancelAppointment";
-import { addDoc, setDoc, doc, collection, Timestamp } from "firebase/firestore";
-import { db } from "../../config/firestore";
+import { useWindowSize } from "@uidotdev/usehooks";
 
 export const SingleAppointment = ({ currentUserUID }) => {
   const location = useLocation();
@@ -100,6 +95,7 @@ export const SingleAppointment = ({ currentUserUID }) => {
 
 const SingleAppoBody = ({ chosenAppo, cancelAppo }) => {
   const [isPopUp, setIsPopUp] = useState(false);
+  const size = useWindowSize();
 
   const togglePopUp = () => {
     setIsPopUp((prev) => !prev);
@@ -135,8 +131,8 @@ const SingleAppoBody = ({ chosenAppo, cancelAppo }) => {
         <p className="lef-column__value">
           {chosenAppo != null ? `${chosenAppo.doctor}` : ""}
         </p>
-        {chosenAppo && !chosenAppo.completed && (
-          <div className="left-column__button-container">
+        {chosenAppo && !chosenAppo.completed && size.width > 1005 && (
+          <div className="single-appo__button-container">
             <MainButton callbackAction={togglePopUp}>
               Cancel appointment
             </MainButton>
@@ -166,6 +162,14 @@ const SingleAppoBody = ({ chosenAppo, cancelAppo }) => {
             !chosenAppo.completed &&
             "Once the appointment is completed, you will see here doctors' recommendations for you to follow."}
         </p>
+
+        {chosenAppo && !chosenAppo.completed && size.width <= 1005 && (
+          <div className="single-appo__button-container">
+            <MainButton callbackAction={togglePopUp}>
+              Cancel appointment
+            </MainButton>
+          </div>
+        )}
       </div>
     </div>
   );
