@@ -15,6 +15,7 @@ import {
 } from "../../Utilities/LoaderCircle";
 import { searchForAppo } from "../../APICommunication/searchForAppo";
 import { bookThisAppointment } from "../../APICommunication/bookAppointment";
+import { useWindowSize } from "@uidotdev/usehooks";
 
 export const SearchDashboard = ({ currentUserUID }) => {
   const location = useLocation();
@@ -163,6 +164,8 @@ export const SearchDashboard = ({ currentUserUID }) => {
 };
 
 const SearchResults = ({ appos, callbackBookAppo }) => {
+  const size = useWindowSize();
+
   const buttonBook = (appo) => {
     callbackBookAppo(appo);
   };
@@ -172,54 +175,95 @@ const SearchResults = ({ appos, callbackBookAppo }) => {
       <DashboardHeaderBig title={"Search results"} link={"/portal"} />
       <div className="appo-list__table dashboard-table search-results__table-container">
         <p className="table__title">Available appointments:</p>
-        <table className="table__content  search-table">
-          <thead>
-            <tr className="content__row-head">
-              <th className=" col-date">Date</th>
-              <th className=" col-time">Hour</th>
-              <th className=" col-doctor">Doctor</th>
-              <th className=" col-spec">Specialization</th>
-              <th className=" col-address">Localization</th>
-              <th className=" col-set content__row-head--last head-set"></th>
-            </tr>
-          </thead>
-          <tbody>
-            {appos ? (
+
+        {size.width > 1005 ? (
+          <table className="table__content  search-table">
+            <thead>
+              <tr className="content__row-head">
+                <th className=" col-date">Date</th>
+                <th className=" col-time">Hour</th>
+                <th className=" col-doctor">Doctor</th>
+                <th className=" col-spec">Specialization</th>
+                <th className=" col-address col-address--search">
+                  Localization
+                </th>
+                <th className=" col-set col-set--search content__row-head--last head-set"></th>
+              </tr>
+            </thead>
+            <tbody>
+              {appos ? (
+                appos.map((appo) => {
+                  return (
+                    <tr key={appo.id} className="appo-row">
+                      <td className=" col-date">
+                        {AppoPureDateFromSeconds(appo.date.seconds)}
+                      </td>
+                      <td className=" col-time">
+                        {AppoTimeFromSeconds(appo.date.seconds)}
+                      </td>
+                      <td className=" col-doctor">{appo.doctor}</td>
+                      <td className=" col-spec">{appo.specialization}</td>
+                      <td className=" col-address col-address--search">
+                        {appo.place}
+                      </td>
+                      <td className="col-set col-set--search content__settings-column">
+                        <TertiaryButton
+                          callbackAction={(e) => {
+                            e.preventDefault();
+                            buttonBook(appo);
+                          }}
+                          wide={false}
+                        >
+                          Book
+                        </TertiaryButton>
+                      </td>
+                    </tr>
+                  );
+                })
+              ) : (
+                <tr className="loader">
+                  <td>
+                    <LoaderCircleSmall />
+                  </td>
+                </tr>
+              )}
+            </tbody>
+          </table>
+        ) : (
+          <div className="table__content--mobile">
+            {appos &&
               appos.map((appo) => {
                 return (
-                  <tr key={appo.id} className="appo-row">
-                    <td className=" col-date">
+                  <div className="content__single-appo" key={appo.id}>
+                    <div className="single-appo__top-row ">
+                      <p className="top-row__spec">{appo.specialization}</p>
+                      <div className="top-row__set">
+                        <TertiaryButton
+                          callbackAction={(e) => {
+                            e.preventDefault();
+                            buttonBook(appo);
+                          }}
+                          wide={false}
+                        >
+                          Book
+                        </TertiaryButton>
+                      </div>
+                    </div>
+
+                    <p className="single-appo__date">
+                      {" "}
                       {AppoPureDateFromSeconds(appo.date.seconds)}
-                    </td>
-                    <td className=" col-time">
+                    </p>
+                    <p className="single-appo__time">
                       {AppoTimeFromSeconds(appo.date.seconds)}
-                    </td>
-                    <td className=" col-doctor">{appo.doctor}</td>
-                    <td className=" col-spec">{appo.specialization}</td>
-                    <td className=" col-address">{appo.place}</td>
-                    <td className="col-set content__settings-column">
-                      <TertiaryButton
-                        callbackAction={(e) => {
-                          e.preventDefault();
-                          buttonBook(appo);
-                        }}
-                        wide={false}
-                      >
-                        Book
-                      </TertiaryButton>
-                    </td>
-                  </tr>
+                    </p>
+                    <p className="single-appo__doctor">{appo.doctor}</p>
+                    <p className="single-appo__address">{appo.place}</p>
+                  </div>
                 );
-              })
-            ) : (
-              <tr className="loader">
-                <td>
-                  <LoaderCircleSmall />
-                </td>
-              </tr>
-            )}
-          </tbody>
-        </table>
+              })}
+          </div>
+        )}
       </div>
     </div>
   );

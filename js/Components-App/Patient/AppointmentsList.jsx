@@ -111,10 +111,15 @@ const AppointetsTable = ({ title, appos, isCompleted }) => {
             {appos &&
               appos.map((appo) => {
                 return (
-                  <div className="content__single-appo" key={appo.id}>
-                    {/* ADD STYLING TO ALL OF THIS */}
-                    {/* STYLING ON RHS FILE */}
-                    <div className="single-appo__top-row">
+                  <div
+                    className={
+                      isCompleted
+                        ? "content__single-appo content__single-appo--greyed-out"
+                        : "content__single-appo"
+                    }
+                    key={appo.id}
+                  >
+                    <div className="single-appo__top-row ">
                       <p className="top-row__spec">{appo.specialization}</p>
                       <div className="top-row__set">
                         <Link
