@@ -9,6 +9,10 @@
     flex-direction: column;
     position: relative;
 
+    @include tablet {
+      height: inherit;
+    }
+
     .search-results__table-container {
       display: flex;
       flex-direction: column;
