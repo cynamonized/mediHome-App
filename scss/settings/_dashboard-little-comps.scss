@@ -23,13 +23,17 @@
   border-bottom: 1px solid $color-greys-mid-1;
   @include flex(flex-start, center);
   .header-big__back-arrow {
-    margin-right: 15px;
+    margin-right: 5px;
     &::before {
       display: block;
       font-family: $font-material-icons;
       color: $color-main-pink;
       font-size: 3rem;
       content: "\e5c4";
+
+      @include mobile {
+        font-size: 2.5rem;
+      }
     }
   }
 }

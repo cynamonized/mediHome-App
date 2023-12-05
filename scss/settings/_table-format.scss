@@ -12,32 +12,26 @@
 
     .col-date {
       width: 15%;
-      background-color: red;
     }
 
     .col-time {
       width: 10%;
-      background-color: green;
     }
 
     .col-doctor {
-      width: 20%;
-      background-color: aqua;
+      width: 25%;
     }
 
     .col-spec {
-      width: 20%;
-      background-color: aquamarine;
+      width: 15%;
     }
 
     .col-address {
-      width: 20%;
-      background-color: orange;
+      width: 25%;
     }
 
     .col-set {
-      width: 15%;
-      background-color: yellow;
+      width: 10%;
     }
 
     thead {
@@ -48,6 +42,10 @@
           @include fonts(1rem, 500, $color-main-text);
           text-align: left;
           padding-bottom: 15px;
+
+          @include tablet {
+            @include fonts(0.9rem, 400, $color-main-text);
+          }
         }
 
         th.content__row-head--last {
@@ -62,6 +60,10 @@
         td {
           padding-top: 30px;
           @include fonts(1rem, 400, $color-main-text);
+
+          @include tablet {
+            @include fonts(0.9rem, 400, $color-main-text);
+          }
         }
       }
 
