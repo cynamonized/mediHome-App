@@ -81,8 +81,12 @@
 
       .bottom-section__main-image {
         border-radius: 0 216px;
-        // max-width: 100%;
+        // max-width: 776px;
+        // width: 776px;
+        // width: 100%;
+        background-color: $color-main-blue-light;
         width: 80%;
+        aspect-ratio: 776/345;
       }
     }
   }
