@@ -10,12 +10,26 @@ import LogoSmall2 from "../../../images/logo-mediDent.svg";
 import LogoSmall3 from "../../../images/logo-mediHospital.svg";
 import LogoSmall4 from "../../../images/logo-mediPharmacy.svg";
 import { ToolTip } from "../../Utilities/PopUp";
+import { animated, useSpring, useSprings } from "@react-spring/web";
 
 export const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
   const [wrongPassword, setWrongPassword] = useState(false);
+
+  const [mainLogoLoaded, setMainLogoLoaded] = useState(false);
+
+  const props = useSpring({
+    from: { opacity: 0 },
+    to: { opacity: mainLogoLoaded ? 1 : 0 },
+  });
+
+  const handleMainImageLoad = () => {
+    setMainLogoLoaded(true);
+  };
+
+  const tempImageFormatting = {};
 
   const emailUpdate = ({ target }) => {
     setEmail(target.value);
@@ -45,7 +59,14 @@ export const Login = () => {
   return (
     <section className="login-screen">
       <div className="login-screen__left-column">
-        <img src={LogoBig} className="left-column__logo" />
+        <img
+          src={LogoBig}
+          className="left-column__logo"
+          style={{
+            width: "100%",
+            aspectRatio: "281/77",
+          }}
+        />
 
         <h3 className="login-screen">
           <span>Log in </span>to manage <br />
@@ -101,7 +122,12 @@ export const Login = () => {
           <TertiaryButton>Contact us</TertiaryButton>
         </div>
 
-        <div className="right-column__bottom-section">
+        <animated.div
+          className="right-column__bottom-section"
+          style={{
+            ...props,
+          }}
+        >
           <div className="bottom-section__health-packages">
             <p className="health-packages__description">
               Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec
@@ -114,8 +140,16 @@ export const Login = () => {
               <img src={LogoSmall4} alt="" className="logos__single-logo" />
             </div>
           </div>
-          <img src={PhotoMain} className="bottom-section__main-image" />
-        </div>
+          <animated.img
+            // src={null}
+            src={PhotoMain}
+            className="bottom-section__main-image"
+            style={{
+              ...props,
+            }}
+            onLoad={handleMainImageLoad}
+          />
+        </animated.div>
       </div>
     </section>
   );
