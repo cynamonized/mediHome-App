@@ -141,7 +141,6 @@ export const Login = () => {
             </div>
           </div>
           <animated.img
-            // src={null}
             src={PhotoMain}
             className="bottom-section__main-image"
             style={{
