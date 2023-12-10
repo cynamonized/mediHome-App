@@ -1,0 +1,31 @@
+.not-found {
+  height: 100vh;
+  width: 100vw;
+
+  @include flex(center, center);
+
+  .not-found__container {
+    @include flex(center, center);
+    flex-direction: column;
+
+    .container__not-found-image {
+      width: 60%;
+      aspect-ratio: 1/1;
+      margin-bottom: 30px;
+    }
+
+    .container__title {
+      margin-bottom: 10px;
+      text-align: center;
+    }
+
+    .container__subtitle {
+      margin-bottom: 50px;
+      text-align: center;
+    }
+
+    @include tablet {
+      padding: 60px;
+    }
+  }
+}

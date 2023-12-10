@@ -11,6 +11,7 @@ import { SingleAppointment } from "./Components-App/Patient/SingleAppointment";
 import { SettingsDashboard } from "./Components-App/Patient/SettingsDashboard";
 import { SearchDashboard } from "./Components-App/Patient/SearchDashboard";
 import { LoaderCircleEmpty } from "./Utilities/LoaderCircle";
+import { NotFound } from "./Components-App/Patient/NotFound";
 import { authUserCheck } from "./APICommunication/authUserCheck";
 import { createDatabase } from "./config/buildDatabase/createDatabase";
 import { fillAvailableAppos } from "./config/buildDatabase/fillAvailableAppos";
@@ -26,36 +27,17 @@ import {
   Timestamp,
   updateDoc,
 } from "firebase/firestore";
+import { createTestAppos } from "./config/buildDatabase/addBooked";
 
 function App() {
   const [currentUser, setCurrentUser] = useState(undefined);
 
-  const createTestAppos = async () => {
-    await addDoc(
-      collection(
-        db,
-        "Users",
-        `3eyqbBF2h8M27OVISJfsae0xDM42`,
-        "Appointments",
-        `Booked`,
-        `Booked`
-      ),
-      {
-        date: Timestamp.fromDate(new Date(`December 12, 2023 9:15:00`)),
-        specialization: `Orthopaedist`,
-        place: `Poznanska 12`,
-        doctor: `Testowy`,
-        booked: true,
-        completed: false,
-        patientID: `3eyqbBF2h8M27OVISJfsae0xDM42`,
-        city: `Warsaw`,
-      }
-    );
-  };
-
   useEffect(() => {
     authUserCheck(setCurrentUser);
+
+    // Creates some test appos for the test user
     // createTestAppos();
+
     // Use below only to generate entire database (!!)
     // It will work only if firestore.js file is set up properly
     // using env variables in .env file (instruction in .env file)
@@ -112,6 +94,7 @@ function App() {
             ) : (
               <Route path="/portal" element={<Login />}></Route>
             )}
+            <Route path="*" element={<NotFound />}></Route>
           </Routes>
         </HashRouter>
       )}
