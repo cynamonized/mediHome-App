@@ -25,6 +25,7 @@
   .header-big__back-arrow {
     margin-right: 5px;
     &::before {
+      transition: 0.2s;
       display: block;
       font-family: $font-material-icons;
       color: $color-main-pink;
@@ -34,6 +35,10 @@
       @include mobile {
         font-size: 2.5rem;
       }
+    }
+
+    &:hover::before {
+      color: $color-main-pink-dark;
     }
   }
 }
