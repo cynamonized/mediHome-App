@@ -1,14 +1,13 @@
 import React, { useState, useEffect } from "react";
 import { MainButton } from "../../Utilities/Buttons";
 import Image404 from "../../../images/404.svg";
+import { useNavigate } from "react-router-dom";
 
 export const NotFound = () => {
-  // useLink hook?
-  const homeLink = null;
+  const navigate = useNavigate();
 
-  // callback action that links to homepage => appoList.jsx example
-  const actionCallback = () => {
-    return null;
+  const goHome = () => {
+    navigate("/portal/");
   };
 
   return (
@@ -21,7 +20,9 @@ export const NotFound = () => {
         <p className="container__subtitle">
           Please make sure your link is valid.
         </p>
-        <MainButton wide={true}>Homepage</MainButton>
+        <MainButton wide={true} callbackAction={goHome}>
+          Homepage
+        </MainButton>
       </div>
     </div>
   );
