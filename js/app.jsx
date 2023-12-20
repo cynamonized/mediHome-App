@@ -90,6 +90,8 @@ function App() {
                   path="/search"
                   element={<SearchDashboard currentUserUID={currentUser.uid} />}
                 />
+
+                <Route path="/landing" />
               </Route>
             ) : (
               <Route path="/portal" element={<Login />}></Route>
