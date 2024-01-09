@@ -1,7 +1,14 @@
 import React, { useState, useEffect } from "react";
-// 0. IMPORT ALL ASSETS AND IMAGES HERE BEFORE START
-// 1. HOW TO IMPORT SCSS?
+import { Footer } from "../Footer";
+import { HeroMerged } from "./HeroMerged";
+
+// links in hooks in patient portal are now broken (/single-appointment/  --> /portal/)
 
 export const LandingPage = () => {
-  return null;
+  return (
+    <>
+      <HeroMerged />
+      <Footer />
+    </>
+  );
 };

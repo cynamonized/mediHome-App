@@ -1,0 +1,28 @@
+.landing-nav {
+  padding: 20px 0;
+  border-bottom: 1px solid $color-greys-light-1;
+  display: flex;
+  justify-content: space-between;
+  font-family: $font-poppins;
+  .landing-nav__logo-top {
+    max-width: 210px;
+  }
+
+  .landing-nav__right-column {
+    display: flex;
+    .right-column__menu {
+      display: flex;
+
+      .menu__single-option {
+        display: block;
+        margin: auto 25px;
+        color: $color-main-blue;
+
+        &:hover {
+          color: $color-main-pink;
+          cursor: pointer;
+        }
+      }
+    }
+  }
+}

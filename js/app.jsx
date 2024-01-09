@@ -28,6 +28,7 @@ import {
   updateDoc,
 } from "firebase/firestore";
 import { createTestAppos } from "./config/buildDatabase/addBooked";
+import { LandingPage } from "./Components-App/LandingPage/LandingPage";
 
 function App() {
   const [currentUser, setCurrentUser] = useState(undefined);
@@ -55,44 +56,47 @@ function App() {
         <HashRouter>
           <Routes>
             {currentUser ? (
-              <Route
-                path="/"
-                element={
-                  <Main
-                    setCurrentUser={setCurrentUser}
-                    currentUserUID={currentUser.uid}
-                  />
-                }
-              >
+              <>
                 <Route
                   path="/portal"
-                  element={<PatientMain currentUserUID={currentUser.uid} />}
-                />
-                <Route
-                  path="/app-list"
                   element={
-                    <AppointmentsList currentUserUID={currentUser.uid} />
+                    <Main
+                      setCurrentUser={setCurrentUser}
+                      currentUserUID={currentUser.uid}
+                    />
                   }
-                />
-                <Route
-                  path="/single-apointment"
-                  element={
-                    <SingleAppointment currentUserUID={currentUser.uid} />
-                  }
-                />
-                <Route
-                  path="/user-settings"
-                  element={
-                    <SettingsDashboard currentUserUID={currentUser.uid} />
-                  }
-                />
-                <Route
-                  path="/search"
-                  element={<SearchDashboard currentUserUID={currentUser.uid} />}
-                />
-
-                <Route path="/landing" />
-              </Route>
+                >
+                  <Route
+                    path="/portal"
+                    element={<PatientMain currentUserUID={currentUser.uid} />}
+                  />
+                  <Route
+                    path="/portal/app-list"
+                    element={
+                      <AppointmentsList currentUserUID={currentUser.uid} />
+                    }
+                  />
+                  <Route
+                    path="/portal/single-apointment"
+                    element={
+                      <SingleAppointment currentUserUID={currentUser.uid} />
+                    }
+                  />
+                  <Route
+                    path="/portal/user-settings"
+                    element={
+                      <SettingsDashboard currentUserUID={currentUser.uid} />
+                    }
+                  />
+                  <Route
+                    path="/portal/search"
+                    element={
+                      <SearchDashboard currentUserUID={currentUser.uid} />
+                    }
+                  />
+                </Route>
+                <Route path="/" element={<LandingPage />} />
+              </>
             ) : (
               <Route path="/portal" element={<Login />}></Route>
             )}
