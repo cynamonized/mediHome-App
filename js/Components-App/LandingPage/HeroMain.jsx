@@ -16,7 +16,8 @@ export const HeroMain = () => {
         <div className="left-column__subtitle">The best on the market</div>
         <MainButton>
           <div className="left-column__button-icon">
-            <p>The best on the market</p> <img src={RightIcon} />
+            <p>The best on the market</p>{" "}
+            <img src={RightIcon} className="button-icon__icon" />
           </div>
         </MainButton>
       </div>

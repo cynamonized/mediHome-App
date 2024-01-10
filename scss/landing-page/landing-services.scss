@@ -1,0 +1,57 @@
+.services {
+  font-family: $font-poppins;
+
+  margin-bottom: 230px;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 80px;
+  .services__left-column {
+    display: flex;
+    flex-direction: column;
+    // margin: auto 0;
+
+    .left-column__description {
+      @include fonts(1.25rem, 400, $color-main-blue);
+      margin-top: 40px;
+      padding-right: 80px;
+    }
+  }
+
+  .service__right-column {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 44px;
+
+    .right-column__specialization-container {
+      padding: 40px;
+      border: 1px solid $color-greys-mid-1;
+      border-radius: 32px;
+      .specialization-container__logo {
+        max-width: 100%;
+        margin-bottom: 25px;
+      }
+
+      .specialization-container__description {
+        @include fonts(1rem, 300, $color-main-text);
+      }
+    }
+
+    // Add animations to below boxes (frames)
+    .spec-A {
+      margin-top: 60px;
+    }
+
+    .spec-B {
+      margin-bottom: 60px;
+    }
+
+    .spec-C {
+      margin-bottom: 0;
+    }
+
+    .spec-D {
+      margin-top: -60px;
+      margin-bottom: 60px;
+    }
+  }
+}

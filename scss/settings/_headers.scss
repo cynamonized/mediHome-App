@@ -6,6 +6,10 @@ h1 {
   }
 }
 
+h1.landing-section-title {
+  @include fonts(3.5rem, 500, $color-main-blue);
+}
+
 h2 {
   @include fonts(1.5rem, 500, $color-main-text);
 

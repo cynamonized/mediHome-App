@@ -1,0 +1,10 @@
+.eyebrow {
+  display: inline-block;
+  color: $color-main-pink;
+  padding: 12px 25px;
+  @include fonts(1.25rem, 400, $color-main-pink);
+  border: 1px solid $color-main-pink;
+  margin-right: auto;
+  margin-bottom: 25px;
+  border-radius: 25px;
+}

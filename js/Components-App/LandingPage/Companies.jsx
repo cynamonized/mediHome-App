@@ -9,7 +9,13 @@ export const Companies = () => {
   return (
     <div className="companies container">
       <p className="companies__title">COMPANIES THAT TRUST US</p>
-      <div className="companies__logos"></div>
+      <div className="companies__logos">
+        <img src={Logo1} className="logos__single-logo" />
+        <img src={Logo2} className="logos__single-logo" />
+        <img src={Logo3} className="logos__single-logo" />
+        <img src={Logo4} className="logos__single-logo" />
+        <img src={Logo5} className="logos__single-logo" />
+      </div>
     </div>
   );
 };

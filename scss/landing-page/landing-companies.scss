@@ -1,0 +1,26 @@
+.companies {
+  font-family: $font-poppins;
+  .companies__title {
+    @include fonts(1.25rem, 400, $color-main-pink);
+    margin-bottom: 50px;
+    position: relative;
+    text-align: center;
+    &::after {
+      display: block;
+      content: "";
+      height: 2px;
+      width: 90px;
+      background-color: $color-main-blue;
+      position: absolute;
+      bottom: -15px;
+      right: calc(50% - 45px);
+    }
+  }
+
+  .companies__logos {
+    @include flex(space-between, center);
+    margin-bottom: 200px;
+    .logos__single-logo {
+    }
+  }
+}
