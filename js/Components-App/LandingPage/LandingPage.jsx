@@ -3,6 +3,7 @@ import { Footer } from "../Footer";
 import { HeroMerged } from "./HeroMerged";
 import { Companies } from "./Companies";
 import { Services } from "./Services";
+import { AboutUs } from "./AboutUs";
 
 // links in hooks in patient portal are now broken (/single-appointment/  --> /portal/)
 
@@ -12,6 +13,8 @@ export const LandingPage = () => {
       <HeroMerged />
       <Companies />
       <Services />
+      <AboutUs />
+
       <Footer />
     </>
   );

@@ -8,6 +8,7 @@ h1 {
 
 h1.landing-section-title {
   @include fonts(3.5rem, 500, $color-main-blue);
+  line-height: 4.25rem;
 }
 
 h2 {
