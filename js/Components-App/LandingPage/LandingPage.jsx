@@ -15,7 +15,7 @@ export const LandingPage = () => {
       <Companies />
       <Services />
       <AboutUs />
-
+      <Contact />
       <Footer />
     </>
   );

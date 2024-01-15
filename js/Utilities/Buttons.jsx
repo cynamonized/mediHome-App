@@ -41,3 +41,18 @@ export const TertiaryButton = ({ children, callbackAction, wide }) => {
     </button>
   );
 };
+
+export const QuaternaryButton = ({ children, callbackAction, wide }) => {
+  return (
+    <button
+      className={`${
+        wide == true
+          ? "main-button quaternary-button wide-buttons"
+          : "main-button quaternary-button"
+      }`}
+      onClick={callbackAction}
+    >
+      {children}
+    </button>
+  );
+};

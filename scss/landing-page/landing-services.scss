@@ -12,6 +12,7 @@
 
     .left-column__description {
       @include fonts(1.25rem, 400, $color-main-blue);
+
       margin-top: 40px;
       padding-right: 80px;
     }

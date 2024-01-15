@@ -48,6 +48,12 @@
   }
 }
 
+.quaternary-button {
+  background-color: $color-main-pink;
+  @include fonts(1.25rem, 400, $color-main-white);
+  display: inline;
+}
+
 .wide-buttons {
   padding: 12px 80px;
 

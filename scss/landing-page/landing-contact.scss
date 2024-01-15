@@ -1,0 +1,44 @@
+.contact {
+  font-family: $font-poppins;
+  margin-bottom: 230px;
+  .contact__title-section {
+    @include flex(center, center);
+    flex-direction: column;
+    margin-bottom: 85px;
+  }
+
+  .contact__columns {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 100px;
+
+    .columns__left-column {
+      display: flex;
+      flex-direction: column;
+      .left-column__form {
+        flex: 1;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        margin-top: 30px;
+
+        .form__custom-area {
+          margin: 0;
+          width: 100%;
+        }
+
+        .form__button-area {
+          max-width: 172px;
+        }
+      }
+    }
+
+    .columns__right-column {
+      .right-column__image {
+        border-radius: 0 252px 252px 252px;
+        // max-height: 503px;
+        height: 100%;
+      }
+    }
+  }
+}
