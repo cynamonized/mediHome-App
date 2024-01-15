@@ -13,7 +13,9 @@ export const AboutUs = () => {
 
       <div className="about-us__right-column">
         <Eyebrow>ABOUT US</Eyebrow>
-        <h1 className="landing-section-title">Why choose our clinic?</h1>
+        <h2 className="landing-section-title right-column__title">
+          Why choose our clinic?
+        </h2>
         <p className="right-column__description">
           Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec libero
           sapien, volutpat sed leo ac, dictum placerat ante.

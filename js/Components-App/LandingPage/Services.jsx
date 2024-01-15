@@ -10,9 +10,9 @@ export const Services = () => {
     <div className="services container">
       <div className="services__left-column">
         <Eyebrow>{"SERVICES"}</Eyebrow>
-        <h1 className="landing-section-title">
+        <h2 className="landing-section-title">
           Find service that suits you best
-        </h1>
+        </h2>
         <p className="left-column__description">
           Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec libero
           sapien, volutpat sed leo ac, dictum placerat ante. In porta risus ut

@@ -6,9 +6,10 @@ h1 {
   }
 }
 
-h1.landing-section-title {
-  @include fonts(3.5rem, 500, $color-main-blue);
-  line-height: 4.25rem;
+h1.hero-main__left-column__title {
+  font-size: 4.375rem;
+  font-weight: 400;
+  margin-bottom: 20px;
 }
 
 h2 {
@@ -21,6 +22,11 @@ h2 {
   @include smallest_desktop {
     @include fonts(1.1rem, 500, $color-main-text);
   }
+}
+
+h2.landing-section-title {
+  @include fonts(3.5rem, 500, $color-main-blue);
+  line-height: 4.25rem;
 }
 
 h3 {

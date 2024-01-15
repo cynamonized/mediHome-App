@@ -10,7 +10,7 @@ export const HeroMain = () => {
   return (
     <div className="hero-main container">
       <div className="hero-main__left-column">
-        <h1 className="left-column__title">
+        <h1 className="hero-main__left-column__title">
           Medical care that you always wanted
         </h1>
         <div className="left-column__subtitle">The best on the market</div>

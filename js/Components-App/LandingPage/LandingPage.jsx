@@ -4,6 +4,7 @@ import { HeroMerged } from "./HeroMerged";
 import { Companies } from "./Companies";
 import { Services } from "./Services";
 import { AboutUs } from "./AboutUs";
+import { Contact } from "./Contact";
 
 // links in hooks in patient portal are now broken (/single-appointment/  --> /portal/)
 

@@ -9,9 +9,6 @@
     // grid-template-columns: repeat(2, minmax(0, 1fr));
     gap: 35px;
 
-    img {
-    }
-
     .left-column__image-tall {
       border-radius: 184px 0 184px 184px;
     }
@@ -26,7 +23,7 @@
   }
 
   .about-us__right-column {
-    h1 {
+    .right-column__title {
       margin-right: 100px;
     }
 
