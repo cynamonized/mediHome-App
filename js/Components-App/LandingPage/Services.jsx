@@ -3,7 +3,7 @@ import LogoA from "../../../images/Landing Page/mediSmallLogos/Logo A.svg";
 import LogoB from "../../../images/Landing Page/mediSmallLogos/Logo B.svg";
 import LogoC from "../../../images/Landing Page/mediSmallLogos/Logo C.svg";
 import LogoD from "../../../images/Landing Page/mediSmallLogos/Logo D.svg";
-import { Eyebrow } from "./LandingGenericComponents";
+import { Eyebrow } from "./Utilities/LandingGenericComponents";
 
 export const Services = () => {
   return (

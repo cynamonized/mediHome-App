@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import ImageTall from "../../../images/Landing Page/About Us_1.jpg";
 import ImageShort from "../../../images/Landing Page/About Us_2.jpg";
-import { Eyebrow } from "./LandingGenericComponents";
+import { Eyebrow } from "./Utilities/LandingGenericComponents";
 
 export const AboutUs = () => {
   return (

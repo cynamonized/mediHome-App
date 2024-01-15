@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { Eyebrow } from "./LandingGenericComponents";
+import { Eyebrow } from "./Utilities/LandingGenericComponents";
 import MainImage from "../../../images/Landing Page/Contact_1.jpg";
 import { QuaternaryButton } from "../../Utilities/Buttons";
 
