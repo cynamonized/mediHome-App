@@ -1,0 +1,56 @@
+.careers {
+  font-family: $font-poppins;
+  margin-bottom: 230px;
+
+  .careers__title-section {
+    margin-right: 200px;
+    margin-bottom: 70px;
+  }
+
+  .careers__columns {
+    display: grid;
+    grid-template-columns: 928fr 337fr;
+    gap: 35px;
+
+    .columns__left-column {
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr;
+      gap: 35px;
+      .single-profession {
+        border: 1px solid $color-greys-mid-1;
+        border-radius: 32px;
+
+        .single-profession__head {
+          padding: 45px;
+          min-height: 140px;
+          border-bottom: 1px solid $color-greys-mid-1;
+          .head__name {
+            @include fonts(1.5rem, 600, $color-main-blue);
+          }
+        }
+
+        .single-profession__body {
+          padding: 45px;
+          .body__description {
+            @include fonts(1rem, 400, $color-greys-dark-2);
+            line-height: 1.25rem;
+          }
+        }
+      }
+    }
+
+    .columns__right-column {
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      .right-column__decription {
+        @include fonts(1.25rem, 400, $color-main-blue);
+        line-height: 1.5rem;
+      }
+
+      .right-column__main-image {
+        border-radius: 0 264px 264px 264px;
+      }
+    }
+  }
+}
