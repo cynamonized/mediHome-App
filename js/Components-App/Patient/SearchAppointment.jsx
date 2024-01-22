@@ -3,6 +3,7 @@ import "../../../scss/main.scss";
 import { MainButton } from "../../Utilities/Buttons";
 import { selectStyles } from "../../Settings/formsStyles";
 import { useNavigate, useLocation } from "react-router-dom";
+import { CustomDateInput } from "./CustomCompsStyling/CustomDateInput";
 
 // -----------------------------------------
 
@@ -12,7 +13,8 @@ import "../../../css/react-datepicker.css";
 
 //------------------------------------------
 
-//placeholder for cities & specs - Fetch once it's in API
+// placeholder for cities & specs - Fetch once it's in API
+// one day? :)
 const cities = [
   { value: "krakow", label: "Krakow" },
   { value: "poznan", label: "Poznan" },
@@ -74,10 +76,10 @@ const SearchAppointment = ({
   const performSearch = (e) => {
     e.preventDefault();
 
-    if (location.pathname != "/search") {
+    if (location.pathname != "/portal/search") {
       if (validateSelects()) {
         setIsSelectValid(true);
-        navigate("/search", {
+        navigate("/portal/search", {
           state: {
             city,
             specialization,
@@ -153,19 +155,5 @@ const SearchAppointment = ({
     </section>
   );
 };
-
-// It adds custom styling to date-picker
-const CustomDateInput = React.forwardRef(({ value, onClick }, ref) => (
-  <button
-    className="datepicker-input"
-    onClick={(e) => {
-      e.preventDefault();
-      onClick();
-    }}
-    ref={ref}
-  >
-    {value}
-  </button>
-));
 
 export default SearchAppointment;

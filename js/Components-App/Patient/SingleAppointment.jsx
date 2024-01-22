@@ -21,8 +21,6 @@ export const SingleAppointment = ({ currentUserUID }) => {
   const [cancelCompleted, setCancelCompleted] = useState(false);
 
   useEffect(() => {
-    // AddBackUserAndServer();
-
     getSingleUserAppointment(
       currentUserUID,
       chosenAppoID,
@@ -48,13 +46,13 @@ export const SingleAppointment = ({ currentUserUID }) => {
 
   const redirectToAppoList = () => {
     const tempDelay = setTimeout(() => {
-      navigate("/app-list");
+      navigate("/portal/app-list");
     }, 2000);
   };
 
   const closeDenyPopUp = () => {
     setDenyPopUp(false);
-    navigate("/app-list");
+    navigate("/portal/app-list");
   };
 
   if (isLoading) {

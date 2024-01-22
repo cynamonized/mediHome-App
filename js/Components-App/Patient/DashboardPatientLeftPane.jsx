@@ -26,7 +26,7 @@ export const DashboarPatientLeftPane = ({ currentUserUID }) => {
         patientAppointments={patientAppointments}
         currentUserUID={currentUserUID}
       />
-      <DashboardFooterSmall link={"/app-list"} />
+      <DashboardFooterSmall link={"/portal/app-list"} />
     </div>
   );
 };
@@ -117,7 +117,7 @@ const DashboardPatientLeftPaneBody = ({ patientAppointments }) => {
                     </div>
 
                     <Link
-                      to="/single-apointment"
+                      to="/portal/single-apointment"
                       state={{
                         chosenAppoID: appo.id,
                         from: "/portal",

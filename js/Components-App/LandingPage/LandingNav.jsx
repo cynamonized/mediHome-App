@@ -3,10 +3,13 @@ import LogoTop from "../../../images/logo-mediHome-small.svg";
 import "../../../scss/landing-page/landing-main.scss";
 import { TertiaryButton } from "../../Utilities/Buttons";
 import { HashLink } from "react-router-hash-link";
+import { useNavigate } from "react-router-dom";
 
 export const LandingNav = () => {
+  const navigate = useNavigate();
+
   const goToPortal = () => {
-    // go to page hook (go to app)
+    navigate("/portal");
   };
 
   return (

@@ -1,6 +1,7 @@
 header {
   border-bottom: 1px solid $color-greys-light-1;
   margin-bottom: 70px;
+
   .container-header {
     padding: 20px 0px 20px 0;
     @include flex(space-between, center);

@@ -48,7 +48,7 @@ export const SearchDashboard = ({ currentUserUID }) => {
     setSearchValuesBackup({
       city: city.label,
       specialization: specialization.label,
-      ppointmentDate: appointmentDate,
+      appointmentDate: appointmentDate,
     });
 
     searchForAppo(

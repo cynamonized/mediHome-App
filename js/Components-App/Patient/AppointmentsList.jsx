@@ -89,10 +89,10 @@ const AppointetsTable = ({ title, appos, isCompleted }) => {
                         }}
                       >
                         <Link
-                          to="/single-apointment"
+                          to="/portal/single-apointment"
                           state={{
                             chosenAppoID: appo.id,
-                            from: "/app-list",
+                            from: "/portal/app-list",
                             ifCompleted: appo.completed,
                           }}
                         >
@@ -123,10 +123,10 @@ const AppointetsTable = ({ title, appos, isCompleted }) => {
                       <p className="top-row__spec">{appo.specialization}</p>
                       <div className="top-row__set">
                         <Link
-                          to="/single-apointment"
+                          to="/portal/single-apointment"
                           state={{
                             chosenAppoID: appo.id,
-                            from: "/app-list",
+                            from: "/portal/app-list",
                             ifCompleted: appo.completed,
                           }}
                         >
