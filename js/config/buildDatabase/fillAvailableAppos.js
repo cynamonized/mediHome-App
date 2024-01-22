@@ -71,8 +71,8 @@ const fillWithSingleAppoSet = async (
 
 export const fillAvailableAppos = async () => {
   await fillWithSingleAppoSet(
-    new Date(`July 31, 2023 8:00:00`),
-    22,
+    new Date(`January 29, 2024 8:00:00`),
+    49,
     3,
     6,
     "Internist",
@@ -82,8 +82,8 @@ export const fillAvailableAppos = async () => {
   );
 
   await fillWithSingleAppoSet(
-    new Date(`August 2, 2023 8:00:00`),
-    22,
+    new Date(`January 29, 2024 8:00:00`),
+    49,
     2,
     6,
     "Internist",
@@ -93,8 +93,8 @@ export const fillAvailableAppos = async () => {
   );
 
   await fillWithSingleAppoSet(
-    new Date(`August 7, 2023 8:00:00`),
-    22,
+    new Date(`January 29, 2024 8:00:00`),
+    49,
     2,
     4,
     "Internist",
@@ -104,8 +104,8 @@ export const fillAvailableAppos = async () => {
   );
 
   await fillWithSingleAppoSet(
-    new Date(`August 8, 2023 8:00:00`),
-    22,
+    new Date(`January 29, 2024 8:00:00`),
+    49,
     5,
     4,
     "Orthopaedist",
@@ -115,8 +115,8 @@ export const fillAvailableAppos = async () => {
   );
 
   await fillWithSingleAppoSet(
-    new Date(`August 14, 2023 8:00:00`),
-    22,
+    new Date(`January 29, 2024 8:00:00`),
+    49,
     4,
     6,
     "Orthopaedist",
@@ -126,8 +126,8 @@ export const fillAvailableAppos = async () => {
   );
 
   await fillWithSingleAppoSet(
-    new Date(`August 8, 2023 8:00:00`),
-    22,
+    new Date(`January 29, 2024 8:00:00`),
+    49,
     4,
     6,
     "Orthopaedist",
@@ -137,8 +137,8 @@ export const fillAvailableAppos = async () => {
   );
 
   await fillWithSingleAppoSet(
-    new Date(`August 1, 2023 8:00:00`),
-    22,
+    new Date(`January 29, 2024 8:00:00`),
+    49,
     5,
     6,
     "Orthodontist",
@@ -148,8 +148,8 @@ export const fillAvailableAppos = async () => {
   );
 
   await fillWithSingleAppoSet(
-    new Date(`August 2, 2023 8:00:00`),
-    22,
+    new Date(`January 29, 2024 8:00:00`),
+    49,
     4,
     6,
     "Orthodontist",
@@ -159,8 +159,8 @@ export const fillAvailableAppos = async () => {
   );
 
   await fillWithSingleAppoSet(
-    new Date(`August 7, 2023 8:00:00`),
-    22,
+    new Date(`January 29, 2024 8:00:00`),
+    49,
     5,
     4,
     "Orthodontist",
@@ -168,4 +168,6 @@ export const fillAvailableAppos = async () => {
     "Poznan",
     "Warszawska Street 34"
   );
+
+  console.log("Yearly appos added!");
 };
