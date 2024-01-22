@@ -17,6 +17,17 @@ export const LandingNav = () => {
       <div className="landing-nav container">
         <img src={LogoTop} className="landing-nav__logo-top"></img>
 
+        {/* MOBILE HAMBURGER  */}
+        <input
+          className="landing-nav__menu-btn"
+          type="checkbox"
+          id="menu-btn"
+        />
+        <label className="landing-nav__menu-icon" htmlFor="menu-btn">
+          <span className="navicon"></span>
+        </label>
+        {/* MOBILE HAMBURGER ENDS HERE */}
+
         <div className="landing-nav__right-column">
           <ul className="right-column__menu">
             <li className="menu__single-option">
