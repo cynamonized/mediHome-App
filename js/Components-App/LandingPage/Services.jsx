@@ -7,7 +7,7 @@ import { Eyebrow } from "./Utilities/LandingGenericComponents";
 
 export const Services = () => {
   return (
-    <div className="services container">
+    <section id="services" className="services container">
       <div className="services__left-column">
         <Eyebrow>{"SERVICES"}</Eyebrow>
         <h2 className="landing-section-title">
@@ -56,6 +56,6 @@ export const Services = () => {
           </p>
         </div>
       </div>
-    </div>
+    </section>
   );
 };

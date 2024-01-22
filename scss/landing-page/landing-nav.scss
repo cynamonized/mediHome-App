@@ -19,11 +19,29 @@
           margin: auto 25px;
           color: $color-main-blue;
 
+          a {
+            display: block;
+            margin: auto;
+            color: $color-main-blue;
+
+            &:hover {
+              color: $color-main-pink;
+            }
+          }
+
+          &:visited {
+            color: $color-main-blue;
+          }
+
           &:hover {
             color: $color-main-pink;
             cursor: pointer;
           }
         }
+      }
+
+      .right-column__button-container {
+        margin-left: 25px;
       }
     }
   }

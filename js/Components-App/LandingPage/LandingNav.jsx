@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import LogoTop from "../../../images/logo-mediHome-small.svg";
 import "../../../scss/landing-page/landing-main.scss";
 import { TertiaryButton } from "../../Utilities/Buttons";
+import { HashLink } from "react-router-hash-link";
 
 export const LandingNav = () => {
   const goToPortal = () => {
@@ -15,14 +16,24 @@ export const LandingNav = () => {
 
         <div className="landing-nav__right-column">
           <ul className="right-column__menu">
-            <li className="menu__single-option">SERVICES</li>
-            <li className="menu__single-option">ABOUT US</li>
-            <li className="menu__single-option">CONTACT</li>
-            <li className="menu__single-option">CAREERS</li>
+            <li className="menu__single-option">
+              <HashLink to="#services">SERVICES</HashLink>
+            </li>
+            <li className="menu__single-option">
+              <HashLink to="#about-us">ABOUT US</HashLink>
+            </li>
+            <li className="menu__single-option">
+              <HashLink to="#contact">CONTACT</HashLink>
+            </li>
+            <li className="menu__single-option">
+              <HashLink to="#careers">CAREERS</HashLink>
+            </li>
           </ul>
-          <TertiaryButton callbackAction={goToPortal}>
-            PATIENT PORTAL
-          </TertiaryButton>
+          <div className="right-column__button-container">
+            <TertiaryButton callbackAction={goToPortal}>
+              PATIENT PORTAL
+            </TertiaryButton>
+          </div>
         </div>
       </div>
     </section>

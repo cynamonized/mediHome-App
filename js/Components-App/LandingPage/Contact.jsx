@@ -9,10 +9,10 @@ export const Contact = () => {
   };
 
   return (
-    <div className="contact container">
+    <section id="contact" className="contact container">
       <div className="contact__title-section">
         <div className="title-section__eyebrow-centered">
-          <Eyebrow>ABOUT US</Eyebrow>
+          <Eyebrow>CONTACT</Eyebrow>
         </div>
 
         <h2 className="landing-section-title">
@@ -62,6 +62,6 @@ export const Contact = () => {
           <img src={MainImage} alt="" className="right-column__image" />
         </div>
       </div>
-    </div>
+    </section>
   );
 };

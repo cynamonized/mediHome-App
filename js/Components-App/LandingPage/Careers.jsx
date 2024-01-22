@@ -9,7 +9,7 @@ export const Careers = () => {
   };
 
   return (
-    <div className="careers container">
+    <section id="careers" className="careers container">
       <div className="careers__title-section">
         <Eyebrow>CAREERS</Eyebrow>
         <h2 className="landing-section-title">
@@ -80,7 +80,7 @@ export const Careers = () => {
           <img src={MainImage} alt="" className="right-column__main-image" />
         </div>
       </div>
-    </div>
+    </section>
   );
 };
 

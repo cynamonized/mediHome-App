@@ -5,7 +5,7 @@ import { Eyebrow } from "./Utilities/LandingGenericComponents";
 
 export const AboutUs = () => {
   return (
-    <div className="about-us container">
+    <section id="about-us" className="about-us container">
       <div className="about-us__left-column">
         <img src={ImageTall} alt="" className="left-column__image-tall" />
         <img src={ImageShort} alt="" className="left-column__image-short" />
@@ -28,7 +28,7 @@ export const AboutUs = () => {
           <SingleStat number="12000+" text="Appointments yearly" />
         </div>
       </div>
-    </div>
+    </section>
   );
 };
 
