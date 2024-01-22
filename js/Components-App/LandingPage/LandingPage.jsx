@@ -8,8 +8,6 @@ import { Contact } from "./Contact";
 import { Testimonials } from "./Testomonials";
 import { Careers } from "./Careers";
 
-// links in hooks in patient portal are now broken (/single-appointment/  --> /portal/)
-
 export const LandingPage = () => {
   return (
     <>
