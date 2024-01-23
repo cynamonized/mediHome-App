@@ -41,6 +41,10 @@ $hero-images-gap: 37px;
       }
 
       .right-column__images-inner {
+        height: 100%;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
         width: calc(
           100% - (((100% - (2 * $hero-images-gap)) / 3) + $hero-images-gap)
         );
@@ -48,7 +52,6 @@ $hero-images-gap: 37px;
         .right-column__image2 {
           max-width: none;
           width: calc((100% - $hero-images-gap) / 2);
-          margin-bottom: $hero-images-gap;
           border-radius: 76px;
         }
         .right-column__image3 {
