@@ -18,13 +18,52 @@
     background-color: $color-main-pink-dark;
   }
 
+  &:hover {
+    .left-column__button-icon {
+      img {
+        margin-left: 15px;
+        transition: 0.5s;
+
+        @include smallest_desktop {
+          margin-left: 0;
+          transition: 0;
+        }
+      }
+    }
+  }
+
+  .left-column__button-icon {
+    .button-icon__icon {
+      height: 17px;
+      margin: auto 0;
+
+      @include small_mobile {
+        display: none;
+      }
+    }
+  }
+
   @include smallest_desktop {
-    padding: 12px 20px;
     width: 100%;
   }
 
   @include tablet {
-    padding: 12px;
+    padding: 12px 20px;
+  }
+
+  @include smaller_tablet {
+    font-size: 1rem;
+    display: inline;
+    width: auto;
+    padding: 12px 40px;
+  }
+}
+
+.hero-main {
+  .main-button {
+    @include smallest_desktop {
+      width: inherit;
+    }
   }
 }
 

@@ -1,3 +1,5 @@
+$hero-images-gap: 37px;
+
 .hero-main {
   padding: 100px 0 200px 0;
   font-family: $font-poppins;
@@ -10,39 +12,106 @@
       color: $color-main-pink;
       margin-bottom: 50px;
       @include fonts(1.5rem, 400, $color-main-pink);
+
+      @include smallest_desktop {
+        @include fonts(1.3rem, 400, $color-main-pink);
+      }
     }
 
     .left-column__button-icon {
       display: flex;
-      gap: 15px;
+      gap: 5px;
     }
   }
 
   .hero-main__right-column {
-    max-width: 532px;
-
+    max-width: none;
+    width: 532px;
+    display: grid;
+    grid-template-columns: 1fr;
     .right-column__images-outer {
+      width: 100%;
+      gap: $hero-images-gap;
+      margin-bottom: $hero-images-gap;
       display: flex;
-      gap: 37px;
-      margin-bottom: 37px;
       .right-column__image1 {
+        max-width: none;
+        width: calc((100% - ($hero-images-gap * 2)) / 3);
         border-radius: 76px 76px 0 76px;
       }
 
       .right-column__images-inner {
+        width: calc(
+          100% - (((100% - (2 * $hero-images-gap)) / 3) + $hero-images-gap)
+        );
+
         .right-column__image2 {
-          margin-bottom: 37px;
+          max-width: none;
+          width: calc((100% - $hero-images-gap) / 2);
+          margin-bottom: $hero-images-gap;
           border-radius: 76px;
         }
-
         .right-column__image3 {
+          max-width: none;
           border-radius: 76px;
+          width: 100%;
         }
       }
     }
-
     .right-column__image4 {
+      max-width: none;
+      width: 100%;
       border-radius: 76px 0 76px 76px;
     }
+  }
+}
+
+.hero-main {
+  @include smallest_desktop {
+    padding: 70px 0 120px 0;
+
+    .hero-main__left-column {
+      max-width: 45%;
+    }
+
+    .hero-main__right-column {
+      width: 380px;
+    }
+  }
+
+  @include smaller_tablet {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+    .hero-main__left-column {
+      max-width: none;
+      margin-bottom: 70px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+
+      .left-column__subtitle {
+        text-align: center;
+      }
+    }
+
+    .hero-main__right-column {
+      width: 480px;
+    }
+  }
+
+  @include mobile {
+    width: 80%;
+    margin: 0 auto;
+
+    .hero-main__right-column {
+      width: 100%;
+    }
+  }
+
+  @include small_mobile {
+    width: 90%;
   }
 }

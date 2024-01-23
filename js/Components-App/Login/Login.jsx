@@ -102,7 +102,7 @@ export const Login = () => {
             {/* <ToolTip icon={"login"} isBig={true}>
               This is a demo build of the application. <br />
               If you wish to test it, please use test user account below: <br />
-              <b>Email: </b>marc.marco@example.com <br />
+              <b>Email: </b>mark.marco@example.com <br />
               <b>Password: </b>321medihome
             </ToolTip> */}
           </div>

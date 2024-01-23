@@ -108,6 +108,7 @@
   .tooltip__hover-message {
     white-space: nowrap;
     font-family: $font-poppins;
+    line-height: 1.25rem;
     background-color: $color-main-white;
     position: absolute;
     padding: 10px;
@@ -115,6 +116,12 @@
     border-radius: 20px;
     top: -50px;
     z-index: 2;
+
+    @include tablet {
+      white-space: wrap;
+      width: 60vw;
+      padding: 20px;
+    }
   }
 
   .tooltip__fade-in {
@@ -154,6 +161,17 @@
     padding: 20px;
     top: 20px;
     left: 70px;
+    @include tablet {
+      white-space: wrap;
+      width: 60vw;
+      padding: 20px;
+      left: inherit;
+      right: 70px;
+    }
+    @include mobile {
+      width: 90vw;
+      right: -15px;
+    }
   }
 }
 

@@ -1,0 +1,235 @@
+// RWD of hero image is ugly oded atm, to be changed
+
+$smallest-desktop-dimension: 100px;
+$smallest-desktop-gap: 37px;
+
+$smaller-tablet-dimension: 150px;
+$smaller-tablet-gap: 37px;
+
+$mobile-dimension: 100px;
+$mobile-gap: 37px;
+
+$small-mobile-dimension: 70px;
+$small-mobile-gap: 37px;
+
+.hero-main {
+  padding: 100px 0 200px 0;
+  font-family: $font-poppins;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  .hero-main__left-column {
+    max-width: 573px;
+    .left-column__subtitle {
+      color: $color-main-pink;
+      margin-bottom: 50px;
+      @include fonts(1.5rem, 400, $color-main-pink);
+
+      @include smallest_desktop {
+        @include fonts(1.3rem, 400, $color-main-pink);
+      }
+    }
+
+    .left-column__button-icon {
+      display: flex;
+      gap: 5px;
+    }
+  }
+
+  .hero-main__right-column {
+    max-width: 532px;
+
+    .right-column__images-outer {
+      display: flex;
+      gap: 37px;
+      margin-bottom: 37px;
+      .right-column__image1 {
+        border-radius: 76px 76px 0 76px;
+      }
+
+      .right-column__images-inner {
+        .right-column__image2 {
+          margin-bottom: 37px;
+          border-radius: 76px;
+        }
+
+        .right-column__image3 {
+          border-radius: 76px;
+        }
+      }
+    }
+
+    .right-column__image4 {
+      border-radius: 76px 0 76px 76px;
+    }
+  }
+}
+
+.hero-main {
+  @include smallest_desktop {
+    padding: 70px 0 120px 0;
+    flex-wrap: wrap;
+
+    .hero-main__left-column {
+      max-width: 45%;
+    }
+
+    // .hero-main__right-column {
+    //   aspect-ratio: auto;
+    //   // aspect-ratio: 532/536;
+    //   // width: 400px;
+
+    //   .right-column__images-outer {
+    //     gap: $smallest-desktop-gap;
+    //     margin-bottom: $smallest-desktop-gap;
+    //     max-width: 100%;
+
+    //     .right-column__image1 {
+    //       max-width: $smallest-desktop-dimension;
+    //     }
+
+    //     .right-column__images-inner {
+    //       max-width: calc(
+    //         $smallest-desktop-dimension * 2 + $smallest-desktop-gap
+    //       );
+    //       .right-column__image2 {
+    //         margin-bottom: 37px;
+    //         max-width: $smallest-desktop-dimension;
+    //       }
+    //       .right-column__image3 {
+    //         max-width: calc(
+    //           $smallest-desktop-dimension * 2 + $smallest-desktop-gap
+    //         );
+    //       }
+    //     }
+    //   }
+    //   .right-column__image4 {
+    //     max-width: calc(
+    //       $smallest-desktop-dimension * 3 + ($smallest-desktop-gap * 2)
+    //     );
+    //   }
+    // }
+  }
+
+  @include smaller_tablet {
+    display: flex;
+    flex-direction: column;
+    max-width: none;
+    flex-wrap: nowrap;
+    justify-content: center;
+    align-items: center;
+
+    .hero-main__left-column {
+      max-width: none;
+      margin-bottom: 70px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+
+      .left-column__subtitle {
+        text-align: center;
+      }
+    }
+
+    // .hero-main__right-column {
+    //   max-width: none;
+    //   width: calc(3 * $smaller-tablet-dimension + (2 * $smaller-tablet-gap));
+
+    //   .right-column__images-outer {
+    //     gap: $smaller-tablet-gap;
+    //     margin-bottom: $smaller-tablet-gap;
+    //     max-width: 100%;
+
+    //     .right-column__image1 {
+    //       max-width: $smaller-tablet-dimension;
+    //     }
+
+    //     .right-column__images-inner {
+    //       max-width: calc($smaller-tablet-dimension * 2 + $smaller-tablet-gap);
+    //       .right-column__image2 {
+    //         margin-bottom: 37px;
+    //         max-width: $smaller-tablet-dimension;
+    //       }
+    //       .right-column__image3 {
+    //         max-width: calc(
+    //           ($smaller-tablet-dimension * 2) + $smaller-tablet-gap
+    //         );
+    //       }
+    //     }
+    //   }
+    //   .right-column__image4 {
+    //     max-width: calc(
+    //       $smaller-tablet-dimension * 3 + (2 * $smaller-tablet-gap)
+    //     );
+    //   }
+    // }
+  }
+
+  // @include mobile {
+  //   .hero-main__right-column {
+  //     width: calc(3 * $mobile-dimension + (2 * $mobile-gap));
+
+  //     .right-column__images-outer {
+  //       gap: $mobile-gap;
+  //       margin-bottom: $mobile-gap;
+  //       max-width: 100%;
+
+  //       .right-column__image1 {
+  //         max-width: $mobile-dimension;
+  //       }
+
+  //       .right-column__images-inner {
+  //         max-width: calc($mobile-dimension * 2 + $mobile-gap);
+  //         .right-column__image2 {
+  //           margin-bottom: 37px;
+  //           max-width: $mobile-dimension;
+  //         }
+  //         .right-column__image3 {
+  //           max-width: calc(($mobile-dimension * 2) + $mobile-gap);
+  //         }
+  //       }
+  //     }
+  //     .right-column__image4 {
+  //       max-width: calc($mobile-dimension * 3 + (2 * $mobile-gap));
+  //     }
+  //   }
+  // }
+
+  @include small_mobile {
+    width: 90%;
+    margin: 0 auto;
+    .hero-main__right-column {
+      max-width: none;
+      width: 100%;
+      display: grid;
+      grid-template-columns: 1fr;
+      .right-column__images-outer {
+        width: 100%;
+        gap: $mobile-gap;
+        display: flex;
+        // justify-content: space-between;
+        .right-column__image1 {
+          max-width: none;
+          width: calc((100% - ($mobile-gap * 2)) / 3);
+        }
+
+        .right-column__images-inner {
+          width: calc(100% - (((100% - (2 * $mobile-gap)) / 3) + $mobile-gap));
+
+          .right-column__image2 {
+            max-width: none;
+            width: calc((100% - $mobile-gap) / 2);
+          }
+          .right-column__image3 {
+            max-width: none;
+            width: 100%;
+          }
+        }
+      }
+      .right-column__image4 {
+        max-width: none;
+        width: 100%;
+      }
+    }
+  }
+}
