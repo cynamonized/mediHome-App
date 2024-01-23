@@ -98,7 +98,10 @@ function App() {
                 <Route path="/" element={<LandingPage />} />
               </>
             ) : (
-              <Route path="/portal" element={<Login />}></Route>
+              <>
+                <Route path="/portal" element={<Login />}></Route>
+                <Route path="/" element={<LandingPage />} />
+              </>
             )}
             <Route path="*" element={<NotFound />}></Route>
           </Routes>
