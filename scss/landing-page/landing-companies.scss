@@ -20,7 +20,25 @@
   .companies__logos {
     @include flex(space-between, center);
     margin-bottom: 200px;
+
+    @include smallest_desktop {
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr;
+      gap: 30px;
+    }
+
+    @include tablet {
+      grid-template-columns: 1fr 1fr;
+      gap: 50px;
+    }
+
+    @include mobile {
+      grid-template-columns: 1fr;
+    }
     .logos__single-logo {
+      @include mobile {
+        margin: 0 auto;
+      }
     }
   }
 }

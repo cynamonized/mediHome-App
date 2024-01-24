@@ -4,9 +4,24 @@
   grid-template-columns: 651fr 517fr;
   gap: 140px;
   margin-bottom: 230px;
+
+  @include small_desktop {
+    grid-template-columns: 1fr 2fr;
+  }
+
+  @include smallest_desktop {
+    gap: 50px;
+  }
+
+  @include smaller_tablet {
+    gap: 30px;
+    grid-template-columns: 1fr;
+  }
+
+  @include small_mobile {
+  }
   .about-us__left-column {
     display: flex;
-    // grid-template-columns: repeat(2, minmax(0, 1fr));
     gap: 35px;
 
     .left-column__image-tall {
@@ -16,23 +31,86 @@
     .left-column__image-short {
       align-self: flex-end;
       border-radius: 184px 184px 0 184px;
-      //   width: 50%;
       max-width: 296px;
-      // aspect-ratio: 1/1;
       object-fit: cover;
+    }
+
+    @include small_desktop {
+      align-items: flex-end;
+      .left-column__image-tall {
+        max-width: 250px;
+      }
+
+      .left-column__image-short {
+        aspect-ratio: 1/1;
+        max-width: 250px;
+        align-self: inherit;
+      }
+    }
+
+    @include smallest_desktop {
+      .left-column__image-tall {
+        max-width: 200px;
+      }
+
+      .left-column__image-short {
+        max-width: 200px;
+      }
+    }
+
+    @include tablet {
+      .left-column__image-tall {
+        max-width: 150px;
+      }
+
+      .left-column__image-short {
+        max-width: 150px;
+      }
+    }
+
+    @include smaller_tablet {
+      justify-content: space-between;
+      margin-top: 50px;
+      gap: inherit;
+      .left-column__image-tall {
+        max-width: calc(50% - (35px / 2));
+      }
+
+      .left-column__image-short {
+        max-width: calc(50% - (35px / 2));
+      }
+    }
+
+    @include small_mobile {
+      margin-top: 15px;
     }
   }
 
   .about-us__right-column {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+
+    @include smaller_tablet {
+      order: -1;
+    }
     .right-column__title {
       margin-right: 100px;
+
+      @include small_desktop {
+        margin-right: 0;
+      }
     }
 
     .right-column__description {
-      @include fonts(1.25rem, 400, $color-main-blue);
-      line-height: 1.625rem;
       margin-top: 40px;
-      margin-bottom: 60px;
+      margin-bottom: 70px;
+      padding-right: 0;
+
+      @include smaller_tablet {
+        margin-bottom: 40px;
+        margin-top: 25px;
+      }
     }
 
     .right-column__stats {
@@ -41,6 +119,11 @@
       gap: 40px;
       row-gap: 60px;
       margin-top: 20px;
+
+      @include small_mobile {
+        grid-template-columns: 1fr;
+        row-gap: 30px;
+      }
 
       .stats__single-stat {
         .single-stat__number {

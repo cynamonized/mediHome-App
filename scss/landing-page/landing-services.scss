@@ -5,6 +5,10 @@
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: 80px;
+
+  @include smallest_desktop {
+    grid-template-columns: 1fr;
+  }
   .services__left-column {
     display: flex;
     flex-direction: column;
@@ -12,9 +16,15 @@
 
     .left-column__description {
       @include fonts(1.25rem, 400, $color-main-blue);
-
+      line-height: 1.5rem;
       margin-top: 40px;
       padding-right: 80px;
+
+      @include smallest_desktop {
+        font-size: 1.1;
+        line-height: 1.3rem;
+        margin-top: 25px;
+      }
     }
   }
 
@@ -23,10 +33,35 @@
     grid-template-columns: repeat(2, minmax(0, 1fr));
     gap: 44px;
 
+    @include mobile {
+      grid-template-columns: 1fr;
+    }
+
     .right-column__specialization-container {
       padding: 40px;
       border: 1px solid $color-greys-mid-1;
       border-radius: 32px;
+
+      @include small_desktop {
+        padding: 30px;
+
+        .specialization-container__logo {
+          max-width: none;
+          max-height: 35px;
+        }
+      }
+
+      @include smallest_desktop {
+        .specialization-container__logo {
+          max-height: 50px;
+        }
+      }
+
+      @include smaller_tablet {
+        .specialization-container__logo {
+          max-height: 36px;
+        }
+      }
       .specialization-container__logo {
         max-width: 100%;
         margin-bottom: 25px;
@@ -34,6 +69,7 @@
 
       .specialization-container__description {
         @include fonts(1rem, 300, $color-main-text);
+        line-height: 1.25rem;
       }
     }
 
@@ -53,6 +89,16 @@
     .spec-D {
       margin-top: -60px;
       margin-bottom: 60px;
+    }
+
+    .spec-A,
+    .spec-B,
+    .spec-C,
+    .spec-D {
+      @include mobile {
+        margin-top: 0;
+        margin-bottom: 0;
+      }
     }
   }
 }

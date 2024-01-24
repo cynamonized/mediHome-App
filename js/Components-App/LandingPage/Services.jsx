@@ -13,7 +13,7 @@ export const Services = () => {
         <h2 className="landing-section-title">
           Find service that suits you best
         </h2>
-        <p className="left-column__description">
+        <p className="section-title__subtitle-description">
           Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec libero
           sapien, volutpat sed leo ac, dictum placerat ante. In porta risus ut
           turpis eleifend, vitae hendrerit velit venenatis.

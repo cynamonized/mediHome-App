@@ -5,6 +5,8 @@ import { TertiaryButton } from "../../Utilities/Buttons";
 import { HashLink } from "react-router-hash-link";
 import { useNavigate } from "react-router-dom";
 
+// FIX THAT OPENING HAMBURGER TAKES SPACE AND MOVES WHOLE PAGE TO THE BOTTOM
+
 export const LandingNav = () => {
   const navigate = useNavigate();
 

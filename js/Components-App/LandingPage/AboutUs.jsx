@@ -16,7 +16,7 @@ export const AboutUs = () => {
         <h2 className="landing-section-title right-column__title">
           Why choose our clinic?
         </h2>
-        <p className="right-column__description">
+        <p className="section-title__subtitle-description right-column__description">
           Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec libero
           sapien, volutpat sed leo ac, dictum placerat ante.
         </p>
