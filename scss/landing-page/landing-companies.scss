@@ -40,5 +40,9 @@
         margin: 0 auto;
       }
     }
+
+    @include smaller_tablet {
+      margin-bottom: 150px;
+    }
   }
 }

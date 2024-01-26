@@ -2,9 +2,17 @@
   font-family: $font-poppins;
   margin-bottom: 230px;
 
+  @include mobile {
+    margin-bottom: 120px;
+  }
+
   .careers__title-section {
     margin-right: 200px;
-    margin-bottom: 70px;
+    margin-bottom: 65px;
+
+    @include small_desktop {
+      margin-right: 0;
+    }
   }
 
   .careers__columns {
@@ -14,7 +22,7 @@
 
     .columns__left-column {
       display: grid;
-      grid-template-columns: 1fr 1fr 1fr;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
       gap: 35px;
       .single-profession {
         border: 1px solid $color-greys-mid-1;
@@ -50,6 +58,74 @@
 
       .right-column__main-image {
         border-radius: 0 264px 264px 264px;
+      }
+    }
+
+    @include small_desktop {
+      .columns__left-column {
+        .single-profession {
+          .single-profession__head {
+            padding: 30px;
+            min-height: 110px;
+            .head__name {
+              font-size: 1.3rem;
+            }
+          }
+
+          .single-profession__body {
+            padding: 30px;
+            .body__description {
+              font-size: 0.9rem;
+            }
+          }
+        }
+      }
+    }
+
+    @include smallest_desktop {
+      grid-template-columns: 1fr;
+      gap: 80px;
+      .columns__right-column {
+        gap: 30px;
+
+        .right-column__main-image {
+          width: 30%;
+        }
+
+        .right-column__button-container {
+          width: 100%;
+        }
+      }
+    }
+
+    @include smaller_tablet {
+      .columns__left-column {
+        grid-template-columns: 1fr;
+
+        .single-profession {
+          .single-profession__head {
+            min-height: 50px;
+          }
+        }
+      }
+    }
+
+    @include mobile {
+      .columns__right-column {
+        .right-column__main-image {
+          width: 50%;
+          margin-left: auto;
+        }
+      }
+    }
+
+    @include small_mobile {
+      margin-bottom: 100px;
+      .columns__right-column {
+        .right-column__main-image {
+          width: 100%;
+          margin-left: inherit;
+        }
       }
     }
   }

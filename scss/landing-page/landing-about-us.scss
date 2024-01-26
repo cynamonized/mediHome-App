@@ -16,6 +16,7 @@
   @include smaller_tablet {
     gap: 30px;
     grid-template-columns: 1fr;
+    margin-bottom: 150px;
   }
 
   @include small_mobile {

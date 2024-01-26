@@ -15,7 +15,7 @@ export const Contact = () => {
           <Eyebrow>CONTACT</Eyebrow>
         </div>
 
-        <h2 className="landing-section-title">
+        <h2 className="landing-section-title contact-title">
           We will help you choose the best option
         </h2>
       </div>

@@ -13,7 +13,7 @@ export const Careers = () => {
       <div className="careers__title-section">
         <Eyebrow>CAREERS</Eyebrow>
         <h2 className="landing-section-title">
-          We are looking for passionate professionalsto join our team
+          We are looking for passionate professionals to join our team
         </h2>
       </div>
       <div className="careers__columns">
@@ -72,7 +72,7 @@ export const Careers = () => {
             we will be happy to talk to you!
           </p>
           <div className="right-column__button-container">
-            <QuaternaryButton callbackAction={performContact} wide={false}>
+            <QuaternaryButton callbackAction={performContact} wide={true}>
               CONTACT US
             </QuaternaryButton>
           </div>

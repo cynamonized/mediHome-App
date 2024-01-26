@@ -9,6 +9,10 @@
   @include smallest_desktop {
     grid-template-columns: 1fr;
   }
+
+  @include smaller_tablet {
+    margin-bottom: 150px;
+  }
   .services__left-column {
     display: flex;
     flex-direction: column;
