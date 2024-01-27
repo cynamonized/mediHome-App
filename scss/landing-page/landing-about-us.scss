@@ -25,13 +25,11 @@
     display: flex;
     gap: 35px;
 
-    .left-column__image-tall {
-      border-radius: 184px 0 184px 184px;
-    }
+    // .left-column__image-tall {
+    // }
 
     .left-column__image-short {
       align-self: flex-end;
-      border-radius: 184px 184px 0 184px;
       max-width: 296px;
       object-fit: cover;
     }
@@ -127,7 +125,7 @@
       }
 
       .stats__single-stat {
-        .single-stat__number {
+        .singlestat__number {
           @include fonts(2.875rem, 600, $color-main-pink);
         }
 

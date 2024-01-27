@@ -1,14 +1,18 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import ImageTall from "../../../images/Landing Page/About Us_1.jpg";
 import ImageShort from "../../../images/Landing Page/About Us_2.jpg";
 import { Eyebrow } from "./Utilities/LandingGenericComponents";
+import AnimatedNumbers from "react-animated-numbers";
+import { useSpring, useInView, animated } from "@react-spring/web";
+import useSize from "@react-hook/size";
+import { easings, config } from "@react-spring/web";
 
 export const AboutUs = () => {
   return (
     <section id="about-us" className="about-us container">
       <div className="about-us__left-column">
-        <img src={ImageTall} alt="" className="left-column__image-tall" />
-        <img src={ImageShort} alt="" className="left-column__image-short" />
+        <ImageTallImg />
+        <ImageShortImg />
       </div>
 
       <div className="about-us__right-column">
@@ -22,22 +26,108 @@ export const AboutUs = () => {
         </p>
 
         <div className="right-column__stats">
-          <SingleStat number="214" text="Best doctors" />
-          <SingleStat number="24" text="Clinic locations" />
-          <SingleStat number="1500+" text="Monthly patients capacity" />
-          <SingleStat number="12000+" text="Appointments yearly" />
+          <SingleStat number={214} text="Best doctors" />
+          <SingleStat number={24} text="Clinic locations" />
+          <SingleStat number={1500} text="Monthly patients capacity" />
+          <SingleStat number={12000} text="Appointments yearly" />
         </div>
       </div>
     </section>
   );
 };
 
+const ImageTallImg = () => {
+  const [ref, InView] = useInView();
+  const [width, height] = useSize(ref);
+
+  const props = useSpring(
+    InView
+      ? {
+          delay: 1300,
+          loop: { reverse: true },
+          from: {
+            borderTopRightRadius: 0,
+            borderBottomRightRadius: width / 2,
+          },
+          to: {
+            borderTopRightRadius: width / 2,
+            borderBottomRightRadius: 0,
+          },
+          config: {
+            duration: 2000,
+          },
+        }
+      : {}
+  );
+
+  return (
+    <>
+      <animated.img
+        src={ImageTall}
+        alt=""
+        className="left-column__image-tall"
+        style={{
+          borderTopLeftRadius: width / 2,
+          borderBottomLeftRadius: width / 2,
+          ...props,
+        }}
+        ref={ref}
+      />
+    </>
+  );
+};
+
+const ImageShortImg = () => {
+  const [ref, InView] = useInView();
+  const [width, height] = useSize(ref);
+
+  const props = useSpring(
+    InView
+      ? {
+          delay: 4000,
+          loop: { reverse: true },
+          from: {
+            borderBottomRightRadius: 0,
+            borderTopLeftRadius: width / 2,
+          },
+          to: {
+            borderBottomRightRadius: width / 2,
+            borderTopLeftRadius: 0,
+          },
+          config: {
+            duration: 2000,
+          },
+        }
+      : {}
+  );
+
+  return (
+    <animated.img
+      src={ImageShort}
+      alt=""
+      className="left-column__image-short"
+      style={{
+        borderTopRightRadius: width / 2,
+        borderBottomLeftRadius: width / 2,
+        ...props,
+      }}
+      ref={ref}
+    />
+  );
+};
+
 const SingleStat = ({ number, text }) => {
+  const [num, setNum] = useState(number);
+
+  const [ref, InView] = useInView();
+  const props = useSpring({ total: InView ? num : 0 });
+
   return (
     <div className="stats__single-stat">
-      {/* ADD A RISING NUMBER COMP/HOOK */}
-      {/* I FOUND IT ALREADY - OneTab/Trello/Notion? */}
-      <p className="single-stat__number">{number}</p>
+      <animated.p className="singlestat__number" ref={ref}>
+        {InView ? props.total.to((x) => x.toFixed(0)) : 0}
+      </animated.p>
+
       <p className="single-stat__text">{text}</p>
     </div>
   );
