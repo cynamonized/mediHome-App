@@ -2,8 +2,34 @@ import React, { useState, useEffect } from "react";
 import { Eyebrow } from "./Utilities/LandingGenericComponents";
 import MainImage from "../../../images/Landing Page/Careers_1.jpg";
 import { QuaternaryButton } from "../../Utilities/Buttons";
+import { useSpring, useInView, animated } from "@react-spring/web";
+import useSize from "@react-hook/size";
+import { easings, config } from "@react-spring/web";
 
 export const Careers = () => {
+  const [ref, InView] = useInView();
+  const [width, height] = useSize(ref);
+
+  const props = useSpring(
+    InView
+      ? {
+          delay: 500,
+          loop: { reverse: true },
+          from: {
+            borderTopLeftRadius: 0,
+            borderBottomRightRadius: width / 2,
+          },
+          to: {
+            borderTopLeftRadius: width / 2,
+            borderBottomRightRadius: 0,
+          },
+          config: {
+            duration: 2000,
+          },
+        }
+      : {}
+  );
+
   const performContact = () => {
     console.log("This is a placeholder");
   };
@@ -77,7 +103,17 @@ export const Careers = () => {
             </QuaternaryButton>
           </div>
 
-          <img src={MainImage} alt="" className="right-column__main-image" />
+          <animated.img
+            src={MainImage}
+            alt=""
+            className="right-column__main-image"
+            ref={ref}
+            style={{
+              borderTopRightRadius: width / 2,
+              borderBottomLeftRadius: width / 2,
+              ...props,
+            }}
+          />
         </div>
       </div>
     </section>

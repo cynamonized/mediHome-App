@@ -2,8 +2,34 @@ import React, { useState, useEffect } from "react";
 import { Eyebrow } from "./Utilities/LandingGenericComponents";
 import MainImage from "../../../images/Landing Page/Contact_1.jpg";
 import { QuaternaryButton } from "../../Utilities/Buttons";
+import { useSpring, useInView, animated } from "@react-spring/web";
+import useSize from "@react-hook/size";
+import { easings, config } from "@react-spring/web";
 
 export const Contact = () => {
+  const [ref, InView] = useInView();
+  const [width, height] = useSize(ref);
+
+  const props = useSpring(
+    InView
+      ? {
+          delay: 2000,
+          loop: { reverse: true },
+          from: {
+            borderTopLeftRadius: 0,
+            borderTopRightRadius: height / 2,
+          },
+          to: {
+            borderTopLeftRadius: height / 2,
+            borderTopRightRadius: 0,
+          },
+          config: {
+            duration: 1500,
+          },
+        }
+      : {}
+  );
+
   const performSubmit = (e) => {
     e.preventDefault();
   };
@@ -59,7 +85,17 @@ export const Contact = () => {
         </div>
 
         <div className="columns__right-column">
-          <img src={MainImage} alt="" className="right-column__image" />
+          <animated.img
+            src={MainImage}
+            alt=""
+            className="right-column__image"
+            style={{
+              borderBottomRightRadius: height / 2,
+              borderBottomLeftRadius: height / 2,
+              ...props,
+            }}
+            ref={ref}
+          />
         </div>
       </div>
     </section>
