@@ -3,7 +3,7 @@ import ImageTall from "../../../images/Landing Page/About Us_1.jpg";
 import ImageShort from "../../../images/Landing Page/About Us_2.jpg";
 import { Eyebrow } from "./Utilities/LandingGenericComponents";
 import AnimatedNumbers from "react-animated-numbers";
-import { useSpring, useInView, animated } from "@react-spring/web";
+import { useSpring, useInView, animated, useChain } from "@react-spring/web";
 import useSize from "@react-hook/size";
 import { easings, config } from "@react-spring/web";
 

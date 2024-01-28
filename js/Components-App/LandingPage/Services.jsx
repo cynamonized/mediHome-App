@@ -1,10 +1,17 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import LogoA from "../../../images/Landing Page/mediSmallLogos/Logo A.svg";
 import LogoB from "../../../images/Landing Page/mediSmallLogos/Logo B.svg";
 import LogoC from "../../../images/Landing Page/mediSmallLogos/Logo C.svg";
 import LogoD from "../../../images/Landing Page/mediSmallLogos/Logo D.svg";
 import { Eyebrow } from "./Utilities/LandingGenericComponents";
-import { useSpring, useInView, animated } from "@react-spring/web";
+import {
+  useSpring,
+  useInView,
+  animated,
+  useChain,
+  useSprings,
+  useSpringRef,
+} from "@react-spring/web";
 import useSize from "@react-hook/size";
 import { easings, config } from "@react-spring/web";
 import { useWindowSize } from "@uidotdev/usehooks";
@@ -14,37 +21,92 @@ export const Services = () => {
   const size = useWindowSize();
   const [isMobile, setIsMobile] = useState(true);
 
-  const propsA = useSpring(
-    InView
-      ? {
-          delay: 1000,
+  const [delayTime, setDelayTime] = useState(0);
 
-          loop: { reverse: true },
-          from: { y: 0 },
-          to: { y: -60 },
-          config: {
-            duration: 2000,
-            easing: easings.easeInOutQuart,
-          },
-        }
-      : {}
-  );
+  const [propsA1, api] = useSpring(() => {
+    if (InView) {
+      return {
+        // delay: () => {
+        //   if (!delayTime) {
+        //     console.log("I am here!");
+        //     setDelayTime(2000);
+        //     return 0;
+        //   }
 
-  const propsB = useSpring(
-    InView
-      ? {
-          delay: 1000,
-          easing: easings.steps(5),
-          loop: { reverse: true },
-          from: { y: 0 },
-          to: { y: 60 },
-          config: {
-            duration: 2000,
-            easing: easings.easeInOutQuart,
-          },
-        }
-      : {}
-  );
+        //   console.log("USUAL WAY");
+        //   return delayTime;
+        // },
+        delay: delayTime,
+        loop: true,
+        from: { y: -60, x: 0 },
+        to: async (next, cancel) => {
+          await next({ y: 0 });
+          await next({ x: 60 });
+          await next({ y: -60 });
+          await next({ x: 0 });
+          setDelayTime(2000);
+          cancel();
+        },
+        config: {
+          duration: 400,
+          easing: easings.easeInOutQuart,
+        },
+      };
+    } else {
+      return {};
+    }
+  }, [InView, delayTime]);
+
+  // const propsA1 = useSpring(
+  //   InView
+  //     ? {
+  //         delay: 100,
+  //         loop: { reverse: true },
+  //         from: { y: -60, x: 0 },
+  //         to: async (next, cancel) => {
+  //           await next({ y: 0 });
+  //           await next({ x: 60 });
+  //           await next({ y: -60 });
+  //           await next({ x: 0 });
+  //         },
+  //         config: {
+  //           duration: 500,
+  //           easing: easings.easeInOutQuart,
+  //         },
+  //       }
+  //     : {}
+  // );
+
+  // const propsA = useSpring(
+  //   InView
+  //     ? {
+  //         delay: 1000,
+  //         loop: { reverse: true },
+  //         from: { y: 0 },
+  //         to: { y: -60 },
+  //         config: {
+  //           duration: 2000,
+  //           easing: easings.easeInOutQuart,
+  //         },
+  //       }
+  //     : {}
+  // );
+
+  // const propsB = useSpring(
+  //   InView
+  //     ? {
+  //         delay: 1000,
+  //         easing: easings.steps(5),
+  //         loop: { reverse: true },
+  //         from: { y: 0 },
+  //         to: { y: 60 },
+  //         config: {
+  //           duration: 2000,
+  //           easing: easings.easeInOutQuart,
+  //         },
+  //       }
+  //     : {}
+  // );
 
   useEffect(() => {
     if (size.width <= 670) {
@@ -71,8 +133,9 @@ export const Services = () => {
       </div>
       <div className="service__right-column">
         <animated.div
-          style={isMobile ? { ...propsBasic } : { ...propsA }}
+          // THIS ANIMATED DIV IS JUST FOR TESTING
           className="right-column__specialization-container spec-A"
+          style={isMobile ? { ...propsBasic } : { ...propsA1 }}
         >
           <img src={LogoA} alt="" className="specialization-container__logo" />
           <p className="specialization-container__description">
@@ -82,7 +145,19 @@ export const Services = () => {
           </p>
         </animated.div>
 
-        <animated.div
+        {/* <animated.div
+          style={isMobile ? { ...propsBasic } : { ...propsA }}
+          className="right-column__specialization-container spec-A"
+        >
+          <img src={LogoA} alt="" className="specialization-container__logo" />
+          <p className="specialization-container__description">
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec
+            libero sapien, volutpat sed leo ac, dictum placerat ante. In porta
+            risus ut turpis eleifend.
+          </p>
+        </animated.div> */}
+
+        {/* <animated.div
           style={isMobile ? { ...propsBasic } : { ...propsB }}
           className="right-column__specialization-container spec-B"
         >
@@ -116,7 +191,7 @@ export const Services = () => {
             libero sapien, volutpat sed leo ac, dictum placerat ante. In porta
             risus ut turpis eleifend.
           </p>
-        </animated.div>
+        </animated.div> */}
       </div>
     </section>
   );

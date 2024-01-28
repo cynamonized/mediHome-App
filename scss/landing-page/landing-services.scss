@@ -16,7 +16,6 @@
   .services__left-column {
     display: flex;
     flex-direction: column;
-    // margin: auto 0;
 
     .left-column__description {
       @include fonts(1.25rem, 400, $color-main-blue);
@@ -77,7 +76,6 @@
       }
     }
 
-    // Add animations to below boxes (frames)
     .spec-A {
       margin-top: 60px;
     }
