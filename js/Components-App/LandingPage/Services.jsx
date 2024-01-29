@@ -23,59 +23,49 @@ export const Services = () => {
 
   const [delayTime, setDelayTime] = useState(0);
 
-  const [propsA1, api] = useSpring(() => {
-    if (InView) {
-      return {
-        // delay: () => {
-        //   if (!delayTime) {
-        //     console.log("I am here!");
-        //     setDelayTime(2000);
-        //     return 0;
-        //   }
+  // const [propsA1, api] = useSpring(() => {
+  //   if (InView) {
+  //     return {
 
-        //   console.log("USUAL WAY");
-        //   return delayTime;
-        // },
-        delay: delayTime,
-        loop: true,
-        from: { y: -60, x: 0 },
-        to: async (next, cancel) => {
-          await next({ y: 0 });
-          await next({ x: 60 });
-          await next({ y: -60 });
-          await next({ x: 0 });
-          setDelayTime(2000);
-          cancel();
-        },
-        config: {
-          duration: 400,
-          easing: easings.easeInOutQuart,
-        },
-      };
-    } else {
-      return {};
-    }
-  }, [InView, delayTime]);
+  //       delay: 1000,
+  //       loop: true,
+  //       from: { y: -60, x: 0 },
+  //       to: async (next, cancel) => {
+  //         await next({ y: 0 });
+  //         await next({ x: 60 });
+  //         await next({ y: -60 });
+  //         await next({ x: 0 });
+  //         setDelayTime(2000);
+  //       },
+  //       config: {
+  //         duration: 400,
+  //         easing: easings.easeInOutQuart,
+  //       },
+  //     };
+  //   } else {
+  //     return {};
+  //   }
+  // }, [InView, delayTime]);
 
-  // const propsA1 = useSpring(
-  //   InView
-  //     ? {
-  //         delay: 100,
-  //         loop: { reverse: true },
-  //         from: { y: -60, x: 0 },
-  //         to: async (next, cancel) => {
-  //           await next({ y: 0 });
-  //           await next({ x: 60 });
-  //           await next({ y: -60 });
-  //           await next({ x: 0 });
-  //         },
-  //         config: {
-  //           duration: 500,
-  //           easing: easings.easeInOutQuart,
-  //         },
-  //       }
-  //     : {}
-  // );
+  const propsA1 = useSpring(
+    InView
+      ? {
+          delay: 100,
+          loop: { reverse: true },
+          from: { y: -60, x: 0 },
+          to: async (next, cancel) => {
+            await next({ y: 0 });
+            await next({ x: 60 });
+            await next({ y: -60 });
+            await next({ x: 0 });
+          },
+          config: {
+            duration: 500,
+            easing: easings.easeInOutQuart,
+          },
+        }
+      : {}
+  );
 
   // const propsA = useSpring(
   //   InView

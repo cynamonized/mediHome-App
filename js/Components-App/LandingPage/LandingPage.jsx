@@ -7,18 +7,21 @@ import { AboutUs } from "./AboutUs";
 import { Contact } from "./Contact";
 import { Testimonials } from "./Testomonials";
 import { Careers } from "./Careers";
+import { TestServices } from "./TestServices";
 
 export const LandingPage = () => {
   return (
     <>
-      <HeroMerged />
+      {/* <HeroMerged />
       <Companies />
       <Services />
       <AboutUs />
       <Testimonials />
       <Contact />
       <Careers />
-      <Footer />
+      <Footer /> */}
+
+      <TestServices />
     </>
   );
 };
