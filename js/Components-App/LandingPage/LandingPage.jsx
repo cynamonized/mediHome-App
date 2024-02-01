@@ -8,12 +8,16 @@ import { Contact } from "./Contact";
 import { Testimonials } from "./Testomonials";
 import { Careers } from "./Careers";
 import { ServicesLegacy } from "./ServicesLegacy";
+import { HeroMainPuzzles } from "./HeroMaainPuzzles";
+import { HeroMain } from "./HeroMain";
 
 export const LandingPage = () => {
   return (
     <>
+      <HeroMain />
+      {/* <HeroMainPuzzles /> */}
       {/* <ServicesLegacy /> */}
-      <Services />
+      {/* <Services /> */}
       {/* <HeroMerged />
       <Companies />
       <Services />
@@ -22,6 +26,7 @@ export const LandingPage = () => {
       <Contact />
       <Careers />
       <Footer /> */}
+      {/* <HeroMerged /> */}
     </>
   );
 };

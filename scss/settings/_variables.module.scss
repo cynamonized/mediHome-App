@@ -57,6 +57,7 @@ $color-greys-dark-2: #5d5d5d;
 // Other
 $border-radius: 30px;
 $margin-inside: 30px;
+$hero-images-gap: 37px;
 
 :export {
   mainPink: $color-main-pink;
@@ -68,4 +69,5 @@ $margin-inside: 30px;
   greysLight2: $color-greys-light-2;
   greysMid1: $color-greys-mid-1;
   mainText: $color-main-text;
+  heroImagesGap: $hero-images-gap;
 }

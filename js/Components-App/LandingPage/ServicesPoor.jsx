@@ -23,6 +23,11 @@ export const Services = () => {
 
   const [animationTimer, setAnimationTimer] = useState(2000);
 
+  // "Services Legacy working - ready to apply hover effects.
+  // ServicesPoor working but HoverOut effect not working
+  // (animation doesn't start again - it needs to apply useSpring body
+  // to api.start() again but then it desynchronizes everything)."
+
   const [propsA, apiA] = useSpring(() => {
     if (InView) {
       return {
