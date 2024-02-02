@@ -1,4 +1,7 @@
+@import "/scss/settings/_reset";
+
 // $hero-images-gap: 37px;
+// MAYBE ITS NEEDED TO ADJUST THIS 37PX TO SMT DIFEFERENT
 
 .hero-main {
   padding: 100px 0 200px 0;
@@ -27,44 +30,64 @@
   .hero-main__right-column {
     max-width: none;
     width: 532px;
-    display: grid;
+    aspect-ratio: 1/1;
+    // height: 532px;
+    // display: grid;
+    gap: $hero-images-gap;
     grid-template-columns: 1fr;
     .right-column__images-outer {
       width: 100%;
+      height: calc(
+        100% - (((100% - (2 * $hero-images-gap)) / 3) + $hero-images-gap)
+      );
       gap: $hero-images-gap;
-      margin-bottom: $hero-images-gap;
       display: flex;
       .right-column__image1 {
         max-width: none;
         width: calc((100% - ($hero-images-gap * 2)) / 3);
+        height: 100%;
         border-radius: 76px 76px 0 76px;
+        object-fit: cover;
       }
 
       .right-column__images-inner {
         height: 100%;
-        display: flex;
-        flex-direction: column;
-        justify-content: space-between;
+        // display: flex;
+        // flex-direction: column;
+        // justify-content: space-between;
+        // display: grid;
+        // grid-template-columns: 1fr;
+        // gap: $hero-images-gap;
         width: calc(
           100% - (((100% - (2 * $hero-images-gap)) / 3) + $hero-images-gap)
         );
+        display: flex;
+        flex-direction: column;
+        row-gap: $hero-images-gap;
 
         .right-column__image2 {
           max-width: none;
           width: calc((100% - $hero-images-gap) / 2);
+          height: calc((100% - $hero-images-gap) / 2);
           border-radius: 76px;
+          object-fit: cover;
         }
         .right-column__image3 {
           max-width: none;
           border-radius: 76px;
           width: 100%;
+          height: calc((100% - $hero-images-gap) / 2);
+          object-fit: cover;
         }
       }
     }
     .right-column__image4 {
       max-width: none;
       width: 100%;
+      height: calc((100% - ($hero-images-gap) * 2) / 3);
       border-radius: 76px 0 76px 76px;
+      object-fit: cover;
+      margin-top: $hero-images-gap;
     }
   }
 }
@@ -79,6 +102,7 @@
 
     .hero-main__right-column {
       width: 380px;
+      height: 380px;
     }
   }
 
@@ -102,6 +126,8 @@
 
     .hero-main__right-column {
       width: 480px;
+      // aspect-ratio: 1/1;
+      height: 480px;
     }
   }
 
@@ -110,7 +136,22 @@
     margin: 0 auto;
 
     .hero-main__right-column {
-      width: 100%;
+      // width: 100%;
+      // padding-top: 100%; /* 1:1 Aspect Ratio */
+      // position: relative;
+
+      // .right-column__images-outer {
+      //   position: absolute;
+      //   top: 0;
+      //   left: 0;
+      //   bottom: 0;
+      //   right: 0;
+      // }
+      width: 300px;
+      height: 300px;
+      // aspect-ratio: 1/1;
+
+      // WIP MOBILE - PERCENTAGE SIZE AND MAINTAIN 1/1 RATION
     }
   }
 

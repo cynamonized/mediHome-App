@@ -1,3 +1,5 @@
+@import "/scss/settings/_reset";
+
 @import "/scss/settings/_variables.module.scss";
 @import "/scss/settings/_mixins";
 @import "/scss/settings/_buttons";
@@ -19,4 +21,4 @@
 @import "/scss//landing-page/landing-testimonials.scss";
 @import "/scss//landing-page/landing-careers.scss";
 
-@import "/scss//landing-page/landing-hero-main-temp.scss";
+@import "/scss/landing-page/landing-hero-main-old.scss";

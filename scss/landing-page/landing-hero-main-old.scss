@@ -1,6 +1,6 @@
-$hero-images-gap: 37px;
+// $hero-images-gap: 37px;
 
-.hero-main-temp {
+.hero-main-old {
   padding: 100px 0 200px 0;
   font-family: $font-poppins;
   display: flex;
@@ -28,7 +28,7 @@ $hero-images-gap: 37px;
     max-width: none;
     width: 532px;
     display: grid;
-    grid-template-columns: 1fr 1fr 1fr;
+    grid-template-columns: 1fr;
     .right-column__images-outer {
       width: 100%;
       gap: $hero-images-gap;
@@ -69,7 +69,7 @@ $hero-images-gap: 37px;
   }
 }
 
-.hero-main-temp {
+.hero-main-old {
   @include smallest_desktop {
     padding: 70px 0 120px 0;
 

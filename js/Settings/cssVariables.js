@@ -8,7 +8,7 @@ import {
   greysLight2,
   greysMid1,
   mainText,
-  heroImageGap,
+  heroImagesGap,
 } from "../../scss/settings/_variables.module.scss";
 
 export const colorMainBlue = mainBlue;
@@ -29,7 +29,7 @@ export const colorGreysMid1 = greysMid1;
 
 export const colorMainText = mainText;
 
-export const heroMainImageGap = heroImageGap;
+export const heroMainImageGap = heroImagesGap;
 
 // LEGACY
 
