@@ -13,12 +13,13 @@ import Medical2 from "../../../images/Landing Page/NotCropped/Medical 2.jpg";
 import Medical3 from "../../../images/Landing Page/NotCropped/Medical 3.jpg";
 import Medical4 from "../../../images/Landing Page/NotCropped/Medical 4.jpg";
 
-// use heroMainImageGap as when calculating width
-// use object-git: cover
+// TO DO
+// Add proper crops
 
-// in the end inner stuff needs to stay in cover?
-// check if this works similar to x?
-// that it can expand out of the container
+// Then add rest of the animations with React String
+// Hover states on card with React Spring - Testimonials and Services
+// I had somehwere a link that perfectly explain how to do those hovers
+// OneNote - Custom tutorial on some sidte
 
 export const HeroMain = () => {
   return (

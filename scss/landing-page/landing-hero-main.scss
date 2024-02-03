@@ -134,28 +134,18 @@
   @include mobile {
     width: 80%;
     margin: 0 auto;
-
-    .hero-main__right-column {
-      // width: 100%;
-      // padding-top: 100%; /* 1:1 Aspect Ratio */
-      // position: relative;
-
-      // .right-column__images-outer {
-      //   position: absolute;
-      //   top: 0;
-      //   left: 0;
-      //   bottom: 0;
-      //   right: 0;
-      // }
-      width: 300px;
-      height: 300px;
-      // aspect-ratio: 1/1;
-
-      // WIP MOBILE - PERCENTAGE SIZE AND MAINTAIN 1/1 RATION
-    }
   }
 
   @include small_mobile {
     width: 90%;
+
+    .hero-main__right-column {
+      // width: 300px;
+      // height: 300px;
+      width: 100%;
+      // padding: 30px;
+      height: 90vw;
+      aspect-ratio: 1/1;
+    }
   }
 }
