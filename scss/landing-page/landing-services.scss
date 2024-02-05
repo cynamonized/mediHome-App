@@ -44,6 +44,7 @@
       padding: 40px;
       border: 1px solid $color-greys-mid-1;
       border-radius: 32px;
+      background-color: $color-main-white;
 
       @include small_desktop {
         padding: 30px;

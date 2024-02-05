@@ -8,28 +8,20 @@ import { Contact } from "./Contact";
 import { Testimonials } from "./Testomonials";
 import { Careers } from "./Careers";
 import { ServicesLegacy } from "./ServicesLegacy";
-import { HeroMainPuzzles } from "./HeroMaainPuzzles";
 import { HeroMain } from "./HeroMain";
 import { HeroMainOld } from "./HeroMainOLd";
 
 export const LandingPage = () => {
   return (
     <>
-      <HeroMain />
-      {/* <HeroMainBackup /> */}
-      <HeroMainOld />
-      {/* <HeroMainPuzzles /> */}
-      {/* <ServicesLegacy /> */}
-      {/* <Services /> */}
       {/* <HeroMerged />
-      <Companies />
-      <Services />
+      <Companies /> */}
+      <ServicesLegacy />
       <AboutUs />
       <Testimonials />
       <Contact />
       <Careers />
-      <Footer /> */}
-      {/* <HeroMerged /> */}
+      <Footer />
     </>
   );
 };

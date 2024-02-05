@@ -1,26 +1,16 @@
 import React, { useState, useEffect, useRef } from "react";
-import LogoA from "../../../images/Landing Page/mediSmallLogos/Logo A.svg";
-import LogoB from "../../../images/Landing Page/mediSmallLogos/Logo B.svg";
-import LogoC from "../../../images/Landing Page/mediSmallLogos/Logo C.svg";
-import LogoD from "../../../images/Landing Page/mediSmallLogos/Logo D.svg";
 import { Eyebrow } from "./Utilities/LandingGenericComponents";
-import {
-  useSpring,
-  useInView,
-  animated,
-  useChain,
-  useSprings,
-  useSpringRef,
-} from "@react-spring/web";
+import { useSpring, useInView, useSpringRef } from "@react-spring/web";
 import useSize from "@react-hook/size";
 import { easings, config } from "@react-spring/web";
 import { useWindowSize } from "@uidotdev/usehooks";
+import { cardsArray } from "./Utilities/cardsArray";
+import { SingleCard } from "./Utilities/ServicesSingleCard";
 
 export const ServicesLegacy = () => {
   const [ref, InView] = useInView();
   const size = useWindowSize();
   const [isMobile, setIsMobile] = useState(true);
-
   const apiA = useSpringRef();
   const apiB = useSpringRef();
   const [animationTimer, setAnimationTimer] = useState(2000);
@@ -157,53 +147,19 @@ export const ServicesLegacy = () => {
         onMouseEnter={stopAnimations}
         onMouseLeave={startAnimations}
       >
-        <animated.div
-          style={isMobile ? { ...propsBasic } : { ...propsA }}
-          className="right-column__specialization-container spec-A"
-        >
-          <img src={LogoA} alt="" className="specialization-container__logo" />
-          <p className="specialization-container__description">
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec
-            libero sapien, volutpat sed leo ac, dictum placerat ante. In porta
-            risus ut turpis eleifend.
-          </p>
-        </animated.div>
-
-        <animated.div
-          style={isMobile ? { ...propsBasic } : { ...propsB }}
-          className="right-column__specialization-container spec-B"
-        >
-          <img src={LogoB} alt="" className="specialization-container__logo" />
-          <p className="specialization-container__description">
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec
-            libero sapien, volutpat sed leo ac, dictum placerat ante. In porta
-            risus ut turpis eleifend.
-          </p>
-        </animated.div>
-
-        <animated.div
-          style={isMobile ? { ...propsBasic } : { ...propsA }}
-          className="right-column__specialization-container spec-C"
-        >
-          <img src={LogoC} alt="" className="specialization-container__logo" />
-          <p className="specialization-container__description">
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec
-            libero sapien, volutpat sed leo ac, dictum placerat ante. In porta
-            risus ut turpis eleifend.
-          </p>
-        </animated.div>
-
-        <animated.div
-          style={isMobile ? { ...propsBasic } : { ...propsB }}
-          className="right-column__specialization-container spec-D"
-        >
-          <img src={LogoD} alt="" className="specialization-container__logo" />
-          <p className="specialization-container__description">
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec
-            libero sapien, volutpat sed leo ac, dictum placerat ante. In porta
-            risus ut turpis eleifend.
-          </p>
-        </animated.div>
+        {cardsArray.map((element, index) => {
+          return (
+            <SingleCard
+              key={index}
+              isMobile={isMobile}
+              propsBasic={propsBasic}
+              propsMain={index % 2 == 0 || index == 0 ? propsB : propsA}
+              boxNameCSS={element.boxNameCSS}
+              logo={element.logo}
+              description={element.description}
+            />
+          );
+        })}
       </div>
     </section>
   );
