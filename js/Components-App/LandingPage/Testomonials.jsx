@@ -4,8 +4,8 @@ import { TestimonialsRating } from "./Utilities/TestimonialsRating";
 import Person1 from "../../../images/Landing Page/reviews/Person 1.jpg";
 import Person2 from "../../../images/Landing Page/reviews/Person 2.jpg";
 import Person3 from "../../../images/Landing Page/reviews/Person 3.jpg";
-
-// MAKE ANY ANIMATION FOR PATIENT PICTURES IN THE FUTURE?
+import { useSpring, useInView, animated, useSprings } from "@react-spring/web";
+import { useWindowSize } from "@uidotdev/usehooks";
 
 export const Testimonials = () => {
   return (
@@ -46,8 +46,66 @@ export const Testimonials = () => {
 };
 
 const SingleColumn = ({ image, name, rating, comment }) => {
+  const size = useWindowSize();
+  const [isMobile, setIsMobile] = useState(true);
+
+  const [hoverSprings, sethoverSprings] = useSpring(
+    () => ({
+      from: { transform: `scale(1)`, zIndex: 0 },
+      config: {
+        tension: 1000,
+        mass: 1,
+        velocity: 0.2,
+      },
+    }),
+    []
+  );
+
+  useEffect(() => {
+    if (size.width <= 670) {
+      setIsMobile(true);
+    } else if (size.width > 670) {
+      setIsMobile(false);
+    }
+  }, [size.width]);
+
+  const hoverIn = () => {
+    sethoverSprings.start({
+      delay: 0,
+      config: {
+        duration: 50,
+      },
+      to: { zIndex: 1 },
+    });
+
+    sethoverSprings.start({
+      delay: 0,
+      to: { transform: `scale(1.1)` },
+    });
+  };
+
+  const hoverOut = () => {
+    sethoverSprings.start({
+      config: {
+        duration: 50,
+      },
+      delay: 0,
+      to: { zIndex: 0 },
+    });
+
+    sethoverSprings.start({
+      delay: 0,
+      to: { transform: `scale(1)` },
+    });
+  };
+
   return (
-    <div className="columns__single-column">
+    <animated.div
+      className="columns__single-column"
+      style={isMobile ? {} : { ...hoverSprings }}
+      onMouseEnter={hoverIn}
+      onMouseLeave={hoverOut}
+    >
       <div className="single-column__head">
         <img src={image} alt="" className="head__image" />
         <p className="head__name">{name}</p>
@@ -59,6 +117,6 @@ const SingleColumn = ({ image, name, rating, comment }) => {
           <TestimonialsRating rating={rating} />
         </div>
       </div>
-    </div>
+    </animated.div>
   );
 };

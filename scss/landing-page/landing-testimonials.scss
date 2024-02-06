@@ -41,9 +41,6 @@
           line-height: 1.25rem;
           margin-bottom: 50px;
         }
-
-        // .body__rating-container {
-        // }
       }
     }
 
@@ -62,14 +59,17 @@
 
         .single-column__body {
           padding: 30px 40px;
-          .body__comment {
-          }
         }
       }
     }
 
     @include tablet {
       gap: 20px;
+      .columns__single-column {
+        .single-column__head {
+          min-height: 235px;
+        }
+      }
     }
 
     @include smaller_tablet {

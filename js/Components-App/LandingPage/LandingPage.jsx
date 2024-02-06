@@ -14,8 +14,8 @@ import { HeroMainOld } from "./HeroMainOLd";
 export const LandingPage = () => {
   return (
     <>
-      {/* <HeroMerged />
-      <Companies /> */}
+      <HeroMerged />
+      <Companies />
       <ServicesLegacy />
       <AboutUs />
       <Testimonials />
