@@ -5,6 +5,8 @@ import { QuaternaryButton } from "../../Utilities/Buttons";
 import { useSpring, useInView, animated } from "@react-spring/web";
 import useSize from "@react-hook/size";
 import { easings, config } from "@react-spring/web";
+import { SingleProfession } from "./Utilities/CareersSingleProfession";
+import { useWindowSize } from "@uidotdev/usehooks";
 
 export const Careers = () => {
   const [ref, InView] = useInView();
@@ -117,21 +119,5 @@ export const Careers = () => {
         </div>
       </div>
     </section>
-  );
-};
-
-const SingleProfession = ({ color, name, description }) => {
-  return (
-    <div className="single-profession">
-      <div className="single-profession__head">
-        <p className="head__name" style={{ color: `${color}` }}>
-          {name}
-        </p>
-      </div>
-
-      <div className="single-profession__body">
-        <p className="body__description">{description}</p>
-      </div>
-    </div>
   );
 };
