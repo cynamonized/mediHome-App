@@ -7,10 +7,17 @@ import useSize from "@react-hook/size";
 import { easings, config } from "@react-spring/web";
 import { SingleProfession } from "./Utilities/CareersSingleProfession";
 import { useWindowSize } from "@uidotdev/usehooks";
+import { careerCards } from "./Utilities/careerCards";
 
 export const Careers = () => {
   const [ref, InView] = useInView();
   const [width, height] = useSize(ref);
+  const [boxChosen, setBoxChosen] = useState(0);
+
+  // 2. USE useSize to get parent width/height
+  // 3. Left columsn needs to be separate comp?
+  // or I can ref Left column by using useRef
+  // YES!!
 
   const props = useSpring(
     InView
@@ -32,9 +39,35 @@ export const Careers = () => {
       : {}
   );
 
-  const performContact = () => {
-    console.log("This is a placeholder");
+  const performContact = (boxIndex) => {
+    console.log("Parent says, you clicked on:", boxIndex);
+    setBoxChosen(boxIndex);
   };
+
+  useEffect(() => {
+    switch (boxChosen) {
+      case 0:
+        break;
+      case 1:
+        console.log("I am 1");
+        break;
+      case 2:
+        console.log("I am 2");
+        break;
+      case 3:
+        console.log("I am 3");
+        break;
+      case 4:
+        console.log("I am 4");
+        break;
+      case 5:
+        console.log("I am 5");
+        break;
+      case 6:
+        console.log("I am 6");
+        break;
+    }
+  }, [boxChosen]);
 
   return (
     <section id="careers" className="careers container">
@@ -46,53 +79,19 @@ export const Careers = () => {
       </div>
       <div className="careers__columns">
         <div className="columns__left-column">
-          <SingleProfession
-            color={"#1CA7EC"}
-            name={"Internists"}
-            description={
-              "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec libero sapien, volutpat sed leo ac, dictum placerat ante. In porta risus ut turpis eleifend."
-            }
-          />
-
-          <SingleProfession
-            color={"#4ADEDE"}
-            name={"Administrative workers"}
-            description={
-              "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec libero sapien, volutpat sed leo ac, dictum placerat ante. In porta risus ut turpis eleifend."
-            }
-          />
-
-          <SingleProfession
-            color={"#438BD3"}
-            name={"Nurses"}
-            description={
-              "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec libero sapien, volutpat sed leo ac, dictum placerat ante. In porta risus ut turpis eleifend."
-            }
-          />
-
-          <SingleProfession
-            color={"#787FF6"}
-            name={"Dentists"}
-            description={
-              "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec libero sapien, volutpat sed leo ac, dictum placerat ante. In porta risus ut turpis eleifend."
-            }
-          />
-
-          <SingleProfession
-            color={"#787FF6"}
-            name={"Orthodontists"}
-            description={
-              "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec libero sapien, volutpat sed leo ac, dictum placerat ante. In porta risus ut turpis eleifend."
-            }
-          />
-
-          <SingleProfession
-            color={"#1F2F98"}
-            name={"Managers"}
-            description={
-              "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec libero sapien, volutpat sed leo ac, dictum placerat ante. In porta risus ut turpis eleifend."
-            }
-          />
+          {careerCards.map((element) => {
+            return (
+              <SingleProfession
+                key={element.index}
+                color={element.color}
+                name={element.name}
+                description={element.description}
+                boxIndex={element.index}
+                boxPointerCallback={performContact}
+                bigBox={boxChosen}
+              />
+            );
+          })}
         </div>
         <div className="columns__right-column">
           <p className="right-column__decription">

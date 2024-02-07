@@ -2,9 +2,17 @@ import React, { useState, useEffect } from "react";
 import { useWindowSize } from "@uidotdev/usehooks";
 import { useSpring, useInView, animated } from "@react-spring/web";
 
-export const SingleProfession = ({ color, name, description }) => {
+export const SingleProfession = ({
+  color,
+  name,
+  description,
+  boxIndex,
+  boxPointerCallback,
+  bigBox,
+}) => {
   const size = useWindowSize();
   const [isMobile, setIsMobile] = useState(true);
+  const [detailsVisible, setDetailsVisible] = useState(false);
 
   // it should reference to which box is chosen
   // it should be given to the props
@@ -19,11 +27,14 @@ export const SingleProfession = ({ color, name, description }) => {
   // additionally it reveals more content (X etc.)
   // Add UI to indicate it's clickable
 
-  const [boxChosen, setBoxChosen] = useState(0);
-
-  const [hoverSprings, sethoverSprings] = useSpring(
+  const [springs, setSprings] = useSpring(
     () => ({
-      from: { transform: `scale(1)`, zIndex: 0 },
+      from: {
+        transform: `scale(1)`,
+        zIndex: 0,
+        width: `inherit`,
+        display: `block`,
+      },
       config: {
         tension: 1000,
         mass: 1,
@@ -33,16 +44,8 @@ export const SingleProfession = ({ color, name, description }) => {
     []
   );
 
-  useEffect(() => {
-    if (size.width <= 670) {
-      setIsMobile(true);
-    } else if (size.width > 670) {
-      setIsMobile(false);
-    }
-  }, [size.width]);
-
   const hoverIn = () => {
-    sethoverSprings.start({
+    setSprings.start({
       delay: 0,
       config: {
         duration: 50,
@@ -50,14 +53,14 @@ export const SingleProfession = ({ color, name, description }) => {
       to: { zIndex: 1 },
     });
 
-    sethoverSprings.start({
+    setSprings.start({
       delay: 0,
       to: { transform: `scale(1.1)` },
     });
   };
 
   const hoverOut = () => {
-    sethoverSprings.start({
+    setSprings.start({
       config: {
         duration: 50,
       },
@@ -65,18 +68,77 @@ export const SingleProfession = ({ color, name, description }) => {
       to: { zIndex: 0 },
     });
 
-    sethoverSprings.start({
+    setSprings.start({
       delay: 0,
       to: { transform: `scale(1)` },
     });
   };
 
+  const growBox = () => {
+    setSprings.start({
+      delay: 0,
+      config: {
+        duration: 50,
+      },
+      to: { zIndex: 5 },
+    });
+
+    setSprings.start({
+      delay: 0,
+      config: {
+        duration: 500,
+      },
+      to: { width: `500%` },
+      // 1. NEED TO ADD PARENT SIZE IN PX
+      // GIVE IT TO THIS COMPONENT AS PROP (ABOVE)
+    });
+  };
+
+  const hideBox = () => {
+    setSprings.start({
+      delay: 0,
+      to: { display: `none` },
+    });
+  };
+
+  const closeBox = () => {
+    // 0. change box back to normal
+  };
+
+  useEffect(() => {
+    if (size.width <= 670) {
+      setIsMobile(true);
+    } else if (size.width > 670) {
+      setIsMobile(false);
+    }
+
+    //0.
+    // Box behaviour logic -> if user chooses something
+    if (bigBox == boxIndex) {
+      console.log("I AM ABOUT TO GROW:", boxIndex);
+      setDetailsVisible(true);
+      growBox();
+
+      // add useTransition -> useChain to show details inside?
+      // seems to be the right way
+    } else if (bigBox == 0) {
+      console.log("Nothing chosen yet...");
+    } else {
+      console.log("I am not a chosen one :( ", boxIndex);
+    }
+  }, [size.width, bigBox]);
+
+  const clickContact = () => {
+    boxPointerCallback(boxIndex);
+  };
+
   return (
     <animated.div
       className="single-profession"
-      style={isMobile ? {} : { ...hoverSprings }}
+      style={isMobile ? {} : { ...springs }}
       onMouseEnter={hoverIn}
       onMouseLeave={hoverOut}
+      onClick={clickContact}
     >
       <div className="single-profession__head">
         <p className="head__name" style={{ color: `${color}` }}>
@@ -86,6 +148,16 @@ export const SingleProfession = ({ color, name, description }) => {
 
       <div className="single-profession__body">
         <p className="body__description">{description}</p>
+        {detailsVisible ? (
+          <p
+            className="additional-content__temp"
+            style={{ color: "red", margin: 50 }}
+          >
+            THIS APPEARS AS TEMP
+          </p>
+        ) : (
+          <></>
+        )}
       </div>
     </animated.div>
   );

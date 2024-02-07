@@ -14,13 +14,14 @@ import { HeroMainOld } from "./HeroMainOLd";
 export const LandingPage = () => {
   return (
     <>
+      <Careers />
       <HeroMerged />
       <Companies />
       <ServicesLegacy />
       <AboutUs />
       <Testimonials />
       <Contact />
-      <Careers />
+
       <Footer />
     </>
   );
