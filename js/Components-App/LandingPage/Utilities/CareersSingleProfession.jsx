@@ -1,5 +1,6 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { useWindowSize } from "@uidotdev/usehooks";
+import useSize from "@react-hook/size";
 import { useSpring, useInView, animated } from "@react-spring/web";
 
 export const SingleProfession = ({
@@ -9,64 +10,89 @@ export const SingleProfession = ({
   boxIndex,
   boxPointerCallback,
   bigBox,
+  parentWidth,
+  parentHeight,
+  children,
 }) => {
   const size = useWindowSize();
+  const compRef = useRef();
+  const [width, height] = useSize(compRef);
   const [isMobile, setIsMobile] = useState(true);
   const [detailsVisible, setDetailsVisible] = useState(false);
+  const [isBig, setIsBig] = useState(false);
 
-  // it should reference to which box is chosen
-  // it should be given to the props
+  const [savedWidth, setSavedWidth] = useState(0);
+  const [savedHeight, setSavedHeight] = useState(0);
 
-  // each box should get separate props that is his index
-  // if the index matches the "boxChosen"  props, it behaves like
-  // master -- 100% size of parent (+ boxChosen is != 0 ofc)
+  // 1. (P0) THIS YET TO BE FIXED - WIDTH AND HEIGHT at the start
+  // Component needs to know his original width and height
+  // when desclaring springs below
 
-  // if not and boxChosen is != 0, then it dissapears
-  // (how ,so I can animate?)
+  // 2. (P1) HERE WE GO AGAIN....
+  // OLD WAY AS IN VANILLA JS
+  // Making clicked box position: absolute
+  // and creating invisible clone below it
 
-  // additionally it reveals more content (X etc.)
-  // Add UI to indicate it's clickable
+  // 2A. (P1) IMAGE AND BOXES FLASHING WHEN BOX CLOSING
+  // BC DOM is changed (empty div is removed or changes position)
 
-  const [springs, setSprings] = useSpring(
-    () => ({
+  // --> BC pos: relative is set to bigBox at first
+  // and then pos:abs to invisible helper... single thread problem
+
+  // BUG REPORT: HOVER DURATION CHANGES AFTER FIRST CLICK & CLOSE
+
+  // 3. HOW BEHAVES WHEN ON MOBILE? IT HAS TO BE DIFFERENT
+
+  // 4. STILL NEED TO ADD Entry UI (+) and Exit UI (x)
+
+  const [springs, setSprings] = useSpring(() => {
+    return {
       from: {
         transform: `scale(1)`,
         zIndex: 0,
-        width: `inherit`,
+        // width: `${savedWidth}px`,
+        // width: `250px`,
+        // height: `450px`,
+        // height: `${savedHeight}px`,
+        position: `relative`,
         display: `block`,
+        opacity: 1,
       },
       config: {
         tension: 1000,
         mass: 1,
         velocity: 0.2,
       },
-    }),
-    []
-  );
+    };
+  }, []);
 
   const hoverIn = () => {
-    setSprings.start({
-      delay: 0,
-      config: {
-        duration: 50,
-      },
-      to: { zIndex: 1 },
-    });
+    if (!isBig) {
+      setSprings.start({
+        delay: 0,
+        config: {
+          duration: 50,
+        },
+        to: { zIndex: 1 },
+      });
 
-    setSprings.start({
-      delay: 0,
-      to: { transform: `scale(1.1)` },
-    });
+      setSprings.start({
+        delay: 0,
+        to: { transform: `scale(1.1)` },
+      });
+    }
   };
 
   const hoverOut = () => {
-    setSprings.start({
-      config: {
-        duration: 50,
-      },
-      delay: 0,
-      to: { zIndex: 0 },
-    });
+    if (!isBig) {
+      setSprings.start({
+        config: {
+          duration: 50,
+        },
+        delay: 0,
+        to: { zIndex: 0 },
+      });
+    }
 
     setSprings.start({
       delay: 0,
@@ -75,90 +101,127 @@ export const SingleProfession = ({
   };
 
   const growBox = () => {
+    hoverOut();
+    setIsBig(true);
+
+    setSavedHeight(height);
+    setSavedWidth(width);
+
     setSprings.start({
       delay: 0,
       config: {
         duration: 50,
       },
-      to: { zIndex: 5 },
+      to: { zIndex: 5, position: `absolute` },
     });
 
     setSprings.start({
       delay: 0,
       config: {
         duration: 500,
+        precision: 1,
       },
-      to: { width: `500%` },
-      // 1. NEED TO ADD PARENT SIZE IN PX
-      // GIVE IT TO THIS COMPONENT AS PROP (ABOVE)
+      to: { width: `${parentWidth}px`, height: `${parentHeight}px` },
     });
   };
 
-  const hideBox = () => {
-    setSprings.start({
+  const closeBigBox = async () => {
+    boxPointerCallback(0);
+
+    setDetailsVisible(false);
+
+    // 2A - ISSUE IS HERE
+    await setSprings.start({
       delay: 0,
-      to: { display: `none` },
+      config: {
+        duration: 500,
+        precision: 1,
+      },
+      to: async (next, cancel) => {
+        await next({
+          width: `${savedWidth}px`,
+          height: `${savedHeight}px`,
+          zIndex: 0,
+        }),
+          /////////////////////////////////////////
+          await next({ position: `relative` });
+        setIsBig(false);
+        /////////////////////////////////////////
+      },
     });
-  };
-
-  const closeBox = () => {
-    // 0. change box back to normal
   };
 
   useEffect(() => {
+    // If mobile it stops hover animations
     if (size.width <= 670) {
       setIsMobile(true);
     } else if (size.width > 670) {
       setIsMobile(false);
     }
 
-    //0.
-    // Box behaviour logic -> if user chooses something
+    // If received signal that it's clicked
     if (bigBox == boxIndex) {
-      console.log("I AM ABOUT TO GROW:", boxIndex);
       setDetailsVisible(true);
       growBox();
-
-      // add useTransition -> useChain to show details inside?
-      // seems to be the right way
     } else if (bigBox == 0) {
-      console.log("Nothing chosen yet...");
+      setDetailsVisible(false);
+      // bringBackBox();
     } else {
-      console.log("I am not a chosen one :( ", boxIndex);
+      // hideBox();
     }
   }, [size.width, bigBox]);
 
   const clickContact = () => {
     boxPointerCallback(boxIndex);
+
+    if (isBig) {
+      closeBigBox();
+    }
   };
 
   return (
-    <animated.div
-      className="single-profession"
-      style={isMobile ? {} : { ...springs }}
-      onMouseEnter={hoverIn}
-      onMouseLeave={hoverOut}
-      onClick={clickContact}
-    >
-      <div className="single-profession__head">
-        <p className="head__name" style={{ color: `${color}` }}>
-          {name}
-        </p>
-      </div>
-
-      <div className="single-profession__body">
-        <p className="body__description">{description}</p>
-        {detailsVisible ? (
-          <p
-            className="additional-content__temp"
-            style={{ color: "red", margin: 50 }}
-          >
-            THIS APPEARS AS TEMP
+    <>
+      <animated.div
+        className="single-profession"
+        style={isMobile ? {} : { ...springs }}
+        onMouseEnter={hoverIn}
+        onMouseLeave={hoverOut}
+        onClick={clickContact}
+        ref={compRef}
+      >
+        <div className="single-profession__head">
+          <p className="head__name" style={{ color: `${color}` }}>
+            {name}
           </p>
-        ) : (
-          <></>
-        )}
-      </div>
-    </animated.div>
+        </div>
+        <div className="single-profession__body">
+          <p className="body__description">{description}</p>
+          {detailsVisible ? (
+            <p
+              className="additional-content__temp"
+              style={{ color: "red", marginTop: 50 }}
+            >
+              {children}
+            </p>
+          ) : (
+            <></>
+          )}
+        </div>
+      </animated.div>
+
+      <div
+        className="single-profession"
+        style={
+          isBig
+            ? { position: `relative`, opacity: 1, zIndex: 2 }
+            : { position: `absolute`, opacity: 1, zIndex: 2 }
+        }
+      ></div>
+    </>
   );
 };
+
+// setSprings.start({
+//   to: { position: `relative` },
+// });
+// setIsBig(false);

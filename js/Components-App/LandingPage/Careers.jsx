@@ -1,35 +1,31 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { Eyebrow } from "./Utilities/LandingGenericComponents";
 import MainImage from "../../../images/Landing Page/Careers_1.jpg";
 import { QuaternaryButton } from "../../Utilities/Buttons";
 import { useSpring, useInView, animated } from "@react-spring/web";
 import useSize from "@react-hook/size";
-import { easings, config } from "@react-spring/web";
 import { SingleProfession } from "./Utilities/CareersSingleProfession";
-import { useWindowSize } from "@uidotdev/usehooks";
 import { careerCards } from "./Utilities/careerCards";
 
 export const Careers = () => {
-  const [ref, InView] = useInView();
-  const [width, height] = useSize(ref);
+  const [imageAnimationRef, InView] = useInView();
+  const leftColumn = useRef();
+  const imageRef = useRef();
+  const [leftColumnWidth, leftColumnHeight] = useSize(leftColumn);
+  const [imageWidth, imageHeight] = useSize(imageRef);
   const [boxChosen, setBoxChosen] = useState(0);
 
-  // 2. USE useSize to get parent width/height
-  // 3. Left columsn needs to be separate comp?
-  // or I can ref Left column by using useRef
-  // YES!!
-
-  const props = useSpring(
+  const imageProps = useSpring(
     InView
       ? {
-          delay: 500,
+          delay: 1000,
           loop: { reverse: true },
           from: {
             borderTopLeftRadius: 0,
-            borderBottomRightRadius: width / 2,
+            borderBottomRightRadius: imageWidth / 2,
           },
           to: {
-            borderTopLeftRadius: width / 2,
+            borderTopLeftRadius: imageWidth / 2,
             borderBottomRightRadius: 0,
           },
           config: {
@@ -40,8 +36,9 @@ export const Careers = () => {
   );
 
   const performContact = (boxIndex) => {
-    console.log("Parent says, you clicked on:", boxIndex);
     setBoxChosen(boxIndex);
+
+    console.log("Current box chosen:", boxIndex);
   };
 
   useEffect(() => {
@@ -77,8 +74,12 @@ export const Careers = () => {
           We are looking for passionate professionals to join our team
         </h2>
       </div>
-      <div className="careers__columns">
-        <div className="columns__left-column">
+      <div className="careers__columns" ref={imageAnimationRef}>
+        <div
+          className="columns__left-column"
+          ref={leftColumn}
+          style={{ background: `red` }}
+        >
           {careerCards.map((element) => {
             return (
               <SingleProfession
@@ -89,30 +90,34 @@ export const Careers = () => {
                 boxIndex={element.index}
                 boxPointerCallback={performContact}
                 bigBox={boxChosen}
-              />
+                parentWidth={leftColumnWidth}
+                parentHeight={leftColumnHeight}
+              >
+                {element.details}
+              </SingleProfession>
             );
           })}
         </div>
         <div className="columns__right-column">
-          <p className="right-column__decription">
-            Tell us a little bit more about yourself and share your CV with us,
-            we will be happy to talk to you!
-          </p>
           <div className="right-column__button-container">
+            <p className="button-container__decription">
+              Tell us a little bit more about yourself and share your CV with
+              us, we will be happy to talk to you!
+            </p>
             <QuaternaryButton callbackAction={performContact} wide={true}>
               CONTACT US
             </QuaternaryButton>
           </div>
-
           <animated.img
             src={MainImage}
             alt=""
             className="right-column__main-image"
-            ref={ref}
+            ref={imageRef}
             style={{
-              borderTopRightRadius: width / 2,
-              borderBottomLeftRadius: width / 2,
-              ...props,
+              borderTopRightRadius: imageWidth / 2,
+              borderBottomLeftRadius: imageWidth / 2,
+              borderBottomRightRadius: imageWidth / 2,
+              ...imageProps,
             }}
           />
         </div>
