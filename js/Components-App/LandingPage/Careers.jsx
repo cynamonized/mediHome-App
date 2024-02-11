@@ -15,6 +15,8 @@ export const Careers = () => {
   const [imageWidth, imageHeight] = useSize(imageRef);
   const [boxChosen, setBoxChosen] = useState(0);
 
+  const [animationCompleted, setAnimationCompleted] = useState(true);
+
   const imageProps = useSpring(
     InView
       ? {
@@ -75,11 +77,7 @@ export const Careers = () => {
         </h2>
       </div>
       <div className="careers__columns" ref={imageAnimationRef}>
-        <div
-          className="columns__left-column"
-          ref={leftColumn}
-          style={{ background: `red` }}
-        >
+        <div className="columns__left-column" ref={leftColumn}>
           {careerCards.map((element) => {
             return (
               <SingleProfession
@@ -92,6 +90,8 @@ export const Careers = () => {
                 bigBox={boxChosen}
                 parentWidth={leftColumnWidth}
                 parentHeight={leftColumnHeight}
+                animCompleted={animationCompleted}
+                setAnimCompleted={setAnimationCompleted}
               >
                 {element.details}
               </SingleProfession>

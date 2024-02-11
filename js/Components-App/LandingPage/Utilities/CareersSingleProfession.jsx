@@ -13,6 +13,8 @@ export const SingleProfession = ({
   parentWidth,
   parentHeight,
   children,
+  animCompleted,
+  setAnimCompleted,
 }) => {
   const size = useWindowSize();
   const compRef = useRef();
@@ -20,28 +22,40 @@ export const SingleProfession = ({
   const [isMobile, setIsMobile] = useState(true);
   const [detailsVisible, setDetailsVisible] = useState(false);
   const [isBig, setIsBig] = useState(false);
+  const [placeholderVisible, setPlaceholderVisible] = useState(false);
 
   const [savedWidth, setSavedWidth] = useState(0);
   const [savedHeight, setSavedHeight] = useState(0);
 
-  // 1. (P0) THIS YET TO BE FIXED - WIDTH AND HEIGHT at the start
+  const [originalWidth, setOriginalWidth] = useState((parentWidth - 70) / 3);
+  const [originalHeight, setOriginalHeight] = useState((parentHeight - 35) / 2);
+
+  // 1. (DONE) THIS YET TO BE FIXED - WIDTH AND HEIGHT at the start
   // Component needs to know his original width and height
   // when desclaring springs below
 
-  // 2. (P1) HERE WE GO AGAIN....
-  // OLD WAY AS IN VANILLA JS
+  // 0. ---> BUT IT FLASHES QUICKLY AT THE BEGINING WITH RE-RENDER !!!!!!!!!!!!!!!!!!!!!!! (Do I care?)
+
+  // 2. (DONE) HERE WE GO AGAIN....
+  // OLD WAY AS IN VANILLA JSnp
   // Making clicked box position: absolute
   // and creating invisible clone below it
 
-  // 2A. (P1) IMAGE AND BOXES FLASHING WHEN BOX CLOSING
+  // 2A. (DONE) IMAGE AND BOXES FLASHING WHEN BOX CLOSING
   // BC DOM is changed (empty div is removed or changes position)
-
   // --> BC pos: relative is set to bigBox at first
   // and then pos:abs to invisible helper... single thread problem
 
-  // BUG REPORT: HOVER DURATION CHANGES AFTER FIRST CLICK & CLOSE
+  // 0.  (DONE) BUG REPORT: HOVER DURATION CHANGES AFTER FIRST CLICK & CLOSE
+
+  // 0. (WIP) zIndex when boxGrow() is 0 bc of hoverOut() -> Added contidion in useSpring definition but it only works once...
+
+  // 0. (WIP) [switch in growBox()] BUF REPORT: POSITION: IT NEEDS TO TRAVEL TO HIM ORG POSITION, NOT TOP LHS AS IT"S NOW
+
+  // 0. originalWidth and savedWidth are too similar - it's reduntant
 
   // 3. HOW BEHAVES WHEN ON MOBILE? IT HAS TO BE DIFFERENT
+  // ---> useEffect()
 
   // 4. STILL NEED TO ADD Entry UI (+) and Exit UI (x)
 
@@ -49,12 +63,10 @@ export const SingleProfession = ({
     return {
       from: {
         transform: `scale(1)`,
-        zIndex: 0,
-        // width: `${savedWidth}px`,
-        // width: `250px`,
-        // height: `450px`,
-        // height: `${savedHeight}px`,
-        position: `relative`,
+        zIndex: bigBox == boxIndex ? { zIndex: 1 } : { zIndex: -1 },
+        width: `${originalWidth}px`,
+        height: `${originalHeight}px`,
+        position: `static`,
         display: `block`,
         opacity: 1,
       },
@@ -64,17 +76,13 @@ export const SingleProfession = ({
         velocity: 0.2,
       },
     };
-  }, []);
+  }, [bigBox]);
 
   const hoverIn = () => {
     if (!isBig) {
-      setSprings.start({
-        delay: 0,
-        config: {
-          duration: 50,
-        },
-        to: { zIndex: 1 },
-      });
+      // setSprings.start({
+      //   to: { zIndex: 1 },
+      // });
 
       setSprings.start({
         delay: 0,
@@ -84,15 +92,11 @@ export const SingleProfession = ({
   };
 
   const hoverOut = () => {
-    if (!isBig) {
-      setSprings.start({
-        config: {
-          duration: 50,
-        },
-        delay: 0,
-        to: { zIndex: 0 },
-      });
-    }
+    // if (!isBig) {
+    //   setSprings.start({
+    //     to: { zIndex: 0 },
+    //   });
+    // }
 
     setSprings.start({
       delay: 0,
@@ -101,18 +105,33 @@ export const SingleProfession = ({
   };
 
   const growBox = () => {
+    setSprings.start({
+      zIndex: 1,
+    });
+
     hoverOut();
     setIsBig(true);
 
+    setPlaceholderVisible(true);
     setSavedHeight(height);
     setSavedWidth(width);
 
+    // THIS IS AWESOME, reply with others (except 1)
+    // for 2 and 5, there needs to be some calculation including parentWidth and parentHeight (and width and height of this component)
+
+    switch (boxIndex) {
+      case 4: {
+        setSprings.start({
+          bottom: 0,
+          left: 0,
+        });
+        break;
+      }
+    }
+
     setSprings.start({
       delay: 0,
-      config: {
-        duration: 50,
-      },
-      to: { zIndex: 5, position: `absolute` },
+      to: { position: `absolute` },
     });
 
     setSprings.start({
@@ -127,15 +146,12 @@ export const SingleProfession = ({
 
   const closeBigBox = async () => {
     boxPointerCallback(0);
-
-    setDetailsVisible(false);
-
-    // 2A - ISSUE IS HERE
+    setIsBig(false);
     await setSprings.start({
       delay: 0,
       config: {
         duration: 500,
-        precision: 1,
+        // precision: 1,
       },
       to: async (next, cancel) => {
         await next({
@@ -143,47 +159,59 @@ export const SingleProfession = ({
           height: `${savedHeight}px`,
           zIndex: 0,
         }),
-          /////////////////////////////////////////
-          await next({ position: `relative` });
-        setIsBig(false);
-        /////////////////////////////////////////
+          await setSprings.start({
+            position: `relative`,
+          });
+        setPlaceholderVisible(false);
+        setAnimCompleted(true);
+        setSprings.start({
+          config: {
+            tension: 1000,
+            mass: 1,
+            velocity: 0.2,
+          },
+        });
       },
     });
   };
 
+  const clickContact = () => {
+    if (animCompleted) {
+      boxPointerCallback(boxIndex);
+      setAnimCompleted(false);
+    }
+    if (isBig) {
+      closeBigBox();
+    }
+  };
+
   useEffect(() => {
-    // If mobile it stops hover animations
     if (size.width <= 670) {
       setIsMobile(true);
     } else if (size.width > 670) {
       setIsMobile(false);
     }
 
-    // If received signal that it's clicked
+    //mobile fixes here TBD
+    // if isBig == false, then animate width to current width
+    // if isBig == true, then animate width to full width (parentWidth)
+
     if (bigBox == boxIndex) {
       setDetailsVisible(true);
       growBox();
     } else if (bigBox == 0) {
       setDetailsVisible(false);
-      // bringBackBox();
     } else {
-      // hideBox();
     }
   }, [size.width, bigBox]);
-
-  const clickContact = () => {
-    boxPointerCallback(boxIndex);
-
-    if (isBig) {
-      closeBigBox();
-    }
-  };
 
   return (
     <>
       <animated.div
         className="single-profession"
-        style={isMobile ? {} : { ...springs }}
+        // style={isMobile ? {} : { ...springs }}
+        // style={bigBox == boxIndex ? { ...springs } : { zIndex: -1, ...springs }}
+        style={{ ...springs }}
         onMouseEnter={hoverIn}
         onMouseLeave={hoverOut}
         onClick={clickContact}
@@ -208,20 +236,14 @@ export const SingleProfession = ({
           )}
         </div>
       </animated.div>
-
       <div
         className="single-profession"
         style={
-          isBig
-            ? { position: `relative`, opacity: 1, zIndex: 2 }
-            : { position: `absolute`, opacity: 1, zIndex: 2 }
+          placeholderVisible
+            ? { position: `relative`, opacity: 0, zIndex: -2 }
+            : { position: `absolute`, opacity: 0, zIndex: -2 }
         }
       ></div>
     </>
   );
 };
-
-// setSprings.start({
-//   to: { position: `relative` },
-// });
-// setIsBig(false);
