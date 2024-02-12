@@ -2,6 +2,7 @@ import React, { useState, useEffect, useRef } from "react";
 import { useWindowSize } from "@uidotdev/usehooks";
 import useSize from "@react-hook/size";
 import { useSpring, useInView, animated } from "@react-spring/web";
+import useMeasure from "react-use-measure";
 
 export const SingleProfession = ({
   color,
@@ -30,11 +31,15 @@ export const SingleProfession = ({
   const [originalWidth, setOriginalWidth] = useState((parentWidth - 70) / 3);
   const [originalHeight, setOriginalHeight] = useState((parentHeight - 35) / 2);
 
+  const [measureRef, { widthMeasure, heigthMeasure }] = useMeasure();
+
   // 1. (DONE) THIS YET TO BE FIXED - WIDTH AND HEIGHT at the start
   // Component needs to know his original width and height
   // when desclaring springs below
 
-  // 0. ---> BUT IT FLASHES QUICKLY AT THE BEGINING WITH RE-RENDER !!!!!!!!!!!!!!!!!!!!!!! (Do I care?)
+  // 0. (DONE) ---> BUT IT FLASHES QUICKLY AT THE BEGINING WITH RE-RENDER !!!!!!!!!!!!!!!!!!!!!!! (Do I care?) -> WHAT IT CAUSES IT? I CAREEEEEEEE
+  // --> Flash can be fixed with changing .start to useSpring declaration -> width: isBig ? parentWidth : width
+  // --> const [ref, {width}] = useMeasure(); https://codesandbox.io/
 
   // 2. (DONE) HERE WE GO AGAIN....
   // OLD WAY AS IN VANILLA JSnp
@@ -46,13 +51,15 @@ export const SingleProfession = ({
   // --> BC pos: relative is set to bigBox at first
   // and then pos:abs to invisible helper... single thread problem
 
-  // 0.  (DONE) BUG REPORT: HOVER DURATION CHANGES AFTER FIRST CLICK & CLOSE
+  // 0. (DONE) BUG REPORT: HOVER DURATION CHANGES AFTER FIRST CLICK & CLOSE
 
-  // 0. (WIP) zIndex when boxGrow() is 0 bc of hoverOut() -> Added contidion in useSpring definition but it only works once...
+  // 0. (DONE) zIndex when boxGrow() is 0 bc of hoverOut() -> Added contidion in useSpring definition but it only works once...
 
-  // 0. (WIP) [switch in growBox()] BUF REPORT: POSITION: IT NEEDS TO TRAVEL TO HIM ORG POSITION, NOT TOP LHS AS IT"S NOW
+  // 0. (WIP-MID-SLOVED) [switch in growBox()] BUF REPORT: POSITION: IT NEEDS TO TRAVEL TO HIM ORG POSITION, NOT TOP LHS AS IT"S NOW
 
-  // 0. originalWidth and savedWidth are too similar - it's reduntant
+  // 0. (DONE) originalWidth and savedWidth are too similar - it's reduntant
+
+  // 0. (P1) When it comes back to orinal width, animation not working if it's <0
 
   // 3. HOW BEHAVES WHEN ON MOBILE? IT HAS TO BE DIFFERENT
   // ---> useEffect()
@@ -62,59 +69,74 @@ export const SingleProfession = ({
   const [springs, setSprings] = useSpring(() => {
     return {
       from: {
+        zIndex: 0,
         transform: `scale(1)`,
-        zIndex: bigBox == boxIndex ? { zIndex: 1 } : { zIndex: -1 },
+        // zIndex: bigBox == boxIndex ? { zIndex: 1 } : { zIndex: -1 },
         width: `${originalWidth}px`,
         height: `${originalHeight}px`,
+        // width: isBig ? parentWidth : width,
         position: `static`,
         display: `block`,
         opacity: 1,
       },
-      config: {
-        tension: 1000,
-        mass: 1,
-        velocity: 0.2,
-      },
+      // config: width
+      //   ? {
+      //       tension: 1000,
+      //       mass: 1,
+      //       velocity: 0.2,
+      //     }
+      //   : {},
+
+      // immediate: (key) => key === `zIndex`,
     };
   }, [bigBox]);
 
   const hoverIn = () => {
     if (!isBig) {
-      // setSprings.start({
-      //   to: { zIndex: 1 },
-      // });
-
       setSprings.start({
-        delay: 0,
+        config: {
+          tension: 1000,
+          mass: 1,
+          velocity: 0.05,
+        },
         to: { transform: `scale(1.1)` },
       });
     }
   };
 
   const hoverOut = () => {
-    // if (!isBig) {
+    // if (isBig) {
     //   setSprings.start({
     //     to: { zIndex: 0 },
     //   });
     // }
 
     setSprings.start({
-      delay: 0,
+      config: {
+        tension: 1000,
+        mass: 1,
+        velocity: 0.05,
+      },
       to: { transform: `scale(1)` },
     });
   };
 
   const growBox = () => {
     setSprings.start({
-      zIndex: 1,
+      zIndex: 15,
+      immediate: (key) => key === `zIndex`,
     });
+
+    // setSavedHeight(height);
+    // setSavedWidth(width);
+
+    setSavedHeight((parentHeight - 35) / 2);
+    setSavedWidth((parentWidth - 70) / 3);
 
     hoverOut();
     setIsBig(true);
 
     setPlaceholderVisible(true);
-    setSavedHeight(height);
-    setSavedWidth(width);
 
     // THIS IS AWESOME, reply with others (except 1)
     // for 2 and 5, there needs to be some calculation including parentWidth and parentHeight (and width and height of this component)
@@ -149,39 +171,40 @@ export const SingleProfession = ({
     setIsBig(false);
     await setSprings.start({
       delay: 0,
-      config: {
-        duration: 500,
-        // precision: 1,
-      },
+      duration: 500,
+      config: {},
       to: async (next, cancel) => {
         await next({
           width: `${savedWidth}px`,
           height: `${savedHeight}px`,
           zIndex: 0,
         }),
-          await setSprings.start({
-            position: `relative`,
-          });
+          await next({});
+        await setSprings.start({
+          position: `relative`,
+        });
+
         setPlaceholderVisible(false);
         setAnimCompleted(true);
-        setSprings.start({
-          config: {
-            tension: 1000,
-            mass: 1,
-            velocity: 0.2,
-          },
-        });
+
+        // setSprings.start({
+        //   config: {
+        //     tension: 1000,
+        //     mass: 1,
+        //     velocity: 0.2,
+        //   },
+        // });
       },
     });
   };
 
-  const clickContact = () => {
+  const clickContact = async () => {
     if (animCompleted) {
       boxPointerCallback(boxIndex);
       setAnimCompleted(false);
     }
     if (isBig) {
-      closeBigBox();
+      await closeBigBox();
     }
   };
 
@@ -203,6 +226,16 @@ export const SingleProfession = ({
       setDetailsVisible(false);
     } else {
     }
+
+    // if (!isBig) {
+    //   setSprings.start({
+    //     config: {
+    //       tension: 1000,
+    //       mass: 1,
+    //       velocity: 0.2,
+    //     },
+    //   });
+    // }
   }, [size.width, bigBox]);
 
   return (
@@ -215,7 +248,7 @@ export const SingleProfession = ({
         onMouseEnter={hoverIn}
         onMouseLeave={hoverOut}
         onClick={clickContact}
-        ref={compRef}
+        ref={measureRef}
       >
         <div className="single-profession__head">
           <p className="head__name" style={{ color: `${color}` }}>
