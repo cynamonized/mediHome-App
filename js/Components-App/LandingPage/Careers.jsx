@@ -39,34 +39,7 @@ export const Careers = () => {
 
   const performContact = (boxIndex) => {
     setBoxChosen(boxIndex);
-
-    // console.log("Current box chosen:", boxIndex);
   };
-
-  // useEffect(() => {
-  //   switch (boxChosen) {
-  //     case 0:
-  //       break;
-  //     case 1:
-  //       console.log("I am 1");
-  //       break;
-  //     case 2:
-  //       console.log("I am 2");
-  //       break;
-  //     case 3:
-  //       console.log("I am 3");
-  //       break;
-  //     case 4:
-  //       console.log("I am 4");
-  //       break;
-  //     case 5:
-  //       console.log("I am 5");
-  //       break;
-  //     case 6:
-  //       console.log("I am 6");
-  //       break;
-  //   }
-  // }, [boxChosen]);
 
   return (
     <section id="careers" className="careers container">

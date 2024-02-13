@@ -35,8 +35,31 @@
           padding: 45px;
           min-height: 140px;
           border-bottom: 1px solid $color-greys-mid-1;
+          position: relative;
           .head__name {
             @include fonts(1.5rem, 600, $color-main-blue);
+          }
+
+          .head__plus-sign {
+            transition: 0.2s;
+            position: absolute;
+            bottom: -22px;
+            z-index: 50;
+            border-radius: 50%;
+            width: 44px;
+            height: 44px;
+            @include flex(center, center);
+            .plus-sign__plus-icon {
+            }
+          }
+
+          .head__exit-sign {
+            position: absolute;
+            top: 0;
+            right: 0;
+            margin: 45px;
+            .exit-sign__exit-icon {
+            }
           }
         }
 

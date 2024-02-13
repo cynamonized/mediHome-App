@@ -3,6 +3,8 @@ import { useWindowSize } from "@uidotdev/usehooks";
 import useSize from "@react-hook/size";
 import { useSpring, useInView, animated } from "@react-spring/web";
 import useMeasure from "react-use-measure";
+import PlusSign from "../../../../images/icons/Plus-sign.svg";
+import ExitSign from "../../../../images/icons/Exit.svg";
 
 export const SingleProfession = ({
   color,
@@ -33,34 +35,6 @@ export const SingleProfession = ({
 
   const [measureRef, { widthMeasure, heigthMeasure }] = useMeasure();
 
-  // 1. (DONE) THIS YET TO BE FIXED - WIDTH AND HEIGHT at the start
-  // Component needs to know his original width and height
-  // when desclaring springs below
-
-  // 0. (DONE) ---> BUT IT FLASHES QUICKLY AT THE BEGINING WITH RE-RENDER !!!!!!!!!!!!!!!!!!!!!!! (Do I care?) -> WHAT IT CAUSES IT? I CAREEEEEEEE
-  // --> Flash can be fixed with changing .start to useSpring declaration -> width: isBig ? parentWidth : width
-  // --> const [ref, {width}] = useMeasure(); https://codesandbox.io/
-
-  // 2. (DONE) HERE WE GO AGAIN....
-  // OLD WAY AS IN VANILLA JSnp
-  // Making clicked box position: absolute
-  // and creating invisible clone below it
-
-  // 2A. (DONE) IMAGE AND BOXES FLASHING WHEN BOX CLOSING
-  // BC DOM is changed (empty div is removed or changes position)
-  // --> BC pos: relative is set to bigBox at first
-  // and then pos:abs to invisible helper... single thread problem
-
-  // 0. (DONE) BUG REPORT: HOVER DURATION CHANGES AFTER FIRST CLICK & CLOSE
-
-  // 0. (DONE) zIndex when boxGrow() is 0 bc of hoverOut() -> Added contidion in useSpring definition but it only works once...
-
-  // 0. (WIP-MID-SLOVED) [switch in growBox()] BUF REPORT: POSITION: IT NEEDS TO TRAVEL TO HIM ORG POSITION, NOT TOP LHS AS IT"S NOW
-
-  // 0. (DONE) originalWidth and savedWidth are too similar - it's reduntant
-
-  // 0. (P1) When it comes back to orinal width, animation not working if it's <0
-
   // 3. HOW BEHAVES WHEN ON MOBILE? IT HAS TO BE DIFFERENT
   // ---> useEffect()
 
@@ -71,23 +45,12 @@ export const SingleProfession = ({
       from: {
         zIndex: 0,
         transform: `scale(1)`,
-        // zIndex: bigBox == boxIndex ? { zIndex: 1 } : { zIndex: -1 },
         width: `${originalWidth}px`,
         height: `${originalHeight}px`,
-        // width: isBig ? parentWidth : width,
         position: `static`,
         display: `block`,
         opacity: 1,
       },
-      // config: width
-      //   ? {
-      //       tension: 1000,
-      //       mass: 1,
-      //       velocity: 0.2,
-      //     }
-      //   : {},
-
-      // immediate: (key) => key === `zIndex`,
     };
   }, [bigBox]);
 
@@ -105,12 +68,6 @@ export const SingleProfession = ({
   };
 
   const hoverOut = () => {
-    // if (isBig) {
-    //   setSprings.start({
-    //     to: { zIndex: 0 },
-    //   });
-    // }
-
     setSprings.start({
       config: {
         tension: 1000,
@@ -127,25 +84,55 @@ export const SingleProfession = ({
       immediate: (key) => key === `zIndex`,
     });
 
-    // setSavedHeight(height);
-    // setSavedWidth(width);
-
     setSavedHeight((parentHeight - 35) / 2);
     setSavedWidth((parentWidth - 70) / 3);
-
     hoverOut();
     setIsBig(true);
-
     setPlaceholderVisible(true);
 
-    // THIS IS AWESOME, reply with others (except 1)
-    // for 2 and 5, there needs to be some calculation including parentWidth and parentHeight (and width and height of this component)
-
     switch (boxIndex) {
+      case 3: {
+        setSprings.start({
+          top: 0,
+          right: 0,
+        });
+        break;
+      }
+
+      case 2: {
+        setSprings.start({
+          top: 0,
+          left: 0,
+          right: 0,
+          marginLeft: `auto`,
+          marginRight: `auto`,
+        });
+        break;
+      }
+
       case 4: {
         setSprings.start({
           bottom: 0,
           left: 0,
+        });
+        break;
+      }
+
+      case 5: {
+        setSprings.start({
+          bottom: 0,
+          left: 0,
+          right: 0,
+          marginLeft: `auto`,
+          marginRight: `auto`,
+        });
+        break;
+      }
+
+      case 6: {
+        setSprings.start({
+          bottom: 0,
+          right: 0,
         });
         break;
       }
@@ -161,6 +148,10 @@ export const SingleProfession = ({
       config: {
         duration: 500,
         precision: 1,
+      },
+      from: {
+        width: `${(parentWidth - 70) / 3}px`,
+        height: `${(parentHeight - 35) / 3}px`,
       },
       to: { width: `${parentWidth}px`, height: `${parentHeight}px` },
     });
@@ -186,14 +177,6 @@ export const SingleProfession = ({
 
         setPlaceholderVisible(false);
         setAnimCompleted(true);
-
-        // setSprings.start({
-        //   config: {
-        //     tension: 1000,
-        //     mass: 1,
-        //     velocity: 0.2,
-        //   },
-        // });
       },
     });
   };
@@ -209,6 +192,11 @@ export const SingleProfession = ({
   };
 
   useEffect(() => {
+    // mobile modification of variables needs to happen here,
+    // so boxes have proper width
+    // just update width based on parent once size.width changes
+    // just as media queries
+
     if (size.width <= 670) {
       setIsMobile(true);
     } else if (size.width > 670) {
@@ -226,24 +214,12 @@ export const SingleProfession = ({
       setDetailsVisible(false);
     } else {
     }
-
-    // if (!isBig) {
-    //   setSprings.start({
-    //     config: {
-    //       tension: 1000,
-    //       mass: 1,
-    //       velocity: 0.2,
-    //     },
-    //   });
-    // }
   }, [size.width, bigBox]);
 
   return (
     <>
       <animated.div
         className="single-profession"
-        // style={isMobile ? {} : { ...springs }}
-        // style={bigBox == boxIndex ? { ...springs } : { zIndex: -1, ...springs }}
         style={{ ...springs }}
         onMouseEnter={hoverIn}
         onMouseLeave={hoverOut}
@@ -254,6 +230,14 @@ export const SingleProfession = ({
           <p className="head__name" style={{ color: `${color}` }}>
             {name}
           </p>
+          {/* ADD CSS CONDITIONS HERE FOR SHOWING UI */}
+          <div className="head__plus-sign" style={{ background: `${color}` }}>
+            <img src={PlusSign} alt="" className="plus-sign__plus-icon" />
+          </div>
+
+          <div className="head__exit-sign">
+            <img src={ExitSign} alt="" className="exit-sign__exit-icon" />
+          </div>
         </div>
         <div className="single-profession__body">
           <p className="body__description">{description}</p>
@@ -273,8 +257,8 @@ export const SingleProfession = ({
         className="single-profession"
         style={
           placeholderVisible
-            ? { position: `relative`, opacity: 0, zIndex: -2 }
-            : { position: `absolute`, opacity: 0, zIndex: -2 }
+            ? { position: `relative`, opacity: 0, zIndex: 0 }
+            : { position: `absolute`, opacity: 0, zIndex: 0 }
         }
       ></div>
     </>
