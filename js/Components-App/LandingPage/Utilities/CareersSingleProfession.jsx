@@ -35,10 +35,13 @@ export const SingleProfession = ({
 
   const [measureRef, { widthMeasure, heigthMeasure }] = useMeasure();
 
-  // 3. HOW BEHAVES WHEN ON MOBILE? IT HAS TO BE DIFFERENT
-  // ---> useEffect()
+  const plusSprings = useSpring({
+    opacity: isBig ? 0 : 1,
+  });
 
-  // 4. STILL NEED TO ADD Entry UI (+) and Exit UI (x)
+  const exitSprings = useSpring({
+    opacity: isBig ? 1 : 0,
+  });
 
   const [springs, setSprings] = useSpring(() => {
     return {
@@ -230,24 +233,27 @@ export const SingleProfession = ({
           <p className="head__name" style={{ color: `${color}` }}>
             {name}
           </p>
-          {/* ADD CSS CONDITIONS HERE FOR SHOWING UI */}
-          <div className="head__plus-sign" style={{ background: `${color}` }}>
-            <img src={PlusSign} alt="" className="plus-sign__plus-icon" />
-          </div>
 
-          <div className="head__exit-sign">
+          <animated.div
+            className="head__plus-sign"
+            style={{ background: `${color}`, ...plusSprings }}
+          >
+            <img src={PlusSign} alt="" className="plus-sign__plus-icon" />
+          </animated.div>
+
+          <animated.div className="head__exit-sign" style={{ ...exitSprings }}>
             <img src={ExitSign} alt="" className="exit-sign__exit-icon" />
-          </div>
+          </animated.div>
         </div>
         <div className="single-profession__body">
           <p className="body__description">{description}</p>
           {detailsVisible ? (
-            <p
+            <animated.p
               className="additional-content__temp"
-              style={{ color: "red", marginTop: 50 }}
+              style={{ color: "red", marginTop: 50, ...exitSprings }}
             >
               {children}
-            </p>
+            </animated.p>
           ) : (
             <></>
           )}
