@@ -48,8 +48,9 @@ export const SingleProfession = ({
       from: {
         zIndex: 0,
         transform: `scale(1)`,
-        width: `${originalWidth}px`,
-        height: `${originalHeight}px`,
+        // Removed it for tests, perhaps not needed
+        // width: `${originalWidth}px`,
+        // height: `${originalHeight}px`,
         position: `static`,
         display: `block`,
         opacity: 1,
@@ -153,11 +154,33 @@ export const SingleProfession = ({
         precision: 1,
       },
       from: {
+        // 1. here
         width: `${(parentWidth - 70) / 3}px`,
         height: `${(parentHeight - 35) / 3}px`,
       },
+      // 2. here
       to: { width: `${parentWidth}px`, height: `${parentHeight}px` },
     });
+  };
+
+  // 0. use those functions to calculate box sizes....
+  // 4. then not sure if changing anything in useEffect()
+  //    is necessary.
+  // 5. stress test it when opening and closing and changing
+  //    window width at the same time / w/o refreshing
+  const calculateEntryWidth = () => {
+    if (parentWidth <= 930) {
+      console.log("ENTERING SMALL WORLD");
+    } else {
+    }
+  };
+
+  const calculateExitWidth = () => {
+    if (parentWidth <= 930) {
+      console.log("ENTERING SMALL WORLD");
+    } else {
+      console.log("I AM IN A BIG WORLD");
+    }
   };
 
   const closeBigBox = async () => {
@@ -169,6 +192,7 @@ export const SingleProfession = ({
       config: {},
       to: async (next, cancel) => {
         await next({
+          // 3. and here
           width: `${savedWidth}px`,
           height: `${savedHeight}px`,
           zIndex: 0,
@@ -200,6 +224,12 @@ export const SingleProfession = ({
     // just update width based on parent once size.width changes
     // just as media queries
 
+    // console.log("ORIGINAL:", originalWidth);
+    // console.log("PARENT: ", parentWidth);
+
+    // setOriginalWidth((parentWidth - 70) / 3);
+    // setOriginalHeight((parentHeight - 35) / 2);
+
     if (size.width <= 670) {
       setIsMobile(true);
     } else if (size.width > 670) {
@@ -217,7 +247,7 @@ export const SingleProfession = ({
       setDetailsVisible(false);
     } else {
     }
-  }, [size.width, bigBox]);
+  }, [size.width, bigBox, parentWidth]);
 
   return (
     <>
@@ -249,8 +279,8 @@ export const SingleProfession = ({
           <p className="body__description">{description}</p>
           {detailsVisible ? (
             <animated.p
-              className="additional-content__temp"
-              style={{ color: "red", marginTop: 50, ...exitSprings }}
+              className="additional-content__temp body__description"
+              style={{ marginTop: 50, ...exitSprings }}
             >
               {children}
             </animated.p>
