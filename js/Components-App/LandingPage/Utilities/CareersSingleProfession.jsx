@@ -58,6 +58,54 @@ export const SingleProfession = ({
     };
   }, [bigBox]);
 
+  const calculateEntrySize = () => {
+    if (parentWidth <= 704) {
+      const calcSizes = {
+        width: parentWidth,
+        height: (parentHeight - 5 * 35) / 6,
+      };
+      console.log("ENTERING SMALL WORLD:", parentWidth);
+      console.log("MY BOX START WIDTH:", calcSizes.width);
+      return calcSizes;
+    } else {
+      const calcSizes = {
+        width: (parentWidth - 70) / 3,
+        height: (parentHeight - 35) / 2,
+      };
+      console.log("ENTERING BIG DESKTOP WORLD:", parentWidth);
+      console.log("MY BOX START WIDTH:", calcSizes.width);
+      return calcSizes;
+    }
+  };
+
+  // 1. WHEN IT EXITS TO ORIGINAL IT TURNS TO BE 0
+  // 2. WHEN SWITCHING WINDOW WIDTHS AFTER SOME ACTIONS,
+  //    IT'S A MESS - STRESS TESTS FAIL FOR THE MOMENT
+  //    -> Set proper width in useEffect when window width changes
+  //    -> (when parentWidth changes)
+  //    -> Can simply re-assign calculated with (using calcEntry() func?)
+
+  const calculateExitSize = () => {
+    if (parentWidth <= 704) {
+      const calcSizes = {
+        width: parentWidth,
+        height: ((parentHeight - 5 * 35) / 6) * 5 + 70,
+        // height: `auto`,
+      };
+      console.log("EXITING SMALL WORLD:", parentWidth);
+      console.log("MY BOX EXIT WIDTH:", calcSizes.width);
+      return calcSizes;
+    } else {
+      const calcSizes = {
+        width: parentWidth,
+        height: parentHeight,
+      };
+      console.log("EXITING BIG DESKTOP WORLD:", parentWidth);
+      console.log("MY BOX EXIT WIDTH:", calcSizes.width);
+      return calcSizes;
+    }
+  };
+
   const hoverIn = () => {
     if (!isBig) {
       setSprings.start({
@@ -155,33 +203,31 @@ export const SingleProfession = ({
       },
       from: {
         // 1. here
-        width: `${(parentWidth - 70) / 3}px`,
-        height: `${(parentHeight - 35) / 3}px`,
+        width: `${calculateEntrySize().width}px`,
+        height: `${calculateEntrySize().height / 2}px`,
+        // width: `${(parentWidth - 70) / 3}px`,
+        // height: `${(parentHeight - 35) / 2}px`,
       },
       // 2. here
-      to: { width: `${parentWidth}px`, height: `${parentHeight}px` },
+      to: {
+        width: `${calculateExitSize().width}px`,
+        height: `${calculateExitSize().height}px`,
+      },
+      // to: { width: `${parentWidth}px`, height: `${parentHeight}px` },
     });
   };
 
   // 0. use those functions to calculate box sizes....
   // 4. then not sure if changing anything in useEffect()
   //    is necessary.
+
   // 5. stress test it when opening and closing and changing
   //    window width at the same time / w/o refreshing
-  const calculateEntryWidth = () => {
-    if (parentWidth <= 930) {
-      console.log("ENTERING SMALL WORLD");
-    } else {
-    }
-  };
-
-  const calculateExitWidth = () => {
-    if (parentWidth <= 930) {
-      console.log("ENTERING SMALL WORLD");
-    } else {
-      console.log("I AM IN A BIG WORLD");
-    }
-  };
+  //    -->SOLUTION:
+  //    at the end of going back animation (gron and shrink)
+  //    there can be a each if 1/3 == parent this.width
+  //    or parent == this.width (based if desktop or mobile)
+  //    if not, then push towards that
 
   const closeBigBox = async () => {
     boxPointerCallback(0);
@@ -193,8 +239,10 @@ export const SingleProfession = ({
       to: async (next, cancel) => {
         await next({
           // 3. and here
-          width: `${savedWidth}px`,
-          height: `${savedHeight}px`,
+          width: `${calculateEntrySize().width}px`,
+          height: `${calculateEntrySize().height}px`,
+          // width: `${savedWidth}px`,
+          // height: `${savedHeight}px`,
           zIndex: 0,
         }),
           await next({});
@@ -219,6 +267,8 @@ export const SingleProfession = ({
   };
 
   useEffect(() => {
+    // console.log(calculateEntryWidth());
+    // console.log(calculateExitWidth());
     // mobile modification of variables needs to happen here,
     // so boxes have proper width
     // just update width based on parent once size.width changes
@@ -230,9 +280,9 @@ export const SingleProfession = ({
     // setOriginalWidth((parentWidth - 70) / 3);
     // setOriginalHeight((parentHeight - 35) / 2);
 
-    if (size.width <= 670) {
+    if (parentWidth <= 704) {
       setIsMobile(true);
-    } else if (size.width > 670) {
+    } else if (parentWidth > 704) {
       setIsMobile(false);
     }
 
@@ -247,13 +297,21 @@ export const SingleProfession = ({
       setDetailsVisible(false);
     } else {
     }
+
+    console.log(isMobile);
   }, [size.width, bigBox, parentWidth]);
 
   return (
     <>
       <animated.div
         className="single-profession"
-        style={{ ...springs }}
+        style={{
+          ...springs,
+          display:
+            isMobile == true && bigBox != 0 && bigBox != boxIndex
+              ? `none`
+              : `block`,
+        }}
         onMouseEnter={hoverIn}
         onMouseLeave={hoverOut}
         onClick={clickContact}

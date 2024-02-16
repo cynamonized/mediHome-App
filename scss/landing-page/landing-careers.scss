@@ -129,7 +129,7 @@
       }
     }
 
-    @include smaller_tablet {
+    @include smallest_tablet {
       .columns__left-column {
         grid-template-columns: 1fr;
 
