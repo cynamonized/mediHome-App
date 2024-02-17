@@ -22,10 +22,11 @@ export const SingleProfession = ({
   const size = useWindowSize();
   const compRef = useRef();
   const [width, height] = useSize(compRef);
-  const [isMobile, setIsMobile] = useState(true);
+  const [isMobile, setIsMobile] = useState(false);
   const [detailsVisible, setDetailsVisible] = useState(false);
   const [isBig, setIsBig] = useState(false);
   const [placeholderVisible, setPlaceholderVisible] = useState(false);
+  const [parentWidthChange, setParentWidthChange] = useState(0);
 
   const [savedWidth, setSavedWidth] = useState(0);
   const [savedHeight, setSavedHeight] = useState(0);
@@ -64,47 +65,48 @@ export const SingleProfession = ({
         width: parentWidth,
         height: (parentHeight - 5 * 35) / 6,
       };
-      console.log("ENTERING SMALL WORLD:", parentWidth);
-      console.log("MY BOX START WIDTH:", calcSizes.width);
+      setSavedHeight(calcSizes.height);
       return calcSizes;
     } else {
       const calcSizes = {
         width: (parentWidth - 70) / 3,
         height: (parentHeight - 35) / 2,
       };
-      console.log("ENTERING BIG DESKTOP WORLD:", parentWidth);
-      console.log("MY BOX START WIDTH:", calcSizes.width);
       return calcSizes;
     }
   };
-
-  // 1. WHEN IT EXITS TO ORIGINAL IT TURNS TO BE 0
-  // 2. WHEN SWITCHING WINDOW WIDTHS AFTER SOME ACTIONS,
-  //    IT'S A MESS - STRESS TESTS FAIL FOR THE MOMENT
-  //    -> Set proper width in useEffect when window width changes
-  //    -> (when parentWidth changes)
-  //    -> Can simply re-assign calculated with (using calcEntry() func?)
 
   const calculateExitSize = () => {
     if (parentWidth <= 704) {
       const calcSizes = {
         width: parentWidth,
-        height: ((parentHeight - 5 * 35) / 6) * 5 + 70,
-        // height: `auto`,
+        // 1. this value is bad
+        height: ((parentHeight - 5 * 35) / 6) * 4 + 70,
       };
-      console.log("EXITING SMALL WORLD:", parentWidth);
-      console.log("MY BOX EXIT WIDTH:", calcSizes.width);
       return calcSizes;
     } else {
       const calcSizes = {
         width: parentWidth,
         height: parentHeight,
       };
-      console.log("EXITING BIG DESKTOP WORLD:", parentWidth);
-      console.log("MY BOX EXIT WIDTH:", calcSizes.width);
       return calcSizes;
     }
   };
+
+  const calculateReturnSizeMobile = () => {
+    if (parentWidth <= 704) {
+      const calcSizes = {
+        width: parentWidth,
+        // 2. this value is bad
+        // height: (parentHeight - 5 * 35) / 6,
+        height: `auto`,
+      };
+      return calcSizes;
+    }
+  };
+
+  // 3. isMobile condition on the very bottom is bad
+  // (flashing out)
 
   const hoverIn = () => {
     if (!isBig) {
@@ -192,7 +194,7 @@ export const SingleProfession = ({
 
     setSprings.start({
       delay: 0,
-      to: { position: `absolute` },
+      to: { position: !isMobile ? `absolute` : `static` },
     });
 
     setSprings.start({
@@ -202,47 +204,34 @@ export const SingleProfession = ({
         precision: 1,
       },
       from: {
-        // 1. here
         width: `${calculateEntrySize().width}px`,
         height: `${calculateEntrySize().height / 2}px`,
-        // width: `${(parentWidth - 70) / 3}px`,
-        // height: `${(parentHeight - 35) / 2}px`,
       },
-      // 2. here
       to: {
         width: `${calculateExitSize().width}px`,
         height: `${calculateExitSize().height}px`,
       },
-      // to: { width: `${parentWidth}px`, height: `${parentHeight}px` },
     });
   };
-
-  // 0. use those functions to calculate box sizes....
-  // 4. then not sure if changing anything in useEffect()
-  //    is necessary.
-
-  // 5. stress test it when opening and closing and changing
-  //    window width at the same time / w/o refreshing
-  //    -->SOLUTION:
-  //    at the end of going back animation (gron and shrink)
-  //    there can be a each if 1/3 == parent this.width
-  //    or parent == this.width (based if desktop or mobile)
-  //    if not, then push towards that
 
   const closeBigBox = async () => {
     boxPointerCallback(0);
     setIsBig(false);
     await setSprings.start({
       delay: 0,
-      duration: 500,
-      config: {},
+
+      config: {
+        duration: 500,
+      },
       to: async (next, cancel) => {
         await next({
-          // 3. and here
+          config: {
+            duration: 500,
+            precision: 1,
+          },
           width: `${calculateEntrySize().width}px`,
+          // height: `${savedHeight}px`, // NO!!!!! WHEN CHANGES WINDOW
           height: `${calculateEntrySize().height}px`,
-          // width: `${savedWidth}px`,
-          // height: `${savedHeight}px`,
           zIndex: 0,
         }),
           await next({});
@@ -267,28 +256,21 @@ export const SingleProfession = ({
   };
 
   useEffect(() => {
-    // console.log(calculateEntryWidth());
-    // console.log(calculateExitWidth());
-    // mobile modification of variables needs to happen here,
-    // so boxes have proper width
-    // just update width based on parent once size.width changes
-    // just as media queries
-
-    // console.log("ORIGINAL:", originalWidth);
-    // console.log("PARENT: ", parentWidth);
-
-    // setOriginalWidth((parentWidth - 70) / 3);
-    // setOriginalHeight((parentHeight - 35) / 2);
-
     if (parentWidth <= 704) {
       setIsMobile(true);
     } else if (parentWidth > 704) {
       setIsMobile(false);
     }
 
-    //mobile fixes here TBD
-    // if isBig == false, then animate width to current width
-    // if isBig == true, then animate width to full width (parentWidth)
+    if (!isBig && animCompleted) {
+      setSprings.start({
+        config: {
+          duration: 0,
+        },
+        width: `${calculateEntrySize().width}px`,
+        height: `${calculateEntrySize().height}px`,
+      });
+    }
 
     if (bigBox == boxIndex) {
       setDetailsVisible(true);
@@ -297,8 +279,6 @@ export const SingleProfession = ({
       setDetailsVisible(false);
     } else {
     }
-
-    console.log(isMobile);
   }, [size.width, bigBox, parentWidth]);
 
   return (
@@ -307,10 +287,10 @@ export const SingleProfession = ({
         className="single-profession"
         style={{
           ...springs,
-          display:
-            isMobile == true && bigBox != 0 && bigBox != boxIndex
-              ? `none`
-              : `block`,
+          // display:
+          //   isMobile == true && bigBox != 0 && bigBox != boxIndex
+          //     ? `none`
+          //     : `block`,
         }}
         onMouseEnter={hoverIn}
         onMouseLeave={hoverOut}
@@ -329,7 +309,15 @@ export const SingleProfession = ({
             <img src={PlusSign} alt="" className="plus-sign__plus-icon" />
           </animated.div>
 
-          <animated.div className="head__exit-sign" style={{ ...exitSprings }}>
+          <animated.div
+            className="head__exit-sign"
+            style={{
+              aspectRatio: `1/1`,
+              height: isMobile ? `25px` : `auto`,
+              margin: isMobile ? `25px` : `45px`,
+              ...exitSprings,
+            }}
+          >
             <img src={ExitSign} alt="" className="exit-sign__exit-icon" />
           </animated.div>
         </div>
@@ -350,6 +338,7 @@ export const SingleProfession = ({
       <div
         className="single-profession"
         style={
+          // placeholderVisible && !isMobile ?
           placeholderVisible
             ? { position: `relative`, opacity: 0, zIndex: 0 }
             : { position: `absolute`, opacity: 0, zIndex: 0 }
