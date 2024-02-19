@@ -21,7 +21,7 @@ export const SingleProfession = ({
 }) => {
   const size = useWindowSize();
   const compRef = useRef();
-  const [width, height] = useSize(compRef);
+  // const [width, height] = useSize(compRef);
   const [isMobile, setIsMobile] = useState(false);
   const [detailsVisible, setDetailsVisible] = useState(false);
   const [isBig, setIsBig] = useState(false);
@@ -36,6 +36,18 @@ export const SingleProfession = ({
 
   const [measureRef, { widthMeasure, heigthMeasure }] = useMeasure();
 
+  const phantomOriginalBrother = useRef();
+  const phantomBigBrother = useRef();
+
+  const [ref1, { width, height }] = useMeasure();
+
+  // Dwie sprawy:
+  // 1. Jak wyjąć drugie width and height, skoro nie moge ich inaczej nazwać?
+  // 2. Wykombinować jak zniknąć phantom brothers jeśli nie w mobile...
+
+  const [phantomOrgWidth, phantomOrgHeight] = useSize(phantomOriginalBrother);
+  const [phantomBigWidth, phantomBigHeight] = useSize(phantomBigBrother);
+
   const plusSprings = useSpring({
     opacity: isBig ? 0 : 1,
   });
@@ -49,9 +61,6 @@ export const SingleProfession = ({
       from: {
         zIndex: 0,
         transform: `scale(1)`,
-        // Removed it for tests, perhaps not needed
-        // width: `${originalWidth}px`,
-        // height: `${originalHeight}px`,
         position: `static`,
         display: `block`,
         opacity: 1,
@@ -60,12 +69,11 @@ export const SingleProfession = ({
   }, [bigBox]);
 
   const calculateEntrySize = () => {
-    if (parentWidth <= 704) {
+    if (parentWidth < 704) {
       const calcSizes = {
-        width: parentWidth,
-        height: (parentHeight - 5 * 35) / 6,
+        width: phantomOrgWidth,
+        height: phantomOrgHeight,
       };
-      setSavedHeight(calcSizes.height);
       return calcSizes;
     } else {
       const calcSizes = {
@@ -77,11 +85,10 @@ export const SingleProfession = ({
   };
 
   const calculateExitSize = () => {
-    if (parentWidth <= 704) {
+    if (parentWidth < 704) {
       const calcSizes = {
         width: parentWidth,
-        // 1. this value is bad
-        height: ((parentHeight - 5 * 35) / 6) * 4 + 70,
+        height: phantomBigHeight,
       };
       return calcSizes;
     } else {
@@ -92,21 +99,6 @@ export const SingleProfession = ({
       return calcSizes;
     }
   };
-
-  const calculateReturnSizeMobile = () => {
-    if (parentWidth <= 704) {
-      const calcSizes = {
-        width: parentWidth,
-        // 2. this value is bad
-        // height: (parentHeight - 5 * 35) / 6,
-        height: `auto`,
-      };
-      return calcSizes;
-    }
-  };
-
-  // 3. isMobile condition on the very bottom is bad
-  // (flashing out)
 
   const hoverIn = () => {
     if (!isBig) {
@@ -230,7 +222,6 @@ export const SingleProfession = ({
             precision: 1,
           },
           width: `${calculateEntrySize().width}px`,
-          // height: `${savedHeight}px`, // NO!!!!! WHEN CHANGES WINDOW
           height: `${calculateEntrySize().height}px`,
           zIndex: 0,
         }),
@@ -256,12 +247,12 @@ export const SingleProfession = ({
   };
 
   useEffect(() => {
-    if (parentWidth <= 704) {
+    if (parentWidth < 704) {
       setIsMobile(true);
-    } else if (parentWidth > 704) {
+    } else if (parentWidth >= 704) {
       setIsMobile(false);
     }
-
+    console.log(width, height);
     if (!isBig && animCompleted) {
       setSprings.start({
         config: {
@@ -277,9 +268,8 @@ export const SingleProfession = ({
       growBox();
     } else if (bigBox == 0) {
       setDetailsVisible(false);
-    } else {
     }
-  }, [size.width, bigBox, parentWidth]);
+  }, [size.width, bigBox, parentWidth, phantomOrgHeight, phantomOrgWidth]);
 
   return (
     <>
@@ -287,10 +277,6 @@ export const SingleProfession = ({
         className="single-profession"
         style={{
           ...springs,
-          // display:
-          //   isMobile == true && bigBox != 0 && bigBox != boxIndex
-          //     ? `none`
-          //     : `block`,
         }}
         onMouseEnter={hoverIn}
         onMouseLeave={hoverOut}
@@ -304,7 +290,10 @@ export const SingleProfession = ({
 
           <animated.div
             className="head__plus-sign"
-            style={{ background: `${color}`, ...plusSprings }}
+            style={{
+              background: `${color}`,
+              ...plusSprings,
+            }}
           >
             <img src={PlusSign} alt="" className="plus-sign__plus-icon" />
           </animated.div>
@@ -335,15 +324,61 @@ export const SingleProfession = ({
           )}
         </div>
       </animated.div>
-      <div
-        className="single-profession"
-        style={
-          // placeholderVisible && !isMobile ?
-          placeholderVisible
-            ? { position: `relative`, opacity: 0, zIndex: 0 }
-            : { position: `absolute`, opacity: 0, zIndex: 0 }
-        }
-      ></div>
+
+      {/* ///////////////////////////////////////////////// */}
+
+      {!isMobile && (
+        <div
+          className="single-profession"
+          style={
+            // placeholderVisible && !isMobile ?
+            placeholderVisible
+              ? { position: `relative`, opacity: 0, zIndex: 0 }
+              : { position: `absolute`, opacity: 0, zIndex: 0 }
+          }
+        ></div>
+      )}
+
+      {/* ///////////////////////////////////////////////// */}
+
+      <>
+        <div
+          className="single-profession"
+          style={{ position: `absolute`, opacity: 0, zIndex: -5 }}
+          ref={phantomBigBrother}
+        >
+          <div className="single-profession__head">
+            <p className="head__name">{name}</p>
+          </div>
+          <div className="single-profession__body">
+            <p className="body__description">{description}</p>
+            <p
+              className="additional-content__temp body__description"
+              style={{ marginTop: 50 }}
+            >
+              {children}
+            </p>
+          </div>
+        </div>
+
+        <div
+          className="single-profession"
+          style={{
+            position: `absolute`,
+            opacity: 1,
+            zIndex: 50,
+            background: `red`,
+          }}
+          ref={ref1}
+        >
+          <div className="single-profession__head">
+            <p className="head__name">{name}</p>
+          </div>
+          <div className="single-profession__body">
+            <p className="body__description">{description}</p>
+          </div>
+        </div>
+      </>
     </>
   );
 };
