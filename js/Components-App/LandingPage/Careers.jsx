@@ -6,6 +6,8 @@ import { useSpring, useInView, animated } from "@react-spring/web";
 import useSize from "@react-hook/size";
 import { SingleProfession } from "./Utilities/CareersSingleProfession";
 import { careerCards } from "./Utilities/careerCards";
+import { isRef } from "react-date-picker/dist/cjs/shared/propTypes";
+import useMeasure from "react-use-measure";
 
 export const Careers = () => {
   const [imageAnimationRef, InView] = useInView();
@@ -16,6 +18,8 @@ export const Careers = () => {
   const [boxChosen, setBoxChosen] = useState(0);
 
   const [animationCompleted, setAnimationCompleted] = useState(true);
+
+  const [ref, { width, height }] = useMeasure();
 
   const imageProps = useSpring(
     InView
@@ -50,7 +54,7 @@ export const Careers = () => {
         </h2>
       </div>
       <div className="careers__columns" ref={imageAnimationRef}>
-        <div className="columns__left-column" ref={leftColumn}>
+        <div className="columns__left-column" ref={ref}>
           {careerCards.map((element) => {
             return (
               <SingleProfession
@@ -61,8 +65,8 @@ export const Careers = () => {
                 boxIndex={element.index}
                 boxPointerCallback={performContact}
                 bigBox={boxChosen}
-                parentWidth={leftColumnWidth}
-                parentHeight={leftColumnHeight}
+                parentWidth={width}
+                parentHeight={height}
                 animCompleted={animationCompleted}
                 setAnimCompleted={setAnimationCompleted}
               >

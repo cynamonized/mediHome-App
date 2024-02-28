@@ -36,17 +36,16 @@ export const SingleProfession = ({
 
   const [measureRef, { widthMeasure, heigthMeasure }] = useMeasure();
 
-  const phantomOriginalBrother = useRef();
-  const phantomBigBrother = useRef();
+  const [phantomBigWidth, setPhantomBigWidth] = useState();
+  const [phantomBigHeight, setPhantomBigHeight] = useState();
+  const [phantomOrgWidth, setPhantomOrgWidth] = useState();
+  const [phantomOrgHeight, setPhantomOrgHeight] = useState();
 
-  const [ref1, { width, height }] = useMeasure();
+  const mobilePixelBorder = 704;
 
-  // Dwie sprawy:
-  // 1. Jak wyjąć drugie width and height, skoro nie moge ich inaczej nazwać?
-  // 2. Wykombinować jak zniknąć phantom brothers jeśli nie w mobile...
-
-  const [phantomOrgWidth, phantomOrgHeight] = useSize(phantomOriginalBrother);
-  const [phantomBigWidth, phantomBigHeight] = useSize(phantomBigBrother);
+  // DWIE SPRAWY
+  // 1. DRUGIE KLIKNIĘCIE JEST ZEPSUTE BO WIDTH: INIT is there
+  // 2. MOBILE ROZWINIĘCIE NIE DZIAŁA
 
   const plusSprings = useSpring({
     opacity: isBig ? 0 : 1,
@@ -69,23 +68,28 @@ export const SingleProfession = ({
   }, [bigBox]);
 
   const calculateEntrySize = () => {
-    if (parentWidth < 704) {
+    const desktopParentHeight = (parentHeight - 35) / 2;
+    const desktopParentWidth = (parentWidth - 70) / 3;
+
+    // MOBILE DOESNT WORK !!
+
+    if (parentWidth <= mobilePixelBorder) {
       const calcSizes = {
-        width: phantomOrgWidth,
+        width: parentWidth,
         height: phantomOrgHeight,
       };
       return calcSizes;
     } else {
       const calcSizes = {
-        width: (parentWidth - 70) / 3,
-        height: (parentHeight - 35) / 2,
+        width: desktopParentWidth,
+        height: phantomOrgHeight,
       };
       return calcSizes;
     }
   };
 
-  const calculateExitSize = () => {
-    if (parentWidth < 704) {
+  const calculateBigSize = () => {
+    if (parentWidth <= mobilePixelBorder) {
       const calcSizes = {
         width: parentWidth,
         height: phantomBigHeight,
@@ -132,19 +136,12 @@ export const SingleProfession = ({
 
     setSavedHeight((parentHeight - 35) / 2);
     setSavedWidth((parentWidth - 70) / 3);
+
     hoverOut();
     setIsBig(true);
     setPlaceholderVisible(true);
 
     switch (boxIndex) {
-      case 3: {
-        setSprings.start({
-          top: 0,
-          right: 0,
-        });
-        break;
-      }
-
       case 2: {
         setSprings.start({
           top: 0,
@@ -152,6 +149,14 @@ export const SingleProfession = ({
           right: 0,
           marginLeft: `auto`,
           marginRight: `auto`,
+        });
+        break;
+      }
+
+      case 3: {
+        setSprings.start({
+          top: 0,
+          right: 0,
         });
         break;
       }
@@ -185,7 +190,7 @@ export const SingleProfession = ({
     }
 
     setSprings.start({
-      delay: 0,
+      immediate: true,
       to: { position: !isMobile ? `absolute` : `static` },
     });
 
@@ -200,8 +205,8 @@ export const SingleProfession = ({
         height: `${calculateEntrySize().height / 2}px`,
       },
       to: {
-        width: `${calculateExitSize().width}px`,
-        height: `${calculateExitSize().height}px`,
+        width: `${calculateBigSize().width}px`,
+        height: `${calculateBigSize().height}px`,
       },
     });
   };
@@ -209,6 +214,7 @@ export const SingleProfession = ({
   const closeBigBox = async () => {
     boxPointerCallback(0);
     setIsBig(false);
+
     await setSprings.start({
       delay: 0,
 
@@ -230,7 +236,14 @@ export const SingleProfession = ({
           position: `relative`,
         });
 
-        setPlaceholderVisible(false);
+        await setPlaceholderVisible(false);
+
+        await next({
+          height: `revert`,
+          width: `revert`,
+          immediate: true,
+        });
+
         setAnimCompleted(true);
       },
     });
@@ -247,21 +260,46 @@ export const SingleProfession = ({
   };
 
   useEffect(() => {
-    if (parentWidth < 704) {
+    if (parentWidth <= mobilePixelBorder) {
       setIsMobile(true);
-    } else if (parentWidth >= 704) {
+    } else if (parentWidth >= mobilePixelBorder) {
       setIsMobile(false);
     }
-    console.log(width, height);
-    if (!isBig && animCompleted) {
-      setSprings.start({
-        config: {
-          duration: 0,
-        },
-        width: `${calculateEntrySize().width}px`,
-        height: `${calculateEntrySize().height}px`,
-      });
-    }
+
+    // console.log(parentHeight);
+    // console.log("MOBILE IS", isMobile, ", when Parent width is:", parentWidth);
+
+    // QQ: THIS SOLVED MOBILE?
+    // if (parentWidth < mobilePixelBorder && !bigBox) {
+    //   setSprings.start({
+    //     config: {
+    //       duration: 0,
+    //     },
+    //     immediate: true,
+    //     to: {
+    //       height: `initial`,
+    //       width: `initial`,
+    //     },
+    //   });
+    // }
+
+    // THIS WAS ADJUSING SIZES ALL THE TIME
+    // if (
+    //   !isBig &&
+    //   animCompleted &&
+    //   calculateEntrySize().width &&
+    //   calculateEntrySize().height
+    // ) {
+    //   setSprings.start({
+    //     config: {
+    //       duration: 0,
+    //     },
+    //     to: {
+    //       width: `${calculateEntrySize().width}px`,
+    //       height: `${calculateEntrySize().height}px`,
+    //     },
+    //   });
+    // }
 
     if (bigBox == boxIndex) {
       setDetailsVisible(true);
@@ -269,15 +307,13 @@ export const SingleProfession = ({
     } else if (bigBox == 0) {
       setDetailsVisible(false);
     }
-  }, [size.width, bigBox, parentWidth, phantomOrgHeight, phantomOrgWidth]);
+  }, [size.width, bigBox, parentWidth]);
 
   return (
     <>
       <animated.div
         className="single-profession"
-        style={{
-          ...springs,
-        }}
+        style={{ ...springs }}
         onMouseEnter={hoverIn}
         onMouseLeave={hoverOut}
         onClick={clickContact}
@@ -331,7 +367,6 @@ export const SingleProfession = ({
         <div
           className="single-profession"
           style={
-            // placeholderVisible && !isMobile ?
             placeholderVisible
               ? { position: `relative`, opacity: 0, zIndex: 0 }
               : { position: `absolute`, opacity: 0, zIndex: 0 }
@@ -341,44 +376,99 @@ export const SingleProfession = ({
 
       {/* ///////////////////////////////////////////////// */}
 
-      <>
-        <div
-          className="single-profession"
-          style={{ position: `absolute`, opacity: 0, zIndex: -5 }}
-          ref={phantomBigBrother}
-        >
-          <div className="single-profession__head">
-            <p className="head__name">{name}</p>
-          </div>
-          <div className="single-profession__body">
-            <p className="body__description">{description}</p>
-            <p
-              className="additional-content__temp body__description"
-              style={{ marginTop: 50 }}
-            >
-              {children}
-            </p>
-          </div>
-        </div>
+      {/* <PhantomBigBrother
+        name={name}
+        description={description}
+        children={children}
+        widthCallback={setPhantomBigWidth}
+        heightCallback={setPhantomBigHeight}
+        bigParentWidth={parentWidth}
+      /> */}
 
-        <div
-          className="single-profession"
-          style={{
-            position: `absolute`,
-            opacity: 1,
-            zIndex: 50,
-            background: `red`,
-          }}
-          ref={ref1}
-        >
-          <div className="single-profession__head">
-            <p className="head__name">{name}</p>
-          </div>
-          <div className="single-profession__body">
-            <p className="body__description">{description}</p>
-          </div>
-        </div>
-      </>
+      <PhantomOriginalBrother
+        name={name}
+        description={description}
+        children={children}
+        widthCallback={setPhantomOrgWidth}
+        heightCallback={setPhantomOrgHeight}
+        bigParentWidth={parentWidth}
+        isMobile={isMobile}
+      />
     </>
+  );
+};
+
+const PhantomBigBrother = ({
+  name,
+  description,
+  children,
+  widthCallback,
+  heightCallback,
+  bigParentWidth,
+}) => {
+  const [ref, { width, height }] = useMeasure();
+
+  useEffect(() => {
+    widthCallback(width);
+    heightCallback(height);
+  }, [width, height]);
+
+  return (
+    <div
+      className="single-profession"
+      style={{ position: `absolute`, opacity: 0, zIndex: -5 }}
+      ref={ref}
+    >
+      <div className="single-profession__head">
+        <p className="head__name">{name}</p>
+      </div>
+      <div className="single-profession__body">
+        <p className="body__description">{description}</p>
+        <p
+          className="additional-content__temp body__description"
+          style={{ marginTop: 50 }}
+        >
+          {children}
+        </p>
+      </div>
+    </div>
+  );
+};
+
+const PhantomOriginalBrother = ({
+  name,
+  description,
+  children,
+  widthCallback,
+  heightCallback,
+  bigParentWidth,
+  isMobile,
+}) => {
+  const [ref, { width, height }] = useMeasure();
+
+  useEffect(() => {
+    widthCallback(width);
+    heightCallback(height);
+  }, [width, height]);
+
+  return (
+    <div
+      className="single-profession"
+      style={{
+        position: `absolute`,
+        opacity: 0,
+        zIndex: -5,
+        width: isMobile ? `100%` : `${(bigParentWidth - 70) / 3}px`,
+        background: `green`,
+      }}
+      ref={ref}
+    >
+      <div className="single-profession__head">
+        <p className="head__name">{name}</p>
+      </div>
+      <div className="single-profession__body">
+        <p className="body__description">{description}</p>
+      </div>
+    </div>
   );
 };
