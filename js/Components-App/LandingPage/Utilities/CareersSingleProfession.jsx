@@ -20,7 +20,7 @@ export const SingleProfession = ({
   setAnimCompleted,
 }) => {
   const size = useWindowSize();
-  const compRef = useRef();
+  const ref = useRef();
   // const [width, height] = useSize(compRef);
   const [isMobile, setIsMobile] = useState(false);
   const [detailsVisible, setDetailsVisible] = useState(false);
@@ -34,8 +34,6 @@ export const SingleProfession = ({
   const [originalWidth, setOriginalWidth] = useState((parentWidth - 70) / 3);
   const [originalHeight, setOriginalHeight] = useState((parentHeight - 35) / 2);
 
-  const [measureRef, { widthMeasure, heigthMeasure }] = useMeasure();
-
   const [phantomBigWidth, setPhantomBigWidth] = useState();
   const [phantomBigHeight, setPhantomBigHeight] = useState();
   const [phantomOrgWidth, setPhantomOrgWidth] = useState();
@@ -45,7 +43,7 @@ export const SingleProfession = ({
 
   // DWIE SPRAWY
   // 1. DRUGIE KLIKNIĘCIE JEST ZEPSUTE BO WIDTH: INIT is there
-  // 2. MOBILE ROZWINIĘCIE NIE DZIAŁA
+  //    -> ref.current.removeAttriute('style) - > ChatGPT
 
   const plusSprings = useSpring({
     opacity: isBig ? 0 : 1,
@@ -55,6 +53,14 @@ export const SingleProfession = ({
     opacity: isBig ? 1 : 0,
   });
 
+  const staticStyles = {
+    zIndex: 0,
+    transform: `scale(1)`,
+    position: `static`,
+    display: `block`,
+    opacity: 1,
+  };
+
   const [springs, setSprings] = useSpring(() => {
     return {
       from: {
@@ -63,6 +69,12 @@ export const SingleProfession = ({
         position: `static`,
         display: `block`,
         opacity: 1,
+      },
+      onRest: () => {
+        // if (ref.current && !isBig) {
+        //   ref.current.style.removeProperty("height");
+        //   ref.current.style.removeProperty("width");
+        // }
       },
     };
   }, [bigBox]);
@@ -238,15 +250,22 @@ export const SingleProfession = ({
 
         await setPlaceholderVisible(false);
 
-        await next({
-          height: `revert`,
-          width: `revert`,
-          immediate: true,
-        });
+        // await next({
+        //   height: `revert`,
+        //   width: `revert`,
+        //   immediate: true,
+        // });
 
         setAnimCompleted(true);
+
+        // await ref.current.style.removeProperty(`height`);
+        // await ref.current.style.removeProperty(`width`);
+        // ref.current.classList.remove("single-profession");
       },
     });
+
+    ref.current.style.removeProperty(`height`);
+    ref.current.style.removeProperty(`width`);
   };
 
   const clickContact = async () => {
@@ -266,41 +285,6 @@ export const SingleProfession = ({
       setIsMobile(false);
     }
 
-    // console.log(parentHeight);
-    // console.log("MOBILE IS", isMobile, ", when Parent width is:", parentWidth);
-
-    // QQ: THIS SOLVED MOBILE?
-    // if (parentWidth < mobilePixelBorder && !bigBox) {
-    //   setSprings.start({
-    //     config: {
-    //       duration: 0,
-    //     },
-    //     immediate: true,
-    //     to: {
-    //       height: `initial`,
-    //       width: `initial`,
-    //     },
-    //   });
-    // }
-
-    // THIS WAS ADJUSING SIZES ALL THE TIME
-    // if (
-    //   !isBig &&
-    //   animCompleted &&
-    //   calculateEntrySize().width &&
-    //   calculateEntrySize().height
-    // ) {
-    //   setSprings.start({
-    //     config: {
-    //       duration: 0,
-    //     },
-    //     to: {
-    //       width: `${calculateEntrySize().width}px`,
-    //       height: `${calculateEntrySize().height}px`,
-    //     },
-    //   });
-    // }
-
     if (bigBox == boxIndex) {
       setDetailsVisible(true);
       growBox();
@@ -312,13 +296,25 @@ export const SingleProfession = ({
   return (
     <>
       <animated.div
-        className="single-profession"
+        className={
+          !animCompleted
+            ? `single-profession`
+            : "single-profession remove-sizes"
+        }
+        // className="single-profession"
         style={{ ...springs }}
         onMouseEnter={hoverIn}
         onMouseLeave={hoverOut}
         onClick={clickContact}
-        ref={measureRef}
+        ref={ref}
       >
+        {/* 
+      ////////////////////////////////////////////////////////////
+      // YAS
+      // MAMY TO
+      ////////////////////////////////////////////////////////////
+      
+      */}
         <div className="single-profession__head">
           <p className="head__name" style={{ color: `${color}` }}>
             {name}
@@ -376,14 +372,14 @@ export const SingleProfession = ({
 
       {/* ///////////////////////////////////////////////// */}
 
-      {/* <PhantomBigBrother
+      <PhantomBigBrother
         name={name}
         description={description}
         children={children}
         widthCallback={setPhantomBigWidth}
         heightCallback={setPhantomBigHeight}
         bigParentWidth={parentWidth}
-      /> */}
+      />
 
       <PhantomOriginalBrother
         name={name}
