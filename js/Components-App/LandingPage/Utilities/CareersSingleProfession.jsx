@@ -39,11 +39,9 @@ export const SingleProfession = ({
   const [phantomOrgWidth, setPhantomOrgWidth] = useState();
   const [phantomOrgHeight, setPhantomOrgHeight] = useState();
 
-  const mobilePixelBorder = 704;
+  const [isAnimating, setIsAnimating] = useState(false);
 
-  // DWIE SPRAWY
-  // 1. DRUGIE KLIKNIĘCIE JEST ZEPSUTE BO WIDTH: INIT is there
-  //    -> ref.current.removeAttriute('style) - > ChatGPT
+  const mobilePixelBorder = 704;
 
   const plusSprings = useSpring({
     opacity: isBig ? 0 : 1,
@@ -82,8 +80,6 @@ export const SingleProfession = ({
   const calculateEntrySize = () => {
     const desktopParentHeight = (parentHeight - 35) / 2;
     const desktopParentWidth = (parentWidth - 70) / 3;
-
-    // MOBILE DOESNT WORK !!
 
     if (parentWidth <= mobilePixelBorder) {
       const calcSizes = {
@@ -141,6 +137,8 @@ export const SingleProfession = ({
   };
 
   const growBox = () => {
+    setIsAnimating(true);
+
     setSprings.start({
       zIndex: 15,
       immediate: (key) => key === `zIndex`,
@@ -224,6 +222,8 @@ export const SingleProfession = ({
   };
 
   const closeBigBox = async () => {
+    // setIsAnimating(true);
+
     boxPointerCallback(0);
     setIsBig(false);
 
@@ -257,6 +257,7 @@ export const SingleProfession = ({
         // });
 
         setAnimCompleted(true);
+        setIsAnimating(false);
 
         // await ref.current.style.removeProperty(`height`);
         // await ref.current.style.removeProperty(`width`);
@@ -296,13 +297,19 @@ export const SingleProfession = ({
   return (
     <>
       <animated.div
-        className={
-          !animCompleted
-            ? `single-profession`
-            : "single-profession remove-sizes"
-        }
-        // className="single-profession"
-        style={{ ...springs }}
+        // className={
+        //   !animCompleted
+        //     ? `single-profession`
+        //     : "single-profession remove-sizes"
+        // }
+        className="single-profession"
+        // style={{ ...springs }}
+
+        // THIS IS SOMETHING?
+        // BELOW ALLOWS TO OPEN AND CLOSE - AND IT LOOSES WIDTH AND HEIGHT SUCCESSFULLY
+        // 1. PROBLEM IS z-Index for pluses - weird
+        // 2. and need to apply 'isAnimating' to hovers
+        style={isAnimating ? { ...springs } : {}}
         onMouseEnter={hoverIn}
         onMouseLeave={hoverOut}
         onClick={clickContact}
@@ -312,6 +319,16 @@ export const SingleProfession = ({
       ////////////////////////////////////////////////////////////
       // YAS
       // MAMY TO
+
+      /// GÓWNO NIE DZIAŁA JEDNAK
+
+      // REMOVE !important class whenever possible -> it doesn't remove style={{width, height}} -> it covers it ->
+
+
+      // maybe after cover find a way to remove it in ReactSpring 
+      // HOW ABOUT SETTING 'INITIAL' instead of 'UNSET'
+
+      // REMOVE THIS CLASS AS FIRST STEP IN GROW BOX
       ////////////////////////////////////////////////////////////
       
       */}
