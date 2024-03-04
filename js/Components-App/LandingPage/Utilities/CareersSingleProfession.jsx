@@ -18,6 +18,9 @@ export const SingleProfession = ({
   children,
   animCompleted,
   setAnimCompleted,
+  // B task
+  closeAnotherBigBox,
+  closeThisBox,
 }) => {
   const size = useWindowSize();
   const ref = useRef();
@@ -26,13 +29,6 @@ export const SingleProfession = ({
   const [detailsVisible, setDetailsVisible] = useState(false);
   const [isBig, setIsBig] = useState(false);
   const [placeholderVisible, setPlaceholderVisible] = useState(false);
-  const [parentWidthChange, setParentWidthChange] = useState(0);
-
-  const [savedWidth, setSavedWidth] = useState(0);
-  const [savedHeight, setSavedHeight] = useState(0);
-
-  const [originalWidth, setOriginalWidth] = useState((parentWidth - 70) / 3);
-  const [originalHeight, setOriginalHeight] = useState((parentHeight - 35) / 2);
 
   const [phantomBigWidth, setPhantomBigWidth] = useState();
   const [phantomBigHeight, setPhantomBigHeight] = useState();
@@ -51,14 +47,6 @@ export const SingleProfession = ({
     opacity: isBig ? 1 : 0,
   });
 
-  const staticStyles = {
-    zIndex: 0,
-    transform: `scale(1)`,
-    position: `static`,
-    display: `block`,
-    opacity: 1,
-  };
-
   const [springs, setSprings] = useSpring(() => {
     return {
       from: {
@@ -67,12 +55,6 @@ export const SingleProfession = ({
         position: `static`,
         display: `block`,
         opacity: 1,
-      },
-      onRest: () => {
-        // if (ref.current && !isBig) {
-        //   ref.current.style.removeProperty("height");
-        //   ref.current.style.removeProperty("width");
-        // }
       },
     };
   }, [bigBox]);
@@ -114,6 +96,7 @@ export const SingleProfession = ({
 
   const hoverIn = () => {
     if (!isBig) {
+      setIsAnimating(true);
       setSprings.start({
         config: {
           tension: 1000,
@@ -126,6 +109,7 @@ export const SingleProfession = ({
   };
 
   const hoverOut = () => {
+    setIsAnimating(true);
     setSprings.start({
       config: {
         tension: 1000,
@@ -141,15 +125,10 @@ export const SingleProfession = ({
 
     setSprings.start({
       zIndex: 15,
-      immediate: (key) => key === `zIndex`,
+      immediate: true,
     });
 
-    setSavedHeight((parentHeight - 35) / 2);
-    setSavedWidth((parentWidth - 70) / 3);
-
     hoverOut();
-    setIsBig(true);
-    setPlaceholderVisible(true);
 
     switch (boxIndex) {
       case 2: {
@@ -199,6 +178,9 @@ export const SingleProfession = ({
       }
     }
 
+    setIsBig(true);
+    setPlaceholderVisible(true);
+
     setSprings.start({
       immediate: true,
       to: { position: !isMobile ? `absolute` : `static` },
@@ -222,9 +204,11 @@ export const SingleProfession = ({
   };
 
   const closeBigBox = async () => {
-    // setIsAnimating(true);
-
-    boxPointerCallback(0);
+    // B Task
+    if (closeThisBox != boxIndex) {
+      boxPointerCallback(0);
+    }
+    // boxPointerCallback(0);
     setIsBig(false);
 
     await setSprings.start({
@@ -247,26 +231,10 @@ export const SingleProfession = ({
         await setSprings.start({
           position: `relative`,
         });
-
         await setPlaceholderVisible(false);
-
-        // await next({
-        //   height: `revert`,
-        //   width: `revert`,
-        //   immediate: true,
-        // });
-
         setAnimCompleted(true);
-        setIsAnimating(false);
-
-        // await ref.current.style.removeProperty(`height`);
-        // await ref.current.style.removeProperty(`width`);
-        // ref.current.classList.remove("single-profession");
       },
     });
-
-    ref.current.style.removeProperty(`height`);
-    ref.current.style.removeProperty(`width`);
   };
 
   const clickContact = async () => {
@@ -274,16 +242,61 @@ export const SingleProfession = ({
       boxPointerCallback(boxIndex);
       setAnimCompleted(false);
     }
+
     if (isBig) {
       await closeBigBox();
+    }
+
+    // B task
+    if (boxIndex != bigBox && bigBox && isMobile) {
+      closeAnotherBigBox(boxIndex);
     }
   };
 
   useEffect(() => {
+    // B task below
+
+    // OFC there is a bug
+    // When it I keep some box open after closing another one by opening this one
+    // and change orientation to desktop -> height is crazy
+    // track it down if what causes it
+
+    // there is some logic missing that prevents secondary opened box from behaving just
+    // as 1st opened box when switching to desktop, not sure if that one, or some insisible placeholders?
+
+    if (closeThisBox == boxIndex) {
+      // TUTAJ NIE DZIEJE SIE WSZYSTKO CO POWINNO SIE DZIAĆ PRZY TYM CLOSE BOXIE
+      closeBigBox();
+    }
+
+    //
+
     if (parentWidth <= mobilePixelBorder) {
       setIsMobile(true);
     } else if (parentWidth >= mobilePixelBorder) {
       setIsMobile(false);
+    }
+
+    if (!isBig && parentWidth > mobilePixelBorder) {
+      setSprings.start({
+        width: `${calculateEntrySize().width}px`,
+        height: `${
+          calculateEntrySize().height
+            ? calculateEntrySize().height
+            : (phantomOrgHeight - 35) / 2
+        }px`,
+      });
+    } else if (!isBig && parentWidth <= mobilePixelBorder) {
+      setSprings.start({
+        width: `${parentWidth}px`,
+        height: `${
+          phantomOrgHeight ? phantomOrgHeight : (parentHeight - 5 * 35) / 5
+        }px`,
+      });
+    }
+
+    if (!isBig && animCompleted) {
+      setIsAnimating(false);
     }
 
     if (bigBox == boxIndex) {
@@ -292,46 +305,20 @@ export const SingleProfession = ({
     } else if (bigBox == 0) {
       setDetailsVisible(false);
     }
-  }, [size.width, bigBox, parentWidth]);
+
+    // added dependencies here (B task)
+  }, [size.width, bigBox, parentWidth, closeThisBox]);
 
   return (
     <>
       <animated.div
-        // className={
-        //   !animCompleted
-        //     ? `single-profession`
-        //     : "single-profession remove-sizes"
-        // }
         className="single-profession"
-        // style={{ ...springs }}
-
-        // THIS IS SOMETHING?
-        // BELOW ALLOWS TO OPEN AND CLOSE - AND IT LOOSES WIDTH AND HEIGHT SUCCESSFULLY
-        // 1. PROBLEM IS z-Index for pluses - weird
-        // 2. and need to apply 'isAnimating' to hovers
         style={isAnimating ? { ...springs } : {}}
         onMouseEnter={hoverIn}
         onMouseLeave={hoverOut}
         onClick={clickContact}
         ref={ref}
       >
-        {/* 
-      ////////////////////////////////////////////////////////////
-      // YAS
-      // MAMY TO
-
-      /// GÓWNO NIE DZIAŁA JEDNAK
-
-      // REMOVE !important class whenever possible -> it doesn't remove style={{width, height}} -> it covers it ->
-
-
-      // maybe after cover find a way to remove it in ReactSpring 
-      // HOW ABOUT SETTING 'INITIAL' instead of 'UNSET'
-
-      // REMOVE THIS CLASS AS FIRST STEP IN GROW BOX
-      ////////////////////////////////////////////////////////////
-      
-      */}
         <div className="single-profession__head">
           <p className="head__name" style={{ color: `${color}` }}>
             {name}
@@ -341,6 +328,7 @@ export const SingleProfession = ({
             className="head__plus-sign"
             style={{
               background: `${color}`,
+              zIndex: 0,
               ...plusSprings,
             }}
           >
@@ -381,8 +369,8 @@ export const SingleProfession = ({
           className="single-profession"
           style={
             placeholderVisible
-              ? { position: `relative`, opacity: 0, zIndex: 0 }
-              : { position: `absolute`, opacity: 0, zIndex: 0 }
+              ? { position: `relative`, opacity: 0, zIndex: -2 }
+              : { position: `absolute`, opacity: 0, zIndex: -2 }
           }
         ></div>
       )}

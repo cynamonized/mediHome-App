@@ -17,6 +17,9 @@ export const Careers = () => {
   const [imageWidth, imageHeight] = useSize(imageRef);
   const [boxChosen, setBoxChosen] = useState(0);
 
+  // B task
+  const [closeThisBox, setCloseThisBox] = useState(0);
+
   const [animationCompleted, setAnimationCompleted] = useState(true);
 
   const [ref, { width, height }] = useMeasure();
@@ -45,6 +48,14 @@ export const Careers = () => {
     setBoxChosen(boxIndex);
   };
 
+  // B task
+  const closeAnotherBigBox = (requestedBoxIndex) => {
+    if (boxChosen) {
+      setCloseThisBox(boxChosen);
+      setBoxChosen(requestedBoxIndex);
+    }
+  };
+
   return (
     <section id="careers" className="careers container">
       <div className="careers__title-section">
@@ -69,6 +80,9 @@ export const Careers = () => {
                 parentHeight={height}
                 animCompleted={animationCompleted}
                 setAnimCompleted={setAnimationCompleted}
+                // B task
+                closeAnotherBigBox={closeAnotherBigBox}
+                closeThisBox={closeThisBox}
               >
                 {element.details}
               </SingleProfession>
