@@ -95,7 +95,7 @@ export const SingleProfession = ({
   };
 
   const hoverIn = () => {
-    if (!isBig) {
+    if (!isBig && !isMobile) {
       setIsAnimating(true);
       setSprings.start({
         config: {
@@ -109,15 +109,17 @@ export const SingleProfession = ({
   };
 
   const hoverOut = () => {
-    setIsAnimating(true);
-    setSprings.start({
-      config: {
-        tension: 1000,
-        mass: 1,
-        velocity: 0.05,
-      },
-      to: { transform: `scale(1)` },
-    });
+    if (!isMobile) {
+      setIsAnimating(true);
+      setSprings.start({
+        config: {
+          tension: 1000,
+          mass: 1,
+          velocity: 0.05,
+        },
+        to: { transform: `scale(1)` },
+      });
+    }
   };
 
   const growBox = () => {
@@ -207,7 +209,10 @@ export const SingleProfession = ({
     // B Task
     if (closeThisBox != boxIndex) {
       boxPointerCallback(0);
+    } else {
     }
+
+    // Below is before B Task
     // boxPointerCallback(0);
     setIsBig(false);
 
@@ -238,39 +243,25 @@ export const SingleProfession = ({
   };
 
   const clickContact = async () => {
-    if (animCompleted) {
+    // works only if none is opened
+    if (animCompleted && bigBox == 0) {
       boxPointerCallback(boxIndex);
       setAnimCompleted(false);
     }
 
-    if (isBig) {
+    // first IF works only this box is opened (and closes it)
+    // second IF works only if another box is opened (occurs only on mobile)
+    if (isBig && bigBox == boxIndex) {
+      setAnimCompleted(false);
       await closeBigBox();
-    }
-
-    // B task
-    if (boxIndex != bigBox && bigBox && isMobile) {
+    } else if (boxIndex != bigBox && bigBox && isMobile) {
+      setAnimCompleted(false);
       closeAnotherBigBox(boxIndex);
     }
   };
 
   useEffect(() => {
-    // B task below
-
-    // OFC there is a bug
-    // When it I keep some box open after closing another one by opening this one
-    // and change orientation to desktop -> height is crazy
-    // track it down if what causes it
-
-    // there is some logic missing that prevents secondary opened box from behaving just
-    // as 1st opened box when switching to desktop, not sure if that one, or some insisible placeholders?
-
-    if (closeThisBox == boxIndex) {
-      // TUTAJ NIE DZIEJE SIE WSZYSTKO CO POWINNO SIE DZIAĆ PRZY TYM CLOSE BOXIE
-      closeBigBox();
-    }
-
-    //
-
+    // Normalizing boxes behavior for mobile ///////////////////////////////////////////////////
     if (parentWidth <= mobilePixelBorder) {
       setIsMobile(true);
     } else if (parentWidth >= mobilePixelBorder) {
@@ -294,20 +285,45 @@ export const SingleProfession = ({
         }px`,
       });
     }
+    // Normalizing ends here ////////////////////////////////////////////////////////////////////
 
     if (!isBig && animCompleted) {
       setIsAnimating(false);
     }
 
+    // B task (3rd IF)
     if (bigBox == boxIndex) {
       setDetailsVisible(true);
       growBox();
     } else if (bigBox == 0) {
       setDetailsVisible(false);
+    } else if (bigBox && closeThisBox == boxIndex) {
+      setDetailsVisible(false);
+      closeBigBox();
     }
 
-    // added dependencies here (B task)
-  }, [size.width, bigBox, parentWidth, closeThisBox]);
+    // Below prevents all animations on while on mobile view
+    if (isMobile) {
+      setSprings.start({
+        immediate: true,
+      });
+    }
+  }, [size.width, bigBox, parentWidth]);
+
+  useEffect(() => {
+    // TEN USE EFFECT ZADZIAŁA TYLKO RAZ JAK PRZEJDE Z MOBILE NA DEKSTOP
+    // I MAM OTWARTE COŚ
+
+    // TBD: zrobić szacher macher, żeby od razu wskakiwał na 100% | 100%
+    if (!isMobile && isBig) {
+      console.log("I changed to desktop");
+      setSprings.start({
+        // width: `${calculateBigSize().width}px`,
+        // height: `${calculateBigSize().height}px`,
+        immediate: true,
+      });
+    }
+  }, [isMobile]);
 
   return (
     <>
@@ -363,7 +379,7 @@ export const SingleProfession = ({
       </animated.div>
 
       {/* ///////////////////////////////////////////////// */}
-
+      {/* Placeholder that keeps layout of boxes stable when big box comes in front  */}
       {!isMobile && (
         <div
           className="single-profession"
@@ -376,7 +392,7 @@ export const SingleProfession = ({
       )}
 
       {/* ///////////////////////////////////////////////// */}
-
+      {/* 2 placeholders that measure desired size of box while interacting with it */}
       <PhantomBigBrother
         name={name}
         description={description}

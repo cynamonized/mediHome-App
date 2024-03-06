@@ -44,11 +44,17 @@ export const Careers = () => {
       : {}
   );
 
+  const contactButton = () => {
+    console.log("Placeholder for contact action");
+  };
+
+  // Works only if none of the boxes is opened
   const performContact = (boxIndex) => {
     setBoxChosen(boxIndex);
   };
 
   // B task
+  // Works only if one of the boxes is opened already
   const closeAnotherBigBox = (requestedBoxIndex) => {
     if (boxChosen) {
       setCloseThisBox(boxChosen);
@@ -95,7 +101,7 @@ export const Careers = () => {
               Tell us a little bit more about yourself and share your CV with
               us, we will be happy to talk to you!
             </p>
-            <QuaternaryButton callbackAction={performContact} wide={true}>
+            <QuaternaryButton callbackAction={contactButton} wide={true}>
               CONTACT US
             </QuaternaryButton>
           </div>
