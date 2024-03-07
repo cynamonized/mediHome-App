@@ -205,7 +205,7 @@ export const SingleProfession = ({
     });
   };
 
-  const closeBigBox = async () => {
+  const closeBigBox = async (instant) => {
     // B Task
     if (closeThisBox != boxIndex) {
       boxPointerCallback(0);
@@ -218,14 +218,14 @@ export const SingleProfession = ({
 
     await setSprings.start({
       delay: 0,
-
+      immediate: instant ? true : false,
       config: {
-        duration: 500,
+        duration: instant ? 0 : 500,
       },
       to: async (next, cancel) => {
         await next({
           config: {
-            duration: 500,
+            duration: instant ? 0 : 500,
             precision: 1,
           },
           width: `${calculateEntrySize().width}px`,
@@ -253,7 +253,7 @@ export const SingleProfession = ({
     // second IF works only if another box is opened (occurs only on mobile)
     if (isBig && bigBox == boxIndex) {
       setAnimCompleted(false);
-      await closeBigBox();
+      await closeBigBox(false);
     } else if (boxIndex != bigBox && bigBox && isMobile) {
       setAnimCompleted(false);
       closeAnotherBigBox(boxIndex);
@@ -299,7 +299,7 @@ export const SingleProfession = ({
       setDetailsVisible(false);
     } else if (bigBox && closeThisBox == boxIndex) {
       setDetailsVisible(false);
-      closeBigBox();
+      closeBigBox(false);
     }
 
     // Below prevents all animations on while on mobile view
@@ -311,17 +311,22 @@ export const SingleProfession = ({
   }, [size.width, bigBox, parentWidth]);
 
   useEffect(() => {
-    // TEN USE EFFECT ZADZIAŁA TYLKO RAZ JAK PRZEJDE Z MOBILE NA DEKSTOP
-    // I MAM OTWARTE COŚ
+    // there are some bugs still but it seems to work now?
+    // do some stress tests
 
-    // TBD: zrobić szacher macher, żeby od razu wskakiwał na 100% | 100%
-    if (!isMobile && isBig) {
-      console.log("I changed to desktop");
-      setSprings.start({
-        // width: `${calculateBigSize().width}px`,
-        // height: `${calculateBigSize().height}px`,
-        immediate: true,
-      });
+    // if (!isMobile && isBig) {
+    //   setAnimCompleted(false);
+    //   closeBigBox(true);
+    // }
+
+    // if (isMobile && isBig){
+    //   setAnimCompleted(false);
+    //   closeBigBox(true);
+    // }
+
+    if (isBig) {
+      setAnimCompleted(false);
+      closeBigBox(true);
     }
   }, [isMobile]);
 
