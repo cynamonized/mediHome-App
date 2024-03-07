@@ -261,13 +261,13 @@ export const SingleProfession = ({
   };
 
   useEffect(() => {
-    // Normalizing boxes behavior for mobile ///////////////////////////////////////////////////
     if (parentWidth <= mobilePixelBorder) {
       setIsMobile(true);
     } else if (parentWidth >= mobilePixelBorder) {
       setIsMobile(false);
     }
 
+    // Normalizing boxes behavior for mobile ///////////////////////////////////////////////////
     if (!isBig && parentWidth > mobilePixelBorder) {
       setSprings.start({
         width: `${calculateEntrySize().width}px`,
@@ -280,9 +280,19 @@ export const SingleProfession = ({
     } else if (!isBig && parentWidth <= mobilePixelBorder) {
       setSprings.start({
         width: `${parentWidth}px`,
+        // 1A. This causes it.
+        // when is big, width needs to be normalized too (I tried below..)
         height: `${
           phantomOrgHeight ? phantomOrgHeight : (parentHeight - 5 * 35) / 5
         }px`,
+      });
+    }
+
+    //1B. Here
+    if (isBig) {
+      setSprings.start({
+        immediate: true,
+        width: `initial`,
       });
     }
     // Normalizing ends here ////////////////////////////////////////////////////////////////////
@@ -311,18 +321,26 @@ export const SingleProfession = ({
   }, [size.width, bigBox, parentWidth]);
 
   useEffect(() => {
+    // if (isBig) {
+    //   setSprings.start({
+    //     immediate: true,
+    //     duration: 0,
+    //     config: {
+    //       duration: 0,
+    //       immediate: true,
+    //     },
+    //     width: `${calculateBigSize().width}px`,
+    //     height: `${calculateBigSize().height}px`,
+    //     // to: {
+    //     //   width: `${calculateBigSize().width}px`,
+    //     //   height: `${calculateBigSize().height}px`,
+    //     // },
+    //   });
+    // }
+
     // there are some bugs still but it seems to work now?
     // do some stress tests
-
-    // if (!isMobile && isBig) {
-    //   setAnimCompleted(false);
-    //   closeBigBox(true);
-    // }
-
-    // if (isMobile && isBig){
-    //   setAnimCompleted(false);
-    //   closeBigBox(true);
-    // }
+    // 1. IF YOU DECREASE WIDTH ON THE WINDOW WHEN BIG BOX OPENED, it will not adjust (mobile)
 
     if (isBig) {
       setAnimCompleted(false);
