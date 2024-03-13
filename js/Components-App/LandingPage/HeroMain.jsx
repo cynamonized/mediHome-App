@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import RightIcon from "../../../images/icons/Arrow right.svg";
 import { MainButton } from "../../Utilities/Buttons";
 import Image1 from "../../../images/Landing Page/Main Hero_1.jpg";
@@ -6,6 +6,9 @@ import Image2 from "../../../images/Landing Page/Main Hero_2.jpg";
 import Image3 from "../../../images/Landing Page/Main Hero_3.jpg";
 import Image4 from "../../../images/Landing Page/Main Hero_4.jpg";
 import { heroMainImageGap } from "../../Settings/cssVariables";
+import { useSpring, useInView, animated } from "@react-spring/web";
+import useMeasure from "react-use-measure";
+import useSize from "@react-hook/size";
 
 // not cropped iamges
 import Medical1 from "../../../images/Landing Page/NotCropped/Medical 1.jpg";
@@ -13,15 +16,60 @@ import Medical2 from "../../../images/Landing Page/NotCropped/Medical 2.jpg";
 import Medical3 from "../../../images/Landing Page/NotCropped/Medical 3.jpg";
 import Medical4 from "../../../images/Landing Page/NotCropped/Medical 4.jpg";
 
-// TO DO
-// Add proper crops
-
-// Then add rest of the animations with React String
-// Hover states on card with React Spring - Testimonials and Services
-// I had somehwere a link that perfectly explain how to do those hovers
-// OneNote - Custom tutorial on some sidte
-
 export const HeroMain = () => {
+  const imageGap = parseInt(heroMainImageGap);
+  const [ref, { width, height }] = useMeasure();
+
+  const parentContainer = useRef();
+  const outerContainer = useRef();
+  const innerContainer = useRef();
+
+  const [parentContainerWidth, parentContainerHeight] =
+    useSize(parentContainer);
+  const [outerContainerWidth, outerContainerHeight] = useSize(outerContainer);
+  const [innerContainerWith, innerContainerHeight] = useSize(innerContainer);
+
+  const [springsImage1, setSpringsImage1] = useSpring(() => {
+    return {
+      from: {
+        // Somehow it needs to be applied before mounting...
+        // but size is given when mounting is done..
+
+        // try any work around, when Ctrl+S again, it works
+
+        // some basic examples with '?:' contitions work
+        // look for examples, maybe useSpring as an object, not as function?
+        width: parentContainerWidth
+          ? `${(parentContainerWidth - imageGap * 2) / 3}px`
+          : `initial`,
+      },
+    };
+  }, []);
+
+  const [springsImage2, setSpringsImage2] = useSpring(() => {
+    return {
+      from: {
+        zIndex: 0,
+      },
+    };
+  }, []);
+
+  const [springsImage3, setSpringsImage3] = useSpring(() => {
+    return {
+      from: {
+        zIndex: 0,
+      },
+    };
+  }, []);
+
+  const [springsImage4, setSpringsImage4] = useSpring(() => {
+    return {
+      from: {
+        zIndex: 0,
+      },
+    };
+  }, []);
+
   return (
     <div className="hero-main container">
       <div className="hero-main__left-column">
@@ -36,11 +84,15 @@ export const HeroMain = () => {
           </div>
         </MainButton>
       </div>
-
-      <div className="hero-main__right-column">
-        <div className="right-column__images-outer">
-          <img src={Medical2} className="right-column__image1" />
-          <div className="right-column__images-inner">
+      {/* {console.log(`${(parentContainerWidth - imageGap * 2) / 3}px`)} */}
+      <div className="hero-main__right-column" ref={parentContainer}>
+        <div className="right-column__images-outer" ref={outerContainer}>
+          <animated.img
+            src={Medical2}
+            className="right-column__image1"
+            style={{ ...springsImage1 }}
+          />
+          <div className="right-column__images-inner" ref={innerContainer}>
             <img src={Medical3} className="right-column__image2" />
             <img src={Medical4} className="right-column__image3" />
           </div>
