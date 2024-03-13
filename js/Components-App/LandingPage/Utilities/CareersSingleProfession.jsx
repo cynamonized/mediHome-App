@@ -24,7 +24,6 @@ export const SingleProfession = ({
 }) => {
   const size = useWindowSize();
   const ref = useRef();
-  // const [width, height] = useSize(compRef);
   const [isMobile, setIsMobile] = useState(false);
   const [detailsVisible, setDetailsVisible] = useState(false);
   const [isBig, setIsBig] = useState(false);
@@ -280,15 +279,12 @@ export const SingleProfession = ({
     } else if (!isBig && parentWidth <= mobilePixelBorder) {
       setSprings.start({
         width: `${parentWidth}px`,
-        // 1A. This causes it.
-        // when is big, width needs to be normalized too (I tried below..)
         height: `${
           phantomOrgHeight ? phantomOrgHeight : (parentHeight - 5 * 35) / 5
         }px`,
       });
     }
 
-    //1B. Here
     if (isBig) {
       setSprings.start({
         immediate: true,
@@ -321,30 +317,12 @@ export const SingleProfession = ({
   }, [size.width, bigBox, parentWidth]);
 
   useEffect(() => {
-    // if (isBig) {
-    //   setSprings.start({
-    //     immediate: true,
-    //     duration: 0,
-    //     config: {
-    //       duration: 0,
-    //       immediate: true,
-    //     },
-    //     width: `${calculateBigSize().width}px`,
-    //     height: `${calculateBigSize().height}px`,
-    //     // to: {
-    //     //   width: `${calculateBigSize().width}px`,
-    //     //   height: `${calculateBigSize().height}px`,
-    //     // },
-    //   });
-    // }
-
-    // there are some bugs still but it seems to work now?
-    // do some stress tests
-    // 1. IF YOU DECREASE WIDTH ON THE WINDOW WHEN BIG BOX OPENED, it will not adjust (mobile)
-
+    // This useEffect closes open box when swithing between desktop and mobile
     if (isBig) {
       setAnimCompleted(false);
       closeBigBox(true);
+      setPlaceholderVisible(false);
+      setAnimCompleted(true);
     }
   }, [isMobile]);
 
