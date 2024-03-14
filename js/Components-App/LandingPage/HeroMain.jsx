@@ -72,22 +72,30 @@ export const HeroMain = () => {
   // I encountered it already with 2 images in other component
   const [springsImage2, setSpringsImage2] = useSpring(() => {
     return {
-      delay: 500,
-      config: {
-        easing: easings.easeOutExpo,
-        duration: 1500,
-      },
+      // delay: 500,
+      // config: {
+      //   easing: easings.easeOutCubic,
+      //   duration: 5000,
+      // },
+      // loop: { reverse: true },
       from: {
         // scale: 0,
         width: `${(100 - gapInner) / 2}%`,
         height: `${(100 - gapInner) / 2}%`,
         objectPosition: `20% 35%`,
+
+        // 0. This won't work...
+        // How to change alignment smoothly?
+        // -> sequence where it goes to 100%
+        // -> and then alignment changes
+        // marginLeft: `auto`,
+        // marginRight: `0`,
       },
       to: {
-        // scale: 1,
-        width: `100%`,
+        // width: `100%`,
+        // marginLeft: `0`,
+        // marginRight: `auto`,
       },
-      loop: { reverse: true },
     };
   }, []);
 
@@ -111,6 +119,7 @@ export const HeroMain = () => {
       delay: 500,
       config: {},
       from: {
+        objectPosition: `50% 25%`,
         width: `100%`,
         height: `${singleColumn}%`,
         // scale: 0,
@@ -119,6 +128,40 @@ export const HeroMain = () => {
         // scale: 1,
       },
     };
+  }, []);
+
+  // How to make it a sequence? right now it plays one after another
+  // DO I have to build my own promise mechanism?
+  // Check on the internet if that's possible
+
+  const runAnimationDemo = async () => {
+    await setSpringsImage2.start({
+      delay: 500,
+      config: {
+        easing: easings.easeOutCubic,
+        duration: 5000,
+      },
+      loop: { reverse: true },
+      to: {
+        width: `100%`,
+      },
+    });
+
+    await setSpringsImage3.start({
+      delay: 500,
+      config: {
+        easing: easings.easeOutCubic,
+        duration: 5000,
+      },
+      loop: { reverse: true },
+      to: {
+        width: `${(100 - gapInner) / 2}%`,
+      },
+    });
+  };
+
+  useEffect(() => {
+    runAnimationDemo();
   }, []);
 
   return (

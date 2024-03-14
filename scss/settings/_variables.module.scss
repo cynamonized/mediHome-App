@@ -67,7 +67,7 @@ $singleColumn: calc((100% - $gapPercentageOuter * 2) / 3);
 $gapPercentageInner: calc(
   ($gapPercentageOuter / ($singleColumn * 2 + $gapPercentageOuter)) * 100%
 );
-$heroRadius: 76px;
+$heroRadius: 80px;
 
 :export {
   mainPink: $color-main-pink;

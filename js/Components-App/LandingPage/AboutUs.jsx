@@ -55,6 +55,26 @@ const ImageTallImg = () => {
           },
           config: {
             duration: 2000,
+            easing: easings.easeOutCubic,
+          },
+        }
+      : {}
+  );
+
+  const imageProps = useSpring(
+    InView
+      ? {
+          delay: 1300,
+          loop: { reverse: true },
+          from: {
+            scale: 1,
+          },
+          to: {
+            scale: 1.2,
+          },
+          config: {
+            duration: 2000,
+            easing: easings.easeOutCubic,
           },
         }
       : {}
@@ -62,17 +82,22 @@ const ImageTallImg = () => {
 
   return (
     <>
-      <animated.img
-        src={ImageTall}
-        alt=""
-        className="left-column__image-tall"
+      <animated.div
+        className="left-column__container-image"
         style={{
           borderTopLeftRadius: width / 2,
           borderBottomLeftRadius: width / 2,
           ...props,
         }}
         ref={ref}
-      />
+      >
+        <animated.img
+          src={ImageTall}
+          alt=""
+          className="left-column__image-tall"
+          style={{ ...imageProps }}
+        />
+      </animated.div>
     </>
   );
 };
@@ -84,7 +109,7 @@ const ImageShortImg = () => {
   const props = useSpring(
     InView
       ? {
-          delay: 4000,
+          delay: 3000,
           loop: { reverse: true },
           from: {
             borderBottomRightRadius: 0,
@@ -96,23 +121,48 @@ const ImageShortImg = () => {
           },
           config: {
             duration: 2000,
+            easing: easings.easeOutCubic,
+          },
+        }
+      : {}
+  );
+
+  const imageProps = useSpring(
+    InView
+      ? {
+          delay: 3000,
+          loop: { reverse: true },
+          from: {
+            scale: 1,
+          },
+          to: {
+            scale: 1.2,
+          },
+          config: {
+            duration: 2000,
+            easing: easings.easeOutCubic,
           },
         }
       : {}
   );
 
   return (
-    <animated.img
-      src={ImageShort}
-      alt=""
-      className="left-column__image-short"
+    <animated.div
+      className="left-column__image-container--short"
       style={{
         borderTopRightRadius: width / 2,
         borderBottomLeftRadius: width / 2,
         ...props,
       }}
       ref={ref}
-    />
+    >
+      <animated.img
+        src={ImageShort}
+        alt=""
+        className="left-column__image-short"
+        style={{ ...imageProps }}
+      />
+    </animated.div>
   );
 };
 
