@@ -59,6 +59,16 @@ $border-radius: 30px;
 $margin-inside: 30px;
 $hero-images-gap: 38px;
 
+// Hero image
+// only gapPercentageOuter to be changed
+// other variables will be changed accordingly
+$gapPercentageOuter: 5%;
+$singleColumn: calc((100% - $gapPercentageOuter * 2) / 3);
+$gapPercentageInner: calc(
+  ($gapPercentageOuter / ($singleColumn * 2 + $gapPercentageOuter)) * 100%
+);
+$heroRadius: 76px;
+
 :export {
   mainPink: $color-main-pink;
   mainPinkLight: $color-main-pink-light;
@@ -69,5 +79,8 @@ $hero-images-gap: 38px;
   greysLight2: $color-greys-light-2;
   greysMid1: $color-greys-mid-1;
   mainText: $color-main-text;
-  heroImagesGap: $hero-images-gap;
+  gapOuter: $gapPercentageOuter;
+  singleColumn: $singleColumn;
+  gapInner: $gapPercentageInner;
+  heroRadius: $heroRadius;
 }

@@ -1,4 +1,4 @@
-// $hero-images-gap: 37px;
+//
 
 .hero-main {
   padding: 100px 0 200px 0;
@@ -28,55 +28,81 @@
     max-width: none;
     width: 532px;
     aspect-ratio: 1/1;
-    gap: $hero-images-gap;
     grid-template-columns: 1fr;
+    //////////////////////////////// Legacy math;
+    // gap: $hero-images-gap;
+    gap: $gapPercentageOuter;
+    //
+
     .right-column__images-outer {
       width: 100%;
-      height: calc(
-        100% - (((100% - (2 * $hero-images-gap)) / 3) + $hero-images-gap)
-      );
-      gap: $hero-images-gap;
+      //////////////////////////////// Legacy math;
+      // height: calc(
+      //   100% - (((100% - (2 * $hero-images-gap)) / 3) + $hero-images-gap)
+      // );
+      height: calc(($singleColumn * 2) + $gapPercentageOuter);
+      // gap: $hero-images-gap;
+      gap: $gapPercentageOuter;
+      //
       display: flex;
       .right-column__image1 {
         max-width: none;
-        // width: calc((100% - ($hero-images-gap * 2)) / 3);
         height: 100%;
-        border-radius: 76px 76px 0 76px;
+        border-radius: $heroRadius $heroRadius 0 $heroRadius;
         object-fit: cover;
+        //////////////////////////////// Legacy math;
+        // width: calc((100% - ($hero-images-gap * 2)) / 3);
+        width: $singleColumn;
+        //
       }
 
       .right-column__images-inner {
         height: 100%;
-        width: calc(
-          100% - (((100% - (2 * $hero-images-gap)) / 3) + $hero-images-gap)
-        );
         display: flex;
         flex-direction: column;
-        row-gap: $hero-images-gap;
+        //////////////////////////////// Legacy math;
+        // width: calc(
+        //   100% - (((100% - (2 * $hero-images-gap)) / 3) + $hero-images-gap)
+        // );
+        width: calc(($singleColumn * 2) + $gapPercentageOuter);
+        // row-gap: $hero-images-gap;
+        row-gap: $gapPercentageInner;
+        //
 
         .right-column__image2 {
           max-width: none;
-          width: calc((100% - $hero-images-gap) / 2);
-          height: calc((100% - $hero-images-gap) / 2);
-          border-radius: 76px;
+          border-radius: $heroRadius;
           object-fit: cover;
+          //////////////////////////////// Legacy math;
+          // width: calc((100% - $hero-images-gap) / 2);
+          width: calc((100% - $gapPercentageInner) / 2);
+          // height: calc((100% - $hero-images-gap) / 2);
+          height: calc((100% - $gapPercentageInner) / 2);
+          //
         }
         .right-column__image3 {
-          max-width: none;
-          border-radius: 76px;
-          width: 100%;
-          height: calc((100% - $hero-images-gap) / 2);
           object-fit: cover;
+          max-width: none;
+          border-radius: $heroRadius;
+          width: 100%;
+          //////////////////////////////// Legacy math;
+          // height: calc((100% - $hero-images-gap) / 2);
+          height: calc((100% - $gapPercentageInner) / 2);
+          //
         }
       }
     }
     .right-column__image4 {
+      border-radius: $heroRadius 0 $heroRadius $heroRadius;
+      object-fit: cover;
       max-width: none;
       width: 100%;
-      height: calc((100% - ($hero-images-gap) * 2) / 3);
-      border-radius: 76px 0 76px 76px;
-      object-fit: cover;
-      margin-top: $hero-images-gap;
+      //////////////////////////////// Legacy math;
+      // height: calc((100% - ($hero-images-gap) * 2) / 3);
+      height: $singleColumn;
+      // margin-top: $hero-images-gap;
+      margin-top: $gapPercentageOuter;
+      //
     }
   }
 }
@@ -115,7 +141,6 @@
 
     .hero-main__right-column {
       width: 480px;
-      // aspect-ratio: 1/1;
       height: 480px;
     }
   }

@@ -5,8 +5,19 @@ import Image1 from "../../../images/Landing Page/Main Hero_1.jpg";
 import Image2 from "../../../images/Landing Page/Main Hero_2.jpg";
 import Image3 from "../../../images/Landing Page/Main Hero_3.jpg";
 import Image4 from "../../../images/Landing Page/Main Hero_4.jpg";
-import { heroMainImageGap } from "../../Settings/cssVariables";
-import { useSpring, useInView, animated } from "@react-spring/web";
+import {
+  gapHeroOuter,
+  gapHeroInner,
+  singleHeroColumn,
+  heroImgRadius,
+} from "../../Settings/cssVariables";
+import {
+  useSpring,
+  useInView,
+  animated,
+  config,
+  easings,
+} from "@react-spring/web";
 import useMeasure from "react-use-measure";
 import useSize from "@react-hook/size";
 
@@ -17,8 +28,18 @@ import Medical3 from "../../../images/Landing Page/NotCropped/Medical 3.jpg";
 import Medical4 from "../../../images/Landing Page/NotCropped/Medical 4.jpg";
 
 export const HeroMain = () => {
-  const imageGap = parseInt(heroMainImageGap);
-  const [ref, { width, height }] = useMeasure();
+  // Below 3 are grid sizes of hero image
+  const gapOuter = parseFloat(gapHeroOuter);
+  const gapInner = parseFloat(gapHeroInner);
+  const singleColumn = parseFloat(singleHeroColumn);
+  const heroRadius = parseFloat(heroImgRadius);
+
+  // gives the same result as gapInner
+  const tempInner = (gapOuter / (singleColumn * 2 + gapOuter)) * 100;
+
+  const defaultDuration = 1000;
+
+  // const [ref, { width, height }] = useMeasure();
 
   const parentContainer = useRef();
   const outerContainer = useRef();
@@ -29,43 +50,73 @@ export const HeroMain = () => {
   const [outerContainerWidth, outerContainerHeight] = useSize(outerContainer);
   const [innerContainerWith, innerContainerHeight] = useSize(innerContainer);
 
+  // Scale animation to be removed later?
+  // not necessary when it will start animating
+
   const [springsImage1, setSpringsImage1] = useSpring(() => {
     return {
+      delay: 600,
+      config: {},
       from: {
-        // Somehow it needs to be applied before mounting...
-        // but size is given when mounting is done..
-
-        // try any work around, when Ctrl+S again, it works
-
-        // some basic examples with '?:' contitions work
-        // look for examples, maybe useSpring as an object, not as function?
-        width: parentContainerWidth
-          ? `${(parentContainerWidth - imageGap * 2) / 3}px`
-          : `initial`,
+        width: `${singleColumn}%`,
+        height: `100%`,
+        // scale: 0,
+      },
+      to: {
+        // scale: 1,
       },
     };
   }, []);
 
+  // CAN I DELAY GOING BACK?, OR THAT'S THE SAME DELAY
+  // I encountered it already with 2 images in other component
   const [springsImage2, setSpringsImage2] = useSpring(() => {
     return {
-      from: {
-        zIndex: 0,
+      delay: 500,
+      config: {
+        easing: easings.easeOutExpo,
+        duration: 1500,
       },
+      from: {
+        // scale: 0,
+        width: `${(100 - gapInner) / 2}%`,
+        height: `${(100 - gapInner) / 2}%`,
+        objectPosition: `20% 35%`,
+      },
+      to: {
+        // scale: 1,
+        width: `100%`,
+      },
+      loop: { reverse: true },
     };
   }, []);
 
   const [springsImage3, setSpringsImage3] = useSpring(() => {
     return {
+      delay: 400,
+      config: {},
       from: {
-        zIndex: 0,
+        width: `100%`,
+        height: `${(100 - gapInner) / 2}%`,
+        // scale: 0,
+      },
+      to: {
+        // scale: 1,
       },
     };
   }, []);
 
   const [springsImage4, setSpringsImage4] = useSpring(() => {
     return {
+      delay: 500,
+      config: {},
       from: {
-        zIndex: 0,
+        width: `100%`,
+        height: `${singleColumn}%`,
+        // scale: 0,
+      },
+      to: {
+        // scale: 1,
       },
     };
   }, []);
@@ -84,7 +135,6 @@ export const HeroMain = () => {
           </div>
         </MainButton>
       </div>
-      {/* {console.log(`${(parentContainerWidth - imageGap * 2) / 3}px`)} */}
       <div className="hero-main__right-column" ref={parentContainer}>
         <div className="right-column__images-outer" ref={outerContainer}>
           <animated.img
@@ -93,11 +143,23 @@ export const HeroMain = () => {
             style={{ ...springsImage1 }}
           />
           <div className="right-column__images-inner" ref={innerContainer}>
-            <img src={Medical3} className="right-column__image2" />
-            <img src={Medical4} className="right-column__image3" />
+            <animated.img
+              src={Medical3}
+              className="right-column__image2"
+              style={{ ...springsImage2 }}
+            />
+            <animated.img
+              src={Medical4}
+              className="right-column__image3"
+              style={{ ...springsImage3 }}
+            />
           </div>
         </div>
-        <img src={Medical1} className="right-column__image4" />
+        <animated.img
+          src={Medical1}
+          className="right-column__image4"
+          style={{ ...springsImage4 }}
+        />
       </div>
     </div>
   );

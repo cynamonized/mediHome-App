@@ -8,7 +8,10 @@ import {
   greysLight2,
   greysMid1,
   mainText,
-  heroImagesGap,
+  gapOuter,
+  gapInner,
+  singleColumn,
+  heroRadius,
 } from "../../scss/settings/_variables.module.scss";
 
 export const colorMainBlue = mainBlue;
@@ -29,10 +32,10 @@ export const colorGreysMid1 = greysMid1;
 
 export const colorMainText = mainText;
 
-export const heroMainImageGap = heroImagesGap;
+export const gapHeroOuter = gapOuter;
 
-// LEGACY
+export const gapHeroInner = gapInner;
 
-// export const colorMainBlue = getComputedStyle(
-//   document.documentElement
-// ).getPropertyValue("--color-main-blue");
+export const singleHeroColumn = singleColumn;
+
+export const heroImgRadius = heroRadius;
