@@ -36,6 +36,10 @@
 
     .col-address--search {
       width: 20%;
+
+      @include smallest_desktop {
+        width: 15%;
+      }
     }
 
     .col-set--search {

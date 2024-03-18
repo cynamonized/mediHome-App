@@ -81,9 +81,13 @@
 
 .tertiary-button {
   background-color: $color-main-blue;
-
+  text-align: center;
   &:hover {
     background-color: $color-main-text;
+  }
+
+  @include smallest_desktop {
+    padding: 10px 15px;
   }
 }
 
