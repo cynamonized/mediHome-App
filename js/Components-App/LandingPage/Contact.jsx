@@ -25,6 +25,26 @@ export const Contact = () => {
           },
           config: {
             duration: 1500,
+            easing: easings.easeOutCubic,
+          },
+        }
+      : {}
+  );
+
+  const imageProps = useSpring(
+    InView
+      ? {
+          delay: 2000,
+          loop: { reverse: true },
+          from: {
+            scale: 1.2,
+          },
+          to: {
+            scale: 1,
+          },
+          config: {
+            duration: 1500,
+            easing: easings.easeOutCubic,
           },
         }
       : {}
@@ -84,19 +104,24 @@ export const Contact = () => {
           </form>
         </div>
 
-        <div className="columns__right-column">
+        <animated.div
+          className="columns__right-column"
+          style={{
+            borderBottomRightRadius: height / 2,
+            borderBottomLeftRadius: height / 2,
+            ...props,
+          }}
+        >
           <animated.img
             src={MainImage}
             alt=""
             className="right-column__image"
             style={{
-              borderBottomRightRadius: height / 2,
-              borderBottomLeftRadius: height / 2,
-              ...props,
+              ...imageProps,
             }}
             ref={ref}
           />
-        </div>
+        </animated.div>
       </div>
     </section>
   );

@@ -50,9 +50,11 @@
     }
 
     .columns__right-column {
+      overflow: hidden;
       .right-column__image {
         // border-radius: 0 252px 252px 252px;
         // max-height: 503px;
+
         height: 100%;
       }
     }

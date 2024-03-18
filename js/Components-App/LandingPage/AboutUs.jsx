@@ -109,7 +109,7 @@ const ImageShortImg = () => {
   const props = useSpring(
     InView
       ? {
-          delay: 3000,
+          delay: 3500,
           loop: { reverse: true },
           from: {
             borderBottomRightRadius: 0,
@@ -130,13 +130,13 @@ const ImageShortImg = () => {
   const imageProps = useSpring(
     InView
       ? {
-          delay: 3000,
+          delay: 3500,
           loop: { reverse: true },
           from: {
-            scale: 1,
+            scale: 1.2,
           },
           to: {
-            scale: 1.2,
+            scale: 1,
           },
           config: {
             duration: 2000,

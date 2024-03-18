@@ -8,6 +8,7 @@ import { SingleProfession } from "./Utilities/CareersSingleProfession";
 import { careerCards } from "./Utilities/careerCards";
 import { isRef } from "react-date-picker/dist/cjs/shared/propTypes";
 import useMeasure from "react-use-measure";
+import { easings, config } from "@react-spring/web";
 
 export const Careers = () => {
   const [imageAnimationRef, InView] = useInView();
@@ -30,6 +31,25 @@ export const Careers = () => {
           delay: 1000,
           loop: { reverse: true },
           from: {
+            scale: 1.2,
+          },
+          to: {
+            scale: 1,
+          },
+          config: {
+            duration: 2000,
+            easing: easings.easeOutCubic,
+          },
+        }
+      : {}
+  );
+
+  const containerProps = useSpring(
+    InView
+      ? {
+          delay: 1000,
+          loop: { reverse: true },
+          from: {
             borderTopLeftRadius: 0,
             borderBottomRightRadius: imageWidth / 2,
           },
@@ -39,6 +59,7 @@ export const Careers = () => {
           },
           config: {
             duration: 2000,
+            easing: easings.easeOutCubic,
           },
         }
       : {}
@@ -105,18 +126,25 @@ export const Careers = () => {
               CONTACT US
             </QuaternaryButton>
           </div>
-          <animated.img
-            src={MainImage}
-            alt=""
-            className="right-column__main-image"
-            ref={imageRef}
+          <animated.div
+            className="right-column__image-container"
             style={{
               borderTopRightRadius: imageWidth / 2,
               borderBottomLeftRadius: imageWidth / 2,
               borderBottomRightRadius: imageWidth / 2,
-              ...imageProps,
+              ...containerProps,
             }}
-          />
+          >
+            <animated.img
+              src={MainImage}
+              alt=""
+              className="right-column__main-image"
+              ref={imageRef}
+              style={{
+                ...imageProps,
+              }}
+            />
+          </animated.div>
         </div>
       </div>
     </section>
