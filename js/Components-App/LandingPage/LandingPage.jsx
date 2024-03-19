@@ -10,8 +10,9 @@ import { Careers } from "./Careers";
 import { ServicesLegacy } from "./ServicesLegacy";
 import { HeroMain } from "./HeroMain";
 import { HeroMainOld } from "./HeroMainOLd";
-import { HeartQuote } from "./HeartQuote";
+import { HeartQuote } from "./Utilities/HeartQuote";
 import { BestPeopleBanner } from "./BestPeopleBanner";
+import { Quote } from "./Quote.";
 import PeopleBanner from "../../../images/Landing Page/About-Us-Banner.jpg";
 
 export const LandingPage = () => {
@@ -23,12 +24,10 @@ export const LandingPage = () => {
       <AboutUs />
       <Testimonials />
       <Contact />
-      <BestPeopleBanner
-        imagePath={"/images/About-Us-Banner.jpg"}
-        // banner={PeopleBanner}
-      />
+      <BestPeopleBanner imagePath={"/images/About-Us-Banner.jpg"} />
       <Careers />
-      <HeartQuote />
+
+      <Quote />
       <Footer />
     </>
   );

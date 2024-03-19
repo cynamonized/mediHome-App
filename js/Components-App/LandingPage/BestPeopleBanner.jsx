@@ -1,8 +1,7 @@
 import { useInView } from "react-intersection-observer";
 
-export const BestPeopleBanner = ({ imagePath, banner }) => {
+export const BestPeopleBanner = ({ imagePath }) => {
   const { ref, inView, entry } = useInView({ threshold: 0.6 });
-  console.log(imagePath);
   return (
     <div
       className={

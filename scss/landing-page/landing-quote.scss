@@ -1,0 +1,30 @@
+$font-arial-quote: "Times New Roman", "serif";
+
+.quote-container {
+  display: grid;
+  grid-template-columns: 527fr 773fr;
+  .quote__left-column {
+    background-color: aquamarine;
+    overflow: hidden;
+    @include flex(center, center);
+  }
+
+  .quote__right-column {
+    background-color: bisque;
+    .right-column__quotation-mark {
+      position: relative;
+      &::after {
+        content: "\275D";
+        font-size: 21.875rem;
+        // position: absolute;
+      }
+    }
+
+    .right-column__quote-text {
+      margin-top: -150px;
+    }
+
+    .right-column__quote-title {
+    }
+  }
+}

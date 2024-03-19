@@ -1,13 +1,15 @@
 .full-container {
-  //   @include flex(center, center);
   margin: 50px 0;
-  .shapes-container {
-    width: 50%;
+  width: 200%;
 
-    aspect-ratio: 1/1;
-    display: flex;
-    justify-content: center;
-    align-items: center;
+  margin-left: auto;
+  margin-right: auto;
+
+  overflow: hidden;
+
+  .shapes-container {
+    padding-left: 80px;
+    @include flex(center, center);
 
     .shape {
       fill: none;
