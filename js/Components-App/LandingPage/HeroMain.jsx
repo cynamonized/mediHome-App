@@ -34,12 +34,10 @@ export const HeroMain = () => {
   const singleColumn = parseFloat(singleHeroColumn);
   const heroRadius = parseFloat(heroImgRadius);
 
-  // gives the same result as gapInner
+  // just to check (remove later), gives the same result as gapInner
   const tempInner = (gapOuter / (singleColumn * 2 + gapOuter)) * 100;
 
   const defaultDuration = 1000;
-
-  // const [ref, { width, height }] = useMeasure();
 
   const parentContainer = useRef();
   const outerContainer = useRef();
@@ -50,9 +48,6 @@ export const HeroMain = () => {
   const [outerContainerWidth, outerContainerHeight] = useSize(outerContainer);
   const [innerContainerWith, innerContainerHeight] = useSize(innerContainer);
 
-  // Scale animation to be removed later?
-  // not necessary when it will start animating
-
   const [springsImage1, setSpringsImage1] = useSpring(() => {
     return {
       delay: 600,
@@ -60,42 +55,21 @@ export const HeroMain = () => {
       from: {
         width: `${singleColumn}%`,
         height: `100%`,
-        // scale: 0,
+        borderTopRightRadius: `0px`,
+        borderBottomRightRadius: `${heroRadius}px`,
       },
-      to: {
-        // scale: 1,
-      },
+      to: {},
     };
   }, []);
 
-  // CAN I DELAY GOING BACK?, OR THAT'S THE SAME DELAY
-  // I encountered it already with 2 images in other component
   const [springsImage2, setSpringsImage2] = useSpring(() => {
     return {
-      // delay: 500,
-      // config: {
-      //   easing: easings.easeOutCubic,
-      //   duration: 5000,
-      // },
-      // loop: { reverse: true },
       from: {
-        // scale: 0,
         width: `${(100 - gapInner) / 2}%`,
         height: `${(100 - gapInner) / 2}%`,
         objectPosition: `20% 35%`,
-
-        // 0. This won't work...
-        // How to change alignment smoothly?
-        // -> sequence where it goes to 100%
-        // -> and then alignment changes
-        // marginLeft: `auto`,
-        // marginRight: `0`,
       },
-      to: {
-        // width: `100%`,
-        // marginLeft: `0`,
-        // marginRight: `auto`,
-      },
+      to: {},
     };
   }, []);
 
@@ -106,11 +80,8 @@ export const HeroMain = () => {
       from: {
         width: `100%`,
         height: `${(100 - gapInner) / 2}%`,
-        // scale: 0,
       },
-      to: {
-        // scale: 1,
-      },
+      to: {},
     };
   }, []);
 
@@ -120,48 +91,99 @@ export const HeroMain = () => {
       config: {},
       from: {
         objectPosition: `50% 25%`,
-        width: `100%`,
         height: `${singleColumn}%`,
-        // scale: 0,
+        width: `100%`,
+        borderTopLeftRadius: `0px`,
+        borderTopRightRadius: `${heroRadius}px`,
       },
-      to: {
-        // scale: 1,
-      },
+      to: {},
     };
   }, []);
 
-  // How to make it a sequence? right now it plays one after another
-  // DO I have to build my own promise mechanism?
-  // Check on the internet if that's possible
+  const runAnimation = async () => {
+    const innerImagesPromise = new Promise((resolve, reject) => {
+      const innerTimeout = setTimeout(() => {
+        setSpringsImage2.start({
+          delay: 800,
+          config: {
+            easing: easings.easeOutCubic,
+            duration: 1800,
+          },
+          loop: { reverse: true },
+          to: {
+            width: `100%`,
+          },
+        });
 
-  const runAnimationDemo = async () => {
-    await setSpringsImage2.start({
-      delay: 500,
-      config: {
-        easing: easings.easeOutCubic,
-        duration: 5000,
-      },
-      loop: { reverse: true },
-      to: {
-        width: `100%`,
-      },
-    });
+        setSpringsImage3.start({
+          delay: 1600,
+          config: {
+            easing: easings.easeOutCubic,
+            duration: 900,
+          },
+          loop: { reverse: true },
+          to: {
+            width: `${(100 - gapInner) / 2}%`,
+          },
+        });
 
-    await setSpringsImage3.start({
-      delay: 500,
-      config: {
-        easing: easings.easeOutCubic,
-        duration: 5000,
-      },
-      loop: { reverse: true },
-      to: {
-        width: `${(100 - gapInner) / 2}%`,
-      },
-    });
+        resolve("Animation carries on...");
+      }, 100);
+    })
+      .then((value) => {
+        console.log(value);
+        const outerTimeout = setTimeout(() => {
+          setSpringsImage1.start({
+            delay: 1800,
+            config: {
+              easing: easings.easeOutCubic,
+              duration: 1800,
+            },
+            loop: { reverse: true },
+            to: {
+              borderTopRightRadius: `${heroRadius}px`,
+              borderBottomRightRadius: `0px`,
+              height: `${(100 - gapInner) / 2}%`,
+            },
+          });
+        }, 500);
+        return value;
+      })
+      .then((value) => {
+        const secondOuterTimeout = setTimeout(() => {
+          console.log(value);
+          setSpringsImage4.start({
+            delay: 1500,
+            config: {
+              easing: easings.easeOutCubic,
+              duration: 750,
+            },
+            to: async (next, cancel) => {
+              await next({
+                delay: 1500,
+                borderTopLeftRadius: `${heroRadius}px`,
+                borderTopRightRadius: `0px`,
+                width: `${((100 - gapOuter * 2) / 3) * 2}%`,
+              }),
+                await next({
+                  delay: 1500,
+                  width: `${(100 - gapOuter * 2) / 3}%`,
+                });
+              await next({
+                delay: 800,
+                width: `100%`,
+                borderTopLeftRadius: `0px`,
+                borderTopRightRadius: `${heroRadius}px`,
+              });
+            },
+            loop: true,
+          });
+        }, 350);
+      });
   };
 
   useEffect(() => {
-    runAnimationDemo();
+    runAnimation();
   }, []);
 
   return (
