@@ -46,7 +46,7 @@ export const LandingNav = () => {
             </li>
           </ul>
           <div className="right-column__button-container">
-            <TertiaryButton callbackAction={goToPortal}>
+            <TertiaryButton callbackAction={goToPortal} wide={true}>
               PATIENT PORTAL
             </TertiaryButton>
           </div>

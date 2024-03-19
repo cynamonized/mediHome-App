@@ -37,10 +37,10 @@ export const Contact = () => {
           delay: 2000,
           loop: { reverse: true },
           from: {
-            scale: 1.2,
+            scale: 1,
           },
           to: {
-            scale: 1,
+            scale: 1.2,
           },
           config: {
             duration: 1500,

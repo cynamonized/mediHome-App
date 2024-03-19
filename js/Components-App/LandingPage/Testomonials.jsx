@@ -80,7 +80,7 @@ const SingleColumn = ({ image, name, rating, comment }) => {
 
     sethoverSprings.start({
       delay: 0,
-      to: { transform: `scale(1.1)` },
+      to: { transform: `scale(1.05)` },
     });
   };
 

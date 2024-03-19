@@ -2,7 +2,7 @@
   font-family: $font-poppins;
   margin-bottom: 230px;
 
-  @include mobile {
+  @include tablet {
     margin-bottom: 150px;
   }
   .contact__title-section {
@@ -54,7 +54,7 @@
       .right-column__image {
         // border-radius: 0 252px 252px 252px;
         // max-height: 503px;
-
+        object-fit: cover;
         height: 100%;
       }
     }
@@ -68,9 +68,10 @@
 
       .columns__right-column {
         .right-column__image {
-          height: inherit;
-          object-fit: contain;
+          // height: inherit;
+          // object-fit: cover;
           width: 100%;
+          aspect-ratio: 1/1;
         }
       }
     }
@@ -89,14 +90,15 @@
       }
 
       .columns__right-column {
+        width: 70%;
         .right-column__image {
-          width: 70%;
         }
       }
     }
 
     @include mobile {
       .columns__right-column {
+        width: 100%;
         .right-column__image {
           width: 100%;
         }

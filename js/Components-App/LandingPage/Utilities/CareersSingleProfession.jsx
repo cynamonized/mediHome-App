@@ -23,7 +23,8 @@ export const SingleProfession = ({
   closeThisBox,
 }) => {
   const size = useWindowSize();
-  const ref = useRef();
+  const [ref, { width, height }] = useMeasure();
+  // const ref = useRef();
   const [isMobile, setIsMobile] = useState(false);
   const [detailsVisible, setDetailsVisible] = useState(false);
   const [isBig, setIsBig] = useState(false);
@@ -43,6 +44,11 @@ export const SingleProfession = ({
   });
 
   const exitSprings = useSpring({
+    opacity: isBig ? 1 : 0,
+  });
+
+  const detailsSprings = useSpring({
+    delay: isMobile ? 0 : 500,
     opacity: isBig ? 1 : 0,
   });
 
@@ -217,12 +223,12 @@ export const SingleProfession = ({
 
     await setSprings.start({
       delay: 0,
-      immediate: instant ? true : false,
       config: {
         duration: instant ? 0 : 500,
       },
       to: async (next, cancel) => {
         await next({
+          immediate: instant ? true : false,
           config: {
             duration: instant ? 0 : 500,
             precision: 1,
@@ -231,10 +237,9 @@ export const SingleProfession = ({
           height: `${calculateEntrySize().height}px`,
           zIndex: 0,
         }),
-          await next({});
-        await setSprings.start({
-          position: `relative`,
-        });
+          await setSprings.start({
+            position: `relative`,
+          });
         await setPlaceholderVisible(false);
         setAnimCompleted(true);
       },
@@ -269,6 +274,7 @@ export const SingleProfession = ({
     // Normalizing boxes behavior for mobile ///////////////////////////////////////////////////
     if (!isBig && parentWidth > mobilePixelBorder) {
       setSprings.start({
+        // immediate: true,
         width: `${calculateEntrySize().width}px`,
         height: `${
           calculateEntrySize().height
@@ -278,6 +284,7 @@ export const SingleProfession = ({
       });
     } else if (!isBig && parentWidth <= mobilePixelBorder) {
       setSprings.start({
+        immediate: true,
         width: `${parentWidth}px`,
         height: `${
           phantomOrgHeight ? phantomOrgHeight : (parentHeight - 5 * 35) / 5
@@ -285,12 +292,10 @@ export const SingleProfession = ({
       });
     }
 
-    if (isBig) {
-      setSprings.start({
-        immediate: true,
-        width: `initial`,
-      });
-    }
+    setSprings.start({
+      immediate: false,
+    });
+
     // Normalizing ends here ////////////////////////////////////////////////////////////////////
 
     if (!isBig && animCompleted) {
@@ -310,6 +315,12 @@ export const SingleProfession = ({
 
     // Below prevents all animations on while on mobile view
     if (isMobile) {
+      setSprings.start({
+        immediate: true,
+      });
+    }
+
+    if (isBig) {
       setSprings.start({
         immediate: true,
       });
@@ -369,7 +380,7 @@ export const SingleProfession = ({
           {detailsVisible ? (
             <animated.p
               className="additional-content__temp body__description"
-              style={{ marginTop: 50, ...exitSprings }}
+              style={{ marginTop: 50, ...detailsSprings }}
             >
               {children}
             </animated.p>
