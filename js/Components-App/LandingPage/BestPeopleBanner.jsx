@@ -11,9 +11,7 @@ export const BestPeopleBanner = ({ imagePath }) => {
       }
       ref={ref}
       style={{
-        background: `url(${imagePath})`,
-        backgroundPosition: "center center",
-        backgroundRepeat: "no-repeat",
+        backgroundImage: `url(${imagePath})`,
       }}
     >
       <div className="circle-container">

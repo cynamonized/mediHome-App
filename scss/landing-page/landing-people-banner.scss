@@ -1,9 +1,36 @@
 .circle-animation-container {
   background-size: 190%;
   width: 100%;
-  aspect-ratio: 1920/570;
+  aspect-ratio: 1920/678;
   overflow: hidden;
   margin-bottom: 150px;
+
+  background-size: cover;
+  background-position: center -200px;
+
+  @include smallest_desktop {
+    margin-bottom: 120px;
+  }
+
+  @include tablet {
+    margin-bottom: 50px;
+    background-position: center -150px;
+  }
+
+  @include smaller_tablet {
+    background-position: center -125px;
+  }
+
+  @include smallest_tablet {
+    background-position: center -100px;
+  }
+
+  @include mobile {
+    aspect-ratio: 1920/1278;
+    background-size: cover;
+    background-position: center center;
+    background-repeat: no-repeat;
+  }
 }
 
 .circle-container {
@@ -16,15 +43,41 @@
   .circle-container__title {
     // this is freestyle - adjust it
     // container height is not enough? hmmm....
+    z-index: 1;
     text-align: center;
     opacity: 0;
-    margin-top: 150px;
+    margin-top: 180px;
     color: white;
     font-size: 3rem;
     line-height: 4rem;
+    font-weight: 500;
     span {
       color: white;
       background-color: $color-main-pink;
+      display: inline-block;
+      padding: 0 10px;
+    }
+
+    @include smallest_desktop {
+      font-size: 2.5rem;
+      line-height: 3.2rem;
+      margin-top: 150px;
+    }
+
+    @include tablet {
+      font-size: 2.2rem;
+      line-height: 2.4rem;
+      margin-top: 130px;
+    }
+
+    @include mobile {
+      font-size: 1.8rem;
+      line-height: 2rem;
+      margin-top: 130px;
+    }
+
+    @include small_mobile {
+      margin-top: 110px;
     }
   }
 }
@@ -72,7 +125,7 @@ $circle3-timing-function: ease-in-out;
 .circle-animation-container--animation {
   animation-delay: 0.3s;
   animation: image-zoom 1.2s ease-in-out;
-  animation-fill-mode: forwards;
+  // animation-fill-mode: forwards;
 }
 
 .title-animation-entrance {
@@ -93,6 +146,10 @@ $circle3-timing-function: ease-in-out;
   width: 75%;
   border: 1px solid white;
   opacity: 0;
+
+  @include mobile {
+    width: 95%;
+  }
 }
 
 .reverse-circle1--animation {
@@ -126,6 +183,10 @@ $circle3-timing-function: ease-in-out;
   width: 57%;
   border: 6px solid white;
   opacity: 0;
+
+  @include mobile {
+    width: 70%;
+  }
 }
 
 .reverse-circle2--animation {
@@ -161,6 +222,10 @@ $circle3-timing-function: ease-in-out;
   width: 40%;
   border: 3px solid white;
   opacity: 0;
+
+  @include mobile {
+    width: 50%;
+  }
 }
 
 .reverse-circle3--animation {

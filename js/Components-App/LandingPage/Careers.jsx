@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useRef } from "react";
 import { Eyebrow } from "./Utilities/LandingGenericComponents";
-import MainImage from "../../../images/Landing Page/Careers_1.jpg";
+import MainImage from "../../../images/Landing Page/Careers_Updated.jpg";
 import { QuaternaryButton } from "../../Utilities/Buttons";
 import { useSpring, useInView, animated } from "@react-spring/web";
 import useSize from "@react-hook/size";

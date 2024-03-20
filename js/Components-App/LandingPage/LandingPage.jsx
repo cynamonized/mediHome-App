@@ -21,10 +21,11 @@ export const LandingPage = () => {
       <HeroMerged />
       <Companies />
       <ServicesLegacy />
+      <Contact />
       <AboutUs />
       <Testimonials />
-      <Contact />
-      <BestPeopleBanner imagePath={"/images/About-Us-Banner.jpg"} />
+
+      <BestPeopleBanner imagePath={"/images/About-Us-Banner-Big.jpg"} />
       <Careers />
 
       <Quote />
