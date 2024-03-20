@@ -14,6 +14,7 @@ import { HeartQuote } from "./Utilities/HeartQuote";
 import { BestPeopleBanner } from "./BestPeopleBanner";
 import { Quote } from "./Quote.";
 import PeopleBanner from "../../../images/Landing Page/About-Us-Banner.jpg";
+import { Calculator } from "./Calculator";
 
 export const LandingPage = () => {
   return (
@@ -21,8 +22,12 @@ export const LandingPage = () => {
       <HeroMerged />
       <Companies />
       <ServicesLegacy />
+
+      <Calculator />
+
       <Contact />
       <AboutUs />
+
       <Testimonials />
 
       <BestPeopleBanner imagePath={"/images/About-Us-Banner-Big.jpg"} />

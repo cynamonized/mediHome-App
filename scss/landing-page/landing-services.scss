@@ -1,7 +1,7 @@
 .services {
   font-family: $font-poppins;
 
-  margin-bottom: 230px;
+  margin-bottom: 260px;
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: 80px;
@@ -10,9 +10,9 @@
     grid-template-columns: 1fr;
   }
 
-  @include smaller_tablet {
-    margin-bottom: 150px;
-  }
+  // @include smaller_tablet {
+  //   margin-bottom: 150px;
+  // }
   .services__left-column {
     display: flex;
     flex-direction: column;

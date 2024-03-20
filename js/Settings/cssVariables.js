@@ -12,6 +12,8 @@ import {
   gapInner,
   singleColumn,
   heroRadius,
+  secBlue,
+  secGreenish,
 } from "../../scss/settings/_variables.module.scss";
 
 export const colorMainBlue = mainBlue;
@@ -23,6 +25,10 @@ export const colorMainPink = mainPink;
 export const colorMainPinkLight = mainPinkLight;
 
 export const colorMainPinkDark = mainPinkDark;
+
+export const colorSecBlue = secBlue;
+
+export const colorSecGreenish = secGreenish;
 
 export const colorGreysLight1 = greysLight1;
 
@@ -39,3 +45,5 @@ export const gapHeroInner = gapInner;
 export const singleHeroColumn = singleColumn;
 
 export const heroImgRadius = heroRadius;
+
+// export const colorMainBlueLight = mainBlueLight;
