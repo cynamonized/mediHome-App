@@ -1,30 +1,95 @@
 $font-arial-quote: "Times New Roman", "serif";
 
 .quote-container {
+  margin-bottom: 100px;
   display: grid;
-  grid-template-columns: 527fr 773fr;
+  grid-template-columns: 450fr 773fr;
   .quote__left-column {
-    background-color: aquamarine;
     overflow: hidden;
     @include flex(center, center);
   }
 
   .quote__right-column {
-    background-color: bisque;
-    .right-column__quotation-mark {
+    @include flex(center, flex-start);
+    flex-direction: column;
+
+    .right-column__quote-text {
+      @include fonts(1.375rem, 300, $color-main-text);
+      line-height: 1.5rem;
+      margin-top: 100px;
+      margin-bottom: 50px;
+
       position: relative;
       &::after {
         content: "\275D";
-        font-size: 21.875rem;
-        // position: absolute;
+        font-size: 15rem;
+        line-height: 15rem;
+        margin-left: -10px;
+        position: absolute;
+        margin-top: -150px;
+        left: 0;
+        top: 0;
+        color: $color-greys-mid-1;
       }
     }
 
-    .right-column__quote-text {
-      margin-top: -150px;
+    .right-column__quote-name {
+      @include fonts(1.5rem, 500, $color-main-blue);
+      line-height: 2rem;
     }
 
     .right-column__quote-title {
+      line-height: 1.3rem;
+      @include fonts(1.1rem, 300, $color-greys-mid-2);
+    }
+  }
+
+  @include smallest_desktop {
+    .quote__right-column {
+      .right-column__quote-text {
+        &::after {
+          font-size: 10rem;
+          line-height: 10rem;
+          margin-top: -100px;
+        }
+      }
+    }
+  }
+
+  @include smaller_tablet {
+    display: block;
+    .quote__left-column {
+      margin: -50px 0;
+      padding-left: 80px;
+    }
+    .quote__right-column {
+      .right-column__quote-text {
+        &::after {
+          // font-size: 10rem;
+          // line-height: 10rem;
+        }
+      }
+    }
+  }
+
+  @include mobile {
+    .quote__left-column {
+    }
+  }
+
+  @include small_mobile {
+    .quote__left-column {
+      // margin: initial;
+      padding-left: initial;
+      // margin-left: 50px;
+    }
+
+    .quote__right-column {
+      .right-column__quote-text {
+        &::after {
+          // margin-top: -230px;
+        }
+      }
     }
   }
 }

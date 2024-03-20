@@ -1,14 +1,30 @@
 .full-container {
   margin: 50px 0;
+
   width: 200%;
+
+  // @include mobile {
+  //   width: 330%;
+  // }
+
+  overflow: hidden;
+
+  @include small_mobile {
+    overflow: inherit;
+    margin: 0;
+  }
 
   margin-left: auto;
   margin-right: auto;
 
-  overflow: hidden;
-
   .shapes-container {
+    margin-left: -90px;
     padding-left: 80px;
+
+    @include small_mobile {
+      margin-left: -40px;
+    }
+
     @include flex(center, center);
 
     .shape {

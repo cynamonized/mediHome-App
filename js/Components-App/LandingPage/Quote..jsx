@@ -9,7 +9,6 @@ export const Quote = () => {
       </div>
 
       <div className="quote__right-column">
-        <p className="right-column__quotation-mark"></p>
         <p className="right-column__quote-text">
           Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec libero
           sapien, volutpat sed leo ac, dictum placerat ante. In porta risus ut
