@@ -8,20 +8,14 @@ export const Calculator = () => {
   const [price, setPrice] = useState(subscriptionCards[0].price);
   const [ref, InView] = useInView();
 
-  // const [props, setProps] = useSpring(() => {
-  //   return { total: price };
-  // }, []);
-
   const props = useSpring({ total: InView ? price : 0 });
 
   const addPrice = (value) => {
     setPrice((price) => {
       return price + value;
     });
-
-    // setProps.start({ total: price });
   };
-  console.log(props);
+
   return (
     <>
       <section className="calculator-container ">

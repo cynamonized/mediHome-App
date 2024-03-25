@@ -1,4 +1,6 @@
 import React, { useState, useEffect } from "react";
+import { useInView, useSpring, animated } from "@react-spring/web";
+import { colorGreysMid2 } from "../../../Settings/cssVariables";
 import CheckedIcon from "../../../../images/icons/CheckMark.svg";
 
 export const SubscriptionOption = ({
@@ -42,10 +44,22 @@ export const SubscriptionOption = ({
 };
 
 const TickMark = ({ initialChecked, chosen, color }) => {
+  const tickFills = useSpring({
+    fillOpacity: initialChecked || chosen ? 1 : 0,
+  });
+
   return (
-    <div
+    <animated.div
       className={initialChecked || chosen ? "tickmark--checked" : "tickmark"}
-      style={{ background: initialChecked || chosen ? `${color}` : "unset" }}
+      style={{
+        // background: initialChecked || chosen ? `${color}` : "unset",
+        background: `${color}`,
+        border:
+          !chosen && !initialChecked
+            ? `1px dashed ${colorGreysMid2}`
+            : `0px dashed white`,
+        ...tickFills,
+      }}
     >
       <img
         src={CheckedIcon}
@@ -53,6 +67,6 @@ const TickMark = ({ initialChecked, chosen, color }) => {
         className="tickmark__image"
         style={{ display: initialChecked || chosen ? `block` : `none` }}
       />
-    </div>
+    </animated.div>
   );
 };

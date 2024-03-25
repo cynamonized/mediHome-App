@@ -68,13 +68,18 @@
             border: 1px dashed $color-greys-mid-2;
             border-radius: 25px;
             @include flex(center, center);
+            -webkit-transition: fill-opacity 1s;
+            transition: fill-opacity 1s;
           }
 
           .tickmark--checked {
             width: 50px;
             height: 50px;
             border-radius: 25px;
+            border: 1px dashed $color-greys-mid-2;
             @include flex(center, center);
+            -webkit-transition: fill-opacity 1s;
+            transition: fill-opacity 1s;
             // border: none;
           }
         }

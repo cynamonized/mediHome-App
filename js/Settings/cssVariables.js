@@ -7,6 +7,7 @@ import {
   greysLight1,
   greysLight2,
   greysMid1,
+  greysMid2,
   mainText,
   gapOuter,
   gapInner,
@@ -35,6 +36,8 @@ export const colorGreysLight1 = greysLight1;
 export const colorGreysLight2 = greysLight2;
 
 export const colorGreysMid1 = greysMid1;
+
+export const colorGreysMid2 = greysMid2;
 
 export const colorMainText = mainText;
 
