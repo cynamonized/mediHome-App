@@ -15,26 +15,64 @@ import { BestPeopleBanner } from "./BestPeopleBanner";
 import { Quote } from "./Quote.";
 import PeopleBanner from "../../../images/Landing Page/About-Us-Banner.jpg";
 import { Calculator } from "./Calculator";
+import { Parallax, ParallaxLayer } from "@react-spring/parallax";
 
 export const LandingPage = () => {
   return (
     <>
-      <HeroMerged />
-      <Companies />
-      <ServicesLegacy />
+      <Parallax
+        pages={11}
+        // style={{ top: "0", left: "0" }}
+        className="animation-parallax"
+      >
+        <ParallaxLayer speed={0.5} offset={0}>
+          <HeroMerged />
+          <Companies />
+          <ServicesLegacy />
+        </ParallaxLayer>
 
-      <Calculator />
+        <ParallaxLayer speed={3} offset={1}>
+          <Calculator />
+        </ParallaxLayer>
 
-      <Contact />
-      <AboutUs />
+        {/* NA TROPIE YAY */}
 
-      <Testimonials />
+        {/* <ParallaxLayer speed={0.5}>
+          
+        </ParallaxLayer>
 
-      <BestPeopleBanner imagePath={"/images/About-Us-Banner-Big.jpg"} />
-      <Careers />
+        <ParallaxLayer speed={5}>
+          <Calculator />
+        </ParallaxLayer>
 
-      <Quote />
-      <Footer />
+        <ParallaxLayer speed={0.5}>
+          <Contact />
+        </ParallaxLayer>
+
+        <ParallaxLayer speed={0.5}>
+          <AboutUs />
+        </ParallaxLayer>
+
+        <ParallaxLayer speed={0.5}>
+          <Testimonials />
+        </ParallaxLayer>
+
+        <ParallaxLayer speed={0.5}>
+          <BestPeopleBanner imagePath={"/images/About-Us-Banner-Big.jpg"} />
+        </ParallaxLayer>
+
+        <ParallaxLayer speed={0.5}>
+          <Careers />
+        </ParallaxLayer>
+
+        <ParallaxLayer speed={0.5}>
+          <Quote />
+        </ParallaxLayer>
+
+        <ParallaxLayer speed={0.5}>
+          <Footer />
+        </ParallaxLayer> */}
+      </Parallax>
     </>
   );
 };

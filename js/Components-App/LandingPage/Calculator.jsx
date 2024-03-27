@@ -3,6 +3,7 @@ import { useInView, useSpring, animated } from "@react-spring/web";
 import { SubscriptionOption } from "./Utilities/SubscriptionOption";
 import { subscriptionCards } from "./Utilities/calculatorSubscriptionCards";
 import { colorMainPink } from "../../Settings/cssVariables";
+import { Parallax, ParallaxLayer } from "@react-spring/parallax";
 
 export const Calculator = () => {
   const [price, setPrice] = useState(subscriptionCards[0].price);
