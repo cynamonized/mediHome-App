@@ -1,115 +1,186 @@
 .calculator-container {
   z-index: 5;
-  margin-bottom: 150px;
-  background-color: $color-sec-blue;
-  //   clip-path: polygon(0 0, 0 45%, 100% 100%, 100% 0, 100% 45%);
-  clip-path: polygon(100% 25%, 100% 75%, 0 100%, 0 0);
+  overflow-x: hidden;
+  // margin-top: -50px;
+  // 1. POLYGON ->
+  // clip-path: polygon(0 0, 100% 250px, 100% calc(100% - 250px), 0 100%);
+  // padding-top: 200px;
+  // padding-bottom: 200px;
 
-  //   .calculator__top-separator {
-  //     width: 0;
-  //     height: 0;
-  //     border-left: 100% solid transparent;
-  //     border-top: 13.9% solid white;
-  //     // margin-top: 13.9vw;
-  //   }
+  // 2. WORKING SOLUTION
+  .calculator__top-separator {
+    width: 0;
+    height: 0;
+    border-right: 100vw solid transparent;
+    border-bottom: 13.9vw solid $color-sec-blue;
+  }
 
-  //   .calculator__bottom-separator {
-  //     width: 0;
-  //     height: 0;
-  //     border-right: 100vw solid transparent;
-  //     border-top: 13.9vw solid red;
-  //     margin-top: -13.9vw;
-  //   }
-
-  .calculator__content-section {
-    // min-height: 600px;
-    // background-color: aquamarine;
-    padding-top: 12%;
-    padding-bottom: 20%;
-    .content-section__section-title {
-      h2.section-title__main-title {
-        width: 50%;
-        color: $color-main-white;
-      }
-
-      .section-title__subtitle-description {
-        @include fonts(1.125rem, 400, $color-main-white);
-        margin-top: 20px;
-        margin-bottom: 100px;
-      }
+  .calculator__bottom-separator {
+    width: 0;
+    height: 0;
+    border-right: 100vw solid transparent;
+    border-top: 13.9vw solid $color-sec-blue;
+    @include smaller_tablet {
+      margin-bottom: 50px;
     }
+  }
 
-    .content-section__subscription-options {
-      display: grid;
-      grid-template-columns: 1fr 1fr 1fr 1fr;
-      gap: 30px;
-      cursor: pointer;
+  .calculator__big-container {
+    background-color: $color-sec-blue;
 
-      .subscription-options__single-option {
-        background-color: $color-main-white;
-        border-radius: 32px;
-        padding: 35px;
-
-        .single-option__name {
-          @include fonts(1.5rem, 600, $color-main-blue);
-          margin-bottom: 33px;
+    .calculator__content-section {
+      // padding-top: -50px;
+      // margin-top: -50px;
+      .content-section__section-title {
+        padding-top: -50px;
+        @include mobile {
+          padding-top: 40px;
         }
+        h2.section-title__main-title {
+          width: 50%;
+          color: $color-main-white;
 
-        .single-option__description {
-          @include fonts(1rem, 400, $color-main-blue);
-          line-height: 1.3rem;
-          margin-bottom: 30px;
-        }
-
-        .single-option__tickmark-container {
-          .tickmark {
-            width: 50px;
-            height: 50px;
-            border: 1px dashed $color-greys-mid-2;
-            border-radius: 25px;
-            @include flex(center, center);
-            -webkit-transition: fill-opacity 1s;
-            transition: fill-opacity 1s;
+          @include small_desktop {
+            width: 70%;
           }
 
-          .tickmark--checked {
-            width: 50px;
-            height: 50px;
-            border-radius: 25px;
-            border: 1px dashed $color-greys-mid-2;
-            @include flex(center, center);
-            -webkit-transition: fill-opacity 1s;
-            transition: fill-opacity 1s;
-            // border: none;
+          @include mobile {
+            width: 100%;
+            text-align: center;
+          }
+        }
+
+        .section-title__subtitle-description {
+          @include fonts(1.125rem, 400, $color-main-white);
+          margin-top: 20px;
+          margin-bottom: 100px;
+
+          @include tablet {
+            margin-bottom: 50px;
+          }
+
+          @include mobile {
+            width: 70%;
+            margin-bottom: 0;
+            margin-left: auto;
+            margin-right: auto;
+            text-align: center;
           }
         }
       }
-    }
+      .content-section__cards-and-price {
+        display: flex;
+        flex-direction: column;
 
-    .content-section__result {
-      margin-top: 50px;
-      @include flex(center, center);
-      flex-direction: column;
-      .result__title {
-        @include fonts(1.75rem, 500, $color-main-pink);
+        @include mobile {
+          flex-direction: column-reverse;
+        }
+
+        .cards-and-price__subscription-options {
+          display: grid;
+          grid-template-columns: 1fr 1fr 1fr 1fr;
+          gap: 30px;
+
+          @include smallest_desktop {
+            grid-template-columns: 1fr 1fr;
+          }
+
+          @include mobile {
+            grid-template-columns: 1fr;
+          }
+
+          .subscription-options__single-option {
+            cursor: pointer;
+            background-color: $color-main-white;
+            border-radius: 32px;
+            padding: 35px;
+            position: relative;
+
+            .single-option__name {
+              @include fonts(1.5rem, 600, $color-main-blue);
+              margin-bottom: 33px;
+
+              @include mobile {
+                margin-bottom: 50px;
+              }
+            }
+
+            .single-option__description {
+              @include fonts(1rem, 400, $color-main-blue);
+              line-height: 1.3rem;
+              margin-bottom: 30px;
+
+              @include mobile {
+                margin-bottom: 0;
+              }
+            }
+
+            .single-option__tickmark-container {
+              @include mobile {
+                position: absolute;
+                top: 35px;
+                right: 35px;
+              }
+
+              .tickmark {
+                width: 50px;
+                height: 50px;
+                border: 1px dashed $color-greys-mid-2;
+                border-radius: 25px;
+                @include flex(center, center);
+              }
+
+              .tickmark--checked {
+                width: 50px;
+                height: 50px;
+                border-radius: 25px;
+                @include flex(center, center);
+              }
+            }
+          }
+        }
+
+        .cards-and-price__result {
+          margin-top: 50px;
+          // margin-bottom: 50px;
+          @include flex(center, center);
+          flex-direction: column;
+          @include mobile {
+            margin-bottom: 50px;
+          }
+          .result__title {
+            @include fonts(1.75rem, 500, $color-main-pink);
+            text-align: center;
+            line-height: 2rem;
+
+            @include small_mobile {
+              width: 70%;
+              display: inline-block;
+            }
+          }
+
+          .result__result-box {
+            margin: 20px 0 20px 0;
+            padding: 20px 100px;
+            width: 300px;
+            border: 4px solid $color-main-pink;
+            border-radius: 40px;
+            text-align: center;
+            @include fonts(1.75rem, 500, $color-main-white);
+          }
+        }
       }
 
-      .result__result-box {
-        margin: 20px 0 20px 0;
-        padding: 20px 100px;
-        width: 300px;
-        border: 4px solid $color-main-pink;
-        border-radius: 40px;
-        text-align: center;
-        @include fonts(1.75rem, 500, $color-main-white);
-      }
-    }
+      .content-section__footer {
+        .footer__note {
+          @include fonts(1.125rem, 400, $color-main-white);
+          margin-top: 30px;
+          margin-bottom: 0;
 
-    .content-section__footer {
-      .footer__note {
-        @include fonts(1.125rem, 400, $color-main-white);
-        margin-top: 60px;
-        margin-bottom: 0;
+          @include medium_desktop {
+            padding-bottom: 20px;
+          }
+        }
       }
     }
   }

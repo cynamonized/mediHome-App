@@ -44,21 +44,11 @@ export const SubscriptionOption = ({
 };
 
 const TickMark = ({ initialChecked, chosen, color }) => {
-  const tickFills = useSpring({
-    fillOpacity: initialChecked || chosen ? 1 : 0,
-  });
-
   return (
-    <animated.div
+    <div
       className={initialChecked || chosen ? "tickmark--checked" : "tickmark"}
       style={{
-        // background: initialChecked || chosen ? `${color}` : "unset",
-        background: `${color}`,
-        border:
-          !chosen && !initialChecked
-            ? `1px dashed ${colorGreysMid2}`
-            : `0px dashed white`,
-        ...tickFills,
+        background: initialChecked || chosen ? `${color}` : "unset",
       }}
     >
       <img
@@ -67,6 +57,6 @@ const TickMark = ({ initialChecked, chosen, color }) => {
         className="tickmark__image"
         style={{ display: initialChecked || chosen ? `block` : `none` }}
       />
-    </animated.div>
+    </div>
   );
 };

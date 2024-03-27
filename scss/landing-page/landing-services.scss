@@ -1,13 +1,14 @@
 .services {
   font-family: $font-poppins;
 
-  margin-bottom: 260px;
+  margin-bottom: 30px;
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: 80px;
 
   @include smallest_desktop {
     grid-template-columns: 1fr;
+    margin-bottom: 100px;
   }
 
   // @include smaller_tablet {
