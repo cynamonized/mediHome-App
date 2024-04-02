@@ -15,64 +15,91 @@ import { BestPeopleBanner } from "./BestPeopleBanner";
 import { Quote } from "./Quote.";
 import PeopleBanner from "../../../images/Landing Page/About-Us-Banner.jpg";
 import { Calculator } from "./Calculator";
-import { Parallax, ParallaxLayer } from "@react-spring/parallax";
+import {
+  useParallax,
+  useParallaxController,
+  ParallaxProvider,
+  Parallax,
+} from "react-scroll-parallax";
 
 export const LandingPage = () => {
   return (
     <>
-      <Parallax
-        pages={11}
-        // style={{ top: "0", left: "0" }}
-        className="animation-parallax"
-      >
-        <ParallaxLayer speed={0.5} offset={0}>
+      {/* <Parallax pages={9} className="animation-parallax">
+        <ParallaxLayer offset={0} speed={0.5}>
           <HeroMerged />
           <Companies />
           <ServicesLegacy />
         </ParallaxLayer>
 
-        <ParallaxLayer speed={3} offset={1}>
+        <ParallaxLayer speed={2} offset={1}>
           <Calculator />
         </ParallaxLayer>
 
-        {/* NA TROPIE YAY */}
-
-        {/* <ParallaxLayer speed={0.5}>
-          
-        </ParallaxLayer>
-
-        <ParallaxLayer speed={5}>
-          <Calculator />
-        </ParallaxLayer>
-
-        <ParallaxLayer speed={0.5}>
+        <ParallaxLayer offset={2} speed={0.5}>
           <Contact />
         </ParallaxLayer>
 
-        <ParallaxLayer speed={0.5}>
+        <ParallaxLayer offset={3} speed={0.5}>
           <AboutUs />
         </ParallaxLayer>
 
-        <ParallaxLayer speed={0.5}>
+        <ParallaxLayer offset={4} speed={0.5}>
           <Testimonials />
         </ParallaxLayer>
 
-        <ParallaxLayer speed={0.5}>
+        <ParallaxLayer offset={5} speed={0.5}>
           <BestPeopleBanner imagePath={"/images/About-Us-Banner-Big.jpg"} />
         </ParallaxLayer>
 
-        <ParallaxLayer speed={0.5}>
+        <ParallaxLayer offset={6} speed={0.5}>
           <Careers />
         </ParallaxLayer>
 
-        <ParallaxLayer speed={0.5}>
+        <ParallaxLayer offset={7} speed={0.5}>
           <Quote />
         </ParallaxLayer>
 
-        <ParallaxLayer speed={0.5}>
+        <ParallaxLayer offset={8} speed={0.5}>
           <Footer />
-        </ParallaxLayer> */}
+        </ParallaxLayer>
+      </Parallax> */}
+
+      {/* <HeroMerged />
+      <Companies />
+      <ServicesLegacy />
+      <Calculator />
+      <Contact />
+      <AboutUs />
+      <Testimonials />
+      <BestPeopleBanner imagePath={"/images/About-Us-Banner-Big.jpg"} />
+      <Careers />
+      <Quote />
+      <Footer /> */}
+      <ParallaxProvider>
+        <LandingComponents />
+      </ParallaxProvider>
+    </>
+  );
+};
+
+const LandingComponents = () => {
+  return (
+    <>
+      <ParallaxProvider />
+      <HeroMerged />
+      <Companies />
+      <ServicesLegacy />
+      <Parallax speed={150}>
+        <Calculator />
       </Parallax>
+      <Contact />
+      <AboutUs />
+      <Testimonials />
+      <BestPeopleBanner imagePath={"/images/About-Us-Banner-Big.jpg"} />
+      <Careers />
+      <Quote />
+      <Footer />
     </>
   );
 };

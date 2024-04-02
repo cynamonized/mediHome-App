@@ -1,25 +1,47 @@
 .calculator-container {
-  z-index: 5;
+  z-index: 500;
   overflow-x: hidden;
 
-  // 1. POLYGON ->
-  // clip-path: polygon(0 0, 100% 250px, 100% calc(100% - 250px), 0 100%);
-  // padding-top: 200px;
-  // padding-bottom: 200px;
+  margin-top: -350px;
+  margin-bottom: -150px;
 
-  // 2. WORKING SOLUTION
+  @include smallest_desktop {
+    margin-top: -500px;
+    margin-bottom: -300px;
+  }
+
+  @include tablet {
+    margin-top: -600px;
+    margin-bottom: -400px;
+  }
+
+  @include smaller_tablet {
+    margin-top: -400px;
+    margin-bottom: -300px;
+  }
+
+  @include mobile {
+    margin-top: -500px;
+    margin-bottom: -300px;
+  }
+
+  @include small_mobile {
+    margin-top: -500px;
+    margin-bottom: -300px;
+  }
+
   .calculator__top-separator {
     width: 0;
     height: 0;
     border-right: 100vw solid transparent;
-    border-bottom: 13.9vw solid $color-sec-blue;
+    border-bottom: 15vw solid $color-sec-blue;
   }
 
   .calculator__bottom-separator {
     width: 0;
     height: 0;
     border-right: 100vw solid transparent;
-    border-top: 13.9vw solid $color-sec-blue;
+    border-top: 15vw solid $color-sec-blue;
     @include smaller_tablet {
       margin-bottom: 50px;
     }
@@ -29,8 +51,6 @@
     background-color: $color-sec-blue;
 
     .calculator__content-section {
-      // padding-top: -50px;
-      // margin-top: -50px;
       .content-section__section-title {
         padding-top: -50px;
         @include mobile {
@@ -142,7 +162,6 @@
 
         .cards-and-price__result {
           margin-top: 50px;
-          // margin-bottom: 50px;
           @include flex(center, center);
           flex-direction: column;
           @include mobile {

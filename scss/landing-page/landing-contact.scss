@@ -1,6 +1,7 @@
 .contact {
   font-family: $font-poppins;
   margin-bottom: 230px;
+  z-index: 0;
 
   @include tablet {
     margin-bottom: 150px;

@@ -24,10 +24,6 @@ export const Calculator = () => {
     document.documentElement.style.setProperty("--len-at-3", opposite + "px");
   };
 
-  // TO DO 0: - MINUS VALUES ON CONTENT SO IT'S CLOSER TO TOP AND BOTTOM
-  // TO DO 0: SET UP FINAL VALUE FOR OBLIGUE BOX
-  // TO DO 1: PARALLAX (!)
-
   return (
     <>
       <section className="calculator-container ">
