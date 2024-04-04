@@ -67,10 +67,10 @@ const ImageTallImg = () => {
           delay: 1300,
           loop: { reverse: true },
           from: {
-            scale: 1,
+            scale: 1.1,
           },
           to: {
-            scale: 1.2,
+            scale: 1.25,
           },
           config: {
             duration: 2000,
@@ -133,10 +133,10 @@ const ImageShortImg = () => {
           delay: 3500,
           loop: { reverse: true },
           from: {
-            scale: 1.2,
+            scale: 1.25,
           },
           to: {
-            scale: 1,
+            scale: 1.1,
           },
           config: {
             duration: 2000,
