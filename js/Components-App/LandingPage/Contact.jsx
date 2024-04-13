@@ -40,7 +40,7 @@ export const Contact = () => {
             scale: 1,
           },
           to: {
-            scale: 1.2,
+            // scale: 1.2,
           },
           config: {
             duration: 1500,

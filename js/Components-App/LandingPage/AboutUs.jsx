@@ -80,6 +80,15 @@ const ImageTallImg = () => {
       : {}
   );
 
+  useEffect(() => {
+    if (InView) {
+      // Opacity + scale animation here (imageProps.start({
+      //from: 0,
+      //to: 1,
+      //})
+    }
+  }, [InView]);
+
   return (
     <>
       <animated.div

@@ -25,57 +25,6 @@ import {
 export const LandingPage = () => {
   return (
     <>
-      {/* <Parallax pages={9} className="animation-parallax">
-        <ParallaxLayer offset={0} speed={0.5}>
-          <HeroMerged />
-          <Companies />
-          <ServicesLegacy />
-        </ParallaxLayer>
-
-        <ParallaxLayer speed={2} offset={1}>
-          <Calculator />
-        </ParallaxLayer>
-
-        <ParallaxLayer offset={2} speed={0.5}>
-          <Contact />
-        </ParallaxLayer>
-
-        <ParallaxLayer offset={3} speed={0.5}>
-          <AboutUs />
-        </ParallaxLayer>
-
-        <ParallaxLayer offset={4} speed={0.5}>
-          <Testimonials />
-        </ParallaxLayer>
-
-        <ParallaxLayer offset={5} speed={0.5}>
-          <BestPeopleBanner imagePath={"/images/About-Us-Banner-Big.jpg"} />
-        </ParallaxLayer>
-
-        <ParallaxLayer offset={6} speed={0.5}>
-          <Careers />
-        </ParallaxLayer>
-
-        <ParallaxLayer offset={7} speed={0.5}>
-          <Quote />
-        </ParallaxLayer>
-
-        <ParallaxLayer offset={8} speed={0.5}>
-          <Footer />
-        </ParallaxLayer>
-      </Parallax> */}
-
-      {/* <HeroMerged />
-      <Companies />
-      <ServicesLegacy />
-      <Calculator />
-      <Contact />
-      <AboutUs />
-      <Testimonials />
-      <BestPeopleBanner imagePath={"/images/About-Us-Banner-Big.jpg"} />
-      <Careers />
-      <Quote />
-      <Footer /> */}
       <ParallaxProvider>
         <LandingComponents />
       </ParallaxProvider>

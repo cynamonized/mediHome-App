@@ -1,5 +1,11 @@
 import React, { useState, useEffect } from "react";
-import { useInView, useSpring, animated } from "@react-spring/web";
+import {
+  useInView,
+  useSpring,
+  animated,
+  useTransition,
+  useSpringRef,
+} from "@react-spring/web";
 import { SubscriptionOption } from "./Utilities/SubscriptionOption";
 import { subscriptionCards } from "./Utilities/calculatorSubscriptionCards";
 import { colorMainPink } from "../../Settings/cssVariables";
@@ -8,8 +14,19 @@ import { Parallax, ParallaxLayer } from "@react-spring/parallax";
 export const Calculator = () => {
   const [price, setPrice] = useState(subscriptionCards[0].price);
   const [ref, InView] = useInView();
+  const transRef = useSpringRef();
 
   const props = useSpring({ total: InView ? price : 0 });
+
+  const [transitions, setTransitions] = useTransition(subscriptionCards, () => {
+    return {
+      ref: transRef,
+      trail: 200 / subscriptionCards.length,
+      from: { opacity: 0, scale: 0 },
+      enter: { opacity: 1, scale: 1 },
+      leave: { opacity: 0, scale: 0 },
+    };
+  });
 
   const addPrice = (value) => {
     setPrice((price) => {
@@ -23,6 +40,12 @@ export const Calculator = () => {
     let opposite = adjacent * Math.tan(deg);
     document.documentElement.style.setProperty("--len-at-3", opposite + "px");
   };
+
+  useEffect(() => {
+    if (InView) {
+      transRef.start();
+    }
+  }, [InView]);
 
   return (
     <>
@@ -42,7 +65,7 @@ export const Calculator = () => {
 
             <div className="content-section__cards-and-price">
               <div className="cards-and-price__subscription-options">
-                {subscriptionCards.map((e, index) => {
+                {/* {subscriptionCards.map((e, index) => {
                   return (
                     <SubscriptionOption
                       name={e.name}
@@ -54,7 +77,23 @@ export const Calculator = () => {
                       priceCallback={addPrice}
                     />
                   );
-                })}
+                })} */}
+                {transitions((style, e, index) => (
+                  <animated.div
+                    className="subscription-options__animated-container"
+                    style={style}
+                  >
+                    <SubscriptionOption
+                      name={e.name}
+                      description={e.description}
+                      color={e.color}
+                      price={e.price}
+                      mandatory={e.mandatory}
+                      key={index}
+                      priceCallback={addPrice}
+                    />
+                  </animated.div>
+                ))}
               </div>
 
               <div className="cards-and-price__result">
