@@ -16,6 +16,7 @@ export const selectStyles = {
     borderRadius: "30px",
     height: "100%",
     padding: "7px",
+    cursor: `pointer`,
     color: `${colorMainText}`,
   }),
   menu: (baseStyles, state) => ({
@@ -25,11 +26,13 @@ export const selectStyles = {
     borderRadius: "2rem",
     boxShadow: "none",
     marginTop: "1rem",
+
     border: `1px solid ${colorGreysLight1}`,
   }),
   option: (baseStyles, state) => ({
     ...baseStyles,
     padding: "2rem",
+    cursor: `pointer`,
     borderRadius: "15px",
   }),
 };
