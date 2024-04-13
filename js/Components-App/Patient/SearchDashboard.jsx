@@ -264,6 +264,16 @@ const SearchResults = ({ appos, callbackBookAppo }) => {
               })}
           </div>
         )}
+
+        {appos && appos.length == 0 && (
+          <div className="table-container__no-appo">
+            <p className="no-appo__sad-face">Ooops!</p>
+            <p className="no-appo__message">
+              We are sorry, we can't find appointment you are looking for.
+              Choose earlier date or contact us to get more details.
+            </p>
+          </div>
+        )}
       </div>
     </div>
   );
