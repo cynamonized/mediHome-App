@@ -29,20 +29,3 @@
     border: none;
   }
 }
-
-.datepicker-input {
-  text-align: left;
-  width: 100%;
-  height: 52px;
-  color: $color-main-text;
-  background-color: $color-main-white;
-  padding: 14px 40px;
-  font-family: $font-poppins;
-  font-size: 1rem;
-  border-radius: 2rem;
-  border: 1px solid $color-main-blue;
-
-  @include tablet {
-    padding: 0 17px;
-  }
-}

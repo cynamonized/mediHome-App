@@ -78,71 +78,131 @@ input {
   }
 }
 
-.react-datepicker {
-  // background-color: green;
+.react-datepicker-popper {
+  div {
+    .react-datepicker {
+      border-radius: calc(2rem + 20px);
+      border: 1px solid $color-greys-mid-2;
+      font-family: $font-poppins;
 
-  font-family: $font-poppins;
+      // triangle
+      .react-datepicker__triangle {
+        // border-bottom-color: $color-main-white;
 
-  // top elements (minor --  optional)
-  .react-datepicker__triangle {
-  }
-
-  .react-datepicker__aria-live {
-  }
-
-  // nav starts here
-  .react-datepicker__navigation {
-  }
-
-  .react-datepicker__navigation--previous {
-    background-color: orange;
-    span {
-    }
-  }
-
-  .react-datepicker__navigation--next {
-    background-color: yellow;
-    span {
-    }
-  }
-
-  //body starts here
-  .react-datepicker__month-container {
-    .react-datepicker__header {
-      .react-datepicker__current-month {
-        // current month
-        background-color: aquamarine;
-      }
-
-      .react-datepicker__header__dropdown {
-      }
-      .react-datepicker__header__dropdown--scroll {
-      }
-
-      .react-datepicker__day-names {
-        // day names
-        .react-datepicker__day-name {
-        }
-      }
-    }
-
-    .react-datepicker__month {
-      // days to choose
-      .react-datepicker__week {
-        .react-datepicker__day {
-          // standard day
+        &::after {
+          border-bottom-color: $color-main-white;
         }
 
-        .react-datepicker__day--keyboard-selected {
-          //current selection
+        &::before {
+          border-bottom-color: $color-greys-mid-2;
+        }
+      }
+
+      .react-datepicker-popper[data-placement^="bottom"]
+        .react-datepicker__triangle::after {
+        border-bottom-color: $color-main-white;
+      }
+
+      .react-datepicker-popper[data-placement^="bottom"]
+        .react-datepicker__triangle::before {
+        top: 50px;
+        border-bottom-color: white;
+      }
+
+      .react-datepicker__aria-live {
+      }
+
+      // nav starts here
+      .react-datepicker__navigation {
+        // background-color: yellow;
+        margin-top: 28px;
+
+        padding: 20px;
+      }
+
+      .react-datepicker__navigation--previous {
+        margin-left: 29px;
+        span {
+        }
+      }
+
+      .react-datepicker__navigation--next {
+        margin-right: 29px;
+        span {
+        }
+      }
+
+      //body starts here
+      .react-datepicker__month-container {
+        padding: 20px;
+
+        .react-datepicker__header {
+          border-radius: 2rem;
+          border-bottom: none;
+          padding: 5px 10px 0 10px;
+          .react-datepicker__current-month {
+            padding: 15px 10px;
+            @include fonts(1.2rem, 600, $color-main-blue);
+          }
+
+          .react-datepicker__header__dropdown {
+          }
+          .react-datepicker__header__dropdown--scroll {
+          }
+
+          .react-datepicker__day-names {
+            // day names
+            // display: flex;
+            // justify-content: space-between;
+
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
+            text-align: center;
+            .react-datepicker__day-name {
+              // padding: 10px 25px;
+              // width: calc(100% / 7);
+              text-align: center;
+            }
+          }
         }
 
-        .react-datepicker__day--outside-month {
-          //outside of month -- optional
-        }
+        .react-datepicker__month {
+          // days to choose
+          // padding: 0 10px;
+          margin: 10px 10px;
+          .react-datepicker__week {
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
+            .react-datepicker__day {
+              // standard day
+              // padding: 5px 20px;
+              // width: calc(100% / 7);
+              &:hover {
+                border-radius: 35px;
+              }
+            }
 
-        .react-datepicker__day--weekend {
-          //weekend day -- optional
+            .react-datepicker__day--keyboard-selected {
+              //current selection
+              border-radius: 35px;
+            }
+
+            .react-datepicker__day--outside-month {
+              //outside of month -- optional
+            }
+
+            .react-datepicker__day--weekend {
+              //weekend day -- optional
+            }
+
+            .react-datepicker__day--today {
+              border-radius: 35px;
+
+              &:hover {
+                border-radius: 35px;
+              }
+            }
+          }
         }
       }
     }
