@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useRef } from "react";
 import { signOut } from "firebase/auth";
 import { useNavigate } from "react-router-dom";
 import "../../scss/main.scss";
@@ -9,6 +9,7 @@ import LogoTop from "../../images/logo-mediHome-small.svg";
 
 export const Header = ({ setCurrentUser, currentUserUID }) => {
   const navigate = useNavigate();
+  const headShotRef = useRef();
 
   const [profileInfo, setProfileInfo] = useState(null);
   const [popUpVisible, setPopUpVisible] = useState(false);
@@ -17,9 +18,21 @@ export const Header = ({ setCurrentUser, currentUserUID }) => {
     getProfileInfo(currentUserUID, setProfileInfo);
   }, []);
 
-  const closePopUp = (e) => {
-    setPopUpVisible(false);
-  };
+  // track down console logs, it immediately shows 'false in 'popUpVisible'...
+
+  useEffect(() => {
+    document.body.addEventListener("click", (e) => {
+      console.log(
+        "DO I CLICK POINT OT INTEREST? ",
+        e.composedPath().includes(headShotRef.current)
+      );
+      console.log("INNER POP UP VISIBLE:", popUpVisible);
+      if (!e.composedPath().includes(headShotRef.current) && popUpVisible) {
+        console.log("AM I HERE?");
+        setPopUpVisible(false);
+      }
+    });
+  }, []);
 
   const goToMainView = () => {
     navigate("/portal/");
@@ -27,7 +40,7 @@ export const Header = ({ setCurrentUser, currentUserUID }) => {
 
   const togglePopUp = (e) => {
     e.preventDefault();
-    setPopUpVisible((prev) => !prev);
+    setPopUpVisible(true);
   };
 
   const userSignOut = async (e) => {
@@ -43,6 +56,7 @@ export const Header = ({ setCurrentUser, currentUserUID }) => {
 
   return (
     <header>
+      {console.log(popUpVisible)}
       <div className="container container-header">
         <img
           src={LogoTop}
@@ -67,19 +81,25 @@ export const Header = ({ setCurrentUser, currentUserUID }) => {
             </>
           )}
 
-          {popUpVisible && <HeaderPopUp userSignOut={userSignOut} />}
+          {popUpVisible && (
+            <div className="profile-popup" ref={headShotRef}>
+              <TertiaryButton wide={false} callbackAction={userSignOut}>
+                Log out
+              </TertiaryButton>
+            </div>
+          )}
         </div>
       </div>
     </header>
   );
 };
 
-export const HeaderPopUp = ({ userSignOut }) => {
-  return (
-    <div className="profile-popup">
-      <TertiaryButton wide={false} callbackAction={userSignOut}>
-        Log out
-      </TertiaryButton>
-    </div>
-  );
-};
+// export const HeaderPopUp = ({ userSignOut, ref }) => {
+//   return (
+//     <div className="profile-popup">
+//       <TertiaryButton wide={false} callbackAction={userSignOut}>
+//         Log out
+//       </TertiaryButton>
+//     </div>
+//   );
+// };

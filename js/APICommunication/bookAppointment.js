@@ -43,13 +43,19 @@ export const bookThisAppointment = async (
       backupAppo["booked"] = true;
 
       // 2. Delete appo
-      // RESTORE WHEN CANCELLING WORKS FULLY
-      const deleteFromDatabase = await deleteSingleAppoFrServer(
-        chosenAppo,
-        "AvailableAppos",
-        failureCallback,
-        refreshSearchCallback
-      );
+      try {
+        const deleteFromDatabase = await deleteSingleAppoFrServer(
+          chosenAppo,
+          "AvailableAppos",
+          failureCallback,
+          refreshSearchCallback
+        );
+      } catch (error) {
+        console.log("Appo is no longer available...");
+        throw new Error(error);
+        keepLoadingCallback(false);
+        denyCallback(true);
+      }
 
       // 3. Insert/create appo to User's collection
       const cloningToUser = await cloneAppo(
