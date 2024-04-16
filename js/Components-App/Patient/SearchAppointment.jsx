@@ -110,9 +110,11 @@ const SearchAppointment = ({
     <section className="search-appointment">
       <div className="container search-appointment-container">
         {!isSelectValid && (
-          <p className="validaiton-warning">
-            Please pick all neccessary criteria.
-          </p>
+          <div className="search-appointment__validation-warning">
+            <p className="validation-warning__message">
+              Please pick all neccessary criteria.
+            </p>
+          </div>
         )}
         <h1 className="search-appointment__main-title">
           Schedule an appointment

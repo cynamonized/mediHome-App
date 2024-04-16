@@ -6,6 +6,31 @@
     .search-appointment__main-title {
       padding-bottom: 44px;
     }
+
+    .search-appointment__validation-warning {
+      background-color: $color-main-pink-dark;
+      padding: 10px 15px;
+      position: absolute;
+      z-index: 1;
+      bottom: -55px;
+      left: 0;
+      width: 100%;
+      border-radius: 30px;
+      .validation-warning__message {
+        @include fonts(1rem, 600, $color-main-white);
+      }
+
+      @include tablet {
+        text-align: center;
+        display: block;
+        width: 100%;
+        bottom: -50px;
+      }
+
+      @include small_mobile {
+        bottom: -70px;
+      }
+    }
   }
 
   .search-appointment__form {
