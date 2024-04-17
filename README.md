@@ -2,7 +2,7 @@
 
 <img src="/images/logo-mediHome-small.svg" width="400"/>
 
-mediHome is a clinic desktop app that allows users to book medical appointments. It was build using React, Firebase, Sass and Vite. You can find a demo [here](https://medihome111.netlify.app/#/portal). Please hover over the icon next the LOG IN button to get email and password of demo user.
+mediHome is a clinic desktop app that allows users to book medical appointments. It was build using React, Firebase, Sass and Vite. You can find a demo [here](https://medihome111.netlify.app/#/portal). Please hover over the icon next the LOG IN button to get email and password of demo user. Project also includes animated landing page, where I explored a lot of animation libraries, you can preview it [here](https://medihome111.netlify.app/).
 <br/>
 ![Login screen preview screenshot](images/login.png)
 <br/>
@@ -11,16 +11,18 @@ mediHome is a clinic desktop app that allows users to book medical appointments.
 
 - users can log in,
 - see their appoinments and check details (if the appointment has been completed, it's possible to check the recommendations that doctor left for the patient),
-- book and cancell appointments,
+- search, book and cancell appointments,
 - update their password and personal information.
 
-_All server data is hosted using Firebase’s Firestore. This is first iteration of the project with patient dashboard available - admin and doctors dashboards (and also RWD) are in the works. At the moment it's only possible to manage appointments and users through the code (Firestore API) or Firebase user dashboard directly._
+_All server data is hosted using Firebase’s Firestore. For the moment only patient dashboard is available - mock ups for admin and doctor dashboards have been designed but haven't been implemented yet. At the moment it's only possible to manage appointments and users through the code (Firestore API) or Firebase user dashboard directly._
 <br/>
 
 **Current state:**
 
 - [x] Patient dashboard first iteration
-- [ ] Polishing patient dashboard, refactoring and optimizing code
+- [x] Polishing patient dashboard, refactoring and optimizing code
+- [x] Landing page designed na built
+- [x] RWD
 - [ ] Admin dashboard
 - [ ] Doctor dashboard
 
