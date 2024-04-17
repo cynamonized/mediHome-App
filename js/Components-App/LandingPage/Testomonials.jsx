@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from "react";
 import { Eyebrow } from "./Utilities/LandingGenericComponents";
 import { TestimonialsRating } from "./Utilities/TestimonialsRating";
-import Person1 from "../../../images/Landing Page/reviews/Person 1.jpg";
-import Person2 from "../../../images/Landing Page/reviews/Person 2.jpg";
-import Person3 from "../../../images/Landing Page/reviews/Person 3.jpg";
+import Person1 from "../../../images/Landing Page/reviews/Person1.jpg";
+import Person2 from "../../../images/Landing Page/reviews/Person2.jpg";
+import Person3 from "../../../images/Landing Page/reviews/Person3.jpg";
 import { useSpring, useInView, animated, useSprings } from "@react-spring/web";
 import { useWindowSize } from "@uidotdev/usehooks";
 
