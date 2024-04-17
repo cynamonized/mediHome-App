@@ -20,6 +20,7 @@ import {
   ParallaxProvider,
   Parallax,
 } from "react-scroll-parallax";
+import BestPeople from "/images/About-Us-Banner-Big.jpg";
 
 export const LandingPage = () => {
   return (
@@ -44,7 +45,8 @@ const LandingComponents = () => {
       <Contact />
       <AboutUs />
       <Testimonials />
-      <BestPeopleBanner imagePath={"/images/About-Us-Banner-Big.jpg"} />
+      {/* <BestPeopleBanner imagePath={"/images/About-Us-Banner-Big.jpg"} /> */}
+      <BestPeopleBanner imagePath={BestPeople} />
       <Careers />
       <Quote />
       <Footer />
