@@ -42,6 +42,21 @@ export const TertiaryButton = ({ children, callbackAction, wide }) => {
   );
 };
 
+export const TertiaryFullButton = ({ children, callbackAction, wide }) => {
+  return (
+    <button
+      className={`${
+        wide == true
+          ? "main-button tertiary-button full-buttons"
+          : "main-button tertiary-button"
+      }`}
+      onClick={callbackAction}
+    >
+      {children}
+    </button>
+  );
+};
+
 export const QuaternaryButton = ({ children, callbackAction, wide }) => {
   return (
     <button

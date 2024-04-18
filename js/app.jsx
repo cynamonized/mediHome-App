@@ -42,7 +42,7 @@ function App() {
     // Use below only to generate entire database (!!)
     // It will work only if firestore.js file is set up properly
     // using env variables in .env file (instruction in .env file)
-    console.log("Just checking in...");
+    // console.log("Just checking in...");
     // createDatabase();
     // fillAvailableAppos();
   }, []);
