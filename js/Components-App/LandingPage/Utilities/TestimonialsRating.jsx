@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
-import EmptyStar from "../../../../images/Landing Page/reviews/Empty Star.svg";
-import FullStar from "../../../../images/Landing Page/reviews/Full Star.svg";
-import HalfStar from "../../../../images/Landing Page/reviews/Half Star.svg";
+import EmptyStar from "../../../../images/Landing Page/reviews/EmptyStar.svg";
+import FullStar from "../../../../images/Landing Page/reviews/FullStar.svg";
+import HalfStar from "../../../../images/Landing Page/reviews/HalfStar.svg";
 
 export const TestimonialsRating = ({ rating }) => {
   const [result, setResult] = useState(0);
